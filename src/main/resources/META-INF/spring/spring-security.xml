@@ -60,7 +60,7 @@
             </list>
         </constructor-arg>
     </bean>
-    <bean id="defaultCsrfRequiresMethodMatche" class="com.github.kazuki43zoo.app.security.DefaultCsrfRequiresMethodMatcher" />
+    <bean id="defaultCsrfRequiresMethodMatche" class="com.github.kazuki43zoo.app.common.security.DefaultCsrfRequiresMethodMatcher" />
     <bean id="negatedH2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
         <constructor-arg>
             <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">

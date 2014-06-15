@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.security;
+package com.github.kazuki43zoo.app.common.security;
 
 import java.util.regex.Pattern;
 

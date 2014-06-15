@@ -1,7 +1,5 @@
 package com.github.kazuki43zoo.app.account;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import org.dozer.Mapper;
@@ -64,7 +62,7 @@ public class AccountsController {
         return "account/create";
     }
 
-    @TransactionTokenCheck(value = "create", type = TransactionTokenType.IN)
+    @TransactionTokenCheck(value = "create")
     @RequestMapping(method = RequestMethod.POST)
     public String create(@Validated AccountForm form, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
@@ -105,8 +103,8 @@ public class AccountsController {
         return "account/edit";
     }
 
-    @TransactionTokenCheck(value = "edit", type = TransactionTokenType.IN)
-    @RequestMapping(value = "{accountUuid}", method = RequestMethod.PATCH)
+    @TransactionTokenCheck(value = "edit")
+    @RequestMapping(value = "{accountUuid}", method = RequestMethod.PUT)
     public String edit(@PathVariable("accountUuid") String accountUuid,
             @Validated AccountForm form, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
@@ -141,7 +139,7 @@ public class AccountsController {
         return "account/edit";
     }
 
-    @TransactionTokenCheck(value = "delete", type = TransactionTokenType.IN)
+    @TransactionTokenCheck(value = "delete")
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("accountUuid") String accountUuid,
             RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {

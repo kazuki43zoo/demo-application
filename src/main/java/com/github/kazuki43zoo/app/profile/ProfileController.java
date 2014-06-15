@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.message.ResultMessages;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
+import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
 import com.github.kazuki43zoo.domain.model.Account;
@@ -50,7 +51,7 @@ public class ProfileController {
     @RequestMapping(method = RequestMethod.PATCH)
     public String save(@AuthenticationPrincipal CustomUserDetails user,
             @Validated ProfileForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return edit(user, form, model);
@@ -63,6 +64,9 @@ public class ProfileController {
         beanMapper.map(savedAccount, user.getAccount());
 
         redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.pf.0001"));
+
+        transactionTokenContext.removeToken();
+
         return "redirect:/profile";
     }
 }

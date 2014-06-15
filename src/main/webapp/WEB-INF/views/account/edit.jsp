@@ -5,7 +5,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <button class="btn btn-default" name="_method" value="patch">
+            <button class="btn btn-default" name="_method" value="put">
                 <span class="glyphicon glyphicon-floppy-save"></span> Save
             </button>
         </div>
