@@ -1,0 +1,37 @@
+package com.github.kazuki43zoo.domain.service.security;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.github.kazuki43zoo.domain.model.Account;
+import com.github.kazuki43zoo.domain.model.AccountAuthority;
+
+public class CustomUserDetails extends User implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
+    private Account account;
+
+    public CustomUserDetails(Account account) {
+        super(account.getAccountId(), account.getPassword(), account.isEnabled(), true, true, true,
+                toGrantedAuthorities(account));
+        this.account = account;
+    }
+
+    private static Collection<GrantedAuthority> toGrantedAuthorities(Account account) {
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (AccountAuthority authority : account.getAuthorities()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + authority.getAuthority()));
+        }
+        return grantedAuthorities;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+}

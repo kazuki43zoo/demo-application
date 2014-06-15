@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.kazuki43zoo.domain.repository.account.AccountRepository">
+
+    <resultMap id="resultMap-Account" type="Account">
+        <id property="accountUuid" column="account_uuid" />
+        <result property="accountId" column="account_id" />
+        <result property="password" column="password" />
+        <result property="firstName" column="first_name" />
+        <result property="lastName" column="last_name" />
+        <result property="enabled" column="enabled" />
+        <collection property="authorities" column="account_uuid" javaType="ArrayList" ofType="AccountAuthority" select="findAllAuthorityByAccountUuid" fetchType="lazy"/>
+    </resultMap>
+
+    <resultMap id="resultMap-AccountAuthority" type="AccountAuthority">
+        <result property="accountUuid" column="account_uuid" />
+        <result property="authority" column="authority" />
+    </resultMap>
+    
+    <sql id="selectAllColumnsOfAccountSql">
+        SELECT
+            account_uuid,
+            account_id,
+            password,
+            first_name,
+            last_name,
+            enabled
+        FROM
+            account
+    </sql>
+    
+    <sql id="whereCriteriaSql">
+        <where>
+            <if test="criteria.accountId != null">
+                account_id LIKE ('%' || #{criteria.accountId} || '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="countByCriteria" resultType="long">
+        SELECT
+            COUNT(*)
+        FROM
+            account
+        <include refid="whereCriteriaSql"/>
+    </select>
+
+    <select id="findAllByCriteria" resultMap="resultMap-Account">
+        <include refid="selectAllColumnsOfAccountSql"/>
+        <include refid="whereCriteriaSql"/>
+        ORDER BY
+            account_id
+        LIMIT
+            #{pageable.pageSize}
+        OFFSET
+            #{pageable.offset}
+    </select>
+
+    <select id="findOneByAccountId" parameterType="String" resultMap="resultMap-Account">
+        <include refid="selectAllColumnsOfAccountSql" />
+        WHERE
+            account_id = #{accountId}
+    </select>
+
+    <select id="findOne" parameterType="String" resultMap="resultMap-Account">
+        <include refid="selectAllColumnsOfAccountSql" />
+        WHERE
+            account_uuid = #{accountUuid}
+    </select>
+
+    <insert id="save" parameterType="Account">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            <choose>
+                <when test="accountUuid == null">
+                    SELECT RANDOM_UUID()
+                </when>
+                <otherwise>
+                    SELECT account_uuid FROM account WHERE account_uuid = #{accountUuid}
+                </otherwise>
+            </choose>
+        </selectKey>
+        <choose>
+            <when test="keyGen == true">
+                INSERT INTO
+                    account
+                (
+                    account_uuid,
+                    account_id,
+                    password,
+                    first_name,
+                    last_name,
+                    enabled
+                )
+                VALUES
+                (
+                    #{accountUuid},
+                    #{accountId},
+                    #{password},
+                    #{firstName},
+                    #{lastName},
+                    #{enabled}
+                );
+            </when>
+            <otherwise>
+                UPDATE
+                    account 
+                SET
+                    account_id = #{accountId},
+                    password = #{password},
+                    first_name = #{firstName},
+                    last_name = #{lastName},
+                    enabled = #{enabled}
+                WHERE
+                    account_uuid = #{accountUuid}
+            </otherwise>
+        </choose>
+    </insert>
+    
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM
+            account
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <select id="findAllAuthorityByAccountUuid" parameterType="String" resultMap="resultMap-AccountAuthority">
+        SELECT
+            account_uuid,
+            authority
+        FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+        ORDER BY
+            authority
+    </select>
+    
+    <insert id="createAuthority" parameterType="AccountAuthority">
+        INSERT INTO
+            account_authorities
+        (
+            account_uuid,
+            authority
+        )
+        VALUES
+        (
+            #{accountUuid},
+            #{authority}
+        );
+    </insert>
+
+    <delete id="deleteAuthority" parameterType="AccountAuthority">
+        DELETE
+        FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            authority = #{authority}
+    </delete>
+
+    <delete id="deleteAuthorities" parameterType="String">
+        DELETE
+        FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+</mapper>

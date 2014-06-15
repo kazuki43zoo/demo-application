@@ -1,0 +1,15 @@
+<t:messagesPanel />
+
+<form action="${contextPath}/profile" class="form-horizontal" method="get">
+
+    <jsp:include page="/WEB-INF/views/account/inc/accountDisplay.jsp" />
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button class="btn btn-default" name="edit">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </button>
+        </div>
+
+    </div>
+</form>
