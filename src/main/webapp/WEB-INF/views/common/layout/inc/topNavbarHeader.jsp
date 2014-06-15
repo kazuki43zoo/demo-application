@@ -1,2 +1,2 @@
 
-<a class="navbar-brand" href="${contextPath}/">Demo Applications</a>
+<a class="navbar-brand" href="${contextPath}/">Demo Application</a>
