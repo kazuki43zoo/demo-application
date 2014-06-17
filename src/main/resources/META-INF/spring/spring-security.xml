@@ -19,7 +19,7 @@
 
         <sec:csrf request-matcher-ref="csrfRequestMatcher" />
 
-        <sec:session-management invalid-session-url="/error/sessionError"
+        <sec:session-management invalid-session-url="/error/invalidSession"
             session-fixation-protection="migrateSession" />
 
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />

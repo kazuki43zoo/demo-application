@@ -92,7 +92,6 @@
                 <entry key="common/error/resourceNotFoundError" value="404" />
                 <entry key="common/error/businessError" value="409" />
                 <entry key="common/error/transactionTokenError" value="409" />
-                <entry key="common/error/dataAccessError" value="500" />
             </map>
         </property>
         <property name="defaultErrorView" value="common/error/systemError" />
@@ -114,6 +113,5 @@
     <mvc:view-controller path="/logoutSuccess" view-name="common/redirect/home" />
     <mvc:view-controller path="/admin" view-name="admin/menu" />
     <mvc:view-controller path="/admin/h2Console" view-name="admin/h2Console" />
-    <mvc:view-controller path="/error/sessionError" view-name="common/error/sessionError" />
 
 </beans>
