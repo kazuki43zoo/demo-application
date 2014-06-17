@@ -5,7 +5,7 @@
             class="caret"></b>
     </a>
         <ul class="dropdown-menu pull-right">
-            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            <sec:authorize url="/profile">
                 <li><a href="${contextPath}/profile"><span class="glyphicon glyphicon-edit"></span> Edit
                         profile</a></li>
                 <li class="divider"></li>

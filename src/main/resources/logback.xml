@@ -8,9 +8,9 @@
     </appender>
 
     <appender name="APPLICATION_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/jbossews-application.log</file>
+        <file>log/demo-application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/jbossews-application-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>log/demo-application-%d{yyyyMMdd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -20,9 +20,9 @@
     </appender>
 
     <appender name="MONITORING_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/jbossews-monitoring.log</file>
+        <file>log/demo-monitoring.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/jbossews-monitoring-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>log/demo-monitoring-%d{yyyyMMdd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>

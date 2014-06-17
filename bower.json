@@ -1,5 +1,5 @@
 {
-    "name": "jbossews",
+    "name": "demo-application",
     "version": "1.0",
     "dependencies": {
         "jquery": "latest",

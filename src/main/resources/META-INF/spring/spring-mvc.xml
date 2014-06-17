@@ -111,6 +111,7 @@
     <context:component-scan base-package="com.github.kazuki43zoo.app" />
 
     <mvc:view-controller path="/login" view-name="auth/loginForm" />
+    <mvc:view-controller path="/logoutSuccess" view-name="common/redirect/home" />
     <mvc:view-controller path="/admin" view-name="admin/menu" />
     <mvc:view-controller path="/admin/h2Console" view-name="admin/h2Console" />
     <mvc:view-controller path="/error/sessionError" view-name="common/error/sessionError" />
