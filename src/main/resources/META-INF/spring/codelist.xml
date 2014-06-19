@@ -27,4 +27,23 @@
         </property>
     </bean>
 
+    <bean id="CL_AUTHENTICATION_RESULT" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+        <property name="map">
+            <map>
+                <entry key="true" value="Success" />
+                <entry key="false" value="Failure" />
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="CL_ACCOUNT_SEARCH_TARGET" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+        <property name="map">
+            <map>
+                <entry key="accountId" value="Account ID" />
+                <entry key="accountName" value="Account Name" />
+            </map>
+        </property>
+    </bean>
+
 </beans>

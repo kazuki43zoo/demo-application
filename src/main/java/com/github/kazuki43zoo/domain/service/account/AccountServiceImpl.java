@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.dozer.Mapper;
+import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.DateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
+import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
 
@@ -41,6 +44,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(readOnly = true)
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
+        criteria.determineCriteria();
         long totalCount = accountRepository.countByCriteria(criteria);
         List<Account> accounts;
         if (totalCount == 0) {
@@ -63,50 +67,86 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account create(Account inputAccount) {
+        DateTime currentDateTime = dateFactory.newDateTime();
+
         String rawPassword = inputAccount.getPassword();
         if (!StringUtils.hasLength(rawPassword)) {
-            rawPassword = dateFactory.newDateTime().toString("yyyyMMdd");
+            rawPassword = currentDateTime.toString("yyyyMMdd");
         }
-        inputAccount.setPassword(passwordEncoder.encode(rawPassword));
+        validatePassword(rawPassword, inputAccount);
+
+        String encodedPassword = passwordEncoder.encode(rawPassword);
+        inputAccount.setPassword(encodedPassword);
+        inputAccount.setPasswordModifiedAt(currentDateTime.toDate());
         inputAccount.setEnabled(true);
+
         accountRepository.save(inputAccount);
+
+        String accountUuid = inputAccount.getAccountUuid();
         for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
-            inputAuthority.setAccountUuid(inputAccount.getAccountUuid());
+            inputAuthority.setAccountUuid(accountUuid);
             accountRepository.createAuthority(inputAuthority);
         }
-        return getAccount(inputAccount.getAccountUuid());
+        accountRepository.createPasswordHistory(new AccountPasswordHistory(accountUuid,
+                encodedPassword, currentDateTime.toDate()));
+
+        return getAccount(accountUuid);
     }
 
     @Override
     public Account changeProfile(Account inputAccount) {
+        DateTime currentDateTime = dateFactory.newDateTime();
+        String accountUuid = inputAccount.getAccountUuid();
 
-        Account currentAccount = getAccount(inputAccount.getAccountUuid());
-        if (StringUtils.hasLength(inputAccount.getPassword())) {
-            currentAccount.setPassword(passwordEncoder.encode(inputAccount.getPassword()));
-        }
+        Account currentAccount = getAccount(accountUuid);
+
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
 
-        accountRepository.save(currentAccount);
+        AccountPasswordHistory passwordHistory = null;
+        String rawPassword = inputAccount.getPassword();
+        if (StringUtils.hasLength(rawPassword)) {
+            validatePassword(rawPassword, currentAccount);
+            String encodedPassword = passwordEncoder.encode(rawPassword);
+            currentAccount.setPassword(encodedPassword);
+            currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
+            passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
+                    currentDateTime.toDate());
+        }
 
-        return getAccount(inputAccount.getAccountUuid());
+        accountRepository.save(currentAccount);
+        if (passwordHistory != null) {
+            accountRepository.createPasswordHistory(passwordHistory);
+        }
+
+        return getAccount(accountUuid);
     }
 
     @Override
     public Account change(Account inputAccount) {
+        DateTime currentDateTime = dateFactory.newDateTime();
+        String accountUuid = inputAccount.getAccountUuid();
 
-        Account currentAccount = getAccount(inputAccount.getAccountUuid());
-        if (StringUtils.hasLength(inputAccount.getPassword())) {
-            currentAccount.setPassword(passwordEncoder.encode(inputAccount.getPassword()));
-        }
+        Account currentAccount = getAccount(accountUuid);
+
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
         currentAccount.setEnabled(inputAccount.isEnabled());
 
-        accountRepository.save(currentAccount);
+        AccountPasswordHistory passwordHistory = null;
+        String rawPassword = inputAccount.getPassword();
+        if (StringUtils.hasLength(rawPassword)) {
+            validatePassword(rawPassword, currentAccount);
+            String encodedPassword = passwordEncoder.encode(rawPassword);
+            currentAccount.setPassword(encodedPassword);
+            currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
+            passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
+                    currentDateTime.toDate());
+        }
 
+        accountRepository.save(currentAccount);
         for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
                 accountRepository.deleteAuthority(currentAuthority);
@@ -115,14 +155,31 @@ public class AccountServiceImpl implements AccountService {
         for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
             accountRepository.createAuthority(inputAuthority);
         }
+        if (passwordHistory != null) {
+            accountRepository.createPasswordHistory(passwordHistory);
+        }
 
-        return getAccount(inputAccount.getAccountUuid());
+        return getAccount(accountUuid);
     }
 
     @Override
     public void delete(String accountUuid) {
+        accountRepository.deletePasswordHistories(accountUuid);
         accountRepository.deleteAuthorities(accountUuid);
         accountRepository.delete(accountUuid);
     }
 
+    private void validatePassword(String rawPassword, Account account) {
+        if (account.getPasswordHistories() == null) {
+            return;
+        }
+        for (AccountPasswordHistory passwordHistory : account.getPasswordHistories()) {
+            if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
+                throw new BusinessException(ResultMessages.danger().add("e.xx.ac.2002"));
+            }
+        }
+
+    }
+
+    
 }

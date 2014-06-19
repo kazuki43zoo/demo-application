@@ -1,8 +1,8 @@
 <t:messagesPanel messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" messagesType="danger" />
-<c:remove var="SPRING_SECURITY_LAST_EXCEPTION"/>
+<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" />
 <form:form action="${contextPath}/authentication" class="navbar-form" method="post">
     <div class="form-group">
-        <input type="text" name="userId" class="form-control" placeholder="User ID">
+        <input type="text" name="accountId" class="form-control" placeholder="User ID">
     </div>
     <div class="form-group">
         <input type="password" name="password" class="form-control" placeholder="Password">

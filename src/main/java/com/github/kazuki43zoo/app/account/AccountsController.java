@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessages;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
@@ -71,22 +72,26 @@ public class AccountsController {
         }
 
         Account inputAccount = beanMapper.map(form, Account.class);
-        System.out.println(inputAccount.getAuthorities());
         for (String authority : form.getAuthorities()) {
             inputAccount.addAuthority(new AccountAuthority(null, authority));
         }
+        Account createdAccount;
         try {
-            accountService.create(inputAccount);
+            createdAccount = accountService.create(inputAccount);
         } catch (DuplicateKeyException e) {
             model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            return createForm(form);
+        } catch (BusinessException e) {
+            model.addAttribute(e.getResultMessages());
             return createForm(form);
         }
 
         redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.ac.0001"));
+        redirectAttributes.addAttribute("accountUuid", createdAccount.getAccountUuid());
 
         transactionTokenContext.removeToken();
 
-        return "redirect:/accounts";
+        return "redirect:/accounts/{accountUuid}";
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
@@ -122,6 +127,9 @@ public class AccountsController {
             accountService.change(inputAccount);
         } catch (DuplicateKeyException e) {
             model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            return editRedo(accountUuid, form, model);
+        } catch (BusinessException e) {
+            model.addAttribute(e.getResultMessages());
             return editRedo(accountUuid, form, model);
         }
 

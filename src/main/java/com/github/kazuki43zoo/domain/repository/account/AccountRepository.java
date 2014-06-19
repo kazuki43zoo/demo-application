@@ -6,7 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 
 import com.github.kazuki43zoo.domain.model.Account;
+import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
+import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
+import com.github.kazuki43zoo.domain.model.AccountPasswordLock;
 
 public interface AccountRepository {
 
@@ -28,5 +31,20 @@ public interface AccountRepository {
     boolean deleteAuthority(AccountAuthority authority);
 
     boolean deleteAuthorities(String accountUuid);
+
+    boolean createPasswordHistory(AccountPasswordHistory passwordHistory);
+
+    boolean deletePasswordHistories(String accountUuid);
+
+    boolean createPasswordLock(AccountPasswordLock passwordLock);
+
+    boolean updatePasswordLock(AccountPasswordLock passwordLock);
+
+    boolean deletePasswordLock(String accountUuid);
+
+    boolean createAuthenticationHistory(AccountAuthenticationHistory authenticationHistory);
+
+    AccountAuthenticationHistory findOneLastSuccessAuthenticationHistoryByAccountUuid(
+            String accountUuid);
 
 }

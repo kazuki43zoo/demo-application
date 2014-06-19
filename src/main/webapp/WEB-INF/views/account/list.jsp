@@ -5,13 +5,28 @@
 <form action="${contextPath}/accounts" class="form-horizontal" method="get">
     <spring:nestedPath path="accountsSearchQuery">
         <div class="form-group">
-            <div class="col-sm-8">
-                <form:input cssClass="form-control" path="accountId" placeholder="(Please input Account ID)" />
-                <form:errors path="accountId" />
+            <div class="col-sm-4">
+                <form:input cssClass="form-control" path="word" placeholder="Account ID or Account Name" />
+                <form:errors path="word" />
             </div>
-            <button class="btn btn-default" name="filter">Filter</button>
-            <a href="${contextPath}/accounts?form=create" class="btn btn-default pull-right">New</a>
+            <div class="col-sm-4">
+
+                <c:forEach var="accountSearchTargetCodeListElement" items="${CL_ACCOUNT_SEARCH_TARGET}"
+                    varStatus="rowStatus">
+                    <div class="checkbox-inline">
+                        <form:checkbox path="targets" value="${accountSearchTargetCodeListElement.key}"
+                            label="${accountSearchTargetCodeListElement.value}" />
+                    </div>
+                </c:forEach>
+
+                <div>
+                    <form:errors path="targets" />
+                </div>
+            </div>
+            <button class="btn btn-default" name="filter"><span class="glyphicon glyphicon-search"></span> Filter</button>
+            <a href="${contextPath}/accounts?form=create" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span> Create Account</a>
         </div>
+
     </spring:nestedPath>
 </form>
 

@@ -11,22 +11,25 @@
 
     <sec:http auto-config="true" use-expressions="true">
 
-        <sec:form-login login-processing-url="/authentication"
-            authentication-failure-url="/login" username-parameter="userId" password-parameter="password" />
-
-        <sec:logout logout-url="/logout" logout-success-url="/logoutSuccess"
-            invalidate-session="true" delete-cookies="JSESSIONID" />
-
         <sec:csrf request-matcher-ref="csrfRequestMatcher" />
 
+        <sec:form-login login-processing-url="/authentication"
+            authentication-failure-url="/login" username-parameter="accountId" password-parameter="password"
+            authentication-details-source-ref="customWebAuthenticationDetailsSource" />
+
         <sec:session-management invalid-session-url="/error/invalidSession"
-            session-fixation-protection="migrateSession" />
+            session-fixation-protection="migrateSession">
+        </sec:session-management>
+
+        <sec:logout logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID"
+            success-handler-ref="customLogoutSuccessHandler" />
 
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
 
         <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/profile/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <sec:intercept-url pattern="/accounts/**" access="hasRole('ROLE_ACCOUNTMNG')" />
+        <sec:intercept-url pattern="/login" access="!isAuthenticated()" />
 
     </sec:http>
 
@@ -36,15 +39,16 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
+    <context:component-scan base-package="com.github.kazuki43zoo.app.common.security" />
+
     <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
         <constructor-arg>
             <list>
-                <ref bean="defaultCsrfRequiresMethodMatche" />
+                <ref bean="defaultCsrfRequiresMethodMatcher" />
                 <ref bean="negatedH2ConsolePathMatcher" />
             </list>
         </constructor-arg>
     </bean>
-    <bean id="defaultCsrfRequiresMethodMatche" class="com.github.kazuki43zoo.app.common.security.DefaultCsrfRequiresMethodMatcher" />
     <bean id="negatedH2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
         <constructor-arg>
             <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">

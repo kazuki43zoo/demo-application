@@ -1,7 +1,10 @@
 <t:messagesPanel />
 <form action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="form-horizontal" method="get">
     <div class="form-group">
-        <div class="col-sm-10">
+        <div class="col-sm-offset-2 col-sm-8">
+            <a href="${contextPath}/accounts" class="btn btn-default pull-left"> <span
+                class="glyphicon glyphicon-step-backward"></span> Account List
+            </a>
             <button class="btn btn-default pull-right">
                 <span class="glyphicon glyphicon-refresh"></span> Refresh
             </button>

@@ -1,10 +1,25 @@
 package com.github.kazuki43zoo.domain.repository.account;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+
 import lombok.Data;
 
 @Data
 public class AccountsSearchCriteria {
 
-    private String accountId;
+    private static final List<String> DEFAULT_TARGETS = Collections.unmodifiableList(Arrays.asList(
+            "accountId", "accountName"));
 
+    private String word;
+    private List<String> targets;
+
+    public void determineCriteria() {
+        if (CollectionUtils.isEmpty(targets)) {
+            setTargets(DEFAULT_TARGETS);
+        }
+    }
 }

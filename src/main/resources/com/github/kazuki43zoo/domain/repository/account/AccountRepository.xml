@@ -8,10 +8,15 @@
         <id property="accountUuid" column="account_uuid" />
         <result property="accountId" column="account_id" />
         <result property="password" column="password" />
+        <result property="passwordModifiedAt" column="password_modified_at" />
         <result property="firstName" column="first_name" />
         <result property="lastName" column="last_name" />
         <result property="enabled" column="enabled" />
+        <association property="passwordLock" column="account_uuid" javaType="AccountPasswordLock" select="findOnePasswordLock" fetchType="lazy" />
         <collection property="authorities" column="account_uuid" javaType="ArrayList" ofType="AccountAuthority" select="findAllAuthorityByAccountUuid" fetchType="lazy"/>
+        <collection property="passwordHistories" column="account_uuid" javaType="ArrayList" ofType="AccountPasswordHistory" select="findAllPasswordHistoryByAccountUuid" fetchType="lazy"/>
+        <collection property="authenticationHistories" column="account_uuid" javaType="ArrayList" ofType="AccountAuthenticationHistory" select="findAllAuthenticationHistoryByAccountUuid" fetchType="lazy"/>
+        
     </resultMap>
 
     <resultMap id="resultMap-AccountAuthority" type="AccountAuthority">
@@ -19,11 +24,33 @@
         <result property="authority" column="authority" />
     </resultMap>
     
+    <resultMap id="resultMap-AccountPasswordHistory" type="AccountPasswordHistory">
+        <result property="accountUuid" column="account_uuid" />
+        <result property="password" column="password" />
+    </resultMap>
+
+    <resultMap id="resultMap-AccountPasswordLock" type="AccountPasswordLock">
+        <result property="accountUuid" column="account_uuid" />
+        <result property="failureCount" column="failure_count" />
+    </resultMap>
+    
+    <resultMap id="resultMap-AccountAuthenticationHistory" type="AccountAuthenticationHistory">
+        <result property="accountUuid" column="account_uuid" />
+        <result property="createdAt" column="created_at" />
+        <result property="authenticationType" column="authentication_type" />
+        <result property="authenticationResult" column="authentication_result" />
+        <result property="remoteAddress" column="remote_address" />
+        <result property="sessionId" column="session_id" />
+        <result property="agent" column="agent" />
+        <result property="trackingId" column="tracking_id" />
+    </resultMap>
+
     <sql id="selectAllColumnsOfAccountSql">
         SELECT
             account_uuid,
             account_id,
             password,
+            password_modified_at,
             first_name,
             last_name,
             enabled
@@ -33,8 +60,17 @@
     
     <sql id="whereCriteriaSql">
         <where>
-            <if test="criteria.accountId != null">
-                account_id LIKE ('%' || #{criteria.accountId} || '%')
+            <if test="criteria.word != null">
+                <foreach collection="criteria.targets" item="target" separator="OR">
+                    <choose>
+                        <when test="target == 'accountId'">
+                            account_id LIKE ('%' || #{criteria.word} || '%')
+                        </when>
+                        <when test="target == 'accountName'">
+                            first_name LIKE ('%' || #{criteria.word} || '%') OR last_name LIKE ('%' || #{criteria.word} || '%')
+                        </when>
+                    </choose>
+                </foreach>
             </if>
         </where>
     </sql>
@@ -89,6 +125,7 @@
                     account_uuid,
                     account_id,
                     password,
+                    password_modified_at,
                     first_name,
                     last_name,
                     enabled
@@ -98,6 +135,7 @@
                     #{accountUuid},
                     #{accountId},
                     #{password},
+                    #{passwordModifiedAt},
                     #{firstName},
                     #{lastName},
                     #{enabled}
@@ -109,6 +147,7 @@
                 SET
                     account_id = #{accountId},
                     password = #{password},
+                    password_modified_at = #{passowrdModifiedAt},
                     first_name = #{firstName},
                     last_name = #{lastName},
                     enabled = #{enabled}
@@ -119,8 +158,7 @@
     </insert>
     
     <delete id="delete" parameterType="String">
-        DELETE
-        FROM
+        DELETE FROM
             account
         WHERE
             account_uuid = #{accountUuid}
@@ -153,8 +191,7 @@
     </insert>
 
     <delete id="deleteAuthority" parameterType="AccountAuthority">
-        DELETE
-        FROM
+        DELETE FROM
             account_authorities
         WHERE
             account_uuid = #{accountUuid}
@@ -163,11 +200,146 @@
     </delete>
 
     <delete id="deleteAuthorities" parameterType="String">
-        DELETE
-        FROM
+        DELETE FROM
             account_authorities
         WHERE
             account_uuid = #{accountUuid}
     </delete>
+    
+    <select id="findAllPasswordHistoryByAccountUuid" parameterType="String" resultMap="resultMap-AccountPasswordHistory">
+        SELECT
+            account_uuid,
+            password
+        FROM
+            account_password_histories
+        WHERE
+            account_uuid = #{account_uuid}
+    </select>
+    
+    <insert id="createPasswordHistory" parameterType="AccountPasswordHistory">
+        INSERT INTO
+            account_password_histories
+        (
+            account_uuid,
+            password,
+            created_at
+        )
+        VALUES
+        (
+            #{accountUuid},
+            #{password},
+            #{createdAt}
+        )
+    </insert>
+
+    <delete id="deletePasswordHistories" parameterType="String">
+        DELETE FROM
+            account_password_histories
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+    
+    <select id="findOnePasswordLock" parameterType="String" resultMap="resultMap-AccountPasswordLock">
+        SELECT
+            account_uuid,
+            failure_count
+        FROM
+            account_password_lock
+        WHERE
+            account_uuid = #{accountUuid}
+    </select>
+    
+    <insert id="createPasswordLock" parameterType="AccountPasswordLock">
+        INSERT INTO
+            account_password_lock
+        (
+            account_uuid,
+            failure_count,
+            modified_at
+        )
+        VALUES(
+            #{accountUuid},
+            #{failureCount},
+            #{modifiedAt}
+        )
+    </insert>
+    
+    <update id="updatePasswordLock" parameterType="AccountPasswordLock">
+        UPDATE
+            account_password_lock
+        SET
+            failure_count = #{failureCount},
+            modified_at = #{modifiedAt}
+        WHERE
+            account_uuid = #{accountUuid}
+    </update>
+    
+    <delete id="deletePasswordLock" parameterType="String">
+        DELETE FROM
+            account_password_lock
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <sql id="selectAllColumnsOfAccountAuthenticationHistorySql">
+        SELECT
+            account_uuid,
+            created_at,
+            authentication_type,
+            authentication_result,
+            remote_address,
+            session_id,
+            agent,
+            tracking_id
+        FROM
+            account_authentication_histories
+    </sql>
+
+    <select id="findAllAuthenticationHistoryByAccountUuid" parameterType="String" resultMap="resultMap-AccountAuthenticationHistory">
+        <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+        ORDER BY
+            created_at DESC
+        LIMIT
+            100
+    </select>
+    <select id="findOneLastSuccessAuthenticationHistoryByAccountUuid" parameterType="String" resultMap="resultMap-AccountAuthenticationHistory">
+        <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            authentication_result = true
+        ORDER BY
+            created_at DESC
+        LIMIT
+            1
+    </select>
+
+    <insert id="createAuthenticationHistory" parameterType="AccountAuthenticationHistory">
+        INSERT INTO
+            account_authentication_histories
+        (
+            account_uuid,
+            created_at,
+            authentication_type,
+            authentication_result,
+            remote_address,
+            session_id,
+            agent,
+            tracking_id
+        )
+        VALUES
+        (
+            #{accountUuid},
+            #{createdAt},
+            #{authenticationType},
+            #{authenticationResult},
+            #{remoteAddress},
+            #{sessionId},
+            #{agent},
+            #{trackingId}
+        )
+    </insert>
 
 </mapper>

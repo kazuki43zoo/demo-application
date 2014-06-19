@@ -23,8 +23,11 @@
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-8">
+    <div class="col-sm-3">
         <span class="form-control">***************</span>
+    </div>
+    <div class="col-sm-5">
+        <span class="form-control">Modified at : <fmt:formatDate value="${account.passwordModifiedAt}" pattern="yyyy/MM/dd HH:mm:ss z" timeZone="UTC" /></span>
     </div>
 </div>
 

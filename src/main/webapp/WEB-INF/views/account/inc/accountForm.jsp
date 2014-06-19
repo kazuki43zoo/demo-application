@@ -35,7 +35,7 @@
 <div class="form-group">
     <form:label path="password" class="col-sm-2 control-label">Password</form:label>
     <div class="col-sm-4">
-        <form:input type="password" cssClass="form-control" path="password" />
+        <form:input type="password" cssClass="form-control" path="password" placeholder="Password" />
         <form:errors path="password" />
     </div>
     <div class="col-sm-4">

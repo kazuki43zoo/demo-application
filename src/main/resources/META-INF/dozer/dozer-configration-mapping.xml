@@ -5,6 +5,9 @@
 
     <configuration>
         <relationship-type>non-cumulative</relationship-type>
+        <copy-by-references>
+            <copy-by-reference>com.github.kazuki43zoo.domain.model.*</copy-by-reference>
+        </copy-by-references>
     </configuration>
 
     <mapping>
@@ -15,4 +18,22 @@
             <b>authorities</b>
         </field-exclude>
     </mapping>
+
+    <mapping>
+        <class-a>com.github.kazuki43zoo.domain.model.Account</class-a>
+        <class-b>com.github.kazuki43zoo.domain.model.Account</class-b>
+        <field-exclude>
+            <a>passwordLock</a>
+            <b>passwordLock</b>
+        </field-exclude>
+        <field-exclude>
+            <a>passwordHistories</a>
+            <b>passwordHistories</b>
+        </field-exclude>
+        <field-exclude>
+            <a>authenticationHistories</a>
+            <b>authenticationHistories</b>
+        </field-exclude>
+    </mapping>
+
 </mappings>

@@ -1,9 +1,9 @@
 package com.github.kazuki43zoo.domain.service.welcome;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public interface WelcomeService {
 
-    Date getCurrentDate();
+    DateTime getCurrentDateTime();
 
 }

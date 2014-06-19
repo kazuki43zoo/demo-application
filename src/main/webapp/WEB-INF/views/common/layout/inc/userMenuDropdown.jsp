@@ -8,6 +8,8 @@
             <sec:authorize url="/profile">
                 <li><a href="${contextPath}/profile"><span class="glyphicon glyphicon-edit"></span> Edit
                         profile</a></li>
+                <li><a href="${contextPath}/profile/authenticationHistories"><span
+                        class="glyphicon glyphicon-list"></span> Authentication Histories</a></li>
                 <li class="divider"></li>
             </sec:authorize>
             <li><a id="logout" href="javascript:logout();"><span class="glyphicon glyphicon-log-out"></span>

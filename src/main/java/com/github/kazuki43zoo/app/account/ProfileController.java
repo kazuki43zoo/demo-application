@@ -1,8 +1,9 @@
-package com.github.kazuki43zoo.app.profile;
+package com.github.kazuki43zoo.app.account;
 
 import javax.inject.Inject;
 
 import org.dozer.Mapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessages;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
@@ -59,7 +61,17 @@ public class ProfileController {
 
         Account inputAccount = beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(user.getAccount().getAccountUuid());
-        Account savedAccount = accountService.changeProfile(inputAccount);
+
+        Account savedAccount = null;
+        try {
+            savedAccount = accountService.changeProfile(inputAccount);
+        } catch (DuplicateKeyException e) {
+            model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            return editRedo(user, form, model);
+        } catch (BusinessException e) {
+            model.addAttribute(e.getResultMessages());
+            return editRedo(user, form, model);
+        }
 
         beanMapper.map(savedAccount, user.getAccount());
 
@@ -68,5 +80,18 @@ public class ProfileController {
         transactionTokenContext.removeToken();
 
         return "redirect:/profile";
+    }
+
+    public String editRedo(CustomUserDetails user, ProfileForm form, Model model) {
+        model.addAttribute(user.getAccount());
+        return "profile/edit";
+    }
+
+    @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
+    public String authenticationHistoryList(@AuthenticationPrincipal CustomUserDetails user,
+            Model model) {
+        Account account = accountService.getAccount(user.getAccount().getAccountUuid());
+        model.addAttribute(account);
+        return "profile/authenticationHistoryList";
     }
 }

@@ -40,6 +40,9 @@
     <logger name="org.terasoluna.gfw">
         <level value="info" />
     </logger>
+    <logger name="org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener">
+        <level value="debug" />
+    </logger>
     <logger name="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor">
         <level value="info" />
     </logger>
