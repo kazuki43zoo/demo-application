@@ -10,10 +10,7 @@
     <listener>
         <listener-class>org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener</listener-class>
     </listener>
-    <listener>
-        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
-    </listener>
- 
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -76,12 +73,31 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-name>SpringSecurityFilterChainForAuth</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSecurityFilterChain</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
+        <filter-name>SpringSecurityFilterChainForAuth</filter-name>
+        <url-pattern>/auth/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>SpringSecurityFilterChainForApp</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSecurityFilterChain</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SpringSecurityFilterChainForApp</filter-name>
+        <servlet-name>appServlet</servlet-name>
     </filter-mapping>
 
     <servlet>
@@ -95,7 +111,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -109,7 +125,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>h2ConsoleServlet</servlet-name>
-        <url-pattern>/admin/h2/console/*</url-pattern>
+        <url-pattern>/vendor/h2/console/*</url-pattern>
     </servlet-mapping>
 
     <jsp-config>
@@ -143,5 +159,10 @@
         <session-timeout>30</session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>
 

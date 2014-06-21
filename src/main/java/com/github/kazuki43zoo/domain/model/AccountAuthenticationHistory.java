@@ -17,6 +17,7 @@ public class AccountAuthenticationHistory implements Serializable {
     private Date createdAt;
     private String authenticationType;
     private boolean authenticationResult;
+    private String failureReason;
     private String remoteAddress;
     private String sessionId;
     private String agent;

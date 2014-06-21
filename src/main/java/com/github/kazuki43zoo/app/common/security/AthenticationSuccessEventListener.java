@@ -9,12 +9,13 @@ import org.springframework.security.authentication.event.AuthenticationSuccessEv
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
 import com.github.kazuki43zoo.domain.service.security.ConcurrentLoginException;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
-@Transactional
+@Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
 public class AthenticationSuccessEventListener implements
         ApplicationListener<AuthenticationSuccessEvent> {
@@ -34,17 +35,20 @@ public class AthenticationSuccessEventListener implements
                 .getPrincipal();
         CustomWebAuthenticationDetails authenticationDetails = (CustomWebAuthenticationDetails) event
                 .getAuthentication().getDetails();
+
+        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails,
+                AccountAuthenticationHistory.class);
+
         if (accountSharedService.isLogin(userDetails.getAccount(),
                 authenticationDetails.getSessionId())) {
-            throw new ConcurrentLoginException(messageSource.getMessage("e.xx.sec.8002",
-                    new String[] { userDetails.getAccount().getAccountId() },
-                    "Already has login by another session.", null));
+            String message = Messages.SECURITY_CONCURRENT_LOGIN.buildMessage(messageSource);
+            accountSharedService.createLoginFailureHistory(userDetails.getAccount().getAccountId(),
+                    authenticationHistory, message);
+            throw new ConcurrentLoginException(message);
         }
 
         accountSharedService.clearPasswordLock(userDetails.getAccount());
 
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails,
-                AccountAuthenticationHistory.class);
         accountSharedService.createLoginSuccessHistory(userDetails.getAccount(),
                 authenticationHistory);
     }

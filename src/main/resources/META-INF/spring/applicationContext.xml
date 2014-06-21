@@ -27,13 +27,13 @@
         <!-- Setting and Customization by project. -->
         <property name="exceptionMappings">
             <map>
-                <entry key="ResourceNotFoundException" value="e.xx.fw.5001" />
-                <entry key="InvalidTransactionTokenException" value="e.xx.fw.7001" />
-                <entry key="BusinessException" value="e.xx.fw.8001" />
-                <entry key="DataAccessException" value="e.xx.fw.9002" />
+                <entry key="ResourceNotFoundException" value="e.demo.fw.5001" />
+                <entry key="InvalidTransactionTokenException" value="e.demo.fw.7001" />
+                <entry key="BusinessException" value="e.demo.fw.8001" />
+                <entry key="DataAccessException" value="e.demo.fw.9002" />
             </map>
         </property>
-        <property name="defaultExceptionCode" value="e.xx.fw.9001" />
+        <property name="defaultExceptionCode" value="e.demo.fw.9001" />
     </bean>
 
     <!-- Exception Logger. -->
@@ -45,6 +45,8 @@
     <bean id="exceptionLoggingFilter" class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter">
         <property name="exceptionLogger" ref="exceptionLogger" />
     </bean>
+
+    <context:component-scan base-package="com.github.kazuki43zoo.core" />
 
     <import resource="classpath:/META-INF/spring/domain.xml" />
 

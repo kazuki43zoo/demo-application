@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
-import org.terasoluna.gfw.common.message.ResultMessages;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
+import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
@@ -66,7 +66,7 @@ public class ProfileController {
         try {
             savedAccount = accountService.changeProfile(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
             return editRedo(user, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -75,11 +75,10 @@ public class ProfileController {
 
         beanMapper.map(savedAccount, user.getAccount());
 
-        redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.pf.0001"));
-
         transactionTokenContext.removeToken();
 
-        return "redirect:/profile";
+        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_PROFILE_EDITED.buildResultMessages());
+        return "redirect:/app/profile";
     }
 
     public String editRedo(CustomUserDetails user, ProfileForm form, Model model) {

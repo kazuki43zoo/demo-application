@@ -8,6 +8,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
+
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
@@ -107,10 +109,11 @@
             pointcut="execution(* org.springframework.web.servlet.HandlerExceptionResolver.resolveException(..))" />
     </aop:config>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.app" />
+    <context:component-scan base-package="com.github.kazuki43zoo.app">
+        <context:exclude-filter type="regex"
+            expression="com\.github\.kazuki43zoo\.app\.common\.security\..*" />
+    </context:component-scan>
 
-    <mvc:view-controller path="/login" view-name="auth/loginForm" />
-    <mvc:view-controller path="/logoutSuccess" view-name="common/redirect/home" />
     <mvc:view-controller path="/admin" view-name="admin/menu" />
     <mvc:view-controller path="/admin/h2Console" view-name="admin/h2Console" />
 

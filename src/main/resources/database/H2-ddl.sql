@@ -37,11 +37,12 @@ CREATE TABLE IF NOT EXISTS account_authentication_histories(
     created_at timestamp,
     authentication_type varchar(64) not null,
     authentication_result boolean not null,
-    remote_address varchar(39) not null,
+    failure_reason nvarchar(256),
+    remote_address varchar(39),
     session_id varchar(128),
     agent varchar(256),
     tracking_id varchar(32),
-    constraint pk_account_credential_history primary key (account_uuid,created_at)
+    constraint pk_account_authentication_histories primary key (account_uuid,created_at)
 );
 
 COMMIT;

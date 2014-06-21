@@ -22,13 +22,16 @@ public interface AccountRepository {
 
     Account findOne(String accountUuid);
 
-    boolean save(Account account);
+    boolean create(Account account);
+
+    boolean update(Account account);
 
     boolean delete(String accountUuid);
 
     boolean createAuthority(AccountAuthority authority);
 
-    boolean deleteAuthority(AccountAuthority authority);
+    boolean deleteAuthority(@Param("accountUuid") String accountUuid,
+            @Param("authority") String authority);
 
     boolean deleteAuthorities(String accountUuid);
 

@@ -1,8 +1,8 @@
 <t:messagesPanel />
-<form action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="form-horizontal" method="get">
+<form action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="form-horizontal" method="get">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <a href="${contextPath}/accounts" class="btn btn-default pull-left"> <span
+            <a href="${contextPath}/app/accounts" class="btn btn-default pull-left"> <span
                 class="glyphicon glyphicon-step-backward"></span> Account List
             </a>
             <button class="btn btn-default pull-right">
@@ -25,6 +25,7 @@
     </div>
 </form>
 
-<form:form id="deleteForm" action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="sr-only" method="post">
+<form:form id="deleteForm" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="sr-only"
+    method="post">
     <input type="hidden" name="_method" value="delete">
 </form:form>

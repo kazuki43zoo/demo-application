@@ -3,7 +3,6 @@ package com.github.kazuki43zoo.domain.service.security;
 import javax.inject.Inject;
 
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.DateFactory;
 
+import com.github.kazuki43zoo.core.config.SecurityConfigs;
+import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
 
@@ -27,19 +28,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Inject
     DateFactory dateFactory;
 
-    @Value("${security.authenticationFailureMaxCount:5}")
-    int authenticationFailureMaxCount;
-
-    @Value("${security.passwordValidDays:90}")
-    int passwordValidDays;
+    @Inject
+    SecurityConfigs securityConfigs;
 
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountSharedService.getAccount(username);
         if (account == null) {
-            throw new UsernameNotFoundException(messageSource.getMessage("e.xx.sec.8001",
-                    new String[] { username }, "Account not found.", null));
+            throw new UsernameNotFoundException(
+                    Messages.SECURITY_ACCOUNT_NOT_FOUND.buildMessage(messageSource));
         }
 
         DateTime currentDateTime = dateFactory.newDateTime();
@@ -48,10 +46,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         boolean accountNonExpired = true;
 
         boolean passwordNonExpired = !currentDateTime.isAfter(passwordModifiedAt
-                .plusDays(passwordValidDays));
+                .plusDays(securityConfigs.getPasswordValidDays()));
 
         boolean accountNonLock = (account.getPasswordLock() == null)
-                || (account.getPasswordLock().getFailureCount() <= authenticationFailureMaxCount);
+                || (account.getPasswordLock().getFailureCount() <= securityConfigs
+                        .getAuthenticationFailureMaxCount());
 
         return new CustomUserDetails(account, accountNonExpired, passwordNonExpired, accountNonLock);
     }

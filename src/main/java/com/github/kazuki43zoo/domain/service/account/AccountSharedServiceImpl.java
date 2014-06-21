@@ -49,11 +49,12 @@ public class AccountSharedServiceImpl implements AccountSharedService {
 
     @Override
     public void createLoginFailureHistory(String failedAccountId,
-            AccountAuthenticationHistory authenticationHistory) {
+            AccountAuthenticationHistory authenticationHistory, String failureReason) {
         Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
+        authenticationHistory.setFailureReason(failureReason);
         createAuthenticationHistory(failedAccount, authenticationHistory, "login", false);
     }
 
@@ -89,6 +90,7 @@ public class AccountSharedServiceImpl implements AccountSharedService {
     @Override
     public void clearPasswordLock(Account authenticatedAccount) {
         accountRepository.deletePasswordLock(authenticatedAccount.getAccountUuid());
+        authenticatedAccount.setPasswordLock(null);
     }
 
     private void createAuthenticationHistory(Account account,

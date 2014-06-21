@@ -39,6 +39,7 @@
         <result property="createdAt" column="created_at" />
         <result property="authenticationType" column="authentication_type" />
         <result property="authenticationResult" column="authentication_result" />
+        <result property="failureReason" column="failure_reason"/>
         <result property="remoteAddress" column="remote_address" />
         <result property="sessionId" column="session_id" />
         <result property="agent" column="agent" />
@@ -106,57 +107,47 @@
             account_uuid = #{accountUuid}
     </select>
 
-    <insert id="save" parameterType="Account">
+    <insert id="create" parameterType="Account">
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
-            <choose>
-                <when test="accountUuid == null">
-                    SELECT RANDOM_UUID()
-                </when>
-                <otherwise>
-                    SELECT account_uuid FROM account WHERE account_uuid = #{accountUuid}
-                </otherwise>
-            </choose>
+            SELECT RANDOM_UUID()
         </selectKey>
-        <choose>
-            <when test="keyGen == true">
-                INSERT INTO
-                    account
-                (
-                    account_uuid,
-                    account_id,
-                    password,
-                    password_modified_at,
-                    first_name,
-                    last_name,
-                    enabled
-                )
-                VALUES
-                (
-                    #{accountUuid},
-                    #{accountId},
-                    #{password},
-                    #{passwordModifiedAt},
-                    #{firstName},
-                    #{lastName},
-                    #{enabled}
-                );
-            </when>
-            <otherwise>
-                UPDATE
-                    account 
-                SET
-                    account_id = #{accountId},
-                    password = #{password},
-                    password_modified_at = #{passowrdModifiedAt},
-                    first_name = #{firstName},
-                    last_name = #{lastName},
-                    enabled = #{enabled}
-                WHERE
-                    account_uuid = #{accountUuid}
-            </otherwise>
-        </choose>
+        INSERT INTO
+            account
+        (
+            account_uuid,
+            account_id,
+            password,
+            password_modified_at,
+            first_name,
+            last_name,
+            enabled
+        )
+        VALUES
+        (
+            #{accountUuid},
+            #{accountId},
+            #{password},
+            #{passwordModifiedAt},
+            #{firstName},
+            #{lastName},
+            #{enabled}
+        );
     </insert>
     
+    <update id="update" parameterType="Account">
+        UPDATE
+            account 
+        SET
+            account_id = #{accountId},
+            password = #{password},
+            password_modified_at = #{passwordModifiedAt},
+            first_name = #{firstName},
+            last_name = #{lastName},
+            enabled = #{enabled}
+        WHERE
+            account_uuid = #{accountUuid}
+    </update>
+
     <delete id="delete" parameterType="String">
         DELETE FROM
             account
@@ -190,7 +181,7 @@
         );
     </insert>
 
-    <delete id="deleteAuthority" parameterType="AccountAuthority">
+    <delete id="deleteAuthority">
         DELETE FROM
             account_authorities
         WHERE
@@ -287,6 +278,7 @@
             created_at,
             authentication_type,
             authentication_result,
+            failure_reason,
             remote_address,
             session_id,
             agent,
@@ -324,6 +316,7 @@
             created_at,
             authentication_type,
             authentication_result,
+            failure_reason,
             remote_address,
             session_id,
             agent,
@@ -335,6 +328,7 @@
             #{createdAt},
             #{authenticationType},
             #{authenticationResult},
+            #{failureReason},
             #{remoteAddress},
             #{sessionId},
             #{agent},

@@ -254,3 +254,7 @@ footer {
 .paginationContainer {
 	text-align:center;
 }
+
+input {
+    background-color: yellow;
+}

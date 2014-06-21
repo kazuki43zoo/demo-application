@@ -17,8 +17,8 @@ import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.DateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
+import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccount(String accountUuid) {
         Account account = accountRepository.findOne(accountUuid);
         if (account == null) {
-            throw new ResourceNotFoundException(ResultMessages.error().add("e.xx.fw.5001"));
+            throw new ResourceNotFoundException(Messages.FW_NOT_FOUND.buildResultMessages());
         }
         return account;
     }
@@ -80,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
         inputAccount.setPasswordModifiedAt(currentDateTime.toDate());
         inputAccount.setEnabled(true);
 
-        accountRepository.save(inputAccount);
+        accountRepository.create(inputAccount);
 
         String accountUuid = inputAccount.getAccountUuid();
         for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
@@ -115,7 +115,7 @@ public class AccountServiceImpl implements AccountService {
                     currentDateTime.toDate());
         }
 
-        accountRepository.save(currentAccount);
+        accountRepository.update(currentAccount);
         if (passwordHistory != null) {
             accountRepository.createPasswordHistory(passwordHistory);
         }
@@ -146,10 +146,11 @@ public class AccountServiceImpl implements AccountService {
                     currentDateTime.toDate());
         }
 
-        accountRepository.save(currentAccount);
+        accountRepository.update(currentAccount);
         for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
-                accountRepository.deleteAuthority(currentAuthority);
+                accountRepository.deleteAuthority(currentAuthority.getAccountUuid(),
+                        currentAuthority.getAuthority());
             }
         }
         for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
@@ -175,11 +176,10 @@ public class AccountServiceImpl implements AccountService {
         }
         for (AccountPasswordHistory passwordHistory : account.getPasswordHistories()) {
             if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
-                throw new BusinessException(ResultMessages.danger().add("e.xx.ac.2002"));
+                throw new BusinessException(Messages.ACCOUNT_PASSWORD_USED_PAST.buildResultMessages());
             }
         }
 
     }
 
-    
 }

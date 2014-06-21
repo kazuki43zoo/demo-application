@@ -11,7 +11,7 @@ public interface AccountSharedService {
             AccountAuthenticationHistory authenticationHistory);
 
     void createLoginFailureHistory(String failedAccountId,
-            AccountAuthenticationHistory authenticationHistory);
+            AccountAuthenticationHistory authenticationHistory, String failureReason);
 
     void createLogoutHistory(Account authenticatedAccount,
             AccountAuthenticationHistory authenticationHistory);

@@ -16,10 +16,16 @@
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">Enabled</label>
-    <div class="col-sm-8">
+    <div class="col-sm-2">
         <c:set var="enabled">${account.enabled}</c:set>
         <span class="form-control">${f:h(CL_ENABLED[enabled])}</span>
     </div>
+    <c:if test="${account.passwordLock != null}">
+        <label class="col-sm-4 control-label">Password Failure Count</label>
+        <div class="col-sm-2">
+            <span class="form-control">${f:h(account.passwordLock.failureCount)}</span>
+        </div>
+    </c:if>
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">Password</label>
@@ -27,7 +33,8 @@
         <span class="form-control">***************</span>
     </div>
     <div class="col-sm-5">
-        <span class="form-control">Modified at : <fmt:formatDate value="${account.passwordModifiedAt}" pattern="yyyy/MM/dd HH:mm:ss z" timeZone="UTC" /></span>
+        <span class="form-control">Modified at : <fmt:formatDate value="${account.passwordModifiedAt}"
+                pattern="yyyy/MM/dd HH:mm:ss z" timeZone="UTC" /></span>
     </div>
 </div>
 

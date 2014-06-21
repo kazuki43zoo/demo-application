@@ -2,7 +2,7 @@
 
 <t:messagesPanel />
 
-<form action="${contextPath}/accounts" class="form-horizontal" method="get">
+<form action="${contextPath}/app/accounts" class="form-horizontal" method="get">
     <spring:nestedPath path="accountsSearchQuery">
         <div class="form-group">
             <div class="col-sm-4">
@@ -23,8 +23,11 @@
                     <form:errors path="targets" />
                 </div>
             </div>
-            <button class="btn btn-default" name="filter"><span class="glyphicon glyphicon-search"></span> Filter</button>
-            <a href="${contextPath}/accounts?form=create" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span> Create Account</a>
+            <button class="btn btn-default" name="filter">
+                <span class="glyphicon glyphicon-search"></span> Filter
+            </button>
+            <a href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right"><span
+                class="glyphicon glyphicon-plus"></span> Create Account</a>
         </div>
 
     </spring:nestedPath>
@@ -37,17 +40,24 @@
             <th>Account ID</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Enabled</th>
+            <th>Disabled</th>
+            <th>Locked</th>
         </tr>
     <thead>
         <c:forEach var="account" items="${page.content}" varStatus="rowStatus">
             <c:set var="enabled">${account.enabled}</c:set>
             <tr>
                 <td>${f:h(rowStatus.count)}</td>
-                <td><a href="${contextPath}/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a></td>
+                <td><a href="${contextPath}/app/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a></td>
                 <td>${f:h(account.firstName)}</td>
                 <td>${f:h(account.lastName)}</td>
-                <td>${f:h(CL_ENABLED[enabled])}</td>
+                <td><c:if test="${!account.enabled}">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </c:if></td>
+                <td><c:if
+                        test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </c:if></td>
             </tr>
         </c:forEach>
 </table>

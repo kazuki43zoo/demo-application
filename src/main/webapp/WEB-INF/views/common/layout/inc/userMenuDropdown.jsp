@@ -5,10 +5,10 @@
             class="caret"></b>
     </a>
         <ul class="dropdown-menu pull-right">
-            <sec:authorize url="/profile">
-                <li><a href="${contextPath}/profile"><span class="glyphicon glyphicon-edit"></span> Edit
+            <sec:authorize url="/app/profile">
+                <li><a href="${contextPath}/app/profile"><span class="glyphicon glyphicon-edit"></span> Edit
                         profile</a></li>
-                <li><a href="${contextPath}/profile/authenticationHistories"><span
+                <li><a href="${contextPath}/app/profile/authenticationHistories"><span
                         class="glyphicon glyphicon-list"></span> Authentication Histories</a></li>
                 <li class="divider"></li>
             </sec:authorize>
@@ -16,7 +16,7 @@
                     Logout</a></li>
         </ul></li>
 </ul>
-<form:form id="logoutForm" action="${contextPath}/logout" class="sr-only" />
+<form:form id="logoutForm" action="${contextPath}/auth/logout" class="sr-only" />
 <script>
     function logout() {
         $('#logoutForm').submit();

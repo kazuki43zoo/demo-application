@@ -8,8 +8,8 @@
     <tiles:insertAttribute name="title" ignore="true" />
 </c:set>
 <title><spring:message code="${titleKey}" text="Demo Application" /></title>
-<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
+<link rel="stylesheet" href="${contextPath}/app/resources/vendor/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/app/resources/app/css/styles.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <script src="${contextPath}/resources/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="${contextPath}/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/app/resources/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="${contextPath}/app/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

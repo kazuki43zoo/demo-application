@@ -11,16 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
-import org.terasoluna.gfw.common.message.ResultMessages;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
+import com.github.kazuki43zoo.core.config.SecurityConfigs;
+import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
@@ -36,6 +38,14 @@ public class AccountsController {
 
     @Inject
     AccountService accountService;
+
+    @Inject
+    SecurityConfigs securityConfigs;
+
+    @ModelAttribute
+    public SecurityConfigs setUpSecurityConfigs() {
+        return securityConfigs;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(@Validated AccountsSearchQuery query, BindingResult bindingResult,
@@ -79,19 +89,18 @@ public class AccountsController {
         try {
             createdAccount = accountService.create(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
             return createForm(form);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
             return createForm(form);
         }
 
-        redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.ac.0001"));
-        redirectAttributes.addAttribute("accountUuid", createdAccount.getAccountUuid());
-
         transactionTokenContext.removeToken();
 
-        return "redirect:/accounts/{accountUuid}";
+        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_CREATED.buildResultMessages());
+        redirectAttributes.addAttribute("accountUuid", createdAccount.getAccountUuid());
+        return "redirect:/app/accounts/{accountUuid}";
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
@@ -126,19 +135,18 @@ public class AccountsController {
         try {
             accountService.change(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(ResultMessages.danger().add("e.xx.ac.2001"));
+            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
             return editRedo(accountUuid, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
             return editRedo(accountUuid, form, model);
         }
 
-        redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.ac.0002"));
-        redirectAttributes.addAttribute("accountUuid", accountUuid);
-
         transactionTokenContext.removeToken();
 
-        return "redirect:/accounts/{accountUuid}";
+        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_EDITED.buildResultMessages());
+        redirectAttributes.addAttribute("accountUuid", accountUuid);
+        return "redirect:/app/accounts/{accountUuid}";
     }
 
     private String editRedo(String accountUuid, AccountForm form, Model model) {
@@ -154,11 +162,10 @@ public class AccountsController {
 
         accountService.delete(accountUuid);
 
-        redirectAttributes.addFlashAttribute(ResultMessages.success().add("i.xx.ac.0003"));
-
         transactionTokenContext.removeToken();
 
-        return "redirect:/accounts";
+        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_DELETED.buildResultMessages());
+        return "redirect:/app/accounts";
     }
 
 }
