@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.account.validation;
+package com.github.kazuki43zoo.core.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.ReportAsSingleViolation;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Documented
@@ -16,11 +16,11 @@ import javax.validation.constraints.Size;
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-@ReportAsSingleViolation
-@Size(min = 8)
-public @interface Password {
+@NotNull
+@Size(max = 128)
+public @interface FirstName {
 
-    String message() default "{com.github.kazuki43zoo.app.account.Password.message}";
+    String message() default "{com.github.kazuki43zoo.app.account.FirstName.message}";
 
     Class<?>[] groups() default {};
 
@@ -31,6 +31,6 @@ public @interface Password {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     public @interface List {
-        Password[] value();
+        FirstName[] value();
     }
 }

@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.common.error;
+package com.github.kazuki43zoo.app.error;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ public class ErrorViewController {
     public String handleSessionError(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Messages.FW_VALID_SESSION_NOT_EXISTS
                 .buildResultMessages());
-        return "redirect:/app/";
+        return "redirect:/";
     }
 
 }

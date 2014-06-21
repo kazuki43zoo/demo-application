@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.account.validation;
+package com.github.kazuki43zoo.core.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Documented
@@ -15,10 +16,11 @@ import javax.validation.constraints.Size;
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
+@NotNull
 @Size(max = 128)
-public @interface LastName {
+public @interface AccountId {
 
-    String message() default "{com.github.kazuki43zoo.app.account.LastName.message}";
+    String message() default "{com.github.kazuki43zoo.app.account.AccountId.message}";
 
     Class<?>[] groups() default {};
 
@@ -29,6 +31,6 @@ public @interface LastName {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     public @interface List {
-        LastName[] value();
+        AccountId[] value();
     }
 }

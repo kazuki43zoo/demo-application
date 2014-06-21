@@ -78,7 +78,7 @@ public class ProfileController {
         transactionTokenContext.removeToken();
 
         redirectAttributes.addFlashAttribute(Messages.ACCOUNT_PROFILE_EDITED.buildResultMessages());
-        return "redirect:/app/profile";
+        return "redirect:/profile";
     }
 
     public String editRedo(CustomUserDetails user, ProfileForm form, Model model) {

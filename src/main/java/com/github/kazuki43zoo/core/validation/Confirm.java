@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.common.validation;
+package com.github.kazuki43zoo.core.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;

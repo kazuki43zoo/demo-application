@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.common.security;
+package com.github.kazuki43zoo.auth.common;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
     @Inject
     Mapper beanMapper;
 
-    @Value("${CustomLogoutSuccessHandler.defaultTargetUrl:/app/auth/logoutSuccess}")
+    @Value("${CustomLogoutSuccessHandler.defaultTargetUrl:/auth/logoutSuccess}")
     public void setDefaultTargetUrl(String defaultTargetUrl) {
         super.setDefaultTargetUrl(defaultTargetUrl);
     }

@@ -100,7 +100,7 @@ public class AccountsController {
 
         redirectAttributes.addFlashAttribute(Messages.ACCOUNT_CREATED.buildResultMessages());
         redirectAttributes.addAttribute("accountUuid", createdAccount.getAccountUuid());
-        return "redirect:/app/accounts/{accountUuid}";
+        return "redirect:/accounts/{accountUuid}";
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
@@ -146,7 +146,7 @@ public class AccountsController {
 
         redirectAttributes.addFlashAttribute(Messages.ACCOUNT_EDITED.buildResultMessages());
         redirectAttributes.addAttribute("accountUuid", accountUuid);
-        return "redirect:/app/accounts/{accountUuid}";
+        return "redirect:/accounts/{accountUuid}";
     }
 
     private String editRedo(String accountUuid, AccountForm form, Model model) {
@@ -165,7 +165,7 @@ public class AccountsController {
         transactionTokenContext.removeToken();
 
         redirectAttributes.addFlashAttribute(Messages.ACCOUNT_DELETED.buildResultMessages());
-        return "redirect:/app/accounts";
+        return "redirect:/accounts";
     }
 
 }

@@ -8,11 +8,11 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
-import com.github.kazuki43zoo.app.account.validation.AccountId;
-import com.github.kazuki43zoo.app.account.validation.FirstName;
-import com.github.kazuki43zoo.app.account.validation.LastName;
-import com.github.kazuki43zoo.app.account.validation.Password;
-import com.github.kazuki43zoo.app.common.validation.Confirm;
+import com.github.kazuki43zoo.core.validation.AccountId;
+import com.github.kazuki43zoo.core.validation.Confirm;
+import com.github.kazuki43zoo.core.validation.FirstName;
+import com.github.kazuki43zoo.core.validation.LastName;
+import com.github.kazuki43zoo.core.validation.Password;
 
 @Confirm(field = "password")
 @Data

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.github.kazuki43zoo.app.auth.LoginForm;
+import com.github.kazuki43zoo.auth.login.LoginForm;
 import com.github.kazuki43zoo.domain.service.welcome.WelcomeService;
 
 @Controller

@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.common.validation;
+package com.github.kazuki43zoo.core.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

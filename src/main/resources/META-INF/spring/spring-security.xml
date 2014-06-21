@@ -6,19 +6,19 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <sec:http pattern="/app/resources/**" security="none" />
-    <sec:http pattern="/app/auth/logoutSuccess" security="none" />
+    <sec:http pattern="/auth/logoutSuccess" security="none" />
 
     <sec:http auto-config="true" use-expressions="true">
 
         <sec:csrf request-matcher-ref="csrfRequestMatcher" />
 
-        <sec:form-login login-processing-url="/auth/login" login-page="/app/auth/login/"
+        <sec:session-management invalid-session-url="/app/error/invalidSession"
+            session-fixation-protection="migrateSession" />
+
+        <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login"
             username-parameter="accountId" password-parameter="password"
             authentication-details-source-ref="customWebAuthenticationDetailsSource"
             authentication-failure-handler-ref="authenticationFailureHandler" />
-
-        <sec:session-management invalid-session-url="/app/error/invalidSession"
-            session-fixation-protection="migrateSession" />
 
         <sec:logout logout-url="/auth/logout" invalidate-session="true" delete-cookies="JSESSIONID"
             success-handler-ref="customLogoutSuccessHandler" />
@@ -29,7 +29,7 @@
         <sec:intercept-url pattern="/vendor/h2/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/app/profile/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <sec:intercept-url pattern="/app/accounts/**" access="hasRole('ROLE_ACCOUNTMNG')" />
-        <sec:intercept-url pattern="/app/auth/login" access="!isAuthenticated()" />
+        <sec:intercept-url pattern="/auth/login" access="!isAuthenticated()" />
 
     </sec:http>
 
@@ -39,12 +39,12 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.app.common.security" />
+    <context:component-scan base-package="com.github.kazuki43zoo.auth.common" />
 
     <bean id="authenticationFailureHandler"
         class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
         <property name="useForward" value="true" />
-        <property name="defaultFailureUrl" value="/app/auth/error" />
+        <property name="defaultFailureUrl" value="/auth/error" />
     </bean>
 
     <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">

@@ -6,9 +6,9 @@
     </a>
         <ul class="dropdown-menu pull-right">
             <sec:authorize url="/app/profile">
-                <li><a href="${contextPath}/app/profile"><span class="glyphicon glyphicon-edit"></span> Edit
+                <li><a href="${contextPath}/profile"><span class="glyphicon glyphicon-edit"></span> Edit
                         profile</a></li>
-                <li><a href="${contextPath}/app/profile/authenticationHistories"><span
+                <li><a href="${contextPath}/profile/authenticationHistories"><span
                         class="glyphicon glyphicon-list"></span> Authentication Histories</a></li>
                 <li class="divider"></li>
             </sec:authorize>

@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.app.auth;
+package com.github.kazuki43zoo.auth.login;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.github.kazuki43zoo.core.message.Messages;
-
-@RequestMapping("auth")
 @Controller
-public class AuthenticationController {
+public class LoginController {
     @ModelAttribute
     public LoginForm setUpLoginForm() {
         return new LoginForm();
@@ -31,7 +28,7 @@ public class AuthenticationController {
         if (bindingResult.hasErrors()) {
             return viewLoginForm();
         }
-        return "forward:/auth/login";
+        return "forward:/auth/authenticate";
     }
 
     @RequestMapping(value = "error", method = RequestMethod.POST)
@@ -40,13 +37,7 @@ public class AuthenticationController {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
                 request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
-        return "redirect:/app/auth/login/";
-    }
-
-    @RequestMapping(value = "logoutSuccess", method = RequestMethod.GET)
-    public String logoutSuccess(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Messages.AUTH_LOGOUT.buildResultMessages());
-        return "redirect:/app/";
+        return "redirect:/auth/login";
     }
 
 }
