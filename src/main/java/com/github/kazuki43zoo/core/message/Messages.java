@@ -1,8 +1,8 @@
 package com.github.kazuki43zoo.core.message;
 
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.DANGER;
-import static org.terasoluna.gfw.common.message.StandardResultMessageType.SUCCESS;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.INFO;
+import static org.terasoluna.gfw.common.message.StandardResultMessageType.SUCCESS;
 
 import java.util.Locale;
 

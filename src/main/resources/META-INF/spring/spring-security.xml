@@ -39,7 +39,8 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.auth.common" />
+
+    <context:component-scan base-package="com.github.kazuki43zoo.web.security" />
 
     <bean id="authenticationFailureHandler"
         class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">

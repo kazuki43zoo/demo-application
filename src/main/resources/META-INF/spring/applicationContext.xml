@@ -50,4 +50,6 @@
 
     <import resource="classpath:/META-INF/spring/domain.xml" />
 
+    <aop:aspectj-autoproxy />
+
 </beans>

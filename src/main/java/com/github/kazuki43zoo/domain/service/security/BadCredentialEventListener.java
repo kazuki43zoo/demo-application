@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.auth.common;
+package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
 

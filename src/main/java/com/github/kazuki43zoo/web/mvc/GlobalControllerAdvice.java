@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.mvc;
+package com.github.kazuki43zoo.web.mvc;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;

@@ -8,10 +8,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <import resource="classpath:/META-INF/spring/spring-mvc.xml" />
+    <import resource="classpath:/META-INF/spring/spring-mvc-common.xml" />
 
-    <context:component-scan base-package="com.github.kazuki43zoo.auth">
-        <context:exclude-filter type="regex"
-            expression="com\.github\.kazuki43zoo\.auth\.common\..*" />
-    </context:component-scan>
+    <context:component-scan base-package="com.github.kazuki43zoo.auth" />
+
 </beans>

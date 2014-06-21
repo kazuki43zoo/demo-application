@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.auth.common;
+package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
 
@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.kazuki43zoo.core.message.Messages;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
-import com.github.kazuki43zoo.domain.service.security.ConcurrentLoginException;
-import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
@@ -33,7 +31,7 @@ public class AthenticationSuccessEventListener implements
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         CustomUserDetails userDetails = (CustomUserDetails) event.getAuthentication()
                 .getPrincipal();
-        CustomWebAuthenticationDetails authenticationDetails = (CustomWebAuthenticationDetails) event
+        CustomAuthenticationDetails authenticationDetails = (CustomAuthenticationDetails) event
                 .getAuthentication().getDetails();
 
         AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails,

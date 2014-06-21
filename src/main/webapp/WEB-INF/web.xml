@@ -10,6 +10,9 @@
     <listener>
         <listener-class>org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -165,7 +168,7 @@
     </error-page>
 
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>1</session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
