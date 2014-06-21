@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.kazuki43zoo.core.message.Messages;
+
 @Controller
 public class LoginController {
     @ModelAttribute
@@ -21,6 +23,12 @@ public class LoginController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String viewLoginForm() {
         return "auth/loginForm";
+    }
+
+    @RequestMapping(value = "encourageLogin", method = RequestMethod.GET)
+    public String encourageLogin(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute(Messages.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
+        return "redirect:/auth/login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)

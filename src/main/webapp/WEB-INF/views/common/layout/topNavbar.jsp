@@ -10,7 +10,9 @@
                 <jsp:include page="inc/userMenuDropdown.jsp" />
             </c:when>
             <c:otherwise>
-                <jsp:include page="/WEB-INF/views/auth/loginForm.jsp" />
+                <jsp:include page="/WEB-INF/views/auth/loginForm.jsp">
+                    <jsp:param name="including" value="true" />
+                </jsp:include>
             </c:otherwise>
         </c:choose>
     </div>

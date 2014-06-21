@@ -15,7 +15,7 @@
         <sec:session-management invalid-session-url="/error/invalidSession"
             session-fixation-protection="migrateSession" />
 
-        <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login"
+        <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/encourageLogin"
             username-parameter="accountId" password-parameter="password"
             authentication-details-source-ref="customWebAuthenticationDetailsSource"
             authentication-failure-handler-ref="authenticationFailureHandler" />
