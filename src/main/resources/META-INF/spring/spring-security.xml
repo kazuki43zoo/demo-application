@@ -12,7 +12,7 @@
 
         <sec:csrf request-matcher-ref="csrfRequestMatcher" />
 
-        <sec:form-login login-processing-url="/auth/login" login-page="/app/auth/login"
+        <sec:form-login login-processing-url="/auth/login" login-page="/app/auth/login/"
             username-parameter="accountId" password-parameter="password"
             authentication-details-source-ref="customWebAuthenticationDetailsSource"
             authentication-failure-handler-ref="authenticationFailureHandler" />

@@ -40,7 +40,7 @@ public class AuthenticationController {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
                 request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
-        return "redirect:/app/auth/login";
+        return "redirect:/app/auth/login/";
     }
 
     @RequestMapping(value = "logoutSuccess", method = RequestMethod.GET)
