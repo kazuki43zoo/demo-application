@@ -72,7 +72,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationHistory.setAccountUuid(account.getAccountUuid());
         authenticationHistory.setAuthenticationType(type);
         authenticationHistory.setAuthenticationResult(result);
-        authenticationHistory.setCreatedAt(currentDateTime.toDate());
+        authenticationHistory.setCreatedAt(currentDateTime);
 
         accountRepository.createAuthenticationHistory(authenticationHistory);
     }

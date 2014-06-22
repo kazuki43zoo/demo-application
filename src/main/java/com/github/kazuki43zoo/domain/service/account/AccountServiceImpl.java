@@ -80,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
 
         String encodedPassword = passwordEncoder.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
-        inputAccount.setPasswordModifiedAt(currentDateTime.toDate());
+        inputAccount.setPasswordModifiedAt(currentDateTime);
 
         accountRepository.create(inputAccount);
 
@@ -90,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.createAuthority(inputAuthority);
         }
         accountRepository.createPasswordHistory(new AccountPasswordHistory(accountUuid,
-                encodedPassword, currentDateTime.toDate()));
+                encodedPassword, currentDateTime));
 
         return getAccount(accountUuid);
     }
@@ -112,9 +112,9 @@ public class AccountServiceImpl implements AccountService {
             passwordSharedService.validatePassword(rawPassword, currentAccount);
             String encodedPassword = passwordEncoder.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
-            currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
+            currentAccount.setPasswordModifiedAt(currentDateTime);
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
-                    currentDateTime.toDate());
+                    currentDateTime);
         }
 
         accountRepository.update(currentAccount);
@@ -143,9 +143,9 @@ public class AccountServiceImpl implements AccountService {
             passwordSharedService.validatePassword(rawPassword, currentAccount);
             String encodedPassword = passwordEncoder.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
-            currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
+            currentAccount.setPasswordModifiedAt(currentDateTime);
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
-                    currentDateTime.toDate());
+                    currentDateTime);
         }
 
         accountRepository.update(currentAccount);

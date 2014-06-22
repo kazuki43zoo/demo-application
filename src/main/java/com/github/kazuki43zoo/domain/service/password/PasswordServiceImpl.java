@@ -31,7 +31,7 @@ public class PasswordServiceImpl implements PasswordService {
     PasswordSharedService passwordSharedService;
 
     @Override
-    public void change(String accountId, String rawOldPassword, String rawNewPassword) {
+    public Account change(String accountId, String rawOldPassword, String rawNewPassword) {
         Account currentAccount = accountRepository.findOneByAccountId(accountId);
 
         authenticate(currentAccount, rawOldPassword);
@@ -42,13 +42,15 @@ public class PasswordServiceImpl implements PasswordService {
 
         String encodedNewPassword = passwordEncoder.encode(rawNewPassword);
         currentAccount.setPassword(encodedNewPassword);
-        currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
+        currentAccount.setPasswordModifiedAt(currentDateTime);
         AccountPasswordHistory passwordHistory = new AccountPasswordHistory(
-                currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime.toDate());
+                currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime);
 
         accountRepository.update(currentAccount);
         accountRepository.createPasswordHistory(passwordHistory);
         passwordSharedService.clearPasswordLock(currentAccount);
+
+        return currentAccount;
 
     }
 

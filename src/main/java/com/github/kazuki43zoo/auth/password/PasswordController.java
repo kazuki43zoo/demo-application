@@ -2,6 +2,7 @@ package com.github.kazuki43zoo.auth.password;
 
 import javax.inject.Inject;
 
+import org.dozer.Mapper;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 import com.github.kazuki43zoo.auth.login.LoginForm;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.password.PasswordService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
@@ -29,6 +31,9 @@ public class PasswordController {
 
     @Inject
     PasswordService passwordService;
+
+    @Inject
+    Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(@AuthenticationPrincipal CustomUserDetails user) {
@@ -62,6 +67,7 @@ public class PasswordController {
             return showChangeForm();
         }
 
+        Account changedAccount = null;
         try {
             String accountId;
             if (user != null) {
@@ -69,7 +75,8 @@ public class PasswordController {
             } else {
                 accountId = form.getAccountId();
             }
-            passwordService.change(accountId, form.getOldPassword(), form.getPassword());
+            changedAccount = passwordService.change(accountId, form.getOldPassword(),
+                    form.getPassword());
         } catch (ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
@@ -78,6 +85,7 @@ public class PasswordController {
         transactionTokenContext.removeToken();
 
         if (user != null) {
+            beanMapper.map(changedAccount, user.getAccount());
             redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.buildResultMessages());
             return "redirect:/";
         } else {

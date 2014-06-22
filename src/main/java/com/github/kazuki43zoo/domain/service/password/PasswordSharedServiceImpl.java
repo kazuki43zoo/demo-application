@@ -51,10 +51,10 @@ public class PasswordSharedServiceImpl implements PasswordSharedService {
         AccountPasswordLock currentPasswordLock = failedAccount.getPasswordLock();
         if (currentPasswordLock == null) {
             accountRepository.createPasswordLock(new AccountPasswordLock(failedAccount
-                    .getAccountUuid(), 1, currentDateTime.toDate()));
+                    .getAccountUuid(), 1, currentDateTime));
         } else {
             currentPasswordLock.countUpFailureCount();
-            currentPasswordLock.setModifiedAt(currentDateTime.toDate());
+            currentPasswordLock.setModifiedAt(currentDateTime);
             accountRepository.updatePasswordLock(currentPasswordLock);
         }
     }

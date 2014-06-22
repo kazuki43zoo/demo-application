@@ -5,6 +5,12 @@
 
     <configuration>
         <relationship-type>non-cumulative</relationship-type>
+        <custom-converters>
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
+                <class-a>org.joda.time.DateTime</class-a>
+                <class-b>org.joda.time.DateTime</class-b>
+            </converter>
+        </custom-converters>
         <copy-by-references>
             <copy-by-reference>com.github.kazuki43zoo.domain.model.*</copy-by-reference>
         </copy-by-references>
@@ -22,12 +28,6 @@
     <mapping>
         <class-a>com.github.kazuki43zoo.domain.model.Account</class-a>
         <class-b>com.github.kazuki43zoo.domain.model.Account</class-b>
-<!--  
-        <field-exclude>
-            <a>passwordLock</a>
-            <b>passwordLock</b>
-        </field-exclude>
--->
         <field-exclude>
             <a>passwordHistories</a>
             <b>passwordHistories</b>

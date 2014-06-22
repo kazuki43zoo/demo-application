@@ -9,5 +9,7 @@
     <typeAliases>
         <package name="com.github.kazuki43zoo.domain.model" />
     </typeAliases>
-    <!-- <typeHandlers> <package name="xxxxxx.yyyyyy.zzzzzz.infra.mybatis.typehandler" /> </typeHandlers> -->
+    <typeHandlers>
+        <package name="com.github.kazuki43zoo.infra.mybatis.typehandler" />
+    </typeHandlers>
 </configuration>

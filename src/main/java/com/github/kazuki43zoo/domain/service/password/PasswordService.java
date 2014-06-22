@@ -1,5 +1,7 @@
 package com.github.kazuki43zoo.domain.service.password;
 
+import com.github.kazuki43zoo.domain.model.Account;
+
 public interface PasswordService {
-    void change(String accountId, String oldPassword, String password);
+    Account change(String accountId, String oldPassword, String password);
 }
