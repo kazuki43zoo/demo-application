@@ -13,7 +13,7 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
 @Component
-public class BadCredentialEventListener implements
+public class BadCredentialEventListenerImpl implements
         ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     @Inject

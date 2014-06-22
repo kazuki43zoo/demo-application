@@ -16,7 +16,7 @@ import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
-@Service
+@Service("customUserDetailsService")
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Inject

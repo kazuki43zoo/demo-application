@@ -17,8 +17,8 @@ import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
-@Component
-public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
+@Component("customLogoutSuccessHandler")
+public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler {
 
     @Inject
     AuthenticationService authenticationService;
@@ -26,7 +26,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
     @Inject
     Mapper beanMapper;
 
-    @Value("${CustomLogoutSuccessHandler.defaultTargetUrl:/auth/logout?success}")
+    @Value("${CustomLogoutSuccessHandlerImpl.defaultTargetUrl:/auth/logout?success}")
     public void setDefaultTargetUrl(String defaultTargetUrl) {
         super.setDefaultTargetUrl(defaultTargetUrl);
     }

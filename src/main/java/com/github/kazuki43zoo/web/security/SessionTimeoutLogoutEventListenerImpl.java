@@ -24,7 +24,7 @@ import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 @Transactional
 @Component
 @Aspect
-public class SessionTimeoutLogoutEventListener implements
+public class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()

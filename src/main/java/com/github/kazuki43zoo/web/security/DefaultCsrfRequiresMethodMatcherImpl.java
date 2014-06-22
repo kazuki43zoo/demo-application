@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
-@Component
-public class DefaultCsrfRequiresMethodMatcher implements RequestMatcher {
+@Component("defaultCsrfRequiresMethodMatcher")
+public class DefaultCsrfRequiresMethodMatcherImpl implements RequestMatcher {
 
     private Pattern allowedMethods;
 
-    @Value("${DefaultCsrfRequiresMethodMatcher.allowedMethods:^(GET|HEAD|TRACE|OPTIONS)$}")
+    @Value("${DefaultCsrfRequiresMethodMatcherImpl.allowedMethods:^(GET|HEAD|TRACE|OPTIONS)$}")
     public void setAllowedMethods(Pattern allowedMethods) {
         this.allowedMethods = allowedMethods;
     }

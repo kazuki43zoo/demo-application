@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
 import com.google.common.net.HttpHeaders;
 
-@Component
-public class CustomAuthenticationDetailsSource implements
+@Component("customAuthenticationDetailsSource")
+public class CustomAuthenticationDetailsSourceImpl implements
         AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> {
 
     @Override

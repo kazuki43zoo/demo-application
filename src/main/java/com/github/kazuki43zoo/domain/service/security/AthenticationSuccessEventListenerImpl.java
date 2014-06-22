@@ -15,7 +15,7 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
-public class AthenticationSuccessEventListener implements
+public class AthenticationSuccessEventListenerImpl implements
         ApplicationListener<AuthenticationSuccessEvent> {
 
     @Inject
