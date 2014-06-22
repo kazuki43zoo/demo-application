@@ -22,17 +22,6 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="password" class="col-sm-2 control-label">Password</form:label>
-        <div class="col-sm-4">
-            <form:input type="password" cssClass="form-control" path="password" placeholder="New password" />
-            <form:errors path="password" />
-        </div>
-        <div class="col-sm-4">
-            <form:input type="password" cssClass="form-control" path="confirmPassword" placeholder="Confirm password" />
-        </div>
-    </div>
-
-    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <button class="btn btn-default" name="_method" value="patch">
                 <span class="glyphicon glyphicon-floppy-save"></span> Save

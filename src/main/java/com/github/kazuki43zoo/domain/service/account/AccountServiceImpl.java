@@ -97,7 +97,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account changeProfile(Account inputAccount) {
-        DateTime currentDateTime = dateFactory.newDateTime();
         String accountUuid = inputAccount.getAccountUuid();
 
         Account currentAccount = getAccount(accountUuid);
@@ -106,21 +105,7 @@ public class AccountServiceImpl implements AccountService {
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
 
-        AccountPasswordHistory passwordHistory = null;
-        String rawPassword = inputAccount.getPassword();
-        if (StringUtils.hasLength(rawPassword)) {
-            passwordSharedService.validatePassword(rawPassword, currentAccount);
-            String encodedPassword = passwordEncoder.encode(rawPassword);
-            currentAccount.setPassword(encodedPassword);
-            currentAccount.setPasswordModifiedAt(currentDateTime);
-            passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
-                    currentDateTime);
-        }
-
         accountRepository.update(currentAccount);
-        if (passwordHistory != null) {
-            accountRepository.createPasswordHistory(passwordHistory);
-        }
 
         return getAccount(accountUuid);
     }

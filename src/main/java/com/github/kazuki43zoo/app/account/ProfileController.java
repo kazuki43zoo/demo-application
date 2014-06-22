@@ -44,7 +44,6 @@ public class ProfileController {
     public String edit(@AuthenticationPrincipal CustomUserDetails user, ProfileForm form,
             Model model) {
         beanMapper.map(user.getAccount(), form);
-        form.setPassword(null);
         model.addAttribute(user.getAccount());
         return "profile/editForm";
     }
