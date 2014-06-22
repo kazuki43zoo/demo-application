@@ -41,7 +41,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- Settings View Resolver. -->
     <bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
         <property name="order" value="1" />
     </bean>
@@ -52,7 +51,6 @@
             </list>
         </property>
     </bean>
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
@@ -70,14 +68,12 @@
         </constructor-arg>
     </bean>
 
-    <!-- Setting Exception Handling. -->
-    <!-- Exception Resolver. -->
     <bean class="org.terasoluna.gfw.web.exception.SystemExceptionResolver">
         <property name="exceptionCodeResolver" ref="exceptionCodeResolver" />
-        <!-- Setting and Customization by project. -->
         <property name="order" value="3" />
         <property name="exceptionMappings">
             <map>
+                <entry key="InvalidAccessException" value="common/error/accessError" />
                 <entry key="ResourceNotFoundException" value="common/error/resourceNotFoundError" />
                 <entry key="BusinessException" value="common/error/businessError" />
                 <entry key="InvalidTransactionTokenException" value="common/error/transactionTokenError" />
@@ -86,6 +82,7 @@
         </property>
         <property name="statusCodes">
             <map>
+                <entry key="common/error/accessError" value="403" />
                 <entry key="common/error/resourceNotFoundError" value="404" />
                 <entry key="common/error/businessError" value="409" />
                 <entry key="common/error/transactionTokenError" value="409" />
@@ -95,7 +92,6 @@
         <property name="defaultStatusCode" value="500" />
     </bean>
 
-    <!-- Setting AOP. -->
     <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
         <property name="exceptionLogger" ref="exceptionLogger" />
     </bean>

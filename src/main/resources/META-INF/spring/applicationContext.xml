@@ -27,6 +27,7 @@
         <!-- Setting and Customization by project. -->
         <property name="exceptionMappings">
             <map>
+                <entry key="InvalidAccessException" value="e.demo.fw.7002" />
                 <entry key="ResourceNotFoundException" value="e.demo.fw.5001" />
                 <entry key="InvalidTransactionTokenException" value="e.demo.fw.7001" />
                 <entry key="BusinessException" value="e.demo.fw.8001" />

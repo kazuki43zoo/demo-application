@@ -19,10 +19,6 @@ public interface AccountSharedService {
     void createSessionTimeoutHistory(Account authenticatedAccount,
             AccountAuthenticationHistory authenticationHistory);
 
-    void countUpPasswordFailureCount(String failedAccountId);
-
-    void clearPasswordLock(Account authenticatedAccount);
-
     boolean isLogin(Account account, String sessionId);
 
 }

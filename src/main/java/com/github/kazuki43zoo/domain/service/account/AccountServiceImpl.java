@@ -15,10 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.DateFactory;
-import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
-import com.github.kazuki43zoo.core.message.Messages;
+import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
@@ -41,6 +40,9 @@ public class AccountServiceImpl implements AccountService {
     @Inject
     AccountRepository accountRepository;
 
+    @Inject
+    PasswordSharedService passwordSharedService;
+
     @Transactional(readOnly = true)
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
@@ -60,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccount(String accountUuid) {
         Account account = accountRepository.findOne(accountUuid);
         if (account == null) {
-            throw new ResourceNotFoundException(Messages.FW_NOT_FOUND.buildResultMessages());
+            throw new ResourceNotFoundException(Message.FW_NOT_FOUND.buildResultMessages());
         }
         return account;
     }
@@ -73,12 +75,11 @@ public class AccountServiceImpl implements AccountService {
         if (!StringUtils.hasLength(rawPassword)) {
             rawPassword = currentDateTime.toString("yyyyMMdd");
         }
-        validatePassword(rawPassword, inputAccount);
+        passwordSharedService.validatePassword(rawPassword, inputAccount);
 
         String encodedPassword = passwordEncoder.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
         inputAccount.setPasswordModifiedAt(currentDateTime.toDate());
-        inputAccount.setEnabled(true);
 
         accountRepository.create(inputAccount);
 
@@ -107,7 +108,7 @@ public class AccountServiceImpl implements AccountService {
         AccountPasswordHistory passwordHistory = null;
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
-            validatePassword(rawPassword, currentAccount);
+            passwordSharedService.validatePassword(rawPassword, currentAccount);
             String encodedPassword = passwordEncoder.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
             currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
@@ -124,7 +125,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account change(Account inputAccount) {
+    public void change(Account inputAccount) {
         DateTime currentDateTime = dateFactory.newDateTime();
         String accountUuid = inputAccount.getAccountUuid();
 
@@ -138,7 +139,7 @@ public class AccountServiceImpl implements AccountService {
         AccountPasswordHistory passwordHistory = null;
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
-            validatePassword(rawPassword, currentAccount);
+            passwordSharedService.validatePassword(rawPassword, currentAccount);
             String encodedPassword = passwordEncoder.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
             currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
@@ -160,7 +161,6 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.createPasswordHistory(passwordHistory);
         }
 
-        return getAccount(accountUuid);
     }
 
     @Override
@@ -170,16 +170,9 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.delete(accountUuid);
     }
 
-    private void validatePassword(String rawPassword, Account account) {
-        if (account.getPasswordHistories() == null) {
-            return;
-        }
-        for (AccountPasswordHistory passwordHistory : account.getPasswordHistories()) {
-            if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
-                throw new BusinessException(Messages.ACCOUNT_PASSWORD_USED_PAST.buildResultMessages());
-            }
-        }
-
+    @Override
+    public void unlock(String accountUuid) {
+        accountRepository.deletePasswordLock(accountUuid);
     }
 
 }

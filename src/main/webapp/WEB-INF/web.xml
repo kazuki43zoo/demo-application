@@ -99,6 +99,7 @@
     </filter-mapping>
 
     <servlet>
+        <description>DispatcherServlet for authentication(login/logout) processing.</description>
         <servlet-name>AuthServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
@@ -113,6 +114,7 @@
     </servlet-mapping>
 
     <servlet>
+        <description>DispatcherServlet for application processing.</description>
         <servlet-name>AppServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
@@ -127,6 +129,7 @@
     </servlet-mapping>
 
     <servlet>
+        <description>Servlet for H2 administration console.</description>
         <servlet-name>H2ConsoleServlet</servlet-name>
         <servlet-class>org.h2.server.web.WebServlet</servlet-class>
         <init-param>
@@ -163,6 +166,10 @@
         <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp</location>
     </error-page>
     <error-page>
+        <error-code>405</error-code>
+        <location>/WEB-INF/views/common/error/accessError.jsp</location>
+    </error-page>
+    <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/WEB-INF/views/common/error/unhandledSystemError.html</location>
     </error-page>
@@ -173,4 +180,3 @@
     </session-config>
 
 </web-app>
-

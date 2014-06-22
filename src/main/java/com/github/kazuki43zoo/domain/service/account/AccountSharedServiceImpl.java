@@ -9,7 +9,6 @@ import org.terasoluna.gfw.common.date.DateFactory;
 
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AccountPasswordLock;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
@@ -58,39 +57,17 @@ public class AccountSharedServiceImpl implements AccountSharedService {
         createAuthenticationHistory(failedAccount, authenticationHistory, "login", false);
     }
 
+    @Override
     public void createLogoutHistory(Account authenticatedAccount,
             AccountAuthenticationHistory authenticationHistory) {
         createAuthenticationHistory(authenticatedAccount, authenticationHistory, "logout", true);
     }
 
+    @Override
     public void createSessionTimeoutHistory(Account authenticatedAccount,
             AccountAuthenticationHistory authenticationHistory) {
         createAuthenticationHistory(authenticatedAccount, authenticationHistory, "sessionTimeout",
                 true);
-    }
-
-    @Override
-    public void countUpPasswordFailureCount(String failedAccountId) {
-        Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
-        if (failedAccount == null) {
-            return;
-        }
-        DateTime currentDateTime = dateFactory.newDateTime();
-        AccountPasswordLock currentPasswordLock = failedAccount.getPasswordLock();
-        if (currentPasswordLock == null) {
-            accountRepository.createPasswordLock(new AccountPasswordLock(failedAccount
-                    .getAccountUuid(), 1, currentDateTime.toDate()));
-        } else {
-            currentPasswordLock.countUpFailureCount();
-            currentPasswordLock.setModifiedAt(currentDateTime.toDate());
-            accountRepository.updatePasswordLock(currentPasswordLock);
-        }
-    }
-
-    @Override
-    public void clearPasswordLock(Account authenticatedAccount) {
-        accountRepository.deletePasswordLock(authenticatedAccount.getAccountUuid());
-        authenticatedAccount.setPasswordLock(null);
     }
 
     private void createAuthenticationHistory(Account account,

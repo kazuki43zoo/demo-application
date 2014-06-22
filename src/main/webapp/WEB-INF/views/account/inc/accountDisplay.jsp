@@ -23,7 +23,12 @@
     <c:if test="${account.passwordLock != null}">
         <label class="col-sm-4 control-label">Password Failure Count</label>
         <div class="col-sm-2">
-            <span class="form-control">${f:h(account.passwordLock.failureCount)}</span>
+            <div class="form-control">
+                <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </c:if>
+                ${f:h(account.passwordLock.failureCount)}
+            </div>
         </div>
     </c:if>
 </div>

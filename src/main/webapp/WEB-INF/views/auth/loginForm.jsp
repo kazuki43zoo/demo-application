@@ -4,7 +4,7 @@
     <spring:hasBindErrors name="loginForm">
         <spring:nestedPath path="loginForm">
             <div class="alert alert-danger">
-                <form:errors path="*" element="ul" />
+                <form:errors path="*" />
             </div>
         </spring:nestedPath>
     </spring:hasBindErrors>

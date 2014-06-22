@@ -17,7 +17,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.message.Messages;
+import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
@@ -36,7 +36,7 @@ public class ProfileController {
     @RequestMapping(method = RequestMethod.GET)
     public String show(@AuthenticationPrincipal CustomUserDetails user, Model model) {
         model.addAttribute(user.getAccount());
-        return "profile/view";
+        return "profile/detail";
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
@@ -46,7 +46,7 @@ public class ProfileController {
         beanMapper.map(user.getAccount(), form);
         form.setPassword(null);
         model.addAttribute(user.getAccount());
-        return "profile/edit";
+        return "profile/editForm";
     }
 
     @TransactionTokenCheck
@@ -62,32 +62,32 @@ public class ProfileController {
         Account inputAccount = beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(user.getAccount().getAccountUuid());
 
-        Account savedAccount = null;
+        Account changedAccount = null;
         try {
-            savedAccount = accountService.changeProfile(inputAccount);
+            changedAccount = accountService.changeProfile(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
             return editRedo(user, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
             return editRedo(user, form, model);
         }
 
-        beanMapper.map(savedAccount, user.getAccount());
+        beanMapper.map(changedAccount, user.getAccount());
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_PROFILE_EDITED.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.buildResultMessages());
         return "redirect:/profile";
     }
 
     public String editRedo(CustomUserDetails user, ProfileForm form, Model model) {
         model.addAttribute(user.getAccount());
-        return "profile/edit";
+        return "profile/editForm";
     }
 
     @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
-    public String authenticationHistoryList(@AuthenticationPrincipal CustomUserDetails user,
+    public String showAuthenticationHistoryList(@AuthenticationPrincipal CustomUserDetails user,
             Model model) {
         Account account = accountService.getAccount(user.getAccount().getAccountUuid());
         model.addAttribute(account);

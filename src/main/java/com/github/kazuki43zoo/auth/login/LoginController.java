@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
+import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.message.Messages;
+import com.github.kazuki43zoo.core.message.Message;
 
+@RequestMapping("login")
 @Controller
 public class LoginController {
     @ModelAttribute
@@ -20,22 +23,25 @@ public class LoginController {
         return new LoginForm();
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String viewLoginForm() {
+    @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
+    @RequestMapping(method = RequestMethod.GET)
+    public String showLoginForm() {
         return "auth/loginForm";
     }
 
-    @RequestMapping(value = "encourageLogin", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, params = "encourage")
     public String encourageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Messages.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
         return "redirect:/auth/login";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String login(@Validated LoginForm form, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
-            return viewLoginForm();
+            return showLoginForm();
         }
+
         return "forward:/auth/authenticate";
     }
 

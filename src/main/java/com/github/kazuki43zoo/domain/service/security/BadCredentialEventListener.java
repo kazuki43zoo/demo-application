@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
+import com.github.kazuki43zoo.domain.service.account.PasswordSharedService;
 
 @Transactional
 @Component
@@ -20,13 +21,16 @@ public class BadCredentialEventListener implements
     AccountSharedService accountSharedService;
 
     @Inject
+    PasswordSharedService passwordSharedService;
+
+    @Inject
     Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
         String failedAccountId = event.getAuthentication().getName();
 
-        accountSharedService.countUpPasswordFailureCount(failedAccountId);
+        passwordSharedService.countUpPasswordFailureCount(failedAccountId);
 
         AccountAuthenticationHistory authenticationHistory = beanMapper.map(event
                 .getAuthentication().getDetails(), AccountAuthenticationHistory.class);

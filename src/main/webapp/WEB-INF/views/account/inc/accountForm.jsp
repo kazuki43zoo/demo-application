@@ -35,11 +35,11 @@
 <div class="form-group">
     <form:label path="password" class="col-sm-2 control-label">Password</form:label>
     <div class="col-sm-4">
-        <form:input type="password" cssClass="form-control" path="password" placeholder="Password" />
+        <form:password cssClass="form-control" path="password" placeholder="Password" showPassword="true" />
         <form:errors path="password" />
     </div>
     <div class="col-sm-4">
-        <form:input type="password" cssClass="form-control" path="confirmPassword" placeholder="Confirm Password" />
+        <form:password cssClass="form-control" path="confirmPassword" placeholder="Confirm Password" showPassword="true" />
     </div>
 </div>
 

@@ -16,8 +16,10 @@ public interface AccountService {
 
     Account changeProfile(Account inputAccount);
 
-    Account change(Account inputAccount);
+    void change(Account inputAccount);
 
     void delete(String accountUuid);
+
+    void unlock(String accountUuid);
 
 }

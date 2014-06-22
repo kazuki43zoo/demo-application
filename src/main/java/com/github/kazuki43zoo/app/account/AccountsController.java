@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +20,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.config.SecurityConfigs;
-import com.github.kazuki43zoo.core.message.Messages;
+import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
@@ -39,14 +37,6 @@ public class AccountsController {
     @Inject
     AccountService accountService;
 
-    @Inject
-    SecurityConfigs securityConfigs;
-
-    @ModelAttribute
-    public SecurityConfigs setUpSecurityConfigs() {
-        return securityConfigs;
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public String list(@Validated AccountsSearchQuery query, BindingResult bindingResult,
             @PageableDefault(size = 15) Pageable pageable, Model model) {
@@ -59,18 +49,18 @@ public class AccountsController {
         return "account/list";
     }
 
-    @TransactionTokenCheck(value = "delete", type = TransactionTokenType.BEGIN)
+    @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.GET)
-    public String view(@PathVariable("accountUuid") String accountUuid, Model model) {
+    public String show(@PathVariable("accountUuid") String accountUuid, Model model) {
         Account account = accountService.getAccount(accountUuid);
         model.addAttribute(account);
-        return "account/view";
+        return "account/detail";
     }
 
     @TransactionTokenCheck(value = "create", type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET, params = "form=create")
     public String createForm(AccountForm form) {
-        return "account/create";
+        return "account/createForm";
     }
 
     @TransactionTokenCheck(value = "create")
@@ -89,7 +79,7 @@ public class AccountsController {
         try {
             createdAccount = accountService.create(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
             return createForm(form);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -98,9 +88,8 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_CREATED.buildResultMessages());
-        redirectAttributes.addAttribute("accountUuid", createdAccount.getAccountUuid());
-        return "redirect:/accounts/{accountUuid}";
+        return redirectDetailView(redirectAttributes, createdAccount.getAccountUuid(),
+                Message.ACCOUNT_CREATED);
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
@@ -114,7 +103,7 @@ public class AccountsController {
             form.addAuthority(accountAuthority.getAuthority());
         }
         form.setPassword(null);
-        return "account/edit";
+        return "account/editForm";
     }
 
     @TransactionTokenCheck(value = "edit")
@@ -135,7 +124,7 @@ public class AccountsController {
         try {
             accountService.change(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Messages.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
             return editRedo(accountUuid, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -144,18 +133,10 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_EDITED.buildResultMessages());
-        redirectAttributes.addAttribute("accountUuid", accountUuid);
-        return "redirect:/accounts/{accountUuid}";
+        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_EDITED);
     }
 
-    private String editRedo(String accountUuid, AccountForm form, Model model) {
-        Account account = accountService.getAccount(accountUuid);
-        model.addAttribute(account);
-        return "account/edit";
-    }
-
-    @TransactionTokenCheck(value = "delete")
+    @TransactionTokenCheck
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("accountUuid") String accountUuid,
             RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
@@ -164,8 +145,33 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Messages.ACCOUNT_DELETED.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.ACCOUNT_DELETED.buildResultMessages());
         return "redirect:/accounts";
+    }
+
+    @TransactionTokenCheck
+    @RequestMapping(value = "{accountUuid}/unlock", method = RequestMethod.POST)
+    public String unlock(@PathVariable("accountUuid") String accountUuid,
+            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+
+        accountService.unlock(accountUuid);
+
+        transactionTokenContext.removeToken();
+
+        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_UNLOCKED);
+    }
+
+    private String editRedo(String accountUuid, AccountForm form, Model model) {
+        Account account = accountService.getAccount(accountUuid);
+        model.addAttribute(account);
+        return "account/editForm";
+    }
+
+    private String redirectDetailView(RedirectAttributes redirectAttributes, String accountUuid,
+            Message message) {
+        redirectAttributes.addFlashAttribute(message.buildResultMessages());
+        redirectAttributes.addAttribute("accountUuid", accountUuid);
+        return "redirect:/accounts/{accountUuid}";
     }
 
 }

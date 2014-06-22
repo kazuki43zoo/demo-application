@@ -26,7 +26,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
     @Inject
     Mapper beanMapper;
 
-    @Value("${CustomLogoutSuccessHandler.defaultTargetUrl:/auth/logoutSuccess}")
+    @Value("${CustomLogoutSuccessHandler.defaultTargetUrl:/auth/logout?success}")
     public void setDefaultTargetUrl(String defaultTargetUrl) {
         super.setDefaultTargetUrl(defaultTargetUrl);
     }

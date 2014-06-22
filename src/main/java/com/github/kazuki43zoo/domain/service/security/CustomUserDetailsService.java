@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.DateFactory;
 
 import com.github.kazuki43zoo.core.config.SecurityConfigs;
-import com.github.kazuki43zoo.core.message.Messages;
+import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
 
@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Account account = accountSharedService.getAccount(username);
         if (account == null) {
             throw new UsernameNotFoundException(
-                    Messages.SECURITY_ACCOUNT_NOT_FOUND.buildMessage(messageSource));
+                    Message.SECURITY_ACCOUNT_NOT_FOUND.buildMessage(messageSource));
         }
 
         DateTime currentDateTime = dateFactory.newDateTime();

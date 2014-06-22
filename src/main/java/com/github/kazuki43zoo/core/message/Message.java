@@ -10,8 +10,11 @@ import org.springframework.context.MessageSource;
 import org.terasoluna.gfw.common.message.ResultMessageType;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
-public enum Messages {
+public enum Message {
 
+    // ---------------
+    // for fw
+    // ---------------
     // e.demo.fw.5001
     FW_NOT_FOUND(DANGER, "e.demo.fw.5001"),
     // e.demo.fw.5002
@@ -26,6 +29,9 @@ public enum Messages {
     FW_DA_ACCESS_ERROR(DANGER, "e.demo.fw.9002"),
     // e.demo.fw.7002
     FW_VALID_ACCESS_DENIED(DANGER, "e.demo.fw.7002"),
+    // ---------------
+    // for account
+    // ---------------
     // i.demo.account.0001
     ACCOUNT_CREATED(SUCCESS, "i.demo.account.0001"),
     // i.demo.account.0002
@@ -33,28 +39,49 @@ public enum Messages {
     // i.demo.account.0003
     ACCOUNT_DELETED(SUCCESS, "i.demo.account.0003"),
     // i.demo.account.0004
-    ACCOUNT_PROFILE_EDITED(SUCCESS, "i.demo.account.0004"),
+    ACCOUNT_UNLOCKED(SUCCESS, "i.demo.account.0004"),
+    // i.demo.account.0005
+    ACCOUNT_PROFILE_EDITED(SUCCESS, "i.demo.account.0005"),
     // e.demo.account.2001
     ACCOUNT_ID_USED(DANGER, "e.demo.account.2001"),
-    // e.demo.account.2002
-    ACCOUNT_PASSWORD_USED_PAST(DANGER, "e.demo.account.2002"),
+    // ---------------
+    // for password
+    // ---------------
+    // i.demo.password.0001
+    PASSWORD_CHANGED(SUCCESS, "i.demo.password.0001"),
+    // e.demo.password.2001
+    PASSWORD_USED_PAST(DANGER, "e.demo.password.2001"),
+    // ---------------
+    // for auth
+    // ---------------
     // i.demo.auth.0001
     AUTH_ENCOURAGE_LOGIN(INFO, "i.demo.auth.0001"),
     // i.demo.auth.0002
     AUTH_LOGOUT(SUCCESS, "i.demo.auth.0002"),
+    // e.demo.auth.8001
+    AUTH_ENCOURAGE_CHANGE_PASSWORD(DANGER, "e.demo.auth.2001"),
+    // ---------------
+    // for security
+    // ---------------
+    // e.demo.security.5001
+    SECURITY_ACCOUNT_NOT_FOUND(DANGER, "e.demo.security.5001"),
     // e.demo.security.8001
-    SECURITY_ACCOUNT_NOT_FOUND(DANGER, "e.demo.security.8001"),
-    // e.demo.security.8002
-    SECURITY_CONCURRENT_LOGIN(DANGER, "e.demo.security.8002"),
+    SECURITY_CONCURRENT_LOGIN(DANGER, "e.demo.security.8001"),
     //
     ;
 
     private final ResultMessageType type;
     private final String code;
+    private final String defaultMessage;
 
-    private Messages(ResultMessageType type, String code) {
+    private Message(ResultMessageType type, String code) {
+        this(type, code, null);
+    }
+
+    private Message(ResultMessageType type, String code, String defaultMessage) {
         this.type = type;
         this.code = code;
+        this.defaultMessage = defaultMessage;
     }
 
     public ResultMessages buildResultMessages(Object... args) {
@@ -62,7 +89,11 @@ public enum Messages {
     }
 
     public String buildMessage(MessageSource messageSource, Object... args) {
-        return messageSource.getMessage(code, args, null, Locale.getDefault());
+        return messageSource.getMessage(code, args, defaultMessage, Locale.getDefault());
+    }
+
+    public String buildMessage(MessageSource messageSource, Locale locale, Object... args) {
+        return messageSource.getMessage(code, args, defaultMessage, locale);
     }
 
 }

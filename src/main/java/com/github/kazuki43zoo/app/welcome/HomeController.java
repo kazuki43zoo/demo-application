@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 
 import com.github.kazuki43zoo.auth.login.LoginForm;
 import com.github.kazuki43zoo.domain.service.welcome.WelcomeService;
 
+@TransactionTokenCheck
 @Controller
 public class HomeController {
 

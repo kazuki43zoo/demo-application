@@ -38,8 +38,7 @@
         <tr>
             <th>#</th>
             <th>Account ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Account name</th>
             <th>Disabled</th>
             <th>Locked</th>
         </tr>
@@ -49,8 +48,7 @@
             <tr>
                 <td>${f:h(rowStatus.count)}</td>
                 <td><a href="${contextPath}/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a></td>
-                <td>${f:h(account.firstName)}</td>
-                <td>${f:h(account.lastName)}</td>
+                <td>${f:h(account.firstName)} ${f:h(account.lastName)}</td>
                 <td><c:if test="${!account.enabled}">
                         <span class="glyphicon glyphicon-ok"></span>
                     </c:if></td>
