@@ -14,13 +14,13 @@ import org.terasoluna.gfw.common.date.DateFactory;
 import com.github.kazuki43zoo.core.config.SecurityConfigs;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
+import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Inject
-    AccountSharedService accountSharedService;
+    AccountRepository accountRepository;
 
     @Inject
     MessageSource messageSource;
@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountSharedService.getAccount(username);
+        Account account = accountRepository.findOneByAccountId(username);
         if (account == null) {
             throw new UsernameNotFoundException(
                     Message.SECURITY_ACCOUNT_NOT_FOUND.buildMessage(messageSource));

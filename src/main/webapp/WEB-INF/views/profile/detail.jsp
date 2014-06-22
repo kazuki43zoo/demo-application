@@ -10,7 +10,6 @@
         </div>
     </div>
 
-
     <jsp:include page="/WEB-INF/views/account/inc/accountDisplay.jsp" />
 
     <div class="form-group">

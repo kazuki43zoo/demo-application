@@ -1,8 +1,8 @@
 
 <t:messagesPanel />
 
-<a href="${contextPath}/profile/authenticationHistories" class="btn btn-default pull-right">
-    <span class="glyphicon glyphicon-refresh"></span> Refresh
+<a href="${contextPath}/profile/authenticationHistories" class="btn btn-default pull-right"> <span
+    class="glyphicon glyphicon-refresh"></span> Refresh
 </a>
 
 <table class="table table-hover">
@@ -21,8 +21,8 @@
             <c:set var="authenticationResult">${authenticationHistory.authenticationResult}</c:set>
             <tr>
                 <td>${f:h(rowStatus.count)}</td>
-                <td><fmt:formatDate value="${authenticationHistory.createdAt}" pattern="yyyy/MM/dd HH:mm:ss z"
-                        timeZone="UTC" /></td>
+                <td><fmt:formatDate value="${authenticationHistory.createdAt}" pattern="${dateTimeFormat}"
+                        timeZone="${timeZoneFormat}" /></td>
                 <td>${f:h(authenticationHistory.authenticationType)}</td>
                 <td>${f:h(CL_AUTHENTICATION_RESULT[authenticationResult])}</td>
                 <td>${f:h(authenticationHistory.failureReason)}</td>

@@ -19,7 +19,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 import com.github.kazuki43zoo.auth.login.LoginForm;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.service.account.PasswordService;
+import com.github.kazuki43zoo.domain.service.password.PasswordService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @TransactionTokenCheck("password")

@@ -1,4 +1,4 @@
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -11,3 +11,5 @@
 <%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<spring:message var="dateTimeFormat" code="format.dateTime" />
+<spring:message var="timeZoneFormat" code="format.timeZone" />

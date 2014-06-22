@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @Size(min = 8)
 public @interface Password {
 
-    String message() default "{com.github.kazuki43zoo.app.account.Password.message}";
+    String message() default "{com.github.kazuki43zoo.core.validation.Password.message}";
 
     Class<?>[] groups() default {};
 

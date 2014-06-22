@@ -24,7 +24,8 @@
         <label class="col-sm-4 control-label">Password Failure Count</label>
         <div class="col-sm-2">
             <div class="form-control">
-                <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
+                <c:if
+                    test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
                     <span class="glyphicon glyphicon-lock"></span>
                 </c:if>
                 ${f:h(account.passwordLock.failureCount)}
@@ -39,7 +40,7 @@
     </div>
     <div class="col-sm-5">
         <span class="form-control">Modified at : <fmt:formatDate value="${account.passwordModifiedAt}"
-                pattern="yyyy/MM/dd HH:mm:ss z" timeZone="UTC" /></span>
+                pattern="${dateTimeFormat}" timeZone="${timeZoneFormat}" /></span>
     </div>
 </div>
 

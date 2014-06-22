@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
+import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @Transactional
@@ -31,7 +31,7 @@ public class SessionTimeoutLogoutEventListener implements
             .concat(".handleLogout");
 
     @Inject
-    AccountSharedService accountSharedService;
+    AuthenticationService authenticationService;
 
     @Inject
     Mapper beanMapper;
@@ -48,7 +48,7 @@ public class SessionTimeoutLogoutEventListener implements
                     .getPrincipal();
             AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext
                     .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-            accountSharedService.createSessionTimeoutHistory(userDetails.getAccount(),
+            authenticationService.createSessionTimeoutHistory(userDetails.getAccount(),
                     authenticationHistory);
         }
     }

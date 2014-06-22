@@ -16,7 +16,7 @@ import javax.validation.Payload;
 @Target({ TYPE, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 public @interface Confirm {
-    String message() default "{com.github.kazuki43zoo.app.common.validation.Confirm.message}";
+    String message() default "{com.github.kazuki43zoo.core.validation.Confirm.message}";
 
     String field();
 

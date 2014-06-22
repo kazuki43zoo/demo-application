@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.service.account;
+package com.github.kazuki43zoo.domain.service.password;
 
 import javax.inject.Inject;
 
@@ -33,6 +33,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void change(String accountId, String rawOldPassword, String rawNewPassword) {
         Account currentAccount = accountRepository.findOneByAccountId(accountId);
+
         authenticate(currentAccount, rawOldPassword);
 
         passwordSharedService.validatePassword(rawNewPassword, currentAccount);
@@ -40,16 +41,13 @@ public class PasswordServiceImpl implements PasswordService {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         String encodedNewPassword = passwordEncoder.encode(rawNewPassword);
-
         currentAccount.setPassword(encodedNewPassword);
         currentAccount.setPasswordModifiedAt(currentDateTime.toDate());
-
         AccountPasswordHistory passwordHistory = new AccountPasswordHistory(
                 currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime.toDate());
 
         accountRepository.update(currentAccount);
         accountRepository.createPasswordHistory(passwordHistory);
-
         passwordSharedService.clearPasswordLock(currentAccount);
 
     }

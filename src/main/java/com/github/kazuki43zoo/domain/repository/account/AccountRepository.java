@@ -33,11 +33,11 @@ public interface AccountRepository {
     boolean deleteAuthority(@Param("accountUuid") String accountUuid,
             @Param("authority") String authority);
 
-    boolean deleteAuthorities(String accountUuid);
+    int deleteAuthorities(String accountUuid);
 
     boolean createPasswordHistory(AccountPasswordHistory passwordHistory);
 
-    boolean deletePasswordHistories(String accountUuid);
+    int deletePasswordHistories(String accountUuid);
 
     boolean createPasswordLock(AccountPasswordLock passwordLock);
 
@@ -46,6 +46,8 @@ public interface AccountRepository {
     boolean deletePasswordLock(String accountUuid);
 
     boolean createAuthenticationHistory(AccountAuthenticationHistory authenticationHistory);
+
+    int deleteAuthenticationHistories(String accountUuid);
 
     AccountAuthenticationHistory findOneLastSuccessAuthenticationHistoryByAccountUuid(
             String accountUuid);

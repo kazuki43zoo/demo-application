@@ -10,7 +10,7 @@ import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetail
 import com.google.common.net.HttpHeaders;
 
 @Component
-public class CustomWebAuthenticationDetailsSource implements
+public class CustomAuthenticationDetailsSource implements
         AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> {
 
     @Override

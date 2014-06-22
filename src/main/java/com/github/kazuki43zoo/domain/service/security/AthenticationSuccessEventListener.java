@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
-import com.github.kazuki43zoo.domain.service.account.PasswordSharedService;
+import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
@@ -23,7 +22,7 @@ public class AthenticationSuccessEventListener implements
     MessageSource messageSource;
 
     @Inject
-    AccountSharedService accountSharedService;
+    AuthenticationService authenticationService;
 
     @Inject
     PasswordSharedService passwordSharedService;
@@ -41,17 +40,16 @@ public class AthenticationSuccessEventListener implements
         AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails,
                 AccountAuthenticationHistory.class);
 
-        if (accountSharedService.isLogin(userDetails.getAccount(),
+        if (authenticationService.isLogin(userDetails.getAccount(),
                 authenticationDetails.getSessionId())) {
             String message = Message.SECURITY_CONCURRENT_LOGIN.buildMessage(messageSource);
-            accountSharedService.createLoginFailureHistory(userDetails.getAccount().getAccountId(),
-                    authenticationHistory, message);
+            authenticationService.createLoginFailureHistory(
+                    userDetails.getAccount().getAccountId(), authenticationHistory, message);
             throw new ConcurrentLoginException(message);
         }
 
         passwordSharedService.clearPasswordLock(userDetails.getAccount());
-
-        accountSharedService.createLoginSuccessHistory(userDetails.getAccount(),
+        authenticationService.createLoginSuccessHistory(userDetails.getAccount(),
                 authenticationHistory);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.service.account;
+package com.github.kazuki43zoo.domain.service.password;
 
 import javax.inject.Inject;
 

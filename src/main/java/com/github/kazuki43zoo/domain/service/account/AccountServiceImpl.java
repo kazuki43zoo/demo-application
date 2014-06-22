@@ -23,6 +23,7 @@ import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
+import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
 @Service
@@ -165,7 +166,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void delete(String accountUuid) {
+        accountRepository.deleteAuthenticationHistories(accountUuid);
         accountRepository.deletePasswordHistories(accountUuid);
+        accountRepository.deletePasswordLock(accountUuid);
         accountRepository.deleteAuthorities(accountUuid);
         accountRepository.delete(accountUuid);
     }

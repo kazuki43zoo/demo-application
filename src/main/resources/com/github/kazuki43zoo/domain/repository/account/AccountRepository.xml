@@ -335,5 +335,12 @@
             #{trackingId}
         )
     </insert>
+    
+    <delete id="deleteAuthenticationHistories" parameterType="String">
+        DELETE FROM
+            account_authentication_histories
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
 
 </mapper>

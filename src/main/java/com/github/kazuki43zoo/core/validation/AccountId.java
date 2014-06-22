@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @Size(max = 128)
 public @interface AccountId {
 
-    String message() default "{com.github.kazuki43zoo.app.account.AccountId.message}";
+    String message() default "{com.github.kazuki43zoo.core.validation.AccountId.message}";
 
     Class<?>[] groups() default {};
 

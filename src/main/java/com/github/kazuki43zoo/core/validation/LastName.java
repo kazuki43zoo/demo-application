@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 @Size(max = 128)
 public @interface LastName {
 
-    String message() default "{com.github.kazuki43zoo.app.account.LastName.message}";
+    String message() default "{com.github.kazuki43zoo.core.validation.LastName.message}";
 
     Class<?>[] groups() default {};
 

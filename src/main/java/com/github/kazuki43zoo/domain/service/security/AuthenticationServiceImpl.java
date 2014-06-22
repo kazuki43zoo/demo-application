@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.service.account;
+package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
 
@@ -13,18 +13,13 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
 @Service
-public class AccountSharedServiceImpl implements AccountSharedService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Inject
     DateFactory dateFactory;
 
     @Inject
     AccountRepository accountRepository;
-
-    @Transactional(readOnly = true)
-    public Account getAccount(String accountId) {
-        return accountRepository.findOneByAccountId(accountId);
-    }
 
     @Transactional(readOnly = true)
     @Override

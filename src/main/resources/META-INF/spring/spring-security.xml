@@ -17,7 +17,7 @@
 
         <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
             username-parameter="accountId" password-parameter="password"
-            authentication-details-source-ref="customWebAuthenticationDetailsSource"
+            authentication-details-source-ref="customAuthenticationDetailsSource"
             authentication-failure-handler-ref="authenticationFailureHandler" />
 
         <sec:logout logout-url="/auth/logout" invalidate-session="true" delete-cookies="JSESSIONID"

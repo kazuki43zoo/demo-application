@@ -14,7 +14,7 @@ import com.github.kazuki43zoo.domain.model.AccountAuthority;
 public class CustomUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
-    private Account account;
+    private final Account account;
 
     public CustomUserDetails(Account account, boolean accountNonExpired,
             boolean passwordNonExpired, boolean accountNonLock) {
