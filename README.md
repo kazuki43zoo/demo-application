@@ -6,7 +6,10 @@ This is sample application for develop using [TERASOLUNA Global Framework](http:
 # Application Overview
 
 ## Application Structure
-Coming soon...
+
+![alt text](./images/application-structure.png "Application Structure")
+
+description coming soon...
 
 ## Application Functionalities
 Coming soon...
@@ -21,19 +24,34 @@ In this application, authentication(login and logout) processing are implements 
 * Spring MVC has responsible for screen flow control.
 
 ### View the login form
-Coming soon...
+
+![alt text](./images/flow-view-login-form.png "Flow of view the login form page")
+
+description coming soon...
 
 ### Login(Authenticate)
-Coming soon...
+
+![alt text](./images/flow-authentication.png "Flow of login")
+
+description coming soon...
 
 ### Handle login error
-Coming soon...
+
+![alt text](./images/flow-handle-authentication-error.png "Flow of handle the authentication error")
+
+description coming soon...
 
 ### Handle validation error
-Coming soon...
+
+![alt text](./images/flow-handle-authentication-validation-error.png "Flow of handle the validation error on login")
+
+description coming soon...
 
 ### Logout
-Coming soon...
+
+![alt text](./images/flow-logout.png "Flow of logout")
+
+description coming soon...
 
 ### Logout by session timeout
 Coming soon...
