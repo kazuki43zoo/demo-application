@@ -10,6 +10,11 @@
 
     <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
 
+    <mvc:default-servlet-handler />
+
+    <mvc:resources mapping="/resources/**" location="/resources/,classpath:META-INF/resources/"
+        cache-period="#{60 * 60}" />
+
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
@@ -101,5 +106,8 @@
     </aop:config>
 
     <context:component-scan base-package="com.github.kazuki43zoo.web.mvc" />
+    <context:component-scan base-package="com.github.kazuki43zoo.app" />
+
+    <mvc:view-controller path="/admin/h2Console" view-name="admin/h2Console" />
 
 </beans>

@@ -16,7 +16,11 @@
         <put-attribute name="title" value="title.auth.{1}" />
         <put-attribute name="content" value="/WEB-INF/views/auth/{1}.jsp" />
     </definition>
-
+    <definition name="password/*" extends="baseLayout">
+        <put-attribute name="topNavbar" value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
+        <put-attribute name="title" value="title.password.{1}" />
+        <put-attribute name="content" value="/WEB-INF/views/password/{1}.jsp" />
+    </definition>
     <definition name="*/*" extends="baseLayout">
         <put-attribute name="title" value="title.{1}.{2}" />
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />

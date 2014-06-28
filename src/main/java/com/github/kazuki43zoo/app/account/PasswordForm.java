@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.auth.password;
+package com.github.kazuki43zoo.app.account;
 
 import java.io.Serializable;
 

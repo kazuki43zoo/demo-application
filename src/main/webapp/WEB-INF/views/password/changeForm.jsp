@@ -1,5 +1,5 @@
 <t:messagesPanel />
-<form:form action="${contextPath}/auth/password" class="form-horizontal" method="post" modelAttribute="passwordForm">
+<form:form action="${contextPath}/password" class="form-horizontal" method="post" modelAttribute="passwordForm">
 
     <sec:authorize access="isAuthenticated()" var="isAuthenticated" />
     <c:choose>

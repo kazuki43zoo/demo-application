@@ -27,7 +27,7 @@
                 <span class="glyphicon glyphicon-search"></span> Filter
             </button>
             <a href="${contextPath}/accounts?form=create" class="btn btn-default pull-right"><span
-                class="glyphicon glyphicon-plus"></span> Create Account</a>
+                class="glyphicon glyphicon-plus"></span> Create</a>
         </div>
 
     </spring:nestedPath>
@@ -48,7 +48,7 @@
             <tr>
                 <td>${f:h(rowStatus.count)}</td>
                 <td><a href="${contextPath}/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a></td>
-                <td>${f:h(account.firstName)} ${f:h(account.lastName)}</td>
+                <td>${f:h(account.firstName)}${f:h(account.lastName)}</td>
                 <td><c:if test="${!account.enabled}">
                         <span class="glyphicon glyphicon-ok"></span>
                     </c:if></td>
@@ -60,5 +60,5 @@
         </c:forEach>
 </table>
 <div class="paginationContainer">
-    <t:pagination page="${page}" outerElementClass="pagination" />
+    <t:pagination page="${page}" criteriaQuery="${f:query(accountsSearchQuery)}" outerElementClass="pagination" />
 </div>

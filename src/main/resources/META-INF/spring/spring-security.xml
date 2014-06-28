@@ -49,7 +49,7 @@
         <property name="exceptionMappings">
             <map>
                 <entry key="org.springframework.security.authentication.CredentialsExpiredException"
-                    value="/auth/password?encourageChange" />
+                    value="/password?encourageChange" />
             </map>
         </property>
     </bean>

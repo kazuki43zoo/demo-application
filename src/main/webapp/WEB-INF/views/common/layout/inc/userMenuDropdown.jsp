@@ -12,7 +12,7 @@
                         class="glyphicon glyphicon-list"></span> Authentication Histories</a></li>
                 <li class="divider"></li>
             </sec:authorize>
-            <li><a href="${contextPath}/auth/password"><span class="glyphicon glyphicon-lock"></span> Change
+            <li><a href="${contextPath}/password"><span class="glyphicon glyphicon-lock"></span> Change
                     Password</a></li>
             <li class="divider"></li>
             <li><a id="logout" href="javascript:logout();"><span class="glyphicon glyphicon-log-out"></span>

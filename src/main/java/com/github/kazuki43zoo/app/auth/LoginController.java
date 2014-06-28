@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.auth.login;
+package com.github.kazuki43zoo.app.auth;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +15,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
 import com.github.kazuki43zoo.core.message.Message;
 
-@RequestMapping("login")
+@RequestMapping("auth/login")
 @Controller
 public class LoginController {
     @ModelAttribute

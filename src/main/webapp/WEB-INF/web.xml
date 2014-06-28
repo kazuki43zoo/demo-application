@@ -89,29 +89,11 @@
     </filter>
     <filter-mapping>
         <filter-name>SpringSecurityFilterChain</filter-name>
-        <servlet-name>AuthServlet</servlet-name>
+        <servlet-name>AppServlet</servlet-name>
+        <servlet-name>H2ConsoleServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>SpringSecurityFilterChain</filter-name>
-        <servlet-name>AppServlet</servlet-name>
-    </filter-mapping>
-
-    <servlet>
-        <description>DispatcherServlet for authentication(login/logout) processing.</description>
-        <servlet-name>AuthServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:META-INF/spring/spring-mvc-auth.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AuthServlet</servlet-name>
-        <url-pattern>/auth/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <description>DispatcherServlet for application processing.</description>
@@ -119,9 +101,9 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:META-INF/spring/spring-mvc-app.xml</param-value>
+            <param-value>classpath*:META-INF/spring/spring-mvc.xml</param-value>
         </init-param>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>
@@ -136,7 +118,7 @@
             <param-name>webAllowOthers</param-name>
             <param-value></param-value>
         </init-param>
-        <load-on-startup>3</load-on-startup>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>H2ConsoleServlet</servlet-name>

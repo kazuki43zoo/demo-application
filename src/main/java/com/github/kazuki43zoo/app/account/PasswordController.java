@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.auth.password;
+package com.github.kazuki43zoo.app.account;
 
 import javax.inject.Inject;
 
@@ -17,7 +17,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.auth.login.LoginForm;
+import com.github.kazuki43zoo.app.auth.LoginForm;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
@@ -47,14 +47,14 @@ public class PasswordController {
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET)
     public String showChangeForm() {
-        return "auth/passwordChangeForm";
+        return "password/changeForm";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "encourageChange")
     public String encourageChange(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_CHANGE_PASSWORD
                 .buildResultMessages());
-        return "redirect:/auth/password";
+        return "redirect:/password";
     }
 
     @TransactionTokenCheck

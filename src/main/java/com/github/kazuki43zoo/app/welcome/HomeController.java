@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.kazuki43zoo.auth.login.LoginForm;
+import com.github.kazuki43zoo.app.auth.LoginForm;
 
 @Controller
 public class HomeController {

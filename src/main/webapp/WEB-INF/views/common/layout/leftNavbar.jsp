@@ -11,7 +11,7 @@
                     Management</a></li>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
-            <li><a href="${contextPath}/auth/password"><span class="glyphicon glyphicon-lock"></span> Change
+            <li><a href="${contextPath}/password"><span class="glyphicon glyphicon-lock"></span> Change
                     Password</a></li>
         </sec:authorize>
     </ul>
