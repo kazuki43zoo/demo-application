@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
@@ -48,8 +49,8 @@ public class SessionTimeoutLogoutEventListenerImpl implements
                     .getPrincipal();
             AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext
                     .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-            authenticationService.createSessionTimeoutHistory(userDetails.getAccount(),
-                    authenticationHistory);
+            authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
+                    authenticationHistory, AuthenticationType.sessionTimeout);
         }
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
@@ -33,8 +34,8 @@ public class BadCredentialEventListenerImpl implements
 
         AccountAuthenticationHistory authenticationHistory = beanMapper.map(event
                 .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-        authenticationService.createLoginFailureHistory(failedAccountId, authenticationHistory,
-                event.getException().getMessage());
+        authenticationService.createAuthenticationFailureHistory(failedAccountId,
+                authenticationHistory, AuthenticationType.login, event.getException().getMessage());
     }
 
 }

@@ -81,7 +81,6 @@ public class AccountServiceImpl implements AccountService {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
         inputAccount.setPasswordModifiedAt(currentDateTime);
-
         accountRepository.create(inputAccount);
 
         String accountUuid = inputAccount.getAccountUuid();
@@ -104,7 +103,6 @@ public class AccountServiceImpl implements AccountService {
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
-
         accountRepository.update(currentAccount);
 
         return getAccount(accountUuid);
@@ -112,10 +110,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void change(Account inputAccount) {
-        DateTime currentDateTime = dateFactory.newDateTime();
         String accountUuid = inputAccount.getAccountUuid();
 
         Account currentAccount = getAccount(accountUuid);
+
+        DateTime currentDateTime = dateFactory.newDateTime();
 
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
@@ -132,8 +131,8 @@ public class AccountServiceImpl implements AccountService {
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
                     currentDateTime);
         }
-
         accountRepository.update(currentAccount);
+
         for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
                 accountRepository.deleteAuthority(currentAuthority.getAccountUuid(),
@@ -143,6 +142,7 @@ public class AccountServiceImpl implements AccountService {
         for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
             accountRepository.createAuthority(inputAuthority);
         }
+
         if (passwordHistory != null) {
             accountRepository.createPasswordHistory(passwordHistory);
         }
@@ -160,7 +160,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void unlock(String accountUuid) {
-        accountRepository.deletePasswordLock(accountUuid);
+        Account account = getAccount(accountUuid);
+        passwordSharedService.resetPasswordLock(account);
     }
 
 }

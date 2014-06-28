@@ -41,16 +41,14 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         }
 
         DateTime currentDateTime = dateFactory.newDateTime();
-        DateTime passwordModifiedAt = new DateTime(account.getPasswordModifiedAt());
 
         boolean accountNonExpired = true;
 
-        boolean passwordNonExpired = !currentDateTime.isAfter(passwordModifiedAt
-                .plusDays(securityConfigs.getPasswordValidDays()));
+        boolean passwordNonExpired = account.isPasswordNonExpired(currentDateTime,
+                securityConfigs.getPasswordValidDays());
 
-        boolean accountNonLock = (account.getPasswordLock() == null)
-                || (account.getPasswordLock().getFailureCount() <= securityConfigs
-                        .getAuthenticationFailureMaxCount());
+        boolean accountNonLock = account.isAccountNonLock(securityConfigs
+                .getAuthenticationFailureMaxCount());
 
         return new CustomUserDetails(account, accountNonExpired, passwordNonExpired, accountNonLock);
     }

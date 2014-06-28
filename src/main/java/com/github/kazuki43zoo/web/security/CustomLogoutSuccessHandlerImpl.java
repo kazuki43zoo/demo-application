@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import org.springframework.stereotype.Component;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
@@ -39,7 +40,8 @@ public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandle
         AccountAuthenticationHistory authenticationHistory = beanMapper.map(
                 authentication.getDetails(), AccountAuthenticationHistory.class);
 
-        authenticationService.createLogoutHistory(userDetails.getAccount(), authenticationHistory);
+        authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
+                authenticationHistory, AuthenticationType.logout);
 
         super.onLogoutSuccess(request, response, authentication);
     }

@@ -43,12 +43,11 @@ public class PasswordServiceImpl implements PasswordService {
         String encodedNewPassword = passwordEncoder.encode(rawNewPassword);
         currentAccount.setPassword(encodedNewPassword);
         currentAccount.setPasswordModifiedAt(currentDateTime);
-        AccountPasswordHistory passwordHistory = new AccountPasswordHistory(
-                currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime);
-
         accountRepository.update(currentAccount);
-        accountRepository.createPasswordHistory(passwordHistory);
-        passwordSharedService.clearPasswordLock(currentAccount);
+        passwordSharedService.resetPasswordLock(currentAccount);
+
+        accountRepository.createPasswordHistory(new AccountPasswordHistory(currentAccount
+                .getAccountUuid(), encodedNewPassword, currentDateTime));
 
         return currentAccount;
 

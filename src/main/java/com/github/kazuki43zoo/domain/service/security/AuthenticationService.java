@@ -2,21 +2,17 @@ package com.github.kazuki43zoo.domain.service.security;
 
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.AuthenticationType;
 
 public interface AuthenticationService {
 
-    void createLoginSuccessHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory);
+    void createAuthenticationSuccessHistory(Account account,
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type);
 
-    void createLoginFailureHistory(String failedAccountId,
-            AccountAuthenticationHistory authenticationHistory, String failureReason);
+    void createAuthenticationFailureHistory(String failedAccountId,
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+            String failureReason);
 
-    void createLogoutHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory);
-
-    void createSessionTimeoutHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory);
-
-    boolean isLogin(Account account, String sessionId);
+    boolean isLogin(Account account);
 
 }

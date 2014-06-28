@@ -9,7 +9,6 @@ import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
-import com.github.kazuki43zoo.domain.model.AccountPasswordLock;
 
 public interface AccountRepository {
 
@@ -39,9 +38,7 @@ public interface AccountRepository {
 
     int deletePasswordHistories(String accountUuid);
 
-    boolean createPasswordLock(AccountPasswordLock passwordLock);
-
-    boolean updatePasswordLock(AccountPasswordLock passwordLock);
+    boolean savePasswordFailureCount(Account account);
 
     boolean deletePasswordLock(String accountUuid);
 

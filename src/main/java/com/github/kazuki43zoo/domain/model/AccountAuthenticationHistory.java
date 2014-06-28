@@ -16,7 +16,7 @@ public class AccountAuthenticationHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     private String accountUuid;
     private DateTime createdAt;
-    private String authenticationType;
+    private AuthenticationType authenticationType;
     private boolean authenticationResult;
     private String failureReason;
     private String remoteAddress;

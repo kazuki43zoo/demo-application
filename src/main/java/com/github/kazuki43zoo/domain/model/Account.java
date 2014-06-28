@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.joda.time.DateTime;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,6 +34,41 @@ public class Account implements Serializable {
             authorities = new ArrayList<>();
         }
         authorities.add(authority);
+    }
+
+    public void countUpPasswordFailureCount(DateTime modifiedAt) {
+        AccountPasswordLock currentPasswordLock = getPasswordLock();
+        if (currentPasswordLock == null) {
+            setPasswordLock(new AccountPasswordLock(getAccountUuid(), 1, modifiedAt));
+        } else {
+            currentPasswordLock.countUpFailureCount();
+            currentPasswordLock.setModifiedAt(modifiedAt);
+        }
+    }
+
+    public void resetPasswordFailureCount() {
+        setPasswordLock(null);
+    }
+
+    public boolean isPastUsedPassword(String rawPassword, PasswordEncoder passwordEncoder) {
+        if (getPasswordHistories() == null) {
+            return false;
+        }
+        for (AccountPasswordHistory passwordHistory : getPasswordHistories()) {
+            if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPasswordNonExpired(DateTime currentDateTime, int passwordValidDays) {
+        return !currentDateTime.isAfter(getPasswordModifiedAt().plusDays(passwordValidDays));
+    }
+
+    public boolean isAccountNonLock(int authenticationFailureMaxCount) {
+        return (getPasswordLock() == null)
+                || (getPasswordLock().getFailureCount() <= authenticationFailureMaxCount);
     }
 
 }

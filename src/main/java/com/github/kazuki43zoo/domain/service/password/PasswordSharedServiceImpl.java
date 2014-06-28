@@ -11,8 +11,6 @@ import org.terasoluna.gfw.common.exception.BusinessException;
 
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
-import com.github.kazuki43zoo.domain.model.AccountPasswordLock;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
@@ -31,38 +29,31 @@ public class PasswordSharedServiceImpl implements PasswordSharedService {
     @Transactional(readOnly = true)
     @Override
     public void validatePassword(String rawPassword, Account account) {
-        if (account.getPasswordHistories() == null) {
-            return;
+        if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {
+            throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.buildResultMessages());
         }
-        for (AccountPasswordHistory passwordHistory : account.getPasswordHistories()) {
-            if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
-                throw new BusinessException(Message.PASSWORD_USED_PAST.buildResultMessages());
-            }
+        if (account.isPastUsedPassword(rawPassword, passwordEncoder)) {
+            throw new BusinessException(Message.PASSWORD_USED_PAST.buildResultMessages());
         }
     }
 
     @Override
     public void countUpPasswordFailureCount(String failedAccountId) {
+
         Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
+
         DateTime currentDateTime = dateFactory.newDateTime();
-        AccountPasswordLock currentPasswordLock = failedAccount.getPasswordLock();
-        if (currentPasswordLock == null) {
-            accountRepository.createPasswordLock(new AccountPasswordLock(failedAccount
-                    .getAccountUuid(), 1, currentDateTime));
-        } else {
-            currentPasswordLock.countUpFailureCount();
-            currentPasswordLock.setModifiedAt(currentDateTime);
-            accountRepository.updatePasswordLock(currentPasswordLock);
-        }
+        failedAccount.countUpPasswordFailureCount(currentDateTime);
+        accountRepository.savePasswordFailureCount(failedAccount);
     }
 
     @Override
-    public void clearPasswordLock(Account account) {
-        accountRepository.deletePasswordLock(account.getAccountUuid());
-        account.setPasswordLock(null);
+    public void resetPasswordLock(Account account) {
+        account.resetPasswordFailureCount();
+        accountRepository.savePasswordFailureCount(account);
     }
 
 }

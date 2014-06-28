@@ -51,6 +51,8 @@ public enum Message {
     PASSWORD_CHANGED(SUCCESS, "i.demo.password.0001"),
     // e.demo.password.2001
     PASSWORD_USED_PAST(DANGER, "e.demo.password.2001"),
+    // e.demo.password.2002
+    PASSWORD_CONTAINS_ACCOUNT_ID(DANGER, "e.demo.password.2002"),
     // ---------------
     // for auth
     // ---------------

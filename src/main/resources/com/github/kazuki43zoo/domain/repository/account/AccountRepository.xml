@@ -108,7 +108,7 @@
     </select>
 
     <insert id="create" parameterType="Account">
-        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+        <selectKey keyProperty="accountUuid" order="BEFORE" resultType="String">
             SELECT RANDOM_UUID()
         </selectKey>
         INSERT INTO
@@ -240,30 +240,40 @@
             account_uuid = #{accountUuid}
     </select>
     
-    <insert id="createPasswordLock" parameterType="AccountPasswordLock">
-        INSERT INTO
-            account_password_lock
-        (
-            account_uuid,
-            failure_count,
-            modified_at
-        )
-        VALUES(
-            #{accountUuid},
-            #{failureCount},
-            #{modifiedAt}
-        )
-    </insert>
-    
-    <update id="updatePasswordLock" parameterType="AccountPasswordLock">
-        UPDATE
-            account_password_lock
-        SET
-            failure_count = #{failureCount},
-            modified_at = #{modifiedAt}
-        WHERE
-            account_uuid = #{accountUuid}
+    <update id="savePasswordFailureCount" parameterType="Account">
+        <choose>
+            <when test="passwordLock==null">
+                DELETE FROM
+                    account_password_lock
+                WHERE
+                    account_uuid = #{accountUuid}
+            </when>
+            <when test="passwordLock.failureCount == 1">
+                INSERT INTO
+                    account_password_lock
+                (
+                    account_uuid,
+                    failure_count,
+                    modified_at
+                )
+                VALUES(
+                    #{accountUuid},
+                    #{passwordLock.failureCount},
+                    #{passwordLock.modifiedAt}
+                )
+            </when>
+            <otherwise>
+                UPDATE
+                    account_password_lock
+                SET
+                    failure_count = #{passwordLock.failureCount},
+                    modified_at = #{passwordLock.modifiedAt}
+                WHERE
+                    account_uuid = #{accountUuid}
+            </otherwise>
+        </choose>
     </update>
+    
     
     <delete id="deletePasswordLock" parameterType="String">
         DELETE FROM

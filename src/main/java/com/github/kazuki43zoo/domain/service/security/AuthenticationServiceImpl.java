@@ -9,6 +9,7 @@ import org.terasoluna.gfw.common.date.DateFactory;
 
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
@@ -23,50 +24,37 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Transactional(readOnly = true)
     @Override
-    public boolean isLogin(Account account, String sessionId) {
+    public boolean isLogin(Account account) {
         AccountAuthenticationHistory lastSuccessAuthenticationHistory = accountRepository
                 .findOneLastSuccessAuthenticationHistoryByAccountUuid(account.getAccountUuid());
         if (lastSuccessAuthenticationHistory == null) {
             return false;
         }
-        if (lastSuccessAuthenticationHistory.getSessionId().equals(sessionId)) {
-            return false;
-        }
-        return "login".equals(lastSuccessAuthenticationHistory.getAuthenticationType());
+        return lastSuccessAuthenticationHistory.getAuthenticationType() == AuthenticationType.login;
     }
 
     @Override
-    public void createLoginSuccessHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory) {
-        createAuthenticationHistory(authenticatedAccount, authenticationHistory, "login", true);
-    }
-
-    @Override
-    public void createLoginFailureHistory(String failedAccountId,
-            AccountAuthenticationHistory authenticationHistory, String failureReason) {
+    public void createAuthenticationFailureHistory(String failedAccountId,
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+            String failureReason) {
         Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
         authenticationHistory.setFailureReason(failureReason);
-        createAuthenticationHistory(failedAccount, authenticationHistory, "login", false);
+        createAuthenticationHistory(failedAccount, authenticationHistory, AuthenticationType.login,
+                false);
     }
 
     @Override
-    public void createLogoutHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory) {
-        createAuthenticationHistory(authenticatedAccount, authenticationHistory, "logout", true);
-    }
-
-    @Override
-    public void createSessionTimeoutHistory(Account authenticatedAccount,
-            AccountAuthenticationHistory authenticationHistory) {
-        createAuthenticationHistory(authenticatedAccount, authenticationHistory, "sessionTimeout",
-                true);
+    public void createAuthenticationSuccessHistory(Account account,
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type) {
+        createAuthenticationHistory(account, authenticationHistory, type, true);
     }
 
     private void createAuthenticationHistory(Account account,
-            AccountAuthenticationHistory authenticationHistory, String type, boolean result) {
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+            boolean result) {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         authenticationHistory.setAccountUuid(account.getAccountUuid());
@@ -76,5 +64,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         accountRepository.createAuthenticationHistory(authenticationHistory);
     }
-
 }

@@ -8,6 +8,6 @@ public interface PasswordSharedService {
 
     void countUpPasswordFailureCount(String failedAccountId);
 
-    void clearPasswordLock(Account account);
+    void resetPasswordLock(Account account);
 
 }
