@@ -60,13 +60,19 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 ## Java package Structure
 
+![alt text](./images/java-package-structure.png "Java package Structure")
+
 Coming soon...
 
 ## Resources package Structure
 
+![alt text](./images/resources-package-structure.png "Resources package Structure")
+
 Coming soon...
 
-## Web resources Structure
+## Web application(war) Structure
+
+![alt text](./images/web-application-structure.png "Web application(war) Structure")
 
 Coming soon...
 
