@@ -74,7 +74,21 @@ Coming soon...
 Coming soon...
 
 ## Application Functionalities
-Coming soon...
+
+Functionalities of this application is following.<br>
+
+| No | Functionality name | Description |
+| :-----: | ----- | ----- |
+| 1 | Welcome page | Coming soon... |
+| 2 | Authentication | Coming soon... |
+| 3 | Authorization | Coming soon... |
+| 4 | Security Countermeasure | Coming soon... |
+| 5 | Session Management | Coming soon... |
+| 6 | Accounts Management | Coming soon... |
+| 7 | My Profile Management | Coming soon... |
+| 8 | Password Management | Coming soon... |
+| 9 | Others... | Coming soon... |
+
 
 # Functionality Details
 
@@ -121,6 +135,8 @@ Coming soon...
 ## Authorization
 This section describe about authorization in this application.<br>
 In this application, authorization(access control of protected page) processing are implements using Spring Security.<br>
+
+Coming soon...
 
 ## Other Security Countermeasure
 This section describe about other security countermeasure in this application.<br>
