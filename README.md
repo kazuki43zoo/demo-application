@@ -26,7 +26,7 @@ Structure of this application is following.<br><br>
 | Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
-| Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
+| Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/)<br>(There is a plan to update to 3.3.0) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ### Dependency libraries for project-specific
@@ -34,12 +34,12 @@ The following libraries is dependency for project-specific without relate on TER
 
 | Library | Description |
 | ----- | --------------------- |
-| [com.h2database:h2:1.4.178](http://www.h2database.com/) |  |
-| [cglib:cglib-nodep:2.2.2](https://github.com/cglib/cglib) |  |
-| [org.projectlombok:lombok:1.14.2](http://projectlombok.org/) |  |
+| [com.h2database:h2:1.4.178](http://www.h2database.com/) | Depends on to access H2 database. |
+| [cglib:cglib-nodep:2.2.2](https://github.com/cglib/cglib)<br>(There is a plan to delete) | Depends on to perform lazy loading in Mybatis3. |
+| [org.projectlombok:lombok:1.14.2](http://projectlombok.org/) | Depends on for automatically generate a method(getter/setter/etc ...) of JavaBeans. By the this library use, we can develop smoothly and effectively. |
 
 ### Version up of dependency libraries for project-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to use the latest version.
+The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
 | Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
 | ----- | ----- | ----- |
