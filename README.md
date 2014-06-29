@@ -14,7 +14,7 @@ Structure of this application is following.<br><br>
 ![alt text](./images/application-structure.png "Application Structure")
 
 
-| Layer | Component | Main responsibilities |
+| Layer | Component/Library | Main responsibilities |
 | ----- | --------- | --------------------- |
 | Platform             | [Spirng Framework 3.2.9](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.4](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
@@ -29,7 +29,7 @@ Structure of this application is following.<br><br>
 | Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
-### Dependencies libraries for project-specific
+### Dependency libraries for project-specific
 The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library | Description |
@@ -38,8 +38,8 @@ The following libraries is dependency for project-specific without relate on TER
 | [cglib:cglib-nodep:2.2.2](https://github.com/cglib/cglib) |  |
 | [org.projectlombok:lombok:1.14.2](http://projectlombok.org/) |  |
 
-### Version up of dependencies libraries for project-specific  
-The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
+### Version up of dependency libraries for project-specific  
+The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to use the latest version.
 
 | Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
 | ----- | ----- | ----- |
