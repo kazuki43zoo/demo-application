@@ -32,11 +32,11 @@ Structure of this application is following.<br><br>
 ### Dependency libraries for project-specific
 The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
 
-| Library | Description |
-| ----- | --------------------- |
-| [com.h2database:h2:1.4.178](http://www.h2database.com/) | Depends on to access H2 database. |
-| [cglib:cglib-nodep:2.2.2](https://github.com/cglib/cglib)<br>(There is a plan to delete) | Depends on to perform lazy loading in Mybatis3. |
-| [org.projectlombok:lombok:1.14.2](http://projectlombok.org/) | Depends on for automatically generate a method(getter/setter/etc ...) of JavaBeans. By the this library use, we can develop smoothly and effectively. |
+| Library | Version | Description |
+| ----- | -----| --------------------- |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.178 | Depends on to access H2 database. |
+| [cglib:cglib-nodep](https://github.com/cglib/cglib)<br>(There is a plan to delete) | 2.2.2 | Depends on to perform lazy loading in Mybatis3. |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.2 | Depends on for automatically generate a method(getter/setter/etc ...) of JavaBeans. By the this library use, we can develop smoothly and effectively. |
 
 ### Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
