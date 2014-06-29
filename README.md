@@ -5,11 +5,44 @@ This is sample application for develop using [TERASOLUNA Global Framework](http:
 
 # Application Overview
 
+This application is developed based [TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
+But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
+
 ## Application Structure
 
+Structure of this application is following.<br><br>
 ![alt text](./images/application-structure.png "Application Structure")
 
+
+| Layer | Component | Main responsibilities |
+| ----- | --------- | --------------------- |
+| Platform             | [Spirng Framework 3.2.9](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spirng Security 3.2.4](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
+|                      | [Spirng MVC 3.2.9](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
+|                      | [Java EE 6 Bean Validation 1.0(JSR-303)](http://beanvalidation.org/1.0/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 4.3.1](http://docs.jboss.org/hibernate/validator/4.3/reference/en-US/html/) as implementation provider.|
+|                      | Controllers | Handle a request & delegate a business procedure to the services.  |
+|                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
+|                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
+| Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
+|                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
+|                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
+| Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
+| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+
+
 description coming soon...
+
+## Java package Structure
+
+Coming soon...
+
+## Resources package Structure
+
+Coming soon...
+
+## Web resources Structure
+
+Coming soon...
 
 ## Application Functionalities
 Coming soon...
