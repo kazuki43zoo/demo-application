@@ -29,6 +29,34 @@ Structure of this application is following.<br><br>
 | Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
+### Dependencies libraries for project-specific
+The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
+
+| Library | Description |
+| ----- | --------------------- |
+| [com.h2database:h2:1.4.178](http://www.h2database.com/) |  |
+| [cglib:cglib-nodep:2.2.2](https://github.com/cglib/cglib) |  |
+| [org.projectlombok:lombok:1.14.2](http://projectlombok.org/) |  |
+
+### Version up of dependencies libraries for project-specific  
+The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
+
+| Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
+| ----- | ----- | ----- |
+| org.springframework.security | 3.1.4 | 3.2.4 |
+| org.springframework.data | 1.6.4 | 1.8.0 |
+| org.aspectj | 1.7.3 | 1.8.0 |
+| org.codehaus.jackson | 1.9.7 | 1.9.13 |
+| org.slf4j | 1.7.5 | 1.7.7 |
+| ch.qos.logback | 1.0.13 | 1.1.2 |
+| jboss-logging | 3.1.0 | 3.1.4 |
+| joda-time.version | 2.2 | 2.3 |
+| dozer | 5.4.0 | 5.5.1 |
+| com.google.guava | 13.0.1 | 17.0 |
+| commons-beanutils | 1.8.3 | 1.9.2 |
+| commons-lang | 3.1 | 3.3.2 |
+| commons-dbcp | 1.2.2.patch_DBCP264_DBCP372 | 1.4 |
+
 
 description coming soon...
 
