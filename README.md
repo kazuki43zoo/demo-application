@@ -16,10 +16,10 @@ Structure of this application is following.<br><br>
 
 | Layer | Component/Library | Main responsibilities |
 | ----- | --------- | --------------------- |
-| Platform             | [Spirng Framework 3.2.9](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spirng Security 3.2.4](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 3.2.9](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
-|                      | [Java EE 6 Bean Validation 1.0(JSR-303)](http://beanvalidation.org/1.0/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 4.3.1](http://docs.jboss.org/hibernate/validator/4.3/reference/en-US/html/) as implementation provider.|
+| Platform             | [Spirng Framework 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spirng Security 3.2.4.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
+|                      | [Spirng MVC 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
+|                      | [Java EE 6 Bean Validation 1.0(JSR-303)](http://beanvalidation.org/1.0/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 4.3.1.Final](http://docs.jboss.org/hibernate/validator/4.3/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
@@ -43,13 +43,14 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
 | ----- | ----- | ----- |
-| org.springframework.security | 3.1.4 | 3.2.4 |
-| org.springframework.data | 1.6.4 | 1.8.0 |
+| org.springframework | 3.2.8.RELEASE | 3.2.9.RELEASE |
+| org.springframework.security | 3.1.4.RELEASE | 3.2.4.RELEASE |
+| org.springframework.data | 1.6.4.RELEASE | 1.8.0.RELEASE |
 | org.aspectj | 1.7.3 | 1.8.0 |
 | org.codehaus.jackson | 1.9.7 | 1.9.13 |
 | org.slf4j | 1.7.5 | 1.7.7 |
 | ch.qos.logback | 1.0.13 | 1.1.2 |
-| jboss-logging | 3.1.0 | 3.1.4 |
+| jboss-logging | 3.1.0.GA | 3.1.4.GA |
 | joda-time.version | 2.2 | 2.3 |
 | dozer | 5.4.0 | 5.5.1 |
 | com.google.guava | 13.0.1 | 17.0 |
