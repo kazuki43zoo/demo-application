@@ -154,6 +154,10 @@ Actual screen are following.
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
+In this application, authentication realize using the `DaoAuthenticationProvider`.
+`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.
+
+
 description coming soon...
 
 ### Handle login error
