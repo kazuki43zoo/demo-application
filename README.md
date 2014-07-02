@@ -106,16 +106,18 @@ In this application, authentication(login and logout) processing are implements 
 
 ![alt text](./images/flow-view-login-form.png "Flow of view the login form page")
 
-If access the protected page when not authenticate, spring-security redirect to page that defined `login-page` attribute of `sec:form-login` element in `src/main/resources/META-INF/spring/spring-security.xml`.
+If access the protected page when not authenticate, spring-security redirect to the page that is defined in `login-page` attribute of `sec:form-login` element.
 
-```xml
-<!-- omit -->
-<sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
-    username-parameter="accountId" password-parameter="password"
-    authentication-details-source-ref="customAuthenticationDetailsSource"
-    authentication-failure-handler-ref="authenticationFailureHandler" />
-<!-- omit -->
-```
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+      username-parameter="accountId" password-parameter="password"
+      authentication-details-source-ref="customAuthenticationDetailsSource"
+      authentication-failure-handler-ref="authenticationFailureHandler" />
+  <!-- omit -->
+  ```
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
 
