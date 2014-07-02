@@ -48,7 +48,7 @@
             <tr>
                 <td>${f:h(rowStatus.count)}</td>
                 <td><a href="${contextPath}/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a></td>
-                <td>${f:h(account.firstName)}${f:h(account.lastName)}</td>
+                <td>${f:h(account.firstName)}&nbsp;${f:h(account.lastName)}</td>
                 <td><c:if test="${!account.enabled}">
                         <span class="glyphicon glyphicon-ok"></span>
                     </c:if></td>
