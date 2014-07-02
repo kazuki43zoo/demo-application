@@ -145,7 +145,10 @@ Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginC
   }
   ```
 
-description coming soon...
+Actual screen are following.
+
+![alt text](./images/screenshot-view-login-form.png "login form")
+
 
 ### Login(Authenticate)
 
