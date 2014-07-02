@@ -121,27 +121,29 @@ If access the protected page when not authenticate, spring-security redirect to 
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
 
-```java
-@RequestMapping("auth/login")
-@Controller
-public class LoginController {
-    // omit
+* `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
-    @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(method = RequestMethod.GET)
-    public String showLoginForm() {
-        return "auth/loginForm";
-    }
+  ```java
+  @RequestMapping("auth/login")
+  @Controller
+  public class LoginController {
+      // omit
 
-    @RequestMapping(method = RequestMethod.GET, params = "encourage")
-    public String encourageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
-        return "redirect:/auth/login";
-    }
+      @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
+      @RequestMapping(method = RequestMethod.GET)
+      public String showLoginForm() {
+          return "auth/loginForm";
+      }
 
-    // omit
-}
-```
+      @RequestMapping(method = RequestMethod.GET, params = "encourage")
+      public String encourageLogin(RedirectAttributes redirectAttributes) {
+          redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
+          return "redirect:/auth/login";
+      }
+
+      // omit
+  }
+  ```
 
 description coming soon...
 
