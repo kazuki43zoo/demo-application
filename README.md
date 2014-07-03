@@ -145,7 +145,7 @@ Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginC
   }
   ```
 
-Generate screen data(response data) by the `auth/loginForm` view(JSP).
+Generate screen data(response data) by the `auth/loginForm` view(JSP). In this application,have use the Tiles 2 as layout engine.
 
 * `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
