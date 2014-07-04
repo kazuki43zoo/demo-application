@@ -184,8 +184,7 @@ Actual screen(response) are following.
 ![alt text](./images/flow-authentication.png "Flow of login")
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
-`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.
-
+`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.<br>
 In DaoAuthenticationProvider, be able to check for the status of loaded user. Actually checking contents are following.
 
 * Specified user exists ?
