@@ -183,7 +183,7 @@ Actual screen(response) are following.
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.<br>
-In DaoAuthenticationProvider, be able to check for the status of loaded user. Actually checking contents are following.
+In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
 * Specified user exists ?
 * Specified user is not lock ?
