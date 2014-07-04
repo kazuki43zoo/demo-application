@@ -116,10 +116,14 @@ If access the protected page when not authenticate, spring-security redirect to 
 
   ```xml
   <!-- omit -->
-  <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
-      username-parameter="accountId" password-parameter="password"
-      authentication-details-source-ref="customAuthenticationDetailsSource"
-      authentication-failure-handler-ref="authenticationFailureHandler" />
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+          username-parameter="accountId" password-parameter="password"
+          authentication-details-source-ref="customAuthenticationDetailsSource"
+          authentication-failure-handler-ref="authenticationFailureHandler" />
+      <!-- omit -->
+  </sec:http>
   <!-- omit -->
   ```
 
@@ -270,10 +274,14 @@ Reason of changing default settings is to hide the fact that are using the sprin
 
   ```xml
   <!-- omit -->
-  <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
-      username-parameter="accountId" password-parameter="password"
-      authentication-details-source-ref="customAuthenticationDetailsSource"
-      authentication-failure-handler-ref="authenticationFailureHandler" />
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+          username-parameter="accountId" password-parameter="password"
+          authentication-details-source-ref="customAuthenticationDetailsSource"
+          authentication-failure-handler-ref="authenticationFailureHandler" />
+      <!-- omit -->
+  </sec:http>
   <!-- omit -->
   ```
 
