@@ -60,19 +60,19 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | commons-lang | 3.1 | 3.3.2 |
 | commons-dbcp | 1.2.2.patch_DBCP264_DBCP372 | 1.4 |
 
-## Java package Structure
+### Java package Structure
 
 ![alt text](./images/java-package-structure.png "Java package Structure")
 
 Coming soon...
 
-## Resources package Structure
+### Resources package Structure
 
 ![alt text](./images/resources-package-structure.png "Resources package Structure")
 
 Coming soon...
 
-## Web application(war) Structure
+### Web application(war) Structure
 
 ![alt text](./images/web-application-structure.png "Web application(war) Structure")
 
