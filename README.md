@@ -202,6 +202,78 @@ Login processing flow are following.
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
+Login form implementation are following.<br>
+In this application, parameter name of username and password has change the default settings of spring-security.
+
+* `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
+
+  ```jsp
+  <form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
+      <div class="form-group">
+          <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
+      </div>
+      <div class="form-group">
+          <form:password path="password" class="form-control" placeholder="Password" />
+      </div>
+      <button class="btn">
+          <span class="glyphicon glyphicon-log-in"></span>
+      </button>
+  </form:form>
+  ```
+
+Receive the login request.<br>
+In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing.
+
+* `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
+
+  ```java
+  @RequestMapping("auth/login")
+  @Controller
+  public class LoginController {
+      // omit
+
+      @RequestMapping(method = RequestMethod.POST)
+      public String login(@Validated LoginForm form, BindingResult bindingResult) {
+
+          if (bindingResult.hasErrors()) {
+              return showLoginForm();
+          }
+
+          return "forward:/auth/authenticate";
+      }
+
+      // omit
+  }
+  ```
+
+* `src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
+
+  ```java
+  @AllArgsConstructor
+  @NoArgsConstructor
+  @Data
+  public class LoginForm implements Serializable {
+      private static final long serialVersionUID = 1L;
+      @NotNull
+      private String accountId;
+      @NotNull
+      private String password;
+  }
+  ```
+
+Configuration of spring-security to authenticate using login form are following.
+
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+      username-parameter="accountId" password-parameter="password"
+      authentication-details-source-ref="customAuthenticationDetailsSource"
+      authentication-failure-handler-ref="authenticationFailureHandler" />
+  <!-- omit -->
+  ```
+
 
 description coming soon...
 
