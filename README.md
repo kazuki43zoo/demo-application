@@ -16,7 +16,9 @@ Structure of this application is following.<br><br>
 
 | Layer | Component/Library | Main responsibilities |
 | ----- | --------- | --------------------- |
-| Platform             | [Spirng Framework 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Client Layer         | [JQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
+|                      | [Bootstrap 3.1.1](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
+| Server Side Platform | [Spirng Framework 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.4.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
 |                      | [Spirng MVC 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
 |                      | [Java EE 6 Bean Validation 1.0(JSR-303)](http://beanvalidation.org/1.0/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 4.3.1.Final](http://docs.jboss.org/hibernate/validator/4.3/reference/en-US/html/) as implementation provider.|
