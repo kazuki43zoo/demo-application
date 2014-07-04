@@ -261,7 +261,10 @@ In this application, `LoginController` receive the login request, and execute va
   }
   ```
 
-Configuration of spring-security to authenticate using login form are following.
+Execute authentication by the spring-security.<br>
+spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
+In this application, login-processing-url and parameter name of username and password has change the default settings of spring-security.<br>
+Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
