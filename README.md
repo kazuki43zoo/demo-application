@@ -222,7 +222,7 @@ In this application, parameter name of username and password has change the defa
   ```
 
 Receive the login request.<br>
-In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing.
+In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of spring-security.
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
