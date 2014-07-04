@@ -189,12 +189,12 @@ In `DaoAuthenticationProvider`, be able to check for the status of loaded user. 
 
 | No | Checking content | Specification in this application |
 | :-----: | ----- | ----- |
-| 1 | Specified user exists ? | Fetches the record that matches specified account id from account table. |
-| 2 | Specified user is not lock ? |  |
-| 3 | Specified user is enable ? |  |
-| 4 | Specified user is not expired ? |  |
-| 5 | Specified user's password is not expired ? |  |
-| 6 | Matches the specified password ? |  |
+| 1 | Specified user exists ? | Fetches the record that matches specified account id from account table. If not exists record, ocurr the authentication error. |
+| 2 | Specified user is not lock ? | Fetches the password failure count of fetched account. If it is over max count of password failure count, occur the authentication error. |
+| 3 | Specified user is enable ? | Fetches the enable flag of fetched account. If it is false(disabled), occur the authentication error. |
+| 4 | Specified user is not expired ? | In this application, this check is not support. This means that check result is OK always. |
+| 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during password valid days, encourage password change. |
+| 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
