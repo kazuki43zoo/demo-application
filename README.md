@@ -106,6 +106,8 @@ In this application, authentication(login and logout) processing are implements 
 
 ### View the login form
 
+Display processing flow of login form are following.
+
 ![alt text](./images/flow-view-login-form.png "Flow of view the login form page")
 
 If access the protected page when not authenticate, spring-security redirect to the page that is defined in `login-page` attribute of `sec:form-login` element.
@@ -195,6 +197,8 @@ In `DaoAuthenticationProvider`, be able to check for the status of loaded user. 
 | 4 | Specified user is not expired ? | In this application, not support this checking. This means that check result is OK at always. |
 | 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
 | 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
+
+Login processing flow are following.
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
