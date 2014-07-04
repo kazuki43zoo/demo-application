@@ -225,7 +225,7 @@ In this application, parameter name of username and password has change the defa
   </form:form>
   ```
 
-Receive the login request.<br>
+Receive the login request by the spring-mvc.<br>
 In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of spring-security.
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
@@ -265,7 +265,7 @@ In this application, `LoginController` receive the login request, and execute va
   }
   ```
 
-Execute authentication by the spring-security.<br>
+Receive the login(authentication) request by the spring-security.<br>
 spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
 Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.
@@ -284,6 +284,9 @@ Reason of changing default settings is to hide the fact that are using the sprin
   </sec:http>
   <!-- omit -->
   ```
+
+Load the user information and create instance of the `CustomUserDetails` (extended class in this application).
+In this application, load the user information via the `CustomUserDetailService` (extended class in this application).
 
 
 description coming soon...
