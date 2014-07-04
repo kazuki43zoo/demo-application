@@ -189,7 +189,7 @@ In `DaoAuthenticationProvider`, be able to check for the status of loaded user. 
 
 | No | Checking content | Specification in this application |
 | :-----: | ----- | ----- |
-| 1 | Specified user exists ? | Fetches the record that matches specified account id from the account table. If not exists matched record, ocurr the authentication error. |
+| 1 | Specified user exists ? | Fetches the record that matches specified account id from the account table. If not exists matched record, occur the authentication error. |
 | 2 | Specified user is not lock ? | Fetches the password failure count of fetched account. If it is over the max count of password failure count, occur the authentication error. |
 | 3 | Specified user is enable ? | Fetches the enable flag of fetched account. If it is false(disabled), occur the authentication error. |
 | 4 | Specified user is not expired ? | In this application, not support this checking. This means that check result is OK at always. |
