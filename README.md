@@ -18,9 +18,9 @@ Structure of this application is following.<br><br>
 | ----- | --------- | --------------------- |
 | Client Layer         | [JQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
-| Server Side Platform | [Spirng Framework 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spirng Security 3.2.4.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
+| Server Side Platform | [Spirng Framework 3.2.10.BUILD-SNAPSHOT](http://docs.spring.io/spring/docs/3.2.10.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
+|                      | [Spirng MVC 3.2.10.BUILD-SNAPSHOT](http://docs.spring.io/spring/docs/3.2.10.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.5.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
@@ -28,7 +28,7 @@ Structure of this application is following.<br><br>
 | Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
-| Infrastructure Layer | [Mybatis 3.2.7](http://mybatis.github.io/mybatis-3/)<br>(There is a plan to update to 3.3.0) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
+| Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ### Dependency libraries for project-specific
@@ -38,7 +38,6 @@ The following libraries is dependency for project-specific without relate on TER
 | ----- | -----| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.179 | Depends on to access H2 database. |
-| [cglib:cglib-nodep](https://github.com/cglib/cglib)<br>(There is a plan to delete) | 2.2.2 | Depends on to perform lazy loading in Mybatis3. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
 
 ### Version up of dependency libraries for project-specific  
@@ -46,16 +45,17 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
 | ----- | ----- | ----- |
-| org.springframework | 3.2.8.RELEASE | 3.2.9.RELEASE |
-| org.springframework.security | 3.1.4.RELEASE | 3.2.4.RELEASE |
-| org.springframework.data | 1.6.4.RELEASE | 1.8.0.RELEASE |
+| org.springframework | 3.2.8.RELEASE | 3.2.10.BUILD-SNAPSHOT |
+| org.springframework.security | 3.1.4.RELEASE | 3.2.5.CI-SNAPSHOT |
+| org.springframework.data | 1.6.4.RELEASE | 1.8.1.RELEASE |
 | org.aspectj | 1.7.3 | 1.8.1 |
 | org.codehaus.jackson | 1.9.7 | 1.9.13 |
 | org.slf4j | 1.7.5 | 1.7.7 |
 | ch.qos.logback | 1.0.13 | 1.1.2 |
 | org.hibernate.hibernate-validator | 4.3.1.Final | 5.1.1.Final |
 | jboss-logging | 3.1.0.GA | 3.1.4.GA |
-| joda-time.version | 2.2 | 2.3 |
+| org.mybatis | 3.2.7 | 3.3.0-SNAPSHOT |
+| joda-time | 2.2 | 2.3 |
 | dozer | 5.4.0 | 5.5.1 |
 | com.google.guava | 13.0.1 | 17.0 |
 | commons-beanutils | 1.8.3 | 1.9.2 |
