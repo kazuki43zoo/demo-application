@@ -59,6 +59,13 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -89,6 +96,7 @@
         <commons-beanutils.version>1.9.2</commons-beanutils.version>
         <commons-lang.version>3.3.2</commons-lang.version>
         <org.hibernate.hibernate-validator.version>5.1.1.Final</org.hibernate.hibernate-validator.version>
+        <org.mybatis.version>3.3.0-SNAPSHOT</org.mybatis.version>
         <!-- for dependency test library version -->
         <junit.version>4.11</junit.version>
         <hamcrest.version>1.3</hamcrest.version>
@@ -170,16 +178,15 @@
         </dependency>
 
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>2.2.2</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${org.mybatis.version}</version>
         </dependency>
 
     </dependencies>
