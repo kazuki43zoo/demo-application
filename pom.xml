@@ -76,7 +76,7 @@
     <properties>
         <!-- for dependency library version -->
         <org.springframework-version>3.2.10.BUILD-SNAPSHOT</org.springframework-version>
-        <org.springframework.security.version>3.2.4.RELEASE</org.springframework.security.version>
+        <org.springframework.security.version>3.2.5.CI-SNAPSHOT</org.springframework.security.version>
         <org.springframework.data.version>1.8.0.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.1</org.aspectj-version>
         <org.codehaus.jackson.version>1.9.13</org.codehaus.jackson.version>
