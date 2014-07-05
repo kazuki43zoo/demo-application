@@ -38,7 +38,7 @@ The following libraries is dependency for project-specific without relate on TER
 | ----- | -----| --------------------- |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.178 | Depends on to access H2 database. |
 | [cglib:cglib-nodep](https://github.com/cglib/cglib)<br>(There is a plan to delete) | 2.2.2 | Depends on to perform lazy loading in Mybatis3. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.2 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
 
 ### Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
