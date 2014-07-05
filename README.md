@@ -21,7 +21,7 @@ Structure of this application is following.<br><br>
 | Server Side Platform | [Spirng Framework 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.4.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.4.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
 |                      | [Spirng MVC 3.2.9.RELEASE](http://docs.spring.io/spring/docs/3.2.9.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
-|                      | [Java EE 6 Bean Validation 1.0(JSR-303)](http://beanvalidation.org/1.0/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 4.3.1.Final](http://docs.jboss.org/hibernate/validator/4.3/reference/en-US/html/) as implementation provider.|
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.5.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
@@ -36,6 +36,7 @@ The following libraries is dependency for project-specific without relate on TER
 
 | Library | Version | Description |
 | ----- | -----| --------------------- |
+| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.179 | Depends on to access H2 database. |
 | [cglib:cglib-nodep](https://github.com/cglib/cglib)<br>(There is a plan to delete) | 2.2.2 | Depends on to perform lazy loading in Mybatis3. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
@@ -48,17 +49,18 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | org.springframework | 3.2.8.RELEASE | 3.2.9.RELEASE |
 | org.springframework.security | 3.1.4.RELEASE | 3.2.4.RELEASE |
 | org.springframework.data | 1.6.4.RELEASE | 1.8.0.RELEASE |
-| org.aspectj | 1.7.3 | 1.8.0 |
+| org.aspectj | 1.7.3 | 1.8.1 |
 | org.codehaus.jackson | 1.9.7 | 1.9.13 |
 | org.slf4j | 1.7.5 | 1.7.7 |
 | ch.qos.logback | 1.0.13 | 1.1.2 |
+| org.hibernate.hibernate-validator | 4.3.1.Final | 5.1.1.Final |
 | jboss-logging | 3.1.0.GA | 3.1.4.GA |
 | joda-time.version | 2.2 | 2.3 |
 | dozer | 5.4.0 | 5.5.1 |
 | com.google.guava | 13.0.1 | 17.0 |
 | commons-beanutils | 1.8.3 | 1.9.2 |
 | commons-lang | 3.1 | 3.3.2 |
-| commons-dbcp | 1.2.2.patch_DBCP264_DBCP372 | 1.4 |
+| commons-dbcp | 1.2.2.patch_DBCP264_DBCP372 | exclusion |
 
 ### Java package Structure
 
