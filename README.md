@@ -18,7 +18,8 @@ Structure of this application is following.<br><br>
 | ----- | --------- | --------------------- |
 | Client Layer         | [JQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
-| Server Side Platform | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
+| Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
+|                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
 |                      | [Spirng Framework 3.2.10.BUILD-SNAPSHOT](http://docs.spring.io/spring/docs/3.2.10.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
 |                      | [Spirng MVC 3.2.10.BUILD-SNAPSHOT](http://docs.spring.io/spring/docs/3.2.10.BUILD-SNAPSHOT/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
