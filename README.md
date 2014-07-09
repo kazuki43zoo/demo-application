@@ -23,7 +23,7 @@ Structure of this application is following.<br><br>
 |                      | [Spirng Framework 4.0.6.RELEASE](http://docs.spring.io/spring/docs/4.0.6.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
 |                      | [Spirng MVC 4.0.6.RELEASE](http://docs.spring.io/spring/docs/4.0.6.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Coming soon... |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.5.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
