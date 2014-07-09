@@ -45,24 +45,24 @@ The following libraries is dependency for project-specific without relate on TER
 ### Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
-| Library | TERASOLUNA Global Framework 1.1.0-SNAPSHOT | In this project |
+| Library | In this project | TERASOLUNA Global Framework 1.1.0-SNAPSHOT |
 | ----- | ----- | ----- |
-| org.springframework | 3.2.8.RELEASE | 4.0.6.RELEASE |
-| org.springframework.security | 3.1.4.RELEASE | 3.2.5.CI-SNAPSHOT |
-| org.springframework.data | 1.6.4.RELEASE | 1.8.1.RELEASE |
-| org.aspectj | 1.7.3 | 1.8.1 |
-| org.codehaus.jackson | 1.9.7 | 1.9.13 |
-| org.slf4j | 1.7.5 | 1.7.7 |
-| ch.qos.logback | 1.0.13 | 1.1.2 |
-| org.hibernate.hibernate-validator | 4.3.1.Final | 5.1.1.Final |
-| jboss-logging | 3.1.0.GA | 3.1.4.GA |
-| org.mybatis | 3.2.7 | 3.3.0-SNAPSHOT |
-| joda-time | 2.2 | 2.3 |
-| dozer | 5.4.0 | 5.5.1 |
-| com.google.guava | 13.0.1 | 17.0 |
-| commons-beanutils | 1.8.3 | 1.9.2 |
-| commons-lang | 3.1 | 3.3.2 |
-| commons-dbcp | 1.2.2.patch_DBCP264_DBCP372 | exclusion |
+| org.springframework | 4.0.6.RELEASE | 3.2.8.RELEASE |
+| org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
+| org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
+| org.aspectj | 1.8.1 | 1.7.3 |
+| org.codehaus.jackson | 1.9.13 | 1.9.7 |
+| org.slf4j | 1.7.7 | 1.7.5 |
+| ch.qos.logback | 1.1.2 | 1.0.13 |
+| org.hibernate.hibernate-validator | 5.1.1.Final | 4.3.1.Final |
+| jboss-logging | 3.1.4.GA | 3.1.0.GA |
+| org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
+| joda-time | 2.3 | 2.2 |
+| dozer | 5.5.1 | 5.4.0 |
+| com.google.guava | 17.0 | 13.0.1 |
+| commons-beanutils | 1.9.2 | 1.8.3 |
+| commons-lang | 3.3.2 | 3.1 |
+| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 
 ### Java package Structure
 
