@@ -45,7 +45,7 @@ The following libraries is dependency for project-specific without relate on TER
 ### Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
-| Library | In this project | TERASOLUNA Global Framework 1.1.0-SNAPSHOT |
+| Library | In this project | TERASOLUNA Global Framework |
 | ----- | ----- | ----- |
 | org.springframework | 4.0.6.RELEASE | 3.2.8.RELEASE |
 | org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
