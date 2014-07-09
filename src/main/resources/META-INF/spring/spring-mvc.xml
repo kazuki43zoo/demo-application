@@ -62,7 +62,7 @@
         <property name="order" value="2" />
     </bean>
 
-    <bean id="requestDataValueProcessor" class="org.terasoluna.gfw.web.mvc.support.CompositeRequestDataValueProcessor">
+    <bean id="requestDataValueProcessor" class="com.github.kazuki43zoo.web.mvc.support.CustomCompositeRequestDataValueProcessor">
         <constructor-arg>
             <util:list>
                 <bean
