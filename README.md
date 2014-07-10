@@ -63,6 +63,7 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | commons-beanutils | 1.9.2 | 1.8.3 |
 | commons-lang | 3.3.2 | 3.1 |
 | commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
+| org.apache.tiles | 3.0.4 | 2.2.2 |
 
 ### Java package Structure
 
