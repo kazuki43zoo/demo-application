@@ -37,7 +37,7 @@ Structure of this application is following.<br><br>
 The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library | Version | Description |
-| ----- | -----| --------------------- |
+| ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.179 | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
