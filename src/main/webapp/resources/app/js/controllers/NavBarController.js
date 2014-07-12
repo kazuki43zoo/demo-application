@@ -2,11 +2,11 @@
 	'use strict';
 	angular.module('app').controller(
 			'NavBarController',
-			[ '$scope', '$timeout', 'DateResource',
+			[ '$scope', '$timeout','DateResource',
 					function($scope, $timeout, DateResource) {
 						var oneSeconds = 1000;
 						var oneMinutes = oneSeconds * 60;
-						var oneHours =  oneSeconds * 60 * 60;
+						var reloadIntervalMinutes =  oneMinutes * 60;
 						var currentDateResource = new DateResource();
 						var refreshPromise = null;
 						var loadCurrentDateTime = function() {
@@ -15,9 +15,9 @@
 							}).then(function() {
 								var currentDateTime = new Date(currentDateResource.dateTime);
 								$scope.currentDateTime = new Date(currentDateTime.getTime() + (currentDateTime.getTimezoneOffset() * oneMinutes));
-								$timeout(loadCurrentDateTime, oneHours);
+								$timeout(loadCurrentDateTime, reloadIntervalMinutes);
 								if(refreshPromise != null){
-									$timeout.cancel(refleshPromise);
+									$timeout.cancel(refreshPromise);
 								}
 								refreshPromise = $timeout($scope.refreshDateTime, oneSeconds);
 							});

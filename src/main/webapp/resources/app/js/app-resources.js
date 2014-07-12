@@ -4,7 +4,7 @@
 	// --------
 	// Models
 	// --------
-	var resources = angular.module('resources', [ 'ngResource' ]);
+	var resources = angular.module('resources', [ 'ngResource']);
 	var contextPath = angular.element("meta[name='contextPath']").attr(
 			'content');
 	resources.factory("DateResource", [ '$resource', function($resource) {
