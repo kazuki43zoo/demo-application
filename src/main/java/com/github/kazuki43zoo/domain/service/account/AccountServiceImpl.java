@@ -21,6 +21,7 @@ import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.model.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
+import com.github.kazuki43zoo.domain.repository.PageParams;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
@@ -53,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
         if (totalCount == 0) {
             accounts = Collections.emptyList();
         } else {
-            accounts = accountRepository.findAllByCriteria(criteria, pageable);
+            accounts = accountRepository.findAllByCriteria(criteria, new PageParams(pageable));
         }
         return new PageImpl<>(accounts, pageable, totalCount);
     }

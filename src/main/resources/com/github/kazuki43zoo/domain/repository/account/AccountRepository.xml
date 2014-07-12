@@ -50,7 +50,7 @@
     </sql>
 
     <select id="countByCriteria"
-        resultType="long">
+        resultType="long" >
         SELECT
             COUNT(*)
         FROM
@@ -59,15 +59,11 @@
     </select>
 
     <select id="findAllByCriteria"
-        resultMap="resultMap-Account">
+        resultMap="resultMap-Account" resultSetType="SCROLL_INSENSITIVE">
         <include refid="selectAllColumnsOfAccountSql"/>
         <include refid="whereCriteriaSql"/>
         ORDER BY
             account_id
-        LIMIT
-            #{pageable.pageSize}
-        OFFSET
-            #{pageable.offset}
     </select>
 
     <select id="findOneByAccountId"
