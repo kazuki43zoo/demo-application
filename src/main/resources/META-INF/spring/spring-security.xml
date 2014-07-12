@@ -9,12 +9,25 @@
     <sec:http pattern="/auth/logout\?success" request-matcher="regex" security="none" />
 
     <sec:http pattern="/api/**" auto-config="true" use-expressions="true">
+
+        <sec:headers>
+            <sec:cache-control />
+        </sec:headers>
+
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
     </sec:http>
 
     <sec:http auto-config="true" use-expressions="true">
 
         <sec:csrf request-matcher-ref="csrfRequestMatcher" />
+
+        <sec:headers>
+            <sec:cache-control />
+            <sec:content-type-options />
+            <sec:frame-options policy="SAMEORIGIN" />
+            <sec:hsts />
+            <sec:xss-protection/>
+        </sec:headers>
 
         <sec:session-management invalid-session-url="/error/invalidSession"
             session-fixation-protection="migrateSession"  />
