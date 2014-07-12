@@ -42,6 +42,7 @@ The following libraries is dependency for project-specific without relate on TER
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.179 | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
+| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonHome) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
 ### Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
