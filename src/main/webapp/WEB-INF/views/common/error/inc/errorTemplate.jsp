@@ -1,12 +1,14 @@
 <%@page session="false"%>
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width" />
+<meta name="contextPath" content="${contextPath}" >
 <title>${param.title}</title>
-<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -14,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController" ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
     <div id="container">
@@ -33,5 +35,10 @@
     </div>
     <script src="${contextPath}/resources/vendor/jquery/dist/jquery.min.js"></script>
     <script src="${contextPath}/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/resources/vendor/angular/angular.min.js"></script>
+    <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
+    <script src="${contextPath}/resources/app/js/app.js"></script>
+    <script src="${contextPath}/resources/app/js/app-resources.js"></script>
+    <script src="${contextPath}/resources/app/js/controllers/NavBarController.js"></script>
 </body>
 </html>

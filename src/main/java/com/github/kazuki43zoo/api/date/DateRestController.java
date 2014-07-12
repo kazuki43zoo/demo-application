@@ -16,7 +16,7 @@ public class DateRestController {
     @Inject
     DateFactory dateFactory;
 
-    @RequestMapping(value = "currentTimeDate", method = RequestMethod.GET)
+    @RequestMapping(value = "currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public DateResource getCurrentTimeDate() {
         DateResource responseResource = new DateResource();

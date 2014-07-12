@@ -2,6 +2,8 @@
     "name": "demo-application",
     "version": "1.0",
     "dependencies": {
+        "angular": "latest",
+        "angular-resource": "latest",
         "jquery": "latest",
         "bootstrap": "latest"
     }

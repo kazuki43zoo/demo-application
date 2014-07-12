@@ -241,6 +241,10 @@ footer {
 	}
 }
 
+#clock {
+	font-size: medium;
+}
+
 #content {
 	height: 100%;
 }
