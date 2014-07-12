@@ -50,7 +50,7 @@
     </sql>
 
     <select id="countByCriteria"
-        resultType="long" >
+        resultType="long">
         SELECT
             COUNT(*)
         FROM

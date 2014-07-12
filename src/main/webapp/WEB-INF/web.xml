@@ -90,6 +90,7 @@
     <filter-mapping>
         <filter-name>SpringSecurityFilterChain</filter-name>
         <servlet-name>AppServlet</servlet-name>
+        <servlet-name>ApiServlet</servlet-name>
         <servlet-name>H2ConsoleServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
@@ -111,6 +112,21 @@
     </servlet-mapping>
 
     <servlet>
+        <description>DispatcherServlet for API processing.</description>
+        <servlet-name>ApiServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:META-INF/spring/spring-mvc-api.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApiServlet</servlet-name>
+        <url-pattern>/api/v1/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <description>Servlet for H2 administration console.</description>
         <servlet-name>H2ConsoleServlet</servlet-name>
         <servlet-class>org.h2.server.web.WebServlet</servlet-class>
@@ -118,7 +134,7 @@
             <param-name>webAllowOthers</param-name>
             <param-value></param-value>
         </init-param>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>3</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>H2ConsoleServlet</servlet-name>
