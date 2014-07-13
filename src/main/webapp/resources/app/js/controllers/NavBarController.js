@@ -1,12 +1,13 @@
 (function(){
 	'use strict';
+	var timeOfOneSeconds = 1000;
+	var timeOfOneMinutes = timeOfOneSeconds * 60;
+	var timeOfReloadInterval =  timeOfOneMinutes * 60;
+	var timeOfTimezoneOffset =  new Date().getTimezoneOffset() * timeOfOneMinutes;
 	angular.module('app').controller(
 			'NavBarController',
 			[ '$scope', '$timeout','DateResource',
 					function($scope, $timeout, DateResource) {
-						var oneSeconds = 1000;
-						var oneMinutes = oneSeconds * 60;
-						var reloadIntervalMinutes =  oneMinutes * 60;
 						var currentDateResource = new DateResource();
 						var refreshPromise = null;
 						var loadCurrentDateTime = function() {
@@ -14,19 +15,22 @@
 								dateId : 'currentDateTime'
 							}).then(function() {
 								var currentDateTime = new Date(currentDateResource.dateTime);
-								$scope.currentDateTime = new Date(currentDateTime.getTime() + (currentDateTime.getTimezoneOffset() * oneMinutes));
-								$timeout(loadCurrentDateTime, reloadIntervalMinutes);
+								var utcTime = currentDateTime.getTime() + timeOfTimezoneOffset;
+								$scope.currentDateTime.setTime(utcTime);
+								$timeout(loadCurrentDateTime, timeOfReloadInterval);
 								if(refreshPromise != null){
 									$timeout.cancel(refreshPromise);
 								}
-								refreshPromise = $timeout($scope.refreshDateTime, oneSeconds);
+								refreshPromise = $timeout(refreshDateTime, timeOfOneSeconds);
 							});
 						}
-
-						$scope.refreshDateTime = function() {
-							$scope.currentDateTime.setTime($scope.currentDateTime.getTime() + oneSeconds);
-							refreshPromise = $timeout($scope.refreshDateTime, oneSeconds);
+						var refreshDateTime = function() {
+							var nextTime = $scope.currentDateTime.getTime() + timeOfOneSeconds;
+							$scope.currentDateTime.setTime(nextTime);
+							refreshPromise = $timeout(refreshDateTime, timeOfOneSeconds);
 						}
+
+						$scope.currentDateTime = new Date();
 
 						loadCurrentDateTime();
 
