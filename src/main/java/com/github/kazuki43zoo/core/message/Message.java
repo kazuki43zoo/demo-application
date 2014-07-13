@@ -3,7 +3,7 @@ package com.github.kazuki43zoo.core.message;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.DANGER;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.INFO;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.SUCCESS;
-
+import static com.github.kazuki43zoo.core.message.CustomResultMessageType.WARNING;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -18,7 +18,7 @@ public enum Message {
     // e.demo.fw.5001
     FW_NOT_FOUND(DANGER, "e.demo.fw.5001"),
     // e.demo.fw.5002
-    FW_VALID_SESSION_NOT_EXISTS(DANGER, "e.demo.fw.5002"),
+    FW_VALID_SESSION_NOT_EXISTS(WARNING, "e.demo.fw.5002"),
     // e.demo.fw.7001
     FW_TRANSACTION_TOKEN_ERROR(DANGER, "e.demo.fw.7001"),
     // e.demo.fw.8001
