@@ -329,7 +329,19 @@ Coming soon...
 ## Other Security Countermeasure
 This section describe about other security countermeasure in this application.<br>
 
-### CSRF Protection
+### Session Fixation Attacks Protection
+Coming soon...
+
+### CSRF Attacks Protection
+Coming soon...
+
+### XSS attacks Protection
+Coming soon...
+
+### Clickjacking Attacks Protection
+Coming soon...
+
+### HTTP Strict Transport Security (HSTS)
 Coming soon...
 
 ## Session Management
