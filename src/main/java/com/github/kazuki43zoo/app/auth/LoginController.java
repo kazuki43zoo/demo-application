@@ -35,6 +35,7 @@ public class LoginController {
         return "redirect:/auth/login";
     }
 
+    @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST)
     public String login(@Validated LoginForm form, BindingResult bindingResult) {
 
