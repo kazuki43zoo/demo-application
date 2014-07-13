@@ -123,7 +123,6 @@ If access the protected page when not authenticate, spring-security redirect to 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
@@ -132,7 +131,6 @@ If access the protected page when not authenticate, spring-security redirect to 
           authentication-failure-handler-ref="authenticationFailureHandler" />
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
@@ -282,7 +280,6 @@ Reason of changing default settings is to hide the fact that are using the sprin
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
@@ -291,7 +288,6 @@ Reason of changing default settings is to hide the fact that are using the sprin
           authentication-failure-handler-ref="authenticationFailureHandler" />
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 Load the user information and create instance of the `CustomUserDetails` (extended class in this application).
@@ -336,14 +332,12 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:session-management invalid-session-url="/error/invalidSession"
           session-fixation-protection="migrateSession"  />
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 ### CSRF Attacks Protection
@@ -352,16 +346,13 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:csrf request-matcher-ref="csrfRequestMatcher" />
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
   ```xml
-  <!-- omit -->
   <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
       <constructor-arg>
           <list>
@@ -381,7 +372,6 @@ Coming soon...
           </list>
       </constructor-arg>
   </bean>
-  <!-- omit -->
   ```
 
 ### XSS attacks Protection
@@ -390,7 +380,6 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:headers>
@@ -400,7 +389,6 @@ Coming soon...
       </sec:headers>
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 ### Clickjacking Attacks Protection
@@ -409,7 +397,6 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:headers>
@@ -419,7 +406,6 @@ Coming soon...
       </sec:headers>
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 ### Directory Traversal Attacks Protection
@@ -431,7 +417,6 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:headers>
@@ -440,7 +425,6 @@ Coming soon...
       </sec:headers>
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 ### HTTP Strict Transport Security (HSTS)
@@ -449,7 +433,6 @@ Coming soon...
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
   ```xml
-  <!-- omit -->
   <sec:http auto-config="true" use-expressions="true">
       <!-- omit -->
       <sec:headers>
@@ -459,7 +442,6 @@ Coming soon...
       </sec:headers>
       <!-- omit -->
   </sec:http>
-  <!-- omit -->
   ```
 
 
