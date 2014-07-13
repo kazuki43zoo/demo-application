@@ -359,6 +359,9 @@ Coming soon...
       <!-- omit -->
   </sec:http>
   <!-- omit -->
+  ```
+  ```xml
+  <!-- omit -->
   <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
       <constructor-arg>
           <list>
