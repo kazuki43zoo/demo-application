@@ -21,14 +21,14 @@ public enum Message {
     FW_VALID_SESSION_NOT_EXISTS(WARNING, "e.demo.fw.5002"),
     // e.demo.fw.7001
     FW_TRANSACTION_TOKEN_ERROR(DANGER, "e.demo.fw.7001"),
+    // e.demo.fw.7002
+    FW_VALID_ACCESS_DENIED(DANGER, "e.demo.fw.7002"),
     // e.demo.fw.8001
     FW_BUSINESS_ERROR(DANGER, "e.demo.fw.8001"),
     // e.demo.fw.9001
     FW_SYSTEM_ERROR(DANGER, "e.demo.fw.9001"),
     // e.demo.fw.9002
     FW_DA_ACCESS_ERROR(DANGER, "e.demo.fw.9002"),
-    // e.demo.fw.7002
-    FW_VALID_ACCESS_DENIED(DANGER, "e.demo.fw.7002"),
     // ---------------
     // for account
     // ---------------
