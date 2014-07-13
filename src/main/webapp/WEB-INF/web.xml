@@ -187,6 +187,10 @@
 
     <session-config>
         <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <max-age>86400</max-age>
+        </cookie-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 

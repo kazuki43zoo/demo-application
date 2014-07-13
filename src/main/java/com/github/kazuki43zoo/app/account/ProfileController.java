@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +20,7 @@ import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
+import com.github.kazuki43zoo.web.security.CurrentUser;
 
 @TransactionTokenCheck("profile")
 @RequestMapping("profile")
@@ -34,15 +34,14 @@ public class ProfileController {
     Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String show(@AuthenticationPrincipal CustomUserDetails user, Model model) {
+    public String show(@CurrentUser CustomUserDetails user, Model model) {
         model.addAttribute(user.getAccount());
         return "profile/detail";
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET, params = "edit")
-    public String edit(@AuthenticationPrincipal CustomUserDetails user, ProfileForm form,
-            Model model) {
+    public String edit(@CurrentUser CustomUserDetails user, ProfileForm form, Model model) {
         beanMapper.map(user.getAccount(), form);
         model.addAttribute(user.getAccount());
         return "profile/editForm";
@@ -50,9 +49,9 @@ public class ProfileController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.PATCH)
-    public String save(@AuthenticationPrincipal CustomUserDetails user,
-            @Validated ProfileForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+    public String save(@CurrentUser CustomUserDetails user, @Validated ProfileForm form,
+            BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+            TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return edit(user, form, model);
@@ -80,14 +79,13 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    public String editRedo(CustomUserDetails user, ProfileForm form, Model model) {
+    public String editRedo(@CurrentUser CustomUserDetails user, ProfileForm form, Model model) {
         model.addAttribute(user.getAccount());
         return "profile/editForm";
     }
 
     @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
-    public String showAuthenticationHistoryList(@AuthenticationPrincipal CustomUserDetails user,
-            Model model) {
+    public String showAuthenticationHistoryList(@CurrentUser CustomUserDetails user, Model model) {
         Account account = accountService.getAccount(user.getAccount().getAccountUuid());
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
