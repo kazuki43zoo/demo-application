@@ -161,7 +161,7 @@ Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginC
   }
   ```
 
-Generate screen data(response data) by the `auth/loginForm` view(JSP). In this application,have use the Tiles 2 as layout engine.
+Generate screen data(response data) by the `auth/loginForm` view(JSP). In this application,have use the Tiles 3 as layout engine.
 
 * `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
@@ -244,6 +244,7 @@ In this application, `LoginController` receive the login request, and execute va
   public class LoginController {
       // omit
 
+      @TransactionTokenCheck
       @RequestMapping(method = RequestMethod.POST)
       public String login(@Validated LoginForm form, BindingResult bindingResult) {
 
