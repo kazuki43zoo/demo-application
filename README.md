@@ -333,20 +333,132 @@ This section describe about other security countermeasure in this application.<b
 ### Session Fixation Attacks Protection
 Coming soon...
 
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:session-management invalid-session-url="/error/invalidSession"
+          session-fixation-protection="migrateSession"  />
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  ```
+
 ### CSRF Attacks Protection
 Coming soon...
+
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:csrf request-matcher-ref="csrfRequestMatcher" />
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+      <constructor-arg>
+          <list>
+              <ref bean="defaultCsrfRequiresMethodMatcher" />
+              <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+                  <constructor-arg ref="csrfExclusionPathMatcher" />
+              </bean>
+          </list>
+      </constructor-arg>
+  </bean>
+  <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+      <constructor-arg>
+          <list>
+              <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                  <constructor-arg index="0" value="/vendor/h2/**" />
+              </bean>
+          </list>
+      </constructor-arg>
+  </bean>
+  <!-- omit -->
+  ```
 
 ### XSS attacks Protection
 Coming soon...
 
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:headers>
+          <!-- omit -->
+          <sec:content-type-options />
+          <sec:xss-protection/>
+      </sec:headers>
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  ```
+
 ### Clickjacking Attacks Protection
 Coming soon...
+
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:headers>
+          <!-- omit -->
+          <sec:frame-options policy="SAMEORIGIN" />
+          <!-- omit -->
+      </sec:headers>
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  ```
 
 ### Directory Traversal Attacks Protection
 Coming soon...
 
+
+### Protected resource not cache
+
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:headers>
+          <sec:cache-control />
+          <!-- omit -->
+      </sec:headers>
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  ```
+
 ### HTTP Strict Transport Security (HSTS)
 Coming soon...
+
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <!-- omit -->
+  <sec:http auto-config="true" use-expressions="true">
+      <!-- omit -->
+      <sec:headers>
+          <!-- omit -->
+          <sec:hsts />
+          <!-- omit -->
+      </sec:headers>
+      <!-- omit -->
+  </sec:http>
+  <!-- omit -->
+  ```
+
 
 ## Session Management
 This section describe about session management in this application.<br>
