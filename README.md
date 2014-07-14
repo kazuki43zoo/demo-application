@@ -199,17 +199,6 @@ Actual screen(response) are following.
 ## 4.2. Login(Authenticate)
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
-`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
-In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
-
-| No | Checking content | Specification in this application |
-| :-----: | ----- | ----- |
-| 1 | Specified user exists ? | Fetches the record that matches specified account id from the account table. If not exists matched record, occur the authentication error. |
-| 2 | Specified user is not lock ? | Fetches the password failure count of fetched account. If it is over the max count of password failure count, occur the authentication error. |
-| 3 | Specified user is enable ? | Fetches the enable flag of fetched account. If it is false(disabled), occur the authentication error. |
-| 4 | Specified user is not expired ? | In this application, not support this checking. This means that check result is OK at always. |
-| 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
-| 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
 
 Login processing flow are following.
 
@@ -302,8 +291,20 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
   </sec:authentication-manager>
   ```
 
+`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
+In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
+
 Load the user information and create instance of the `CustomUserDetails` (extended class in this application).
 In this application, load the user information via the `CustomUserDetailService` (extended class in this application).
+
+| No | Checking content | Specification in this application |
+| :-----: | ----- | ----- |
+| 1 | Specified user exists ? | Fetches the record that matches specified account id from the account table. If not exists matched record, occur the authentication error. |
+| 2 | Specified user is not lock ? | Fetches the password failure count of fetched account. If it is over the max count of password failure count, occur the authentication error. |
+| 3 | Specified user is enable ? | Fetches the enable flag of fetched account. If it is false(disabled), occur the authentication error. |
+| 4 | Specified user is not expired ? | In this application, not support this checking. This means that check result is OK at always. |
+| 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
+| 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
 
 
 description coming soon...
