@@ -43,10 +43,7 @@ The following libraries is dependency for application-specific without relate on
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
 ## 2.2. Version up of dependency libraries for application-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. 
-
-> ![alt text](./images/info.png)<br>
-> **Reason of version up is to try the latest version.** 
+The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
