@@ -201,9 +201,6 @@ In this application, authentication realize using the `DaoAuthenticationProvider
 
 Login processing flow are following.
 
-> ![alt text](./images/tip.png "Tip")<br>
-> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
-
 ![alt text](./images/flow-authentication.png "Flow of login")
 
 ### Submit login request
@@ -229,6 +226,9 @@ In this application, parameter name of username and password has change the defa
 ### Receive the login request by the Spring MVC
 
 In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of Spring Security.
+
+> ![alt text](./images/tip.png "Tip")<br>
+> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
