@@ -317,9 +317,9 @@ In this application, load the user information via the `CustomUserDetailService`
   </sec:authentication-manager>
   ```
 
-  > ![alt text](./images/info.png)
-  > * **`customUserDetailsService` are scan by component-scan.**
-  > * **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
+  > ![alt text](./images/info.png)<br>
+  > **`customUserDetailsService` are scan by component-scan.**
+  > **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
 ### Authentication success processing
 
