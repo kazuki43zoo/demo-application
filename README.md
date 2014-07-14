@@ -32,7 +32,7 @@ Structure of this application is following.<br><br>
 | Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
-## 2.1 Dependency libraries for project-specific
+## 2.1. Dependency libraries for project-specific
 The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library | Version | Description |
@@ -43,7 +43,7 @@ The following libraries is dependency for project-specific without relate on TER
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
-## 2.2 Version up of dependency libraries for project-specific  
+## 2.2. Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
 | Library | In this project | TERASOLUNA<br>Global Framework |
@@ -66,25 +66,25 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 | org.apache.tiles | 3.0.4 | 2.2.2 |
 
-## 2.3 Java package Structure
+## 2.3. Java package Structure
 
 ![alt text](./images/java-package-structure.png "Java package Structure")
 
 Coming soon...
 
-## 2.4 Resources package Structure
+## 2.4. Resources package Structure
 
 ![alt text](./images/resources-package-structure.png "Resources package Structure")
 
 Coming soon...
 
-## 2.5 Web application(war) Structure
+## 2.5. Web application(war) Structure
 
 ![alt text](./images/web-application-structure.png "Web application(war) Structure")
 
 Coming soon...
 
-# 3 Application Functionalities
+# 3. Application Functionalities
 
 Functionalities of this application is following.<br>
 
@@ -101,14 +101,14 @@ Functionalities of this application is following.<br>
 | 9 | Others... | Coming soon... |
 
 
-# 4 Authentication
+# 4. Authentication
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
 * Spring Security has responsible for the authentication processing.
 * Spring MVC has responsible for screen flow control.
 
-## 4.1 View the login form
+## 4.1. View the login form
 
 Display processing flow of login form are following.
 
@@ -189,7 +189,7 @@ Actual screen(response) are following.
 ![alt text](./images/screenshot-view-login-form.png "login form")
 
 
-## 4.2 Login(Authenticate)
+## 4.2. Login(Authenticate)
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.<br>
@@ -292,37 +292,37 @@ In this application, load the user information via the `CustomUserDetailService`
 
 description coming soon...
 
-## 4.3 Handle login error
+## 4.3. Handle login error
 
 ![alt text](./images/flow-handle-authentication-error.png "Flow of handle the authentication error")
 
 description coming soon...
 
-## 4.4 Handle validation error
+## 4.4. Handle validation error
 
 ![alt text](./images/flow-handle-authentication-validation-error.png "Flow of handle the validation error on login")
 
 description coming soon...
 
-## 4.5 Logout
+## 4.5. Logout
 
 ![alt text](./images/flow-logout.png "Flow of logout")
 
 description coming soon...
 
-## 4.6 Logout by session timeout
+## 4.6. Logout by session timeout
 Coming soon...
 
-# 5 Authorization
+# 5. Authorization
 This section describe about authorization in this application.<br>
 In this application, authorization(access control of protected page) processing are implements using Spring Security.<br>
 
 Coming soon...
 
-# 6 Other Security Countermeasure
+# 6. Other Security Countermeasure
 This section describe about other security countermeasure in this application.<br>
 
-## 6.1 Session Fixation Attacks Protection
+## 6.1. Session Fixation Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -336,7 +336,7 @@ Coming soon...
   </sec:http>
   ```
 
-## 6.2 CSRF Attacks Protection
+## 6.2. CSRF Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -370,7 +370,7 @@ Coming soon...
   </bean>
   ```
 
-## 6.3 XSS attacks Protection
+## 6.3. XSS attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -387,7 +387,7 @@ Coming soon...
   </sec:http>
   ```
 
-## 6.4 Clickjacking Attacks Protection
+## 6.4. Clickjacking Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -404,11 +404,11 @@ Coming soon...
   </sec:http>
   ```
 
-## 6.5 Directory Traversal Attacks Protection
+## 6.5. Directory Traversal Attacks Protection
 Coming soon...
 
 
-## 6.6 Protected resource not cache
+## 6.6. Protected resource not cache
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -423,7 +423,7 @@ Coming soon...
   </sec:http>
   ```
 
-## 6.7 HTTP Strict Transport Security (HSTS)
+## 6.7. HTTP Strict Transport Security (HSTS)
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -441,9 +441,9 @@ Coming soon...
   ```
 
 
-# 7 Session Management
+# 7. Session Management
 This section describe about session management in this application.<br>
 
-## 7.1 Detect Session timeout
+## 7.1. Detect Session timeout
 Coming soon...
 
