@@ -32,8 +32,8 @@ Structure of this application is following.<br><br>
 | Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
-## 2.1. Dependency libraries for project-specific
-The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
+## 2.1. Dependency libraries for application-specific
+The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library | Version | Description |
 | ----- | :-----:| --------------------- |
@@ -43,10 +43,10 @@ The following libraries is dependency for project-specific without relate on TER
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
-## 2.2. Version up of dependency libraries for project-specific  
+## 2.2. Version up of dependency libraries for application-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
-| Library | In this project | TERASOLUNA<br>Global Framework |
+| Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
 | org.springframework | 4.0.6.RELEASE | 3.2.8.RELEASE |
 | org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
