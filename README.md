@@ -286,11 +286,15 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
   </sec:http>
   ```
 
+### Authentication processing
+
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
-Load the user information and create instance of the `CustomUserDetails` (extended class in this application).
-In this application, load the user information via the `CustomUserDetailService` (extended class in this application).
+> ![alt text](./images/info.png)<br>
+> **User information are loaded as instance of the `CustomUserDetails` (extended class in this application).
+In this application, load the user information via the `CustomUserDetailService` (extended class in this application).**
+
 
 | No | Checking content | Specification in this application |
 | :-----: | ----- | ----- |
