@@ -104,11 +104,14 @@ Functionalities of this application is following.<br>
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
-> ![alt text](./images/info.png)<br>
+> ![alt text](./images/info.png "Note")<br>
 > **Responsibility of each other are following.** 
 >
 > * **Spring Security has responsible for the authentication processing.**
 > * **Spring MVC has responsible for screen flow control.**
+
+> ![alt text](./images/tip.png "Tip")<br>
+> **If not exists requirement as input value validation or re-display, spring-mvc is not required.**
 
 ## 4.1. View the login form
 
@@ -291,7 +294,7 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
-> ![alt text](./images/info.png)<br>
+> ![alt text](./images/info.png "Note")<br>
 > **User information are loaded as instance of the `CustomUserDetails` (extended class in this application).
 In this application, load the user information via the `CustomUserDetailService` (extended class in this application).**
 
@@ -315,7 +318,7 @@ In this application, load the user information via the `CustomUserDetailService`
   </sec:authentication-manager>
   ```
 
-  > ![alt text](./images/info.png)<br>
+  > ![alt text](./images/info.png "Note")<br>
   > **`customUserDetailsService` are scan by component-scan.**
   > **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
