@@ -201,7 +201,7 @@ Actual screen(response) are following.
 
 ## 4.2. Login(Authenticate)
 
-In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
+In this application, authentication realize using the `DaoAuthenticationProvider` of Spring Security.
 
 Login processing flow are following.
 
@@ -209,7 +209,7 @@ Login processing flow are following.
 
 ### Submit login request
 
-In this application, parameter name of username and password has change the default settings of spring-security.
+In this application, parameter name of username and password has change the default settings of Spring Security.
 
 * `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
@@ -227,9 +227,9 @@ In this application, parameter name of username and password has change the defa
   </form:form>
   ```
 
-### Receive the login request by the spring-mvc
+### Receive the login request by the Spring MVC
 
-In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of spring-security.
+In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of Spring Security.
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
@@ -269,13 +269,13 @@ In this application, `LoginController` receive the login request, and execute va
   }
   ```
 
-### Receive the login(authentication) request by the spring-security
+### Receive the login(authentication) request by the Spring Security
 
-spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
-In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
+Spring Security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
+In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of Spring Security.<br>
 
 > ![alt text](./images/tip.png)<br>
-> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
+> **Reason of changing default settings is to hide the fact that are using the Spring Security as security countermeasure. If occur the security vulnerability in the Spring Security, be able to reduce the risk of attack to this application.**
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -290,7 +290,7 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
   </sec:http>
   ```
 
-### Authentication processing
+### Execute authentication processing
 
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
@@ -323,7 +323,7 @@ In this application, load the user information via the `CustomUserDetailService`
   > **`customUserDetailsService` are scan by component-scan.**
   > **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
-### Authentication success processing
+### Execute authentication success processing
 
 description coming soon...
 
