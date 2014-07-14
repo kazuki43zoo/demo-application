@@ -108,7 +108,7 @@ In this application, authentication(login and logout) processing are implements 
 > **Responsibility of each other are following.** 
 >
 > * **Spring Security has responsible for the authentication processing.**
-> * **Spring MVC has responsible for screen flow control.**
+> * **Spring MVC has responsible for input values validation and the screen control.**
 
 
 > ![alt text](./images/tip.png "Tip")<br>
