@@ -291,6 +291,11 @@ Reason of changing default settings is to hide the fact that are using the sprin
           authentication-failure-handler-ref="authenticationFailureHandler" />
       <!-- omit -->
   </sec:http>
+  <sec:authentication-manager>
+      <sec:authentication-provider user-service-ref="customUserDetailsService">
+          <sec:password-encoder ref="passwordEncoder" />
+      </sec:authentication-provider>
+  </sec:authentication-manager>
   ```
 
 Load the user information and create instance of the `CustomUserDetails` (extended class in this application).
