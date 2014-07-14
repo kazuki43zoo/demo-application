@@ -110,10 +110,6 @@ In this application, authentication(login and logout) processing are implements 
 > * **Spring Security has responsible for the authentication processing.**
 > * **Spring MVC has responsible for input values validation and the screen control.**
 
-
-> ![alt text](./images/tip.png "Tip")<br>
-> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
-
 ## 4.1. View the login form
 
 Display processing flow of login form are following.
@@ -204,6 +200,9 @@ Actual screen(response) are following.
 In this application, authentication realize using the `DaoAuthenticationProvider` of Spring Security.
 
 Login processing flow are following.
+
+> ![alt text](./images/tip.png "Tip")<br>
+> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
