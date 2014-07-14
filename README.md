@@ -319,7 +319,7 @@ In this application, load the user information via the `CustomUserDetailService`
 
   > ![alt text](./images/info.png)<br>
   > * **`customUserDetailsService` are scan by component-scan.**
-  > * **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`.**
+  > * **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
 ### Authentication success processing
 
