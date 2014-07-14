@@ -104,7 +104,8 @@ Functionalities of this application is following.<br>
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
-> ![alt text](./images/info.png)    **Responsibility of each other are following.** 
+> ![alt text](./images/info.png)
+> **Responsibility of each other are following.** 
 >
 > * **Spring Security has responsible for the authentication processing.**
 > * **Spring MVC has responsible for screen flow control.**
