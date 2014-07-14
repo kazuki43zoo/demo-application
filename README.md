@@ -284,11 +284,6 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
           authentication-failure-handler-ref="authenticationFailureHandler" />
       <!-- omit -->
   </sec:http>
-  <sec:authentication-manager>
-      <sec:authentication-provider user-service-ref="customUserDetailsService">
-          <sec:password-encoder ref="passwordEncoder" />
-      </sec:authentication-provider>
-  </sec:authentication-manager>
   ```
 
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
@@ -306,6 +301,15 @@ In this application, load the user information via the `CustomUserDetailService`
 | 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
 | 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
 
+* `src/main/resources/META-INF/spring/spring-security.xml`
+
+  ```xml
+  <sec:authentication-manager>
+      <sec:authentication-provider user-service-ref="customUserDetailsService">
+          <sec:password-encoder ref="passwordEncoder" />
+      </sec:authentication-provider>
+  </sec:authentication-manager>
+  ```
 
 description coming soon...
 
