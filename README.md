@@ -11,7 +11,6 @@ But it being customized by my opinion in the partially (this means is not 100% c
 Structure of this application is following.<br><br>
 ![alt text](./images/application-structure.png "Application Structure")
 
-
 | Layer | Component/Library | Main responsibilities |
 | :-----: | --------- | --------------------- |
 | Client Layer         | [JQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
@@ -280,7 +279,7 @@ spring-security execute the authentication processing when was accessed to the u
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
 
 >***
-**[Note]**<br> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
+![alt text](./images/info.png)<br> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
 >***
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
