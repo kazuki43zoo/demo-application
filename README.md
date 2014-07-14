@@ -114,6 +114,8 @@ Display processing flow of login form are following.
 
 ![alt text](./images/flow-view-login-form.png "Flow of view the login form page")
 
+### Access the protected page when not authenticate
+
 If access the protected page when not authenticate, spring-security redirect to the page that is defined in `login-page` attribute of `sec:form-login` element.
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -128,6 +130,8 @@ If access the protected page when not authenticate, spring-security redirect to 
       <!-- omit -->
   </sec:http>
   ```
+
+### Encourage the login
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
 
@@ -208,7 +212,8 @@ Login processing flow are following.
 
 ![alt text](./images/flow-authentication.png "Flow of login")
 
-Login form implementation are following.<br>
+### Submit login request
+
 In this application, parameter name of username and password has change the default settings of spring-security.
 
 * `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
@@ -227,7 +232,8 @@ In this application, parameter name of username and password has change the defa
   </form:form>
   ```
 
-Receive the login request by the spring-mvc.<br>
+### Receive the login request by the spring-mvc
+
 In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of spring-security.
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
@@ -268,7 +274,8 @@ In this application, `LoginController` receive the login request, and execute va
   }
   ```
 
-Receive the login(authentication) request by the spring-security.<br>
+### Receive the login(authentication) request by the spring-security
+
 spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
 Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.
