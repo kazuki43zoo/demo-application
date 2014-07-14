@@ -3,12 +3,10 @@
 This is sample application for develop using [TERASOLUNA Global Framework](http://terasoluna.org).<br>
 **Currently, this application is under developing !!!**
 
-# Application Overview
-
 This application is developed based [TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
 But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
 
-## Application Structure
+# Application Structure
 
 Structure of this application is following.<br><br>
 ![alt text](./images/application-structure.png "Application Structure")
@@ -34,7 +32,7 @@ Structure of this application is following.<br><br>
 | Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
-### Dependency libraries for project-specific
+## Dependency libraries for project-specific
 The following libraries is dependency for project-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library | Version | Description |
@@ -45,7 +43,7 @@ The following libraries is dependency for project-specific without relate on TER
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
-### Version up of dependency libraries for project-specific  
+## Version up of dependency libraries for project-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
 
 | Library | In this project | TERASOLUNA<br>Global Framework |
@@ -68,25 +66,25 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 | org.apache.tiles | 3.0.4 | 2.2.2 |
 
-### Java package Structure
+## Java package Structure
 
 ![alt text](./images/java-package-structure.png "Java package Structure")
 
 Coming soon...
 
-### Resources package Structure
+## Resources package Structure
 
 ![alt text](./images/resources-package-structure.png "Resources package Structure")
 
 Coming soon...
 
-### Web application(war) Structure
+## Web application(war) Structure
 
 ![alt text](./images/web-application-structure.png "Web application(war) Structure")
 
 Coming soon...
 
-## Application Functionalities
+# Application Functionalities
 
 Functionalities of this application is following.<br>
 
@@ -103,16 +101,14 @@ Functionalities of this application is following.<br>
 | 9 | Others... | Coming soon... |
 
 
-# Functionality Details
-
-## Authentication
+# Authentication
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
 * Spring Security has responsible for the authentication processing.
 * Spring MVC has responsible for screen flow control.
 
-### View the login form
+## View the login form
 
 Display processing flow of login form are following.
 
@@ -193,7 +189,7 @@ Actual screen(response) are following.
 ![alt text](./images/screenshot-view-login-form.png "login form")
 
 
-### Login(Authenticate)
+## Login(Authenticate)
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.<br>
@@ -296,37 +292,37 @@ In this application, load the user information via the `CustomUserDetailService`
 
 description coming soon...
 
-### Handle login error
+## Handle login error
 
 ![alt text](./images/flow-handle-authentication-error.png "Flow of handle the authentication error")
 
 description coming soon...
 
-### Handle validation error
+## Handle validation error
 
 ![alt text](./images/flow-handle-authentication-validation-error.png "Flow of handle the validation error on login")
 
 description coming soon...
 
-### Logout
+## Logout
 
 ![alt text](./images/flow-logout.png "Flow of logout")
 
 description coming soon...
 
-### Logout by session timeout
+## Logout by session timeout
 Coming soon...
 
-## Authorization
+# Authorization
 This section describe about authorization in this application.<br>
 In this application, authorization(access control of protected page) processing are implements using Spring Security.<br>
 
 Coming soon...
 
-## Other Security Countermeasure
+# Other Security Countermeasure
 This section describe about other security countermeasure in this application.<br>
 
-### Session Fixation Attacks Protection
+## Session Fixation Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -340,7 +336,7 @@ Coming soon...
   </sec:http>
   ```
 
-### CSRF Attacks Protection
+## CSRF Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -374,7 +370,7 @@ Coming soon...
   </bean>
   ```
 
-### XSS attacks Protection
+## XSS attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -391,7 +387,7 @@ Coming soon...
   </sec:http>
   ```
 
-### Clickjacking Attacks Protection
+## Clickjacking Attacks Protection
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -408,7 +404,7 @@ Coming soon...
   </sec:http>
   ```
 
-### Directory Traversal Attacks Protection
+## Directory Traversal Attacks Protection
 Coming soon...
 
 
@@ -427,7 +423,7 @@ Coming soon...
   </sec:http>
   ```
 
-### HTTP Strict Transport Security (HSTS)
+## HTTP Strict Transport Security (HSTS)
 Coming soon...
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
@@ -445,9 +441,9 @@ Coming soon...
   ```
 
 
-## Session Management
+# Session Management
 This section describe about session management in this application.<br>
 
-### Detect Session timeout
+## Detect Session timeout
 Coming soon...
 
