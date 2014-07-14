@@ -196,7 +196,7 @@ Actual screen(response) are following.
 ## 4.2. Login(Authenticate)
 
 In this application, authentication realize using the `DaoAuthenticationProvider` of spring-security.
-`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the database.<br>
+`DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
 | No | Checking content | Specification in this application |
@@ -278,7 +278,9 @@ In this application, `LoginController` receive the login request, and execute va
 
 spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
-Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.
+
+
+> [Note]<br> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
