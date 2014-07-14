@@ -23,9 +23,9 @@
 
         <sec:headers>
             <sec:cache-control />
-            <sec:content-type-options />
             <sec:frame-options policy="SAMEORIGIN" />
             <sec:hsts />
+            <sec:content-type-options />
             <sec:xss-protection/>
         </sec:headers>
 
@@ -74,23 +74,20 @@
         <constructor-arg>
             <list>
                 <ref bean="defaultCsrfRequiresMethodMatcher" />
-                <ref bean="csrfExclusionPathPathMatcher" />
+                <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+                    <constructor-arg ref="csrfExclusionPathMatcher" />
+                </bean>
             </list>
         </constructor-arg>
     </bean>
-    <bean id="csrfExclusionPathPathMatcher" class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+    <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
         <constructor-arg>
-            <bean class="org.springframework.security.web.util.matcher.OrRequestMatcher">
-                <constructor-arg>
-                    <list>
-                        <ref bean="h2ConsolePathMatcher" />
-                    </list>
-                </constructor-arg>
-            </bean>
+            <list>
+                <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <constructor-arg index="0" value="/vendor/h2/**" />
+                </bean>
+            </list>
         </constructor-arg>
-    </bean>
-    <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
-        <constructor-arg index="0" value="/vendor/h2/**" />
     </bean>
 
     <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter" />

@@ -29,7 +29,7 @@ public class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()
-            .concat(".handleLogout");
+            .concat(".logout");
 
     @Inject
     AuthenticationService authenticationService;
