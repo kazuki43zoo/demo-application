@@ -110,8 +110,9 @@ In this application, authentication(login and logout) processing are implements 
 > * **Spring Security has responsible for the authentication processing.**
 > * **Spring MVC has responsible for screen flow control.**
 
+
 > ![alt text](./images/tip.png "Tip")<br>
-> **If not exists requirement as input value validation or re-display, spring-mvc is not required.**
+> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
 ## 4.1. View the login form
 
