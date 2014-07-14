@@ -45,7 +45,8 @@ The following libraries is dependency for application-specific without relate on
 ## 2.2. Version up of dependency libraries for application-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. 
 
-> ![alt text](./images/info.png)<br> **Reason of version up is to try the latest version.** 
+> ![alt text](./images/info.png)<br>
+> **Reason of version up is to try the latest version.** 
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
@@ -271,7 +272,8 @@ In this application, `LoginController` receive the login request, and execute va
 spring-security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of spring-security.<br>
 
-> ![alt text](./images/info.png)<br> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
+> ![alt text](./images/info.png)<br>
+> **Reason of changing default settings is to hide the fact that are using the spring-security as security countermeasure. If occur the security vulnerability in the spring-security, be able to reduce the risk of attack to this application.**
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -303,7 +305,7 @@ In this application, load the user information via the `CustomUserDetailService`
 | 3 | Specified user is enable ? | Fetches the enable flag of fetched account. If it is false(disabled), occur the authentication error. |
 | 4 | Specified user is not expired ? | In this application, not support this checking. This means that check result is OK at always. |
 | 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
-| 6 | Matches the specified password ? | Fetches the passowrd. If it not matches the specified password, occur the authentication error as bad credential.  |
+| 6 | Matches the specified password ? | Fetches the password. If it not matches the specified password, occur the authentication error as bad credential.  |
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -314,6 +316,12 @@ In this application, load the user information via the `CustomUserDetailService`
       </sec:authentication-provider>
   </sec:authentication-manager>
   ```
+
+  > ![alt text](./images/info.png)<br>
+  > * **`customUserDetailsService` are scan by component-scan.**
+  > * **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`.**
+
+### Authentication success processing
 
 description coming soon...
 
