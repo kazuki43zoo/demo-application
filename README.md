@@ -43,7 +43,9 @@ The following libraries is dependency for application-specific without relate on
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 
 ## 2.2. Version up of dependency libraries for application-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
+The following libraries are version up from version that TERASOLUNA Global Framework depend on. 
+
+> ![alt text](./images/info.png)<br> **Reason of version up is to try the latest version.** 
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
@@ -104,8 +106,10 @@ Functionalities of this application is following.<br>
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
-* Spring Security has responsible for the authentication processing.
-* Spring MVC has responsible for screen flow control.
+> ![alt text](./images/info.png)<br> **Responsibility of each other are following.** 
+>
+> * **Spring Security has responsible for the authentication processing.**
+> * **Spring MVC has responsible for screen flow control.**
 
 ## 4.1. View the login form
 
