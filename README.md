@@ -230,9 +230,6 @@ In this application, `LoginController` receive the login request, and execute va
 > ![alt text](./images/tip.png "Tip")<br>
 > **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
-> ![alt text](./images/info.png "Note")<br>
-> **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
-
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
   ```java
@@ -255,6 +252,9 @@ In this application, `LoginController` receive the login request, and execute va
       // omit
   }
   ```
+  > ![alt text](./images/info.png "Note")<br>
+  > **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
+
 
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
