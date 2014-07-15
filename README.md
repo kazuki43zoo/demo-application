@@ -118,7 +118,7 @@ Display processing flow of login form are following.
 
 ### Access the protected page when not authenticate
 
-If access the protected page when not authenticate, spring-security redirect to the page that is defined in `login-page` attribute of `sec:form-login` element.
+If access the protected page when not authenticate, spring-security redirect to the uri(page) that is defined in `login-page` attribute of `sec:form-login` element.
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -136,6 +136,7 @@ If access the protected page when not authenticate, spring-security redirect to 
 ### Encourage the login
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
+In the `LoginController`, set the message and view the login form page.
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
@@ -160,8 +161,11 @@ Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginC
       // omit
   }
   ```
+  > ![alt text](./images/info.png "Note")<br>
+  > **When view the login form page, global transaction for transaction token check is begun.**
 
-Generate screen data(response data) by the `auth/loginForm` view(JSP). In this application,have use the Tiles 3 as layout engine.
+
+Generate screen data(response data) by the `auth/loginForm` view(JSP). 
 
 * `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
@@ -189,6 +193,11 @@ Generate screen data(response data) by the `auth/loginForm` view(JSP). In this a
       </button>
   </form:form>
   ```
+  > ![alt text](./images/info.png "Note")<br>
+  > **`loginForm.jsp` is included from the `src/main/webapp/WEB-INF/views/common/layout/topNavbar.jsp`.**
+  > **Hence, in this JSP, use the `including` parameter to judge the included / not included.**
+  > **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
+
 
 Actual screen(response) are following.
 
@@ -300,7 +309,7 @@ For forward to the authentication processing of Spring Security, as the settings
 Spring Security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of Spring Security.<br>
 
-> ![alt text](./images/tip.png)<br>
+> ![alt text](./images/important.png "Important")<br>
 > **Reason of changing default settings is to hide the fact that are using the Spring Security as security countermeasure. If occur the security vulnerability in the Spring Security, be able to reduce the risk of attack to this application.**
 
 * `src/main/resources/META-INF/spring/spring-security.xml`
