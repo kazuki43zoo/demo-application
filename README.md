@@ -199,7 +199,7 @@ Generate screen data(response data) by the `auth/loginForm` view(JSP).
   > **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
 
 
-Actual screen(response) are following.
+### Actual screen(response) are following.
 
 ![alt text](./images/screenshot-view-login-form.png "login form")
 
