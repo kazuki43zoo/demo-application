@@ -270,7 +270,8 @@ In this application, `LoginController` receive the login request, and execute va
   }
   ```
 
-For forward to the authentication processing of Spring Security, as the settings of `SpringSecurityFilterChain`, need add `<dispatcher>FORWARD</dispatcher>` . ![alt text](./images/point.png "Point")
+![alt text](./images/point.png "Point")<br>
+For forward to the authentication processing of Spring Security, as the settings of `SpringSecurityFilterChain`, need add `<dispatcher>FORWARD</dispatcher>` .
 
 * `src/main/webapp/WEB-INF/web.xml`
 
