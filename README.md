@@ -206,8 +206,6 @@ Generate screen data(response data) by the `auth/loginForm` view(JSP).
 
 ## 4.2. Login(Authenticate)
 
-In this application, authentication realize using the `DaoAuthenticationProvider` of Spring Security.
-
 Login processing flow are following.
 
 ![alt text](./images/flow-authentication.png "Flow of login")
@@ -327,6 +325,7 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
 
 ### Execute authentication processing
 
+In this application, authentication realize using the `DaoAuthenticationProvider` of Spring Security.<br>
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
