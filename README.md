@@ -300,7 +300,9 @@ For forward to the authentication processing of Spring Security, as the settings
       <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
   ```
-
+  > ![alt text](./images/tip.png "Tip")<br>
+  > **As the way to map to this servlet filter, i will recommend to use the `<servlet-name>` element.**
+  > **If specify `<url-pattern>/*</url-pattern>`, this servlet filter would has been applied at the jsp forwarding.**
 
 ### Receive the login(authentication) request by the Spring Security
 
