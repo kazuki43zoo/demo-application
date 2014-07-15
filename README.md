@@ -256,6 +256,29 @@ In this application, `LoginController` receive the login request, and execute va
   > **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
 
 
+* `src/main/webapp/WEB-INF/web.xml`
+
+  For forward to the authentication processing of Spring Security, as the settings of `SpringSecurityFilterChain`, need add `<dispatcher>FORWARD</dispatcher>` .
+
+  ```xml
+  <filter>
+      <filter-name>SpringSecurityFilterChain</filter-name>
+      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+      <init-param>
+          <param-name>targetBeanName</param-name>
+          <param-value>springSecurityFilterChain</param-value>
+      </init-param>
+  </filter>
+  <filter-mapping>
+      <filter-name>SpringSecurityFilterChain</filter-name>
+      <servlet-name>AppServlet</servlet-name>
+      <servlet-name>ApiServlet</servlet-name>
+      <servlet-name>H2ConsoleServlet</servlet-name>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  ```
+
 
 * `src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
 
