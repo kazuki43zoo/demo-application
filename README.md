@@ -34,7 +34,7 @@ Structure of this application is following.<br><br>
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
 
-| Library | Version | Description |
+| Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | Depends on to access H2 database. |
