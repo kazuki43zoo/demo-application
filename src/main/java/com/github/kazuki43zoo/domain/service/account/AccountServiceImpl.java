@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.dozer.Mapper;
 import org.joda.time.DateTime;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.DateFactory;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
@@ -45,7 +45,6 @@ public class AccountServiceImpl implements AccountService {
     @Inject
     PasswordSharedService passwordSharedService;
 
-    @Transactional(readOnly = true)
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
         criteria.determineCriteria();
@@ -59,7 +58,6 @@ public class AccountServiceImpl implements AccountService {
         return new PageImpl<>(accounts, pageable, totalCount);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Account getAccount(String accountUuid) {
         Account account = accountRepository.findOne(accountUuid);

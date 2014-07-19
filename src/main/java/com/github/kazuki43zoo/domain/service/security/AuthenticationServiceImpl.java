@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.DateFactory;
 
 import com.github.kazuki43zoo.domain.model.Account;
@@ -22,7 +22,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     AccountRepository accountRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public boolean isLogin(Account account) {
         AccountAuthenticationHistory lastSuccessAuthenticationHistory = accountRepository

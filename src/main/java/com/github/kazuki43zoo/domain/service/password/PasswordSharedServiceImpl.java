@@ -1,11 +1,11 @@
 package com.github.kazuki43zoo.domain.service.password;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.joda.time.DateTime;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.DateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
@@ -26,7 +26,6 @@ public class PasswordSharedServiceImpl implements PasswordSharedService {
     @Inject
     AccountRepository accountRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public void validatePassword(String rawPassword, Account account) {
         if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {

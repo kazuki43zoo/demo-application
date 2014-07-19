@@ -1,18 +1,18 @@
 package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
-@Transactional(noRollbackFor = ConcurrentLoginException.class)
+@Transactional(dontRollbackOn = ConcurrentLoginException.class)
 @Component
 public class InteractiveAuthenticationSuccessEventListenerImpl implements
         ApplicationListener<InteractiveAuthenticationSuccessEvent> {
