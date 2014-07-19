@@ -1,49 +1,50 @@
 # 1. Demo Application
 
-This is sample application for develop using [TERASOLUNA Global Framework](http://terasoluna.org).<br>
-**Currently, this application is under developing !!!**
+このアプリケーションは、[TERASOLUNA Global Framework](http://terasoluna.org)用のサンプルアプリケーションです。<br>
+**現在、このアプリケーションは開発中です。**
 
-This application is developed based [TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
-But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
+このアプリケーションは、[TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
 
 # 2. Application Structure
 
-Structure of this application is following.<br><br>
+アプリケーション構造は以下の通りです。<br><br>
 ![alt text](./images/application-structure.png "Application Structure")
 
 | Layer | Component/Library | Main responsibilities |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [JQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
-|                      | [AngularJS 1.2.20](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
-|                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
-| Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
-|                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spirng Framework 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
-|                      | Controllers | Handle a request & delegate a business procedure to the services.  |
-|                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
-|                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
-| Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
-|                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
-|                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
-| Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, Codelist, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Client Layer         | [JQuery 2.1.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
+|                      | [AngularJS 1.2.20](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
+|                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
+| Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
+|                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
+|                      | [Spirng Framework 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spirng MVC 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/#mvc) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) を使用しています。|
+|                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
+|                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
+|                      | JSPs | Formデータやドメインオブジェクトなどにアクセスし、プレゼンテーション用のコンポーネント(HTMLなど)を生成します。 |
+| Domain Layer         | Domain Objects | ドメインデータの保持と、コアなビジネスロジックを実装・提供します。 |
+|                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
+|                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
+| Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
+| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
-The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
+
+以下のライブラリは、TERASOLUNA Global Framewrokと関係がないアプリケーション独自の依存ライブラリです。
 
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
-| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | Depends on to access H2 database. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
-| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
+| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | H2データベースにアクセスするために依存しています。 |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
+| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
+| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Jackson上でJoda-Timeを使うために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
+
+以下のライブラリは、TERASOLUNA Global Frameworkが依存しているバージョンからバージョンをアップしています。バージョンアップしている理由は、最新バージョンを試すためです。
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
