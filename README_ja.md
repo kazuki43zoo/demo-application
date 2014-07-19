@@ -1,7 +1,7 @@
 # 1. Demo Application
 
-このアプリケーションは、[TERASOLUNA Global Framework](http://terasoluna.org)用のサンプルアプリケーションです。
-*現在、このアプリケーションは開発中です。*
+このアプリケーションは、[TERASOLUNA Global Framework](http://terasoluna.org)用のサンプルアプリケーションです。<br>
+**現在、このアプリケーションは開発中です。**
 
 このアプリケーションは、[TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
 
@@ -28,21 +28,23 @@
 |                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
 |                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
 | Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
-| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
+| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
-The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
+
+以下のライブラリは、TERASOLUNA Global Framewrokと関係がないアプリケーション独自の依存ライブラリです。
 
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
-| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | Depends on to access H2 database. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
-| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
+| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | H2データベースにアクセスするために依存しています。 |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>** Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
+| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
+| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Jackson上でJoda-Timeを使うために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
+
+以下のライブラリは、TERASOLUNA Global Frameworkが依存しているバージョンからバージョンをアップしています。バージョンアップしている理由は、最新バージョンを試すためです。
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
