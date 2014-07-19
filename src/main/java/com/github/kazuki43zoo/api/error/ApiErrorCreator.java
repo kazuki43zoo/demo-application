@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.api.error;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -12,7 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
-@Component
+@Named
 public class ApiErrorCreator {
 
     @Inject

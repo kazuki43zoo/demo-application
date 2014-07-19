@@ -11,7 +11,6 @@ import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.DateFactory;
@@ -32,9 +31,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Inject
     Mapper beanMapper;
-
-    @Inject
-    PasswordEncoder passwordEncoder;
 
     @Inject
     DateFactory dateFactory;
@@ -73,11 +69,11 @@ public class AccountServiceImpl implements AccountService {
 
         String rawPassword = inputAccount.getPassword();
         if (!StringUtils.hasLength(rawPassword)) {
-            rawPassword = currentDateTime.toString("yyyyMMdd");
+            rawPassword = passwordSharedService.generateNewPassword();
         }
         passwordSharedService.validatePassword(rawPassword, inputAccount);
 
-        String encodedPassword = passwordEncoder.encode(rawPassword);
+        String encodedPassword = passwordSharedService.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
         inputAccount.setPasswordModifiedAt(currentDateTime);
         accountRepository.create(inputAccount);
@@ -124,7 +120,7 @@ public class AccountServiceImpl implements AccountService {
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
             passwordSharedService.validatePassword(rawPassword, currentAccount);
-            String encodedPassword = passwordEncoder.encode(rawPassword);
+            String encodedPassword = passwordSharedService.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
             currentAccount.setPasswordModifiedAt(currentDateTime);
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,

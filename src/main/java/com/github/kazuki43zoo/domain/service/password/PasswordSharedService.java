@@ -10,4 +10,8 @@ public interface PasswordSharedService {
 
     void resetPasswordLock(Account account);
 
+    String encode(String rawPassword);
+
+    String generateNewPassword();
+
 }

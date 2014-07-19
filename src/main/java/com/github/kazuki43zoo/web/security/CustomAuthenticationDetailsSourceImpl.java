@@ -1,15 +1,15 @@
 package com.github.kazuki43zoo.web.security;
 
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.authentication.AuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 
 import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
 import com.google.common.net.HttpHeaders;
 
-@Component("customAuthenticationDetailsSource")
+@Named("customAuthenticationDetailsSource")
 public class CustomAuthenticationDetailsSourceImpl implements
         AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> {
 

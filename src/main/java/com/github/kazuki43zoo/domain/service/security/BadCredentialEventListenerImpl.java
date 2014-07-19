@@ -1,19 +1,19 @@
 package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
-import org.springframework.stereotype.Component;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
-@Component
+@Named
 public class BadCredentialEventListenerImpl implements
         ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 

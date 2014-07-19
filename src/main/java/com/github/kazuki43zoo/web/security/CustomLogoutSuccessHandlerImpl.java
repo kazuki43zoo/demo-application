@@ -3,6 +3,7 @@ package com.github.kazuki43zoo.web.security;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,14 +12,13 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
-import org.springframework.stereotype.Component;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
-@Component("customLogoutSuccessHandler")
+@Named("customLogoutSuccessHandler")
 public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler {
 
     @Inject

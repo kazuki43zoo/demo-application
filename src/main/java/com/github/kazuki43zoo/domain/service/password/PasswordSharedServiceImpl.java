@@ -55,4 +55,14 @@ public class PasswordSharedServiceImpl implements PasswordSharedService {
         accountRepository.savePasswordFailureCount(account);
     }
 
+    @Override
+    public String encode(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
+    }
+
+    @Override
+    public String generateNewPassword() {
+        return dateFactory.newDateTime().toString("yyyyMMdd");
+    }
+
 }

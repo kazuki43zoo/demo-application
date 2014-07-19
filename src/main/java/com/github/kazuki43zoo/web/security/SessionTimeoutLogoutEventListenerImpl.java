@@ -3,8 +3,10 @@ package com.github.kazuki43zoo.web.security;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,8 +16,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.session.HttpSessionDestroyedEvent;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.AuthenticationType;
@@ -23,7 +23,7 @@ import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @Transactional
-@Component
+@Named
 @Aspect
 public class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
