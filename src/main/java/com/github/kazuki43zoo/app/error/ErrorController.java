@@ -13,7 +13,7 @@ public class ErrorController {
     @RequestMapping("invalidSession")
     public String handleSessionError(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.FW_VALID_SESSION_NOT_EXISTS
-                .buildResultMessages());
+                .resultMessages());
         return "redirect:/";
     }
 

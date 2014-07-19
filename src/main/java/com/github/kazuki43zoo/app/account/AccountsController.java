@@ -79,7 +79,7 @@ public class AccountsController {
         try {
             createdAccount = accountService.create(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return createForm(form);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -124,7 +124,7 @@ public class AccountsController {
         try {
             accountService.change(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return editRedo(accountUuid, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -145,7 +145,7 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Message.ACCOUNT_DELETED.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.ACCOUNT_DELETED.resultMessages());
         return "redirect:/accounts";
     }
 
@@ -169,7 +169,7 @@ public class AccountsController {
 
     private String redirectDetailView(RedirectAttributes redirectAttributes, String accountUuid,
             Message message) {
-        redirectAttributes.addFlashAttribute(message.buildResultMessages());
+        redirectAttributes.addFlashAttribute(message.resultMessages());
         redirectAttributes.addAttribute("accountUuid", accountUuid);
         return "redirect:/accounts/{accountUuid}";
     }

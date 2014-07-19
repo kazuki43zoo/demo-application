@@ -31,7 +31,7 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET, params = "encourage")
     public String encourageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
         return "redirect:/auth/login";
     }
 

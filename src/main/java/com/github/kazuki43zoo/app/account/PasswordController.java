@@ -53,7 +53,7 @@ public class PasswordController {
     @RequestMapping(method = RequestMethod.GET, params = "encourageChange")
     public String encourageChange(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_CHANGE_PASSWORD
-                .buildResultMessages());
+                .resultMessages());
         return "redirect:/password";
     }
 
@@ -86,11 +86,11 @@ public class PasswordController {
 
         if (user != null) {
             beanMapper.map(changedAccount, user.getAccount());
-            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.buildResultMessages());
+            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute(new LoginForm(form.getAccountId(), null));
-            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.buildResultMessages());
+            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/auth/login";
         }
     }

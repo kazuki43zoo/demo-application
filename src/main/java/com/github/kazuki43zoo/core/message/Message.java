@@ -86,15 +86,15 @@ public enum Message {
         this.defaultMessage = defaultMessage;
     }
 
-    public ResultMessages buildResultMessages(Object... args) {
+    public ResultMessages resultMessages(Object... args) {
         return new ResultMessages(type).add(code, args);
     }
 
-    public String buildMessage(MessageSource messageSource, Object... args) {
+    public String text(MessageSource messageSource, Object... args) {
         return messageSource.getMessage(code, args, defaultMessage, Locale.getDefault());
     }
 
-    public String buildMessage(MessageSource messageSource, Locale locale, Object... args) {
+    public String text(MessageSource messageSource, Locale locale, Object... args) {
         return messageSource.getMessage(code, args, defaultMessage, locale);
     }
 

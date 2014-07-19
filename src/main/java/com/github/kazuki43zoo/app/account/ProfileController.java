@@ -64,7 +64,7 @@ public class ProfileController {
         try {
             changedAccount = accountService.changeProfile(inputAccount);
         } catch (DuplicateKeyException e) {
-            model.addAttribute(Message.ACCOUNT_ID_USED.buildResultMessages());
+            model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return editRedo(user, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
@@ -75,7 +75,7 @@ public class ProfileController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.buildResultMessages());
+        redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.resultMessages());
         return "redirect:/profile";
     }
 

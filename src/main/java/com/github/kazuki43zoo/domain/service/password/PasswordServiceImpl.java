@@ -56,11 +56,11 @@ public class PasswordServiceImpl implements PasswordService {
     private void authenticate(Account currentAccount, String rawPassword) {
         if (currentAccount == null) {
             throw new ResourceNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.buildResultMessages());
+                    Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
         if (!passwordEncoder.matches(rawPassword, currentAccount.getPassword())) {
             throw new ResourceNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.buildResultMessages());
+                    Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
     }
 

@@ -34,7 +34,7 @@ public class AuthenticationSuccessEventListenerImpl implements
         CustomAuthenticationDetails authenticationDetails = (CustomAuthenticationDetails) event
                 .getAuthentication().getDetails();
         if (authenticationService.isLogin(userDetails.getAccount())) {
-            String message = Message.SECURITY_CONCURRENT_LOGIN.buildMessage(messageSource);
+            String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
             AccountAuthenticationHistory authenticationHistory = beanMapper.map(
                     authenticationDetails, AccountAuthenticationHistory.class);
             authenticationService.createAuthenticationFailureHistory(userDetails.getAccount()

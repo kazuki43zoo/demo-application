@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccount(String accountUuid) {
         Account account = accountRepository.findOne(accountUuid);
         if (account == null) {
-            throw new ResourceNotFoundException(Message.FW_NOT_FOUND.buildResultMessages());
+            throw new ResourceNotFoundException(Message.FW_NOT_FOUND.resultMessages());
         }
         return account;
     }

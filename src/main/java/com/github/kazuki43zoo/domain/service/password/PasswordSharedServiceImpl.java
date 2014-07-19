@@ -29,10 +29,10 @@ public class PasswordSharedServiceImpl implements PasswordSharedService {
     @Override
     public void validatePassword(String rawPassword, Account account) {
         if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {
-            throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.buildResultMessages());
+            throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.resultMessages());
         }
         if (account.isPastUsedPassword(rawPassword, passwordEncoder)) {
-            throw new BusinessException(Message.PASSWORD_USED_PAST.buildResultMessages());
+            throw new BusinessException(Message.PASSWORD_USED_PAST.resultMessages());
         }
     }
 

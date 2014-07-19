@@ -37,7 +37,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         Account account = accountRepository.findOneByAccountId(username);
         if (account == null) {
             throw new UsernameNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.buildMessage(messageSource));
+                    Message.SECURITY_ACCOUNT_NOT_FOUND.text(messageSource));
         }
 
         DateTime currentDateTime = dateFactory.newDateTime();
