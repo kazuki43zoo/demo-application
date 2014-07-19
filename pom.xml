@@ -52,6 +52,11 @@
             <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-3rdparty/</url>
         </repository>
         <repository>
+            <id>repository.spring.milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>http://repo.spring.io/snapshot</url>
@@ -82,7 +87,7 @@
     </pluginRepositories>
     <properties>
         <!-- for dependency library version -->
-        <org.springframework-version>4.0.6.RELEASE</org.springframework-version>
+        <org.springframework-version>4.1.0.RC1</org.springframework-version>
         <org.springframework.security.version>3.2.5.CI-SNAPSHOT</org.springframework.security.version>
         <org.springframework.data.version>1.8.1.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.1</org.aspectj-version>
