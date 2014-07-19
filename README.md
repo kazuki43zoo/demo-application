@@ -18,9 +18,9 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spirng Framework 4.0.6.RELEASE](http://docs.spring.io/spring/docs/4.0.6.RELEASE/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+|                      | [Spirng Framework 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 4.0.6.RELEASE](http://docs.spring.io/spring/docs/4.0.6.RELEASE/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spirng MVC 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
@@ -47,7 +47,7 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.0.6.RELEASE | 3.2.8.RELEASE |
+| org.springframework | 4.1.0.RC1 | 3.2.8.RELEASE |
 | org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
 | org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.1 | 1.7.3 |
