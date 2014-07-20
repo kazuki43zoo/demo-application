@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 
 import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
+import com.github.kazuki43zoo.web.CustomHttpHeaders;
 import com.google.common.net.HttpHeaders;
 
 @Named("customAuthenticationDetailsSource")
@@ -25,7 +26,7 @@ public class CustomAuthenticationDetailsSourceImpl implements
         HttpSession session = request.getSession(false);
         String sessionId = (session != null) ? session.getId() : null;
         String agent = request.getHeader(HttpHeaders.USER_AGENT);
-        String trackingId = (String) request.getAttribute("X-Track");
+        String trackingId = (String) request.getAttribute(CustomHttpHeaders.X_TRACK);
         return new CustomAuthenticationDetails(remoteAddress, sessionId, agent, trackingId);
     }
 
