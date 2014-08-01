@@ -48,17 +48,17 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.0.RC1 | 3.2.8.RELEASE |
+| org.springframework | 4.1.0.RC1 | 3.2.10.RELEASE |
 | org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
 | org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
-| org.aspectj | 1.8.1 | 1.7.3 |
+| org.aspectj | 1.8.1 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
 | org.hibernate.hibernate-validator | 5.1.1.Final | 4.3.1.Final |
 | jboss-logging | 3.1.4.GA | 3.1.0.GA |
 | org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
-| joda-time | 2.3 | 2.2 |
+| joda-time | 2.4 | 2.2 |
 | dozer | 5.5.1 | 5.4.0 |
 | com.google.guava | 17.0 | 13.0.1 |
 | commons-beanutils | 1.9.2 | 1.8.3 |
