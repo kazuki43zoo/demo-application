@@ -6,10 +6,6 @@
 
     <import resource="classpath:META-INF/spring/env.xml" />
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
     <bean id="jdbcOperations" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource" />
     </bean>

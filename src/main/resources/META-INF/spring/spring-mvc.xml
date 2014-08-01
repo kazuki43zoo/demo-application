@@ -75,7 +75,7 @@
                 <entry key="ResourceNotFoundException" value="common/error/resourceNotFoundError" />
                 <entry key="BusinessException" value="common/error/businessError" />
                 <entry key="InvalidTransactionTokenException" value="common/error/transactionTokenError" />
-                <entry key=".DataAccessException" value="common/error/dataAccessError" />
+                <entry key="DataAccessException" value="common/error/dataAccessError" />
             </map>
         </property>
         <property name="statusCodes">
