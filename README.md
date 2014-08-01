@@ -39,7 +39,7 @@ The following libraries is dependency for application-specific without relate on
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.1 | Depends on to bind JSON. |
+| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.3 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Depends on to use the `@java.transaction.Transactinal` annotation of Java standard API. |
 
@@ -48,17 +48,17 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.0.RC1 | 3.2.8.RELEASE |
+| org.springframework | 4.1.0.RC1 | 3.2.10.RELEASE |
 | org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
 | org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
-| org.aspectj | 1.8.1 | 1.7.3 |
+| org.aspectj | 1.8.1 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
 | org.hibernate.hibernate-validator | 5.1.1.Final | 4.3.1.Final |
 | jboss-logging | 3.1.4.GA | 3.1.0.GA |
 | org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
-| joda-time | 2.3 | 2.2 |
+| joda-time | 2.4 | 2.2 |
 | dozer | 5.5.1 | 5.4.0 |
 | com.google.guava | 17.0 | 13.0.1 |
 | commons-beanutils | 1.9.2 | 1.8.3 |
