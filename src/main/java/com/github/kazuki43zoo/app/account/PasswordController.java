@@ -3,7 +3,6 @@ package com.github.kazuki43zoo.app.account;
 import javax.inject.Inject;
 
 import org.dozer.Mapper;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +22,7 @@ import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.Account;
 import com.github.kazuki43zoo.domain.service.password.PasswordService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
+import com.github.kazuki43zoo.web.security.CurrentUser;
 
 @TransactionTokenCheck("password")
 @RequestMapping("password")
@@ -36,10 +36,10 @@ public class PasswordController {
     Mapper beanMapper;
 
     @ModelAttribute
-    public PasswordForm setUpPasswordForm(@AuthenticationPrincipal CustomUserDetails user) {
+    public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {
         PasswordForm form = new PasswordForm();
-        if (user != null) {
-            form.setAccountId(user.getAccount().getAccountId());
+        if (currentUser != null) {
+            form.setAccountId(currentUser.getAccount().getAccountId());
         }
         return form;
     }
@@ -59,9 +59,9 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "change")
-    public String change(@AuthenticationPrincipal CustomUserDetails user,
-            @Validated PasswordForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+    public String change(@CurrentUser CustomUserDetails currentUser, @Validated PasswordForm form,
+            BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+            TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return showChangeForm();
@@ -70,8 +70,8 @@ public class PasswordController {
         Account changedAccount = null;
         try {
             String accountId;
-            if (user != null) {
-                accountId = user.getAccount().getAccountId();
+            if (currentUser != null) {
+                accountId = currentUser.getAccount().getAccountId();
             } else {
                 accountId = form.getAccountId();
             }
@@ -84,8 +84,8 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        if (user != null) {
-            beanMapper.map(changedAccount, user.getAccount());
+        if (currentUser != null) {
+            beanMapper.map(changedAccount, currentUser.getAccount());
             redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/";
         } else {
@@ -97,11 +97,11 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "changeAndLogin")
-    public String changeAndLogin(@AuthenticationPrincipal CustomUserDetails user,
+    public String changeAndLogin(@CurrentUser CustomUserDetails currentUser,
             @Validated PasswordForm form, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
-        if (user != null) {
+        if (currentUser != null) {
             throw new InvalidAccessException();
         }
 

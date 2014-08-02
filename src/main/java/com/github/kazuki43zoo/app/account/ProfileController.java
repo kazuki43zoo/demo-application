@@ -34,44 +34,44 @@ public class ProfileController {
     Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String show(@CurrentUser CustomUserDetails user, Model model) {
-        model.addAttribute(user.getAccount());
+    public String show(@CurrentUser CustomUserDetails currentUser, Model model) {
+        model.addAttribute(currentUser.getAccount());
         return "profile/detail";
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET, params = "edit")
-    public String edit(@CurrentUser CustomUserDetails user, ProfileForm form, Model model) {
-        beanMapper.map(user.getAccount(), form);
-        model.addAttribute(user.getAccount());
+    public String edit(@CurrentUser CustomUserDetails currentUser, ProfileForm form, Model model) {
+        beanMapper.map(currentUser.getAccount(), form);
+        model.addAttribute(currentUser.getAccount());
         return "profile/editForm";
     }
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.PATCH)
-    public String save(@CurrentUser CustomUserDetails user, @Validated ProfileForm form,
+    public String save(@CurrentUser CustomUserDetails currentUser, @Validated ProfileForm form,
             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
             TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
-            return edit(user, form, model);
+            return edit(currentUser, form, model);
         }
 
         Account inputAccount = beanMapper.map(form, Account.class);
-        inputAccount.setAccountUuid(user.getAccount().getAccountUuid());
+        inputAccount.setAccountUuid(currentUser.getAccount().getAccountUuid());
 
         Account changedAccount = null;
         try {
             changedAccount = accountService.changeProfile(inputAccount);
         } catch (DuplicateKeyException e) {
             model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
-            return editRedo(user, form, model);
+            return editRedo(currentUser, form, model);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
-            return editRedo(user, form, model);
+            return editRedo(currentUser, form, model);
         }
 
-        beanMapper.map(changedAccount, user.getAccount());
+        beanMapper.map(changedAccount, currentUser.getAccount());
 
         transactionTokenContext.removeToken();
 
@@ -79,14 +79,15 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    public String editRedo(@CurrentUser CustomUserDetails user, ProfileForm form, Model model) {
-        model.addAttribute(user.getAccount());
+    public String editRedo(@CurrentUser CustomUserDetails currentUser, ProfileForm form, Model model) {
+        model.addAttribute(currentUser.getAccount());
         return "profile/editForm";
     }
 
     @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
-    public String showAuthenticationHistoryList(@CurrentUser CustomUserDetails user, Model model) {
-        Account account = accountService.getAccount(user.getAccount().getAccountUuid());
+    public String showAuthenticationHistoryList(@CurrentUser CustomUserDetails currentUser,
+            Model model) {
+        Account account = accountService.getAccount(currentUser.getAccount().getAccountUuid());
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
     }
