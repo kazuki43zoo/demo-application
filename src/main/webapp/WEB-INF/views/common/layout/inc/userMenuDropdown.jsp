@@ -15,13 +15,8 @@
             <li><a href="${contextPath}/password"><span class="glyphicon glyphicon-lock"></span> Change
                     Password</a></li>
             <li class="divider"></li>
-            <li><a id="logout" href="javascript:logout();"><span class="glyphicon glyphicon-log-out"></span>
+            <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span>
                     Logout</a></li>
         </ul></li>
 </ul>
 <form:form id="logoutForm" action="${contextPath}/auth/logout" class="sr-only" />
-<script>
-    function logout() {
-        $('#logoutForm').submit();
-    }
-</script>

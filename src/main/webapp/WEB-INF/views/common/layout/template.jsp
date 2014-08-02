@@ -18,7 +18,7 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController" ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar" ng-cloak>
         <tiles:insertAttribute name="topNavbar" />
     </div>
     <div class="container">
@@ -35,6 +35,7 @@
     <script src="${contextPath}/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular/angular.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
+    <script src="${contextPath}/resources/app/js/common.js"></script>
     <script src="${contextPath}/resources/app/js/app.js"></script>
     <script src="${contextPath}/resources/app/js/app-resources.js"></script>
     <script src="${contextPath}/resources/app/js/controllers/NavBarController.js"></script>
