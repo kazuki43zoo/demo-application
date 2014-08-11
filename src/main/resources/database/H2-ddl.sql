@@ -1,3 +1,7 @@
+DROP TABLE daily_attendance;
+DROP TABLE time_card;
+DROP TABLE work_place;
+
 DROP TABLE account_authentication_histories;
 DROP TABLE account_password_lock;
 DROP TABLE account_password_histories;
@@ -43,6 +47,32 @@ CREATE TABLE IF NOT EXISTS account_authentication_histories(
     agent varchar(256),
     tracking_id varchar(32),
     constraint pk_account_authentication_histories primary key (account_uuid,created_at)
+);
+
+CREATE TABLE IF NOT EXISTS work_place(
+    work_place_uuid nvarchar(36),
+    work_place_name nvarchar(256) not null,
+    display_order int,
+    constraint pk_work_place primary key (work_place_uuid)
+);
+
+CREATE TABLE IF NOT EXISTS time_card(
+    account_uuid nvarchar(36),
+    target_month date,
+    work_place_uuid nvarchar(36),
+    constraint pk_time_card primary key (account_uuid, target_month)
+);
+
+CREATE TABLE IF NOT EXISTS daily_attendance(
+    account_uuid nvarchar(36),
+    target_date date,
+    begin_time time,
+    finish_time time,
+    paid_leave boolean,
+    special_work_code nvarchar(2),
+    note nvarchar(512),
+    work_place_uuid nvarchar(36),
+    constraint pk_daily_attendance primary key (account_uuid, target_date)
 );
 
 COMMIT;

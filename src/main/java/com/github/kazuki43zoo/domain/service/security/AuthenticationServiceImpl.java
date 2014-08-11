@@ -29,7 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (lastSuccessAuthenticationHistory == null) {
             return false;
         }
-        return lastSuccessAuthenticationHistory.getAuthenticationType() == AuthenticationType.login;
+        return lastSuccessAuthenticationHistory.getAuthenticationType() == AuthenticationType.LOGIN;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return;
         }
         authenticationHistory.setFailureReason(failureReason);
-        createAuthenticationHistory(failedAccount, authenticationHistory, AuthenticationType.login,
+        createAuthenticationHistory(failedAccount, authenticationHistory, AuthenticationType.LOGIN,
                 false);
     }
 

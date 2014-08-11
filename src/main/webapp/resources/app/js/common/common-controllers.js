@@ -5,7 +5,8 @@
 	var timeOfReloadInterval = timeOfOneMinutes * 60;
 	var timeOfTimezoneOffset = new Date().getTimezoneOffset()
 			* timeOfOneMinutes;
-	var constructor = function($timeout, DateResource) {
+
+	var NavBarController = function($timeout, DateResource) {
 		var currentDateResource = new DateResource();
 		var refreshPromise = null;
 		var _this = this;
@@ -41,6 +42,6 @@
 	};
 
 	angular.module('app').controller('NavBarController',
-			[ '$timeout', 'DateResource', constructor ]);
+			[ '$timeout', 'DateResource', NavBarController ]);
 
 })();

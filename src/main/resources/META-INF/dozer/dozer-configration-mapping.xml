@@ -10,10 +10,15 @@
                 <class-a>org.joda.time.DateTime</class-a>
                 <class-b>org.joda.time.DateTime</class-b>
             </converter>
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
+                <class-a>org.joda.time.LocalDate</class-a>
+                <class-b>org.joda.time.LocalDate</class-b>
+            </converter>
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
+                <class-a>org.joda.time.LocalTime</class-a>
+                <class-b>org.joda.time.LocalTime</class-b>
+            </converter>
         </custom-converters>
-        <copy-by-references>
-            <copy-by-reference>com.github.kazuki43zoo.domain.model.*</copy-by-reference>
-        </copy-by-references>
     </configuration>
 
     <mapping>
@@ -36,6 +41,24 @@
             <a>authenticationHistories</a>
             <b>authenticationHistories</b>
         </field-exclude>
+    </mapping>
+
+    <mapping>
+        <class-a>com.github.kazuki43zoo.api.timecard.TimeCardResource</class-a>
+        <class-b>com.github.kazuki43zoo.domain.model.TimeCard</class-b>
+        <field>
+            <a>workPlaceUuid</a>
+            <b>workPlace.workPlaceUuid</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.github.kazuki43zoo.api.timecard.DailyAttendanceResource</class-a>
+        <class-b>com.github.kazuki43zoo.domain.model.DailyAttendance</class-b>
+        <field>
+            <a>workPlaceUuid</a>
+            <b>workPlace.workPlaceUuid</b>
+        </field>
     </mapping>
 
 </mappings>

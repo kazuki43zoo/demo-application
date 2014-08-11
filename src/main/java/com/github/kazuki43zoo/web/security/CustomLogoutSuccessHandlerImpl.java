@@ -41,7 +41,7 @@ public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandle
                 authentication.getDetails(), AccountAuthenticationHistory.class);
 
         authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                authenticationHistory, AuthenticationType.logout);
+                authenticationHistory, AuthenticationType.LOGOUT);
 
         super.onLogoutSuccess(request, response, authentication);
     }

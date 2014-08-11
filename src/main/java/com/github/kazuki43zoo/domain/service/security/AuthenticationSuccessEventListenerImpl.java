@@ -38,7 +38,7 @@ public class AuthenticationSuccessEventListenerImpl implements
             AccountAuthenticationHistory authenticationHistory = beanMapper.map(
                     authenticationDetails, AccountAuthenticationHistory.class);
             authenticationService.createAuthenticationFailureHistory(userDetails.getAccount()
-                    .getAccountId(), authenticationHistory, AuthenticationType.login, message);
+                    .getAccountId(), authenticationHistory, AuthenticationType.LOGIN, message);
             throw new ConcurrentLoginException(message);
         }
     }

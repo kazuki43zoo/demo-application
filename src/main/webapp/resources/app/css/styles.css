@@ -6,16 +6,16 @@ body {
 	font-weight: 300;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
 	color: #222;
 	margin: 0 0 20px;
 }
 
-p,ul,ol,table,pre,dl {
+p, ul, ol, table, pre, dl {
 	margin: 0 0 20px;
 }
 
-h1,h2,h3 {
+h1, h2, h3 {
 	line-height: 1.1;
 }
 
@@ -27,7 +27,7 @@ h2 {
 	color: #393939;
 }
 
-h3,h4,h5,h6 {
+h3, h4, h5, h6 {
 	color: #494949;
 }
 
@@ -56,7 +56,7 @@ blockquote {
 	font-style: italic;
 }
 
-code,pre {
+code, pre {
 	font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
 	color: #333;
 	font-size: 12px;
@@ -75,7 +75,7 @@ table {
 	border-collapse: collapse;
 }
 
-th,td {
+th, td {
 	text-align: left;
 	padding: 5px 10px;
 	border-bottom: 1px solid #e5e5e5;
@@ -185,7 +185,7 @@ footer {
 		width: auto;
 		margin: 0;
 	}
-	header,section,footer {
+	header, section, footer {
 		float: none;
 		position: static;
 		width: auto;
@@ -216,10 +216,10 @@ footer {
 	header {
 		padding: 0;
 	}
-	header ul,header p.view {
+	header ul, header p.view {
 		position: static;
 	}
-	pre,code {
+	pre, code {
 		word-wrap: normal;
 	}
 }
@@ -259,3 +259,42 @@ footer {
 	text-align: center;
 }
 
+[class$="error"], [id$="errors"] {
+	color: red;
+}
+
+.checkbox-inline>label, .radio-inline>label {
+	cursor: pointer;
+}
+
+.time {
+	text-align: right;
+}
+
+.number {
+	text-align: right;
+}
+
+.check {
+	text-align: center;
+}
+
+.text {
+	white-space: pre-wrap;
+}
+
+.codeName {
+	text-align: center;
+}
+
+.center {
+	text-align: center;
+}
+
+.Sat {
+	color: blue;
+}
+
+.Sun {
+	color: red;
+}

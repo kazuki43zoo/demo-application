@@ -29,11 +29,12 @@ public class Account implements Serializable {
     private List<AccountPasswordHistory> passwordHistories;
     private List<AccountAuthenticationHistory> authenticationHistories;
 
-    public void addAuthority(AccountAuthority authority) {
+    public Account addAuthority(AccountAuthority authority) {
         if (authorities == null) {
             authorities = new ArrayList<>();
         }
         authorities.add(authority);
+        return this;
     }
 
     public void countUpPasswordFailureCount(DateTime modifiedAt) {

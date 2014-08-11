@@ -1,5 +1,3 @@
-
-
 <t:messagesPanel />
 
 <form action="${contextPath}/accounts" class="form-horizontal" method="get">

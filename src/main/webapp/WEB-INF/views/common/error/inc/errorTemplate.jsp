@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController" ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar" ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
     <div id="container">

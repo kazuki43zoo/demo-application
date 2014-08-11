@@ -38,7 +38,7 @@ public class InteractiveAuthenticationSuccessEventListenerImpl implements
 
         passwordSharedService.resetPasswordLock(userDetails.getAccount());
         authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                authenticationHistory, AuthenticationType.login);
+                authenticationHistory, AuthenticationType.LOGIN);
     }
 
 }

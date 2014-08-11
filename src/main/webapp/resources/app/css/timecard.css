@@ -1,0 +1,48 @@
+.targetMonth {
+	text-align: center;
+}
+
+input.beginTime, input.finishTime {
+	width: 100px;
+	text-align: right;
+}
+
+thead>tr>th, tfoot>tr>th {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+tbody>tr>td>div {
+	width: auto;
+	overflow: hidden;
+}
+
+thead>tr>td {
+	vertical-align: middle !important;
+	border-bottom: 2px solid #ddd;
+}
+
+.targetDate {
+	text-align: center;
+}
+
+.listTable tbody, .listTable thead, .listTable tfoot {
+	border-style: inset;
+}
+
+.listTable td, .listTable th {
+	border-left-style: dotted;
+	border-left-width: 1px;
+	border-right-style: dotted;
+	border-right-width: 1px;
+}
+
+.lastTd {
+	border-right-style: inset !important;
+	border-right-color: inherit !important;
+	border-right-width: 3px !important;
+}
+
+.listTable .selected {
+	background-color: #fffeb4;
+}

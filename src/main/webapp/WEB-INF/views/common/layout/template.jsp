@@ -8,17 +8,23 @@
 <c:set var="titleKey">
     <tiles:insertAttribute name="title" ignore="true" />
 </c:set>
+<c:set var="usecaseName">
+    <tiles:insertAttribute name="usecaseName" ignore="true" />
+</c:set>
+
 <title><spring:message code="${titleKey}" text="Demo Application" /></title>
+
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
+<link rel="stylesheet" href="${contextPath}/resources/app/css/${usecaseName}.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar" ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBarCtrl" ng-cloak>
         <tiles:insertAttribute name="topNavbar" />
     </div>
     <div class="container">
@@ -35,9 +41,12 @@
     <script src="${contextPath}/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular/angular.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
-    <script src="${contextPath}/resources/app/js/common.js"></script>
+    <script src="${contextPath}/resources/app/js/common/common-handlers.js"></script>
     <script src="${contextPath}/resources/app/js/app.js"></script>
     <script src="${contextPath}/resources/app/js/app-resources.js"></script>
-    <script src="${contextPath}/resources/app/js/controllers/NavBarController.js"></script>
+    <script src="${contextPath}/resources/app/js/app-filters.js"></script>
+    <script src="${contextPath}/resources/app/js/common/common-controllers.js"></script>
+    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-controllers.js"></script>
+    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-services.js"></script>
 </body>
 </html>

@@ -4,12 +4,36 @@
 	// --------
 	// Models
 	// --------
-	var resources = angular.module('resources', [ 'ngResource']);
-	var contextPath = angular.element("meta[name='contextPath']").attr(
-			'content');
-	resources.factory("DateResource", [ '$resource', function($resource) {
-		return $resource(contextPath + '/api/v1/dates/:dateId', {
-			todoId : "@dateId"
+	var apiBasePath = angular.element("meta[name='contextPath']").attr(
+			'content')
+			+ '/api/v1';
+
+	angular.module('resources', [ 'ngResource' ])
+	//
+	.factory("DateResource", [ '$resource', function($resource) {
+		return $resource(apiBasePath + '/dates/:dateId', {
+			dateId : "@dateId"
+		});
+	} ])
+	//
+	.factory("TimeCardResource", [ '$resource', function($resource) {
+		return $resource(apiBasePath + '/timecards/:targetMonth', {
+			targetMonth : "@targetMonth"
+		}, {
+			put : {
+				method : 'PUT'
+			}
+		});
+	} ])
+	//
+	.factory("DailyAttendanceResource", [ '$resource', function($resource) {
+		return $resource(apiBasePath + '/timecards/:targetMonth/:targetDay', {
+			targetMonth : "@targetMonth",
+			targetDay : "@targetDay"
+		}, {
+			put : {
+				method : 'PUT'
+			}
 		});
 	} ]);
 

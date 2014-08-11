@@ -50,7 +50,7 @@ public class SessionTimeoutLogoutEventListenerImpl implements
             AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext
                     .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
             authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                    authenticationHistory, AuthenticationType.sessionTimeout);
+                    authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
         }
     }
 

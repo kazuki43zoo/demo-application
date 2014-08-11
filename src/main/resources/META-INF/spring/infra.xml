@@ -6,8 +6,13 @@
 
     <import resource="classpath:META-INF/spring/env.xml" />
 
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+        <property name="fetchSize" value="100" />
+    </bean>
+
     <bean id="jdbcOperations" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg ref="dataSource" />
+        <constructor-arg ref="jdbcTemplate" />
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
