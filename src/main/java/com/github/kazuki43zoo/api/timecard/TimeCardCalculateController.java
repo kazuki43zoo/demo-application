@@ -33,7 +33,9 @@ public class TimeCardCalculateController {
     public DailyAttendanceResource calculate(
             @RequestBody @Validated DailyAttendanceResource resource) {
         DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
-        attendance.calculate(null);
+        attendance.setWorkPlace(timeCardService.getWorkPlace(attendance.getWorkPlace()
+                .getWorkPlaceUuid()));
+        attendance.calculate();
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 

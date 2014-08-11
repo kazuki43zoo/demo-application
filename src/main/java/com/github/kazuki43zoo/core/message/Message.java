@@ -29,6 +29,8 @@ public enum Message {
     FW_SYSTEM_ERROR(DANGER, "e.demo.fw.9001"),
     // e.demo.fw.9002
     FW_DA_ACCESS_ERROR(DANGER, "e.demo.fw.9002"),
+    // e.demo.fw.9003
+    FW_DATA_INCONSISTENCIES(DANGER, "e.demo.fw.9003"),
     // ---------------
     // for account
     // ---------------
@@ -96,6 +98,10 @@ public enum Message {
 
     public String text(MessageSource messageSource, Locale locale, Object... args) {
         return messageSource.getMessage(code, args, defaultMessage, locale);
+    }
+
+    public String code() {
+        return code;
     }
 
 }

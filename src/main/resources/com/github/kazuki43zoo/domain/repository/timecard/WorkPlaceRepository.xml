@@ -12,6 +12,9 @@
         SELECT
             work_place_uuid
             ,work_place_name
+            ,base_begin_time
+            ,base_finish_time
+            ,unit_time
         FROM
             work_place
         WHERE

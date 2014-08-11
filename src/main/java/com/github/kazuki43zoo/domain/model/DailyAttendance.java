@@ -1,6 +1,8 @@
 package com.github.kazuki43zoo.domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
@@ -17,11 +20,12 @@ import org.joda.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class DailyAttendance implements Serializable {
-    public static final LocalTime BASE_BEGIN_TIME = LocalTime.parse("9:00");
-    public static final LocalTime BASE_FINISH_TIME = LocalTime.parse("17:45");
+
     private static final LocalTime MIDNIGHT_BEGIN_TIME = LocalTime.parse("22:00");
+    private static final LocalTime MIDNIGHT_FINISH_TIME = LocalTime.parse("05:00");
     public static final int DEFAULT_ACTUAL_WORKING_MINUTE = Long.valueOf(
             TimeUnit.HOURS.toMinutes(7) + TimeUnit.MINUTES.toMinutes(45)).intValue();
+
     private static final long serialVersionUID = 1L;
 
     private String accountUuid;
@@ -44,42 +48,89 @@ public class DailyAttendance implements Serializable {
     @Getter
     transient private boolean absence;
 
+    public void calculate() {
+        calculate(null);
+    }
+
     public void calculate(WorkPlace defaultWorkPlace) {
+
         clearCalculate();
+
+        WorkPlace actualWorkPlace = workPlace;
+        if (actualWorkPlace == null) {
+            actualWorkPlace = defaultWorkPlace;
+        }
+
         if (beginTime != null && finishTime != null) {
-            this.actualWorkingMinute = calculateIntervalMinute(beginTime, finishTime);
+
+            // calculate work time interval
+            if (targetDate == null) {
+                targetDate = LocalDate.now();
+            }
+            DateTime beginDateTime = targetDate.toDateTime(beginTime);
+            DateTime finishDateTime = targetDate.toDateTime(finishTime);
+            if (!beginTime.isBefore(finishTime)) {
+                finishDateTime = finishDateTime.plusDays(1);
+            }
+            Interval workTimeInterval = new Interval(beginDateTime, finishDateTime);
+
+            // calculate working minute
+            this.actualWorkingMinute = calculateIntervalMinute(workTimeInterval);
+            this.actualWorkingMinute -= (this.actualWorkingMinute % actualWorkPlace.getUnitTime()
+                    .getMinuteOfHour());
+
+            // calculate compensation minute
             if (actualWorkingMinute < DEFAULT_ACTUAL_WORKING_MINUTE) {
                 this.compensationMinute = DEFAULT_ACTUAL_WORKING_MINUTE - actualWorkingMinute;
             }
-            if (finishTime.isAfter(MIDNIGHT_BEGIN_TIME)) {
-                this.midnightWorkingMinute = calculateIntervalMinute(MIDNIGHT_BEGIN_TIME,
-                        finishTime);
+
+            // calculate midnight working minute
+            List<Interval> midnightIntervals = new ArrayList<>();
+            // 00:00-05:00
+            midnightIntervals.add(new Interval(targetDate.toDateTimeAtStartOfDay(), targetDate
+                    .toDateTime(MIDNIGHT_FINISH_TIME)));
+            // 22:00-05:00(29:00)
+            midnightIntervals.add(new Interval(targetDate.toDateTime(MIDNIGHT_BEGIN_TIME),
+                    targetDate.toDateTime(MIDNIGHT_FINISH_TIME).plusDays(1)));
+            // 22:00(46:00)-00:00(48:00)
+            midnightIntervals.add(new Interval(targetDate.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(
+                    1), targetDate.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));
+            for (Interval midnightInterval : midnightIntervals) {
+                if (workTimeInterval.overlaps(midnightInterval)) {
+                    this.midnightWorkingMinute += calculateIntervalMinute(workTimeInterval
+                            .overlap(midnightInterval));
+                }
             }
+            this.midnightWorkingMinute -= (this.midnightWorkingMinute % actualWorkPlace
+                    .getUnitTime().getMinuteOfHour());
+
         } else if (beginTime == null && finishTime == null) {
             if (isWorkDay()) {
                 this.absence = true;
             }
         }
-        if ((beginTime != null && beginTime.isAfter(BASE_BEGIN_TIME))
-                || (finishTime != null && finishTime.isBefore(BASE_FINISH_TIME))) {
-            this.tardyOrEarlyLeaving = true;
-        }
-        if (!tardyOrEarlyLeaving) {
+
+        this.tardyOrEarlyLeaving = actualWorkPlace.isTardyOrEarlyLeaving(beginTime, finishTime);
+
+        if (tardyOrEarlyLeaving) {
+            this.compensationMinute = 0;
+        } else {
             this.specialWorkCode = null;
         }
+
     }
 
     public void setDefault(WorkPlace defaultWorkPlace) {
-        setBeginTime(DailyAttendance.BASE_BEGIN_TIME);
-        setFinishTime(DailyAttendance.BASE_FINISH_TIME);
+        setBeginTime(defaultWorkPlace.getBaseBeginTime());
+        setFinishTime(defaultWorkPlace.getBaseFinishTime());
     }
 
     public boolean isWorkDay() {
         if (targetDate == null) {
             return false;
         }
-        return !(targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY || targetDate
-                .getDayOfWeek() == DateTimeConstants.SUNDAY);
+        return !((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY) || (targetDate
+                .getDayOfWeek() == DateTimeConstants.SUNDAY));
     }
 
     private void clearCalculate() {
@@ -90,10 +141,9 @@ public class DailyAttendance implements Serializable {
         this.absence = false;
     }
 
-    private int calculateIntervalMinute(LocalTime begin, LocalTime finish) {
-        return Long.valueOf(
-                TimeUnit.MILLISECONDS.toMinutes(new Interval(begin.toDateTimeToday(), finish
-                        .toDateTimeToday()).toDuration().getMillis())).intValue();
+    private int calculateIntervalMinute(Interval interval) {
+        return Long.valueOf(TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis()))
+                .intValue();
     }
 
 }

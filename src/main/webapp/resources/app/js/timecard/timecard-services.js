@@ -89,20 +89,35 @@
 		}, this);
 	};
 
-	TimeCardService.prototype.calculateTime = function(attendance,
-			originalAttendance, total, fieldName) {
+	TimeCardService.prototype.calculateTime = function(defaultWorkPlaceUuid,
+			attendance, originalAttendance, total, fieldName) {
 		if (attendance[fieldName] === originalAttendance[fieldName]) {
 			return;
 		}
 		var _this = this;
+		var workPlaceUuid = attendance.workPlaceUuid;
 		var reflectCalculateResult = function(calculatedAttendance) {
 			_this.reflectCalculateResult(calculatedAttendance,
 					originalAttendance, total);
+			calculatedAttendance.workPlaceUuid = workPlaceUuid;
 			angular.copy(calculatedAttendance, attendance);
 			angular.copy(attendance, originalAttendance);
 		}
+		var postingAttendance = angular.copy(attendance);
+		if (postingAttendance.workPlaceUuid === '') {
+			postingAttendance.workPlaceUuid = defaultWorkPlaceUuid;
+		}
 		return this.$http.post(this.apiBasePath + '/timecards/calculate',
-				attendance).success(reflectCalculateResult);
+				postingAttendance).success(reflectCalculateResult);
+	};
+
+	TimeCardService.prototype.initTotal = function(total) {
+		total.actualWorkingMinute = 0;
+		total.compensationMinute = 0;
+		total.midnightWorkingMinute = 0;
+		total.tardyOrEarlyLeavingCount = 0;
+		total.absenceCount = 0;
+		total.paidLeaveCount = 0;
 	};
 
 	TimeCardService.prototype.reflectCalculateResult = function(
@@ -116,15 +131,11 @@
 		total.midnightWorkingMinute += this.calculateDiff(
 				originalAttendance.midnightWorkingMinute,
 				calculatedAttendance.midnightWorkingMinute);
-	};
-
-	TimeCardService.prototype.initTotal = function(total) {
-		total.actualWorkingMinute = 0;
-		total.compensationMinute = 0;
-		total.midnightWorkingMinute = 0;
-		total.tardyOrEarlyLeavingCount = 0;
-		total.absenceCount = 0;
-		total.paidLeaveCount = 0;
+		total.tardyOrEarlyLeavingCount += this.calculateCount(
+				originalAttendance.tardyOrEarlyLeaving,
+				calculatedAttendance.tardyOrEarlyLeaving);
+		total.absenceCount += this.calculateCount(originalAttendance.absence,
+				calculatedAttendance.absence);
 	};
 
 	TimeCardService.prototype.changePaidLeave = function(attendance, total) {
@@ -176,6 +187,17 @@
 		diff -= before;
 		diff += after;
 		return diff;
+	};
+
+	TimeCardService.prototype.calculateCount = function(before, after) {
+		var count = 0;
+		if (before === true) {
+			count--;
+		}
+		if (after === true) {
+			count++;
+		}
+		return count;
 	};
 
 	angular.module('app').service(

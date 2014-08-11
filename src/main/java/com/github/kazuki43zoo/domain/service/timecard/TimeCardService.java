@@ -17,4 +17,7 @@ public interface TimeCardService {
     void saveDailyAttendance(String accountUuid, LocalDate targetDate, DailyAttendance attendance);
 
     WorkPlace getWorkPlace(String workPlaceUuid);
+
+    WorkPlace getWorkPlaceDetail(WorkPlace workPlace);
+
 }

@@ -87,8 +87,9 @@
 	};
 
 	TimeCardController.prototype.calculateTime = function(fieldName) {
-		this.timeCardService.calculateTime(this.editableAttendance,
-				this.originalAttendance, this.total, fieldName);
+		this.timeCardService.calculateTime(this.timeCard.workPlaceUuid,
+				this.editableAttendance, this.originalAttendance, this.total,
+				fieldName);
 	};
 
 	TimeCardController.prototype.enter = function() {
