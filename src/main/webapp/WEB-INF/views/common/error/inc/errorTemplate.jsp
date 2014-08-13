@@ -5,10 +5,11 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width" />
-<meta name="contextPath" content="${contextPath}" >
+<meta name="contextPath" content="${contextPath}">
 <title>${param.title}</title>
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+    href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -16,7 +17,8 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar" ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar"
+        ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
     <div id="container">

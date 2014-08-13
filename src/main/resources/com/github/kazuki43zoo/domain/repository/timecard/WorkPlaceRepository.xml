@@ -8,6 +8,7 @@
     <resultMap id="resultMap-WorkPlace" type="WorkPlace">
         <id property="workPlaceUuid" column="work_place_uuid"/>
         <result property="workPlaceName" column="work_place_name" />
+        <result property="workPlaceNameJa" column="work_place_name_ja" />
         <result property="baseBeginTime" column="base_begin_time" />
         <result property="baseFinishTime" column="base_finish_time" />
         <result property="unitTime" column="unit_time" />
@@ -18,6 +19,7 @@
                 <arg column="break_finish_time" javaType="LocalTime" />
             </constructor>
             <result property="note" column="break_time_note" />
+            <result property="noteJa" column="break_time_note_ja" />
         </collection>
     </resultMap>
     
@@ -25,12 +27,14 @@
         SELECT
             w.work_place_uuid
             ,w.work_place_name
+            ,w.work_place_name_ja
             ,w.base_begin_time
             ,w.base_finish_time
             ,w.unit_time
             ,b.begin_time AS break_begin_time
             ,b.finish_time AS break_finish_time
             ,b.note As break_time_note
+            ,b.note_ja As break_time_note_ja
         FROM
             work_place w
         LEFT OUTER JOIN

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="language">Language</entry>
+    <entry key="language.english">English</entry>
+    <entry key="language.japanese">Japanese</entry>
+
+    <entry key="menu">Menu</entry>
+    <entry key="menu.h2AdminConsole">H2 Admin Console</entry>
+    <entry key="menu.changePassword">Change Password</entry>
+    <entry key="menu.accountsManagement">Accounts Management</entry>
+    <entry key="menu.timeCard">Time Card</entry>
+
+    <entry key="userMenu.editProfile">Edit Profile</entry>
+    <entry key="userMenu.authenticationHistories">Authentication Histories</entry>
+    <entry key="userMenu.changePassword">Change Password</entry>
+    <entry key="userMenu.logout">Logout</entry>
+
+    <entry key="todayBtn">Today</entry>
+    <entry key="initializeBtn">Initialize</entry>
+    <entry key="reloadBtn">Reload</entry>
+    <entry key="saveBtn">Save</entry>
+
+    <entry key="targetMonth">Target Month</entry>
+    <entry key="workPlace">Work Place</entry>
+    <entry key="days">Days</entry>
+    <entry key="beginTime">Begin Time</entry>
+    <entry key="finishTime">Finish Time</entry>
+    <entry key="paidLeave">Paid Leave</entry>
+    <entry key="specialWork">Special Work</entry>
+    <entry key="note">Note</entry>
+    <entry key="actualWorkTime">Actual Working Time</entry>
+    <entry key="compensationTime">Compensation Time</entry>
+    <entry key="midnightWorkingTime">Midnight Working Time</entry>
+    <entry key="tardyOrEarlyLeaving">Tardy Or Early Leaving</entry>
+    <entry key="absence">Absence</entry>
+    <entry key="dayOfWeek">Day Of Week</entry>
+    <entry key="total">Total</entry>
+
+    <entry key="thead.days">D</entry>
+    <entry key="thead.dayOfWeek">W</entry>
+    <entry key="thead.beginTime">B Time</entry>
+    <entry key="thead.finishTime">F Time</entry>
+    <entry key="thead.paidLeave">P L</entry>
+    <entry key="thead.specialWork">S W</entry>
+    <entry key="thead.note">Note</entry>
+    <entry key="thead.actualWorkTime">A W Time</entry>
+    <entry key="thead.compensationTime">C Time</entry>
+    <entry key="thead.midnightWorkingTime">M W Time</entry>
+    <entry key="thead.tardyOrEarlyLeaving">T E</entry>
+    <entry key="thead.absence">A</entry>
+    <entry key="thead.workPlace">Work Place</entry>
+
+</properties>

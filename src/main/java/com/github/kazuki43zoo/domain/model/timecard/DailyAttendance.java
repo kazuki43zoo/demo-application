@@ -83,13 +83,16 @@ public class DailyAttendance implements Serializable {
             if (isWorkDay()) {
                 this.absence = true;
             }
+
         } else {
             if (finishTime != null) {
                 finishTime = null;
             }
         }
 
-        this.tardyOrEarlyLeaving = actualWorkPlace.isTardyOrEarlyLeaving(beginTime, finishTime);
+        if (isWorkDay()) {
+            this.tardyOrEarlyLeaving = actualWorkPlace.isTardyOrEarlyLeaving(beginTime, finishTime);
+        }
 
         if (tardyOrEarlyLeaving) {
             this.compensationMinute = 0;

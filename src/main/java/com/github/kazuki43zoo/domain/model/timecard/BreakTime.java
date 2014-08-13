@@ -20,6 +20,9 @@ public class BreakTime implements Serializable {
     private final LocalTime beginTime;
     private final LocalTime finishTime;
 
+    private String note;
+    private String noteJa;
+
     private final List<Interval> breakTimeIntervals = new ArrayList<>();
 
     public BreakTime(String workPlaceUuid, LocalTime beginTime, LocalTime finishTime) {

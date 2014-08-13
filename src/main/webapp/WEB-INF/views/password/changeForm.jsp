@@ -1,5 +1,6 @@
 <t:messagesPanel />
-<form:form action="${contextPath}/password" class="form-horizontal" method="post" modelAttribute="passwordForm">
+<form:form action="${contextPath}/password" class="form-horizontal" method="post"
+    modelAttribute="passwordForm">
 
     <sec:authorize access="isAuthenticated()" var="isAuthenticated" />
     <c:choose>
@@ -30,7 +31,8 @@
             <form:errors path="password" />
         </div>
         <div class="col-sm-4">
-            <form:password cssClass="form-control" path="confirmPassword" placeholder="Confirm Password" />
+            <form:password cssClass="form-control" path="confirmPassword"
+                placeholder="Confirm Password" />
         </div>
     </div>
     <div class="form-group">

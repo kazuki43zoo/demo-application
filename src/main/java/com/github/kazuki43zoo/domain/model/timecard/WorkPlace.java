@@ -16,12 +16,14 @@ import org.joda.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class WorkPlace implements Serializable {
+
     public static final String MAIN_OFFICE_UUID = "00000000-0000-0000-0000-000000000000";
     private static final LocalDate BASE_DATE = new LocalDate(0);
-
     private static final long serialVersionUID = 1L;
+
     private String workPlaceUuid;
     private String workPlaceName;
+    private String workPlaceNameJa;
     private LocalTime baseBeginTime;
     private LocalTime baseFinishTime;
     private LocalTime unitTime;
@@ -55,8 +57,13 @@ public class WorkPlace implements Serializable {
     }
 
     public boolean isTardyOrEarlyLeaving(LocalTime beginTime, LocalTime finishTime) {
-        return (beginTime != null && beginTime.isAfter(baseBeginTime))
-                || (finishTime != null && finishTime.isBefore(baseFinishTime));
+        if (beginTime != null && beginTime.isAfter(baseBeginTime)) {
+            return true;
+        }
+        if (finishTime != null && finishTime.isBefore(baseFinishTime)) {
+            return true;
+        }
+        return false;
     }
 
     private int calculateContainsBreakTimeMinute(Interval workTimeInterval) {
@@ -68,8 +75,8 @@ public class WorkPlace implements Serializable {
     }
 
     private int toMinute(Interval interval) {
-        return Long.valueOf(TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis()))
-                .intValue();
+        long minute = TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
+        return Long.valueOf(minute).intValue();
     }
 
 }

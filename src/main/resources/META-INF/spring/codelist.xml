@@ -47,21 +47,72 @@
         </property>
     </bean>
 
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-        <property name="map">
+
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+        <property name="rows">
             <map>
-                <entry key="00" value="公" />
-                <entry key="01" value="指" />
-                <entry key="10" value="代" />
+                <entry key="en">
+                    <map>
+                        <entry key="00" value="Delayed by public transport" />
+                        <entry key="01" value="Indicated by superiors" />
+                        <entry key="10" value="Compensatory holiday" />
+                    </map>
+                </entry>
+                <entry key="ja">
+                    <map>
+                        <entry key="00" value="公共交通機関の遅延" />
+                        <entry key="01" value="上長の指示" />
+                        <entry key="10" value="代休" />
+                    </map>
+                </entry>
             </map>
         </property>
     </bean>
-    
-    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.JdbcCodeList">
-        <property name="jdbcTemplate" ref="jdbcTemplate" />
-        <property name="valueColumn" value="work_place_uuid" />
-        <property name="labelColumn" value="work_place_name" />
-        <property name="querySql" value="SELECT work_place_uuid, work_place_name FROM work_place ORDER BY display_order, work_place_name" />
+
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+        <property name="rows">
+            <map>
+                <entry key="en">
+                    <map>
+                        <entry key="00" value="D" />
+                        <entry key="01" value="I" />
+                        <entry key="10" value="C" />
+                    </map>
+                </entry>
+                <entry key="ja">
+                    <map>
+                        <entry key="00" value="公" />
+                        <entry key="01" value="上" />
+                        <entry key="10" value="代" />
+                    </map>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+        <property name="rowsByCodeList">
+            <map>
+                <entry key="en">
+                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList">
+                        <property name="jdbcTemplate" ref="jdbcTemplate" />
+                        <property name="valueColumn" value="work_place_uuid" />
+                        <property name="labelColumn" value="work_place_name" />
+                        <property name="querySql"
+                            value="SELECT work_place_uuid, work_place_name FROM work_place ORDER BY display_order, work_place_name" />
+                    </bean>
+                </entry>
+                <entry key="ja">
+                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList">
+                        <property name="jdbcTemplate" ref="jdbcTemplate" />
+                        <property name="valueColumn" value="work_place_uuid" />
+                        <property name="labelColumn" value="work_place_name_ja" />
+                        <property name="querySql"
+                            value="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name_ja" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
     </bean>
 
 </beans>

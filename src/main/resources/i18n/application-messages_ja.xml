@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="language">言 語</entry>
+    <entry key="language.english">英語</entry>
+    <entry key="language.japanese">日本語</entry>
+
+    <entry key="menu">メニュー</entry>
+    <entry key="menu.h2AdminConsole">H2 管理コンソール</entry>
+    <entry key="menu.changePassword">パスワード変更</entry>
+    <entry key="menu.accountsManagement">アカウント管理</entry>
+    <entry key="menu.timeCard">タイムカード</entry>
+
+    <entry key="userMenu.editProfile">プロファイル編集</entry>
+    <entry key="userMenu.authenticationHistories">認証履歴</entry>
+    <entry key="userMenu.changePassword">パスワード変更</entry>
+    <entry key="userMenu.logout">ログアウト</entry>
+
+    <entry key="todayBtn">今日</entry>
+    <entry key="initializeBtn">初期化</entry>
+    <entry key="reloadBtn">再読込</entry>
+    <entry key="saveBtn">保存</entry>
+
+    <entry key="targetMonth">対象月</entry>
+    <entry key="workPlace">勤務先</entry>
+    <entry key="days">日</entry>
+    <entry key="beginTime">出勤</entry>
+    <entry key="finishTime">退勤</entry>
+    <entry key="paidLeave">有給</entry>
+    <entry key="specialWork">特殊</entry>
+    <entry key="note">備考</entry>
+    <entry key="actualWorkTime">実働</entry>
+    <entry key="compensationTime">補填</entry>
+    <entry key="midnightWorkingTime">深夜</entry>
+    <entry key="tardyOrEarlyLeaving">遅早</entry>
+    <entry key="absence">欠勤</entry>
+    <entry key="dayOfWeek">曜日</entry>
+    <entry key="total">合計</entry>
+
+    <entry key="thead.days">日</entry>
+    <entry key="thead.dayOfWeek">曜</entry>
+    <entry key="thead.beginTime">出勤</entry>
+    <entry key="thead.finishTime">退勤</entry>
+    <entry key="thead.paidLeave">有給</entry>
+    <entry key="thead.specialWork">特殊</entry>
+    <entry key="thead.note">備考</entry>
+    <entry key="thead.actualWorkTime">実働</entry>
+    <entry key="thead.compensationTime">補填</entry>
+    <entry key="thead.midnightWorkingTime">深夜</entry>
+    <entry key="thead.tardyOrEarlyLeaving">遅早</entry>
+    <entry key="thead.absence">欠勤</entry>
+    <entry key="thead.workPlace">勤務先</entry>
+
+</properties>

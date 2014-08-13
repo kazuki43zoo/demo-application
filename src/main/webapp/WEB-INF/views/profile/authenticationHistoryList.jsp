@@ -17,17 +17,18 @@
             <th>Agent</th>
         </tr>
     </thead>
-        <c:forEach var="authenticationHistory" items="${account.authenticationHistories}" varStatus="rowStatus">
-            <c:set var="strAuthenticationResult">${authenticationHistory.authenticationResult}</c:set>
-            <tr>
-                <td>${f:h(rowStatus.count)}</td>
-                <td><joda:format value="${authenticationHistory.createdAt}" pattern="${dateTimeFormat}"
-                        dateTimeZone="${timeZoneFormat}" /></td>
-                <td>${f:h(authenticationHistory.authenticationType)}</td>
-                <td>${f:h(CL_AUTHENTICATION_RESULT[strAuthenticationResult])}</td>
-                <td>${f:h(authenticationHistory.failureReason)}</td>
-                <td>${f:h(authenticationHistory.remoteAddress)}</td>
-                <td>${f:h(authenticationHistory.agent)}</td>
-            </tr>
-        </c:forEach>
+    <c:forEach var="authenticationHistory" items="${account.authenticationHistories}"
+        varStatus="rowStatus">
+        <c:set var="strAuthenticationResult">${authenticationHistory.authenticationResult}</c:set>
+        <tr>
+            <td>${f:h(rowStatus.count)}</td>
+            <td><joda:format value="${authenticationHistory.createdAt}"
+                    pattern="${dateTimeFormat}" dateTimeZone="${timeZoneFormat}" /></td>
+            <td>${f:h(authenticationHistory.authenticationType)}</td>
+            <td>${f:h(CL_AUTHENTICATION_RESULT[strAuthenticationResult])}</td>
+            <td>${f:h(authenticationHistory.failureReason)}</td>
+            <td>${f:h(authenticationHistory.remoteAddress)}</td>
+            <td>${f:h(authenticationHistory.agent)}</td>
+        </tr>
+    </c:forEach>
 </table>

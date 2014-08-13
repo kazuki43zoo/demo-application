@@ -8,8 +8,8 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <import resource="classpath:META-INF/spring/infra.xml" />
-    
-    <import resource="classpath:META-INF/spring/codelist.xml"/>
+
+    <import resource="classpath:META-INF/spring/codelist.xml" />
 
     <tx:annotation-driven />
 

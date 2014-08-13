@@ -4,15 +4,17 @@
     <spring:nestedPath path="accountsSearchQuery">
         <div class="form-group">
             <div class="col-sm-4">
-                <form:input cssClass="form-control" path="word" placeholder="Account ID or Account Name" />
+                <form:input cssClass="form-control" path="word"
+                    placeholder="Account ID or Account Name" />
                 <form:errors path="word" />
             </div>
             <div class="col-sm-4">
 
-                <c:forEach var="accountSearchTargetCodeListElement" items="${CL_ACCOUNT_SEARCH_TARGET}"
-                    varStatus="rowStatus">
+                <c:forEach var="accountSearchTargetCodeListElement"
+                    items="${CL_ACCOUNT_SEARCH_TARGET}" varStatus="rowStatus">
                     <div class="checkbox-inline">
-                        <form:checkbox path="targets" value="${accountSearchTargetCodeListElement.key}"
+                        <form:checkbox path="targets"
+                            value="${accountSearchTargetCodeListElement.key}"
                             label="${accountSearchTargetCodeListElement.value}" />
                     </div>
                 </c:forEach>
@@ -58,5 +60,6 @@
         </c:forEach>
 </table>
 <div class="paginationContainer">
-    <t:pagination page="${page}" criteriaQuery="${f:query(accountsSearchQuery)}" outerElementClass="pagination" />
+    <t:pagination page="${page}" criteriaQuery="${f:query(accountsSearchQuery)}"
+        outerElementClass="pagination" />
 </div>

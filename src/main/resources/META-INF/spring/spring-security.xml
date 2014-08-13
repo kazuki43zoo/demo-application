@@ -28,11 +28,11 @@
             <sec:frame-options policy="SAMEORIGIN" />
             <sec:hsts />
             <sec:content-type-options />
-            <sec:xss-protection/>
+            <sec:xss-protection />
         </sec:headers>
 
         <sec:session-management invalid-session-url="/error/invalidSession"
-            session-fixation-protection="migrateSession"  />
+            session-fixation-protection="migrateSession" />
 
         <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
             username-parameter="accountId" password-parameter="password"

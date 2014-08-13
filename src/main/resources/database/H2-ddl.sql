@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS account_authentication_histories(
 CREATE TABLE IF NOT EXISTS work_place(
     work_place_uuid nvarchar(36),
     work_place_name nvarchar(256) not null,
+    work_place_name_ja nvarchar(256) not null,
     base_begin_time time not null,
     base_finish_time time not null,
     unit_time time not null,
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS break_time(
     begin_time time,
     finish_time time not null,
     note nvarchar(256),
+    note_ja nvarchar(256),
     constraint pk_break_time primary key (work_place_uuid, begin_time)
 );
 

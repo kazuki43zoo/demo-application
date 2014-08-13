@@ -1,7 +1,8 @@
 
 <t:messagesPanel />
 
-<form:form action="${contextPath}/profile" class="form-horizontal" method="post" modelAttribute="profileForm">
+<form:form action="${contextPath}/profile" class="form-horizontal" method="post"
+    modelAttribute="profileForm">
 
     <div class="form-group">
         <form:label path="accountId" class="col-sm-2 control-label">Account ID</form:label>

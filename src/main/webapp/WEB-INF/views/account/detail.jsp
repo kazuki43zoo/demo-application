@@ -1,5 +1,6 @@
 <t:messagesPanel />
-<form action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="form-horizontal" method="get">
+<form action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="form-horizontal"
+    method="get">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <a href="${contextPath}/accounts" class="btn btn-default pull-left"> <span
@@ -24,18 +25,19 @@
             <c:if
                 test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
                 <div class="btn btn-default pull-right" onclick="$('#unlockForm').submit();">
-                    <span class="glyphicon glyphicon-lock"></span><span class="glyphicon glyphicon-remove"></span>
-                    Unlock
+                    <span class="glyphicon glyphicon-lock"></span><span
+                        class="glyphicon glyphicon-remove"></span> Unlock
                 </div>
             </c:if>
         </div>
     </div>
 </form>
 
-<form:form id="deleteForm" action="${contextPath}/accounts/${f:h(account.accountUuid)}" class="sr-only" method="post">
+<form:form id="deleteForm" action="${contextPath}/accounts/${f:h(account.accountUuid)}"
+    class="sr-only" method="post">
     <input type="hidden" name="_method" value="delete">
 </form:form>
 
-<form:form id="unlockForm" action="${contextPath}/accounts/${f:h(account.accountUuid)}/unlock" class="sr-only"
-    method="post">
+<form:form id="unlockForm" action="${contextPath}/accounts/${f:h(account.accountUuid)}/unlock"
+    class="sr-only" method="post">
 </form:form>

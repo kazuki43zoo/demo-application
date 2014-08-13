@@ -38,6 +38,11 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+        <property name="cookieName" value="locale" />
+    </bean>
+
     <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
         <property name="exceptionLogger" ref="exceptionLogger" />
     </bean>

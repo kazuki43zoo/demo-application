@@ -9,7 +9,8 @@
         </spring:nestedPath>
     </spring:hasBindErrors>
 </c:if>
-<form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
+<form:form action="${contextPath}/auth/login" class="navbar-form" method="post"
+    modelAttribute="loginForm">
     <div class="form-group">
         <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
     </div>

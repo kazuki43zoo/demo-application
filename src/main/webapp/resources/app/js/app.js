@@ -1,4 +1,4 @@
 (function() {
-	'use strict';
-	angular.module('app', [ 'resources', 'filters' ]);
+    'use strict';
+    angular.module('app', [ 'resources', 'filters' ]);
 })();
