@@ -1,8 +1,8 @@
 package com.github.kazuki43zoo.domain.service.security;
 
-import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AuthenticationType;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 
 public interface AuthenticationService {
 

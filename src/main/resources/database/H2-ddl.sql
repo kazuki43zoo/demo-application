@@ -1,5 +1,6 @@
 DROP TABLE daily_attendance;
 DROP TABLE time_card;
+DROP TABLE break_time;
 DROP TABLE work_place;
 
 DROP TABLE account_authentication_histories;
@@ -57,6 +58,14 @@ CREATE TABLE IF NOT EXISTS work_place(
     unit_time time not null,
     display_order int,
     constraint pk_work_place primary key (work_place_uuid)
+);
+
+CREATE TABLE IF NOT EXISTS break_time(
+    work_place_uuid nvarchar(36),
+    begin_time time,
+    finish_time time not null,
+    note nvarchar(256),
+    constraint pk_break_time primary key (work_place_uuid, begin_time)
 );
 
 CREATE TABLE IF NOT EXISTS time_card(

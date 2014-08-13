@@ -17,8 +17,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.session.HttpSessionDestroyedEvent;
 
-import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AuthenticationType;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 

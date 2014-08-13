@@ -23,7 +23,7 @@
 
     <mapping>
         <class-a>com.github.kazuki43zoo.app.account.AccountForm</class-a>
-        <class-b>com.github.kazuki43zoo.domain.model.Account</class-b>
+        <class-b>com.github.kazuki43zoo.domain.model.account.Account</class-b>
         <field-exclude>
             <a>authorities</a>
             <b>authorities</b>
@@ -31,8 +31,8 @@
     </mapping>
 
     <mapping>
-        <class-a>com.github.kazuki43zoo.domain.model.Account</class-a>
-        <class-b>com.github.kazuki43zoo.domain.model.Account</class-b>
+        <class-a>com.github.kazuki43zoo.domain.model.account.Account</class-a>
+        <class-b>com.github.kazuki43zoo.domain.model.account.Account</class-b>
         <field-exclude>
             <a>passwordHistories</a>
             <b>passwordHistories</b>
@@ -45,7 +45,7 @@
 
     <mapping>
         <class-a>com.github.kazuki43zoo.api.timecard.TimeCardResource</class-a>
-        <class-b>com.github.kazuki43zoo.domain.model.TimeCard</class-b>
+        <class-b>com.github.kazuki43zoo.domain.model.timecard.TimeCard</class-b>
         <field>
             <a>workPlaceUuid</a>
             <b>workPlace.workPlaceUuid</b>
@@ -54,7 +54,7 @@
 
     <mapping>
         <class-a>com.github.kazuki43zoo.api.timecard.DailyAttendanceResource</class-a>
-        <class-b>com.github.kazuki43zoo.domain.model.DailyAttendance</class-b>
+        <class-b>com.github.kazuki43zoo.domain.model.timecard.DailyAttendance</class-b>
         <field>
             <a>workPlaceUuid</a>
             <b>workPlace.workPlaceUuid</b>

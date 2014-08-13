@@ -10,8 +10,8 @@ import org.terasoluna.gfw.common.date.DateFactory;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
 import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.model.AccountPasswordHistory;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.model.account.AccountPasswordHistory;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional

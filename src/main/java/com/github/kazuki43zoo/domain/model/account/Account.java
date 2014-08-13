@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.model;
+package com.github.kazuki43zoo.domain.model.account;
 
 import java.io.Serializable;
 import java.util.ArrayList;

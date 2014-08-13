@@ -8,8 +8,8 @@ import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 
-import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AuthenticationType;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional

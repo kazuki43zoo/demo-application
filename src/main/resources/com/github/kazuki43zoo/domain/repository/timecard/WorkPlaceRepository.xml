@@ -4,21 +4,40 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository">
-    <resultMap id="resultMap-WorkPlace" type="WorkPlace">
-        <id property="workPlaceUuid" column="work_place_uuid" />
-    </resultMap>
 
+    <resultMap id="resultMap-WorkPlace" type="WorkPlace">
+        <id property="workPlaceUuid" column="work_place_uuid"/>
+        <result property="workPlaceName" column="work_place_name" />
+        <result property="baseBeginTime" column="base_begin_time" />
+        <result property="baseFinishTime" column="base_finish_time" />
+        <result property="unitTime" column="unit_time" />
+        <collection property="breakTimes" javaType="ArrayList" ofType="BreakTime">
+            <constructor>
+                <idArg column="work_place_uuid" javaType="String" />
+                <idArg column="break_begin_time" javaType="LocalTime" />
+                <arg column="break_finish_time" javaType="LocalTime" />
+            </constructor>
+            <result property="note" column="break_time_note" />
+        </collection>
+    </resultMap>
+    
     <select id="findOne" resultMap="resultMap-WorkPlace">
         SELECT
-            work_place_uuid
-            ,work_place_name
-            ,base_begin_time
-            ,base_finish_time
-            ,unit_time
+            w.work_place_uuid
+            ,w.work_place_name
+            ,w.base_begin_time
+            ,w.base_finish_time
+            ,w.unit_time
+            ,b.begin_time AS break_begin_time
+            ,b.finish_time AS break_finish_time
+            ,b.note As break_time_note
         FROM
-            work_place
+            work_place w
+        LEFT OUTER JOIN
+            break_time b
+                ON w.work_place_uuid = b.work_place_uuid
         WHERE
-            work_place_uuid = #{workPlaceUuid}
+            w.work_place_uuid = #{workPlaceUuid}
     </select>
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.model;
+package com.github.kazuki43zoo.domain.model.timecard;
 
 import java.io.Serializable;
 import java.util.ArrayList;

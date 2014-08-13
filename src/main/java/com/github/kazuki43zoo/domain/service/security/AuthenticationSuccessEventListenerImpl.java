@@ -10,8 +10,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 
 import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AuthenticationType;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 
 @Transactional(dontRollbackOn = ConcurrentLoginException.class)
 @Named

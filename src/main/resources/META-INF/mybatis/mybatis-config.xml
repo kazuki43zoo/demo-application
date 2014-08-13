@@ -9,6 +9,7 @@
     </settings>
     <typeAliases>
         <package name="com.github.kazuki43zoo.domain.model" />
+        <package name="org.joda.time"/>
     </typeAliases>
     <typeHandlers>
         <package name="com.github.kazuki43zoo.infra.mybatis.typehandler" />

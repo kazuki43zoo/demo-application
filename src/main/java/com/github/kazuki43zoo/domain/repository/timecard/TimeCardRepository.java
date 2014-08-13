@@ -3,8 +3,8 @@ package com.github.kazuki43zoo.domain.repository.timecard;
 import org.apache.ibatis.annotations.Param;
 import org.joda.time.LocalDate;
 
-import com.github.kazuki43zoo.domain.model.DailyAttendance;
-import com.github.kazuki43zoo.domain.model.TimeCard;
+import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
+import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 
 public interface TimeCardRepository {
     TimeCard findOne(@Param("accountUuid") String accountUuid,

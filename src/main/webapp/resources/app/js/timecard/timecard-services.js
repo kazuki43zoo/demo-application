@@ -84,6 +84,7 @@
 				attendance.beginTime = null;
 				attendance.finishTime = null;
 				attendance.actualWorkingMinute = 0;
+				attendance.compensationMinute = 0;
 			}
 			this.addCalculateResult(attendance, total);
 		}, this);
@@ -144,7 +145,9 @@
 			attendance.finishTime = '17:45';
 			attendance.specialWorkCode = '';
 			attendance.workPlaceUuid = '';
+			attendance.absence = false;
 			total.paidLeaveCount++;
+			total.absenceCount--;
 		} else {
 			total.paidLeaveCount--;
 		}

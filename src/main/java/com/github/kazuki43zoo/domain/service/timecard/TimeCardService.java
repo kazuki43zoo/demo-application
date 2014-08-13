@@ -2,9 +2,8 @@ package com.github.kazuki43zoo.domain.service.timecard;
 
 import org.joda.time.LocalDate;
 
-import com.github.kazuki43zoo.domain.model.DailyAttendance;
-import com.github.kazuki43zoo.domain.model.TimeCard;
-import com.github.kazuki43zoo.domain.model.WorkPlace;
+import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
+import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 
 public interface TimeCardService {
 
@@ -15,9 +14,5 @@ public interface TimeCardService {
     void saveTimeCard(String accountUuid, LocalDate targetMonth, TimeCard timeCard);
 
     void saveDailyAttendance(String accountUuid, LocalDate targetDate, DailyAttendance attendance);
-
-    WorkPlace getWorkPlace(String workPlaceUuid);
-
-    WorkPlace getWorkPlaceDetail(WorkPlace workPlace);
 
 }

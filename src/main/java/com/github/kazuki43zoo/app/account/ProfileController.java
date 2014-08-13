@@ -17,7 +17,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
 import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.Account;
+import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.github.kazuki43zoo.web.security.CurrentUser;

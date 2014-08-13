@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.kazuki43zoo.domain.model.DailyAttendance;
-import com.github.kazuki43zoo.domain.model.TimeCard;
+import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
+import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.github.kazuki43zoo.domain.service.timecard.TimeCardService;
 import com.github.kazuki43zoo.web.security.CurrentUser;

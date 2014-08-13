@@ -7,9 +7,9 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.terasoluna.gfw.common.date.DateFactory;
 
-import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.model.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.AuthenticationType;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional

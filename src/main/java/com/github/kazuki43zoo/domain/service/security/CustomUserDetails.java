@@ -8,8 +8,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.github.kazuki43zoo.domain.model.Account;
-import com.github.kazuki43zoo.domain.model.AccountAuthority;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
 
 public class CustomUserDetails extends User implements UserDetails {
 

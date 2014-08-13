@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.domain.model;
+package com.github.kazuki43zoo.domain.model.account;
 
 import java.io.Serializable;
 
@@ -11,15 +11,11 @@ import org.joda.time.DateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AccountPasswordLock implements Serializable {
+public class AccountPasswordHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String accountUuid;
-    private int failureCount;
-    private DateTime modifiedAt;
-
-    public void countUpFailureCount() {
-        failureCount++;
-    }
+    private String password;
+    private DateTime createdAt;
 
 }

@@ -4,6 +4,7 @@
 	function TimeCardController($location, timeCardService) {
 		this.$location = $location;
 		this.timeCardService = timeCardService;
+		this.originalAttendance = {};
 		this.targetDay = 1;
 		this.total = {};
 		this.timeCardService.initTotal(this.total);
@@ -51,7 +52,7 @@
 		var targetDayIndex = this.targetDay - 1;
 		this.editableAttendance = this.timeCard.attendances[targetDayIndex];
 		this.loadedAttendance = this.loadedTimeCard.attendances[targetDayIndex];
-		this.originalAttendance = angular.copy(this.editableAttendance);
+		angular.copy(this.editableAttendance, this.originalAttendance);
 	};
 
 	TimeCardController.prototype.needSaveTimeCard = function() {
@@ -63,7 +64,11 @@
 	};
 
 	TimeCardController.prototype.initTimeCard = function() {
-		this.timeCardService.initTimeCard(this.timeCard, this.total);
+		var _this = this;
+		this.timeCardService.initTimeCard(this.timeCard, this.total).success(
+				function() {
+					_this.setEditableAttendance();
+				});
 	};
 
 	TimeCardController.prototype.saveTimeCard = function() {
