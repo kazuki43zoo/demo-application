@@ -18,10 +18,10 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spirng Framework 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
+|                      | [Spirng Framework 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spirng Security 3.2.5.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
+|                      | [Spirng MVC 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.2.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
@@ -37,7 +37,7 @@ The following libraries is dependency for application-specific without relate on
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | Depends on to access H2 database. |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.3 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Depends on to use Joda-Time on the Jackson. |
@@ -48,14 +48,14 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.0.RC1 | 3.2.10.RELEASE |
-| org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
+| org.springframework | 4.1.0.RC2 | 3.2.10.RELEASE |
+| org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
 | org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.1 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
-| org.hibernate.hibernate-validator | 5.1.1.Final | 4.3.1.Final |
+| org.hibernate.hibernate-validator | 5.1.2.Final | 4.3.1.Final |
 | jboss-logging | 3.1.4.GA | 3.1.0.GA |
 | org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
 | joda-time | 2.4 | 2.2 |
