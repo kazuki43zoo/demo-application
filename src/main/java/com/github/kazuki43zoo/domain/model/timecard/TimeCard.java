@@ -18,6 +18,7 @@ public class TimeCard implements Serializable {
     private String accountUuid;
     private LocalDate targetMonth;
     private WorkPlace workPlace;
+    private String note;
     private List<DailyAttendance> attendances;
 
     public TimeCard addAttendance(DailyAttendance attendance) {

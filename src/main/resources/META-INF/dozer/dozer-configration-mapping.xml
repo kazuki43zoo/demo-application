@@ -50,6 +50,10 @@
             <a>workPlaceUuid</a>
             <b>workPlace.workPlaceUuid</b>
         </field>
+        <field-exclude>
+            <a>workPlace</a>
+            <b>workPlace</b>
+        </field-exclude>
     </mapping>
 
     <mapping>

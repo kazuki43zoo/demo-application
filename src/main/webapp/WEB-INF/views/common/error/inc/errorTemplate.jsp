@@ -17,7 +17,7 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBar"
+    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBarCtrl"
         ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
@@ -41,6 +41,8 @@
     <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
     <script src="${contextPath}/resources/app/js/app.js"></script>
     <script src="${contextPath}/resources/app/js/app-resources.js"></script>
-    <script src="${contextPath}/resources/app/js/controllers/NavBarController.js"></script>
+    <script src="${contextPath}/resources/app/js/app-filters.js"></script>
+    <script src="${contextPath}/resources/app/js/common/common-controllers.js"></script>
+    <script src="${contextPath}/resources/app/js/common/common-services.js"></script>
 </body>
 </html>

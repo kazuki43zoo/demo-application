@@ -25,8 +25,11 @@ public class TimeCardServiceImpl implements TimeCardService {
     public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {
         TimeCard timeCard = timeCardRepository.findOne(accountUuid, targetMonth);
         if (timeCard != null) {
-            WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(timeCard.getWorkPlace()
-                    .getWorkPlaceUuid());
+            String defaultWorkPlaceUuid = null;
+            if (timeCard.getWorkPlace() != null) {
+                defaultWorkPlaceUuid = timeCard.getWorkPlace().getWorkPlaceUuid();
+            }
+            WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(defaultWorkPlaceUuid);
             for (DailyAttendance attendance : timeCard.getAttendances()) {
                 attendance.setWorkPlace(workPlaceService.getWorkPlaceDetail(attendance
                         .getWorkPlace()));

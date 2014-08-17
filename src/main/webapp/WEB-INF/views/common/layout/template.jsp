@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width" />
-<meta name="contextPath" content="${contextPath}" >
+<meta name="contextPath" content="${contextPath}">
 <c:set var="titleKey">
     <tiles:insertAttribute name="title" ignore="true" />
 </c:set>
@@ -15,7 +15,8 @@
 <title><spring:message code="${titleKey}" text="Demo Application" /></title>
 
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+    href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
 <link rel="stylesheet" href="${contextPath}/resources/app/css/${usecaseName}.css">
 <!--[if lt IE 9]>
@@ -24,7 +25,8 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBarCtrl" ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top"
+        ng-controller="NavBarController as navBarCtrl" ng-cloak>
         <tiles:insertAttribute name="topNavbar" />
     </div>
     <div class="container">
@@ -40,12 +42,15 @@
     <script src="${contextPath}/resources/vendor/jquery/dist/jquery.min.js"></script>
     <script src="${contextPath}/resources/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular/angular.min.js"></script>
+    <script src="${contextPath}/resources/vendor/angular-i18n/angular-locale_${locale}.js"></script>
     <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
     <script src="${contextPath}/resources/app/js/common/common-handlers.js"></script>
     <script src="${contextPath}/resources/app/js/app.js"></script>
     <script src="${contextPath}/resources/app/js/app-resources.js"></script>
     <script src="${contextPath}/resources/app/js/app-filters.js"></script>
+    <script src="${contextPath}/resources/app/js/common/common-services.js"></script>
     <script src="${contextPath}/resources/app/js/common/common-controllers.js"></script>
+    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}.js"></script>
     <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-controllers.js"></script>
     <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-services.js"></script>
 </body>

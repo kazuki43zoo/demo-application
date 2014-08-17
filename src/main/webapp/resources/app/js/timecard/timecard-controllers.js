@@ -1,25 +1,31 @@
 (function() {
     'use strict';
 
-    function TimeCardController($location, timeCardService) {
+    function TimeCardController($location, timeCardService, dateTimeService) {
         this.$location = $location;
         this.timeCardService = timeCardService;
+        this.dateTimeService = dateTimeService;
+
         this.originalAttendance = {};
         this.targetDay = 1;
         this.total = {};
-        this.timeCardService.initTotal(this.total);
         this.targetMonth = $location.path().substring(1);
+
+        this.timeCardService.initTotal(this.total);
     }
 
     TimeCardController.prototype.loadTimeCard = function() {
         if (this.targetMonth === '') {
             this.loadToday();
         } else {
-            this.$location.path(this.targetMonth);
-            this.timeCardService.initTotal(this.total);
             this.timeCard = this.timeCardService.getTimeCard(this.targetMonth, this.total);
             var _this = this;
             var reflectLoadResult = function(timeCard) {
+                _this.defaultWorkPlace = angular.copy(timeCard.workPlace);
+                _this.stored = timeCard.stored;
+                delete timeCard.workPlace;
+                delete timeCard.stored;
+                _this.$location.path(_this.targetMonth);
                 _this.loadedTimeCard = angular.copy(timeCard);
                 _this.setEditableAttendance();
             };
@@ -31,7 +37,7 @@
         var _this = this;
         var loadToday = function(currentDateTime) {
             var currentDate = new Date(currentDateTime.dateTime);
-            var targetMonth = _this.timeCardService.formatDate(currentDate, 'yyyy-MM');
+            var targetMonth = _this.dateTimeService.formatDate(currentDate, 'yyyy-MM');
             if (targetMonth !== _this.targetMonth) {
                 _this.targetMonth = targetMonth;
                 _this.targetDay = currentDate.getDate();
@@ -43,12 +49,12 @@
                 }
             }
         }
-        this.timeCardService.getCurrentDateTime().then(loadToday);
+        this.dateTimeService.getCurrentDateTime().then(loadToday);
     };
 
     TimeCardController.prototype.setEditableAttendance = function() {
         if (!angular.isNumber(this.targetDay)) {
-            this.targetDay = 1;
+            return;
         }
         if (this.timeCard.attendances.length < this.targetDay) {
             this.targetDay = this.timeCard.attendances.length;
@@ -77,6 +83,7 @@
     TimeCardController.prototype.saveTimeCard = function() {
         var _this = this;
         var reflectSaveResult = function() {
+            _this.stored = true;
             angular.copy(_this.timeCard, _this.loadedTimeCard);
             _this.setEditableAttendance();
         }
@@ -101,31 +108,35 @@
         var _this = this;
         var enter = function(currentDateTime) {
             var currentDate = new Date(currentDateTime.dateTime);
-            var time = _this.timeCardService.formatDate(currentDate, 'HH:mm');
-            _this.editableAttendance.beginTime = time;
-            _this.calculateTime('beginTime');
-            _this.saveDailyAttendance();
+            var time = _this.dateTimeService.formatDate(currentDate, 'HH:mm');
+            if (time !== _this.editableAttendance.beginTime) {
+                _this.editableAttendance.beginTime = time;
+                _this.calculateTime('beginTime');
+                _this.saveDailyAttendance();
+            }
         }
-        this.timeCardService.getCurrentDateTime().then(enter);
+        this.dateTimeService.getCurrentDateTime().then(enter);
     };
 
     TimeCardController.prototype.exit = function() {
         var _this = this;
         var exit = function(currentDateTime) {
             var currentDate = new Date(currentDateTime.dateTime);
-            var time = _this.timeCardService.formatDate(currentDate, 'HH:mm');
-            _this.editableAttendance.finishTime = time;
-            _this.calculateTime('finishTime');
-            _this.saveDailyAttendance();
+            var time = _this.dateTimeService.formatDate(currentDate, 'HH:mm');
+            if (time !== _this.editableAttendance.finishTime) {
+                _this.editableAttendance.finishTime = time;
+                _this.calculateTime('finishTime');
+                _this.saveDailyAttendance();
+            }
         }
-        this.timeCardService.getCurrentDateTime().then(exit);
+        this.dateTimeService.getCurrentDateTime().then(exit);
     };
 
     TimeCardController.prototype.changePaidLeave = function() {
         this.timeCardService.changePaidLeave(this.editableAttendance, this.total);
     }
 
-    angular.module('app').controller('TimeCardController',
-            [ '$location', 'timeCardService', TimeCardController ]);
+    angular.module('app.usecase').controller('TimeCardController',
+            [ '$location', 'timeCardService', 'dateTimeService', TimeCardController ]);
 
 })();

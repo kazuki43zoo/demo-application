@@ -8,6 +8,7 @@
     <resultMap id="resultMap-TimeCard" type="TimeCard">
         <id property="accountUuid" column="account_uuid" />
         <id property="targetMonth" column="target_month" />
+        <result property="note" column="note"/>
         <association property="workPlace" javaType="WorkPlace">
             <id property="workPlaceUuid" column="work_place_uuid" />
         </association>
@@ -20,6 +21,7 @@
             account_uuid
             ,target_month
             ,work_place_uuid
+            ,note
         FROM
             time_card
         WHERE
@@ -36,12 +38,14 @@
             account_uuid
             ,target_month
             ,work_place_uuid
+            ,note
         )
         VALUES
         (
             #{accountUuid}
             ,#{targetMonth}
             ,#{workPlace.workPlaceUuid}
+            ,#{note}
         )
     </insert>
     
@@ -51,6 +55,7 @@
             time_card 
         SET
             work_place_uuid = #{workPlace.workPlaceUuid}
+            ,note = #{note}
         WHERE
             account_uuid = #{accountUuid}
         AND

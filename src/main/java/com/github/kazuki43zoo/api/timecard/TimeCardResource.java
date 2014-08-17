@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
+import javax.validation.constraints.Null;
 
 import lombok.Data;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
+import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
 
 @Data
 public class TimeCardResource implements Serializable {
@@ -21,7 +23,14 @@ public class TimeCardResource implements Serializable {
     @Valid
     private List<DailyAttendanceResource> attendances;
 
-    private boolean stored;
+    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    private String note;
+
+    @Null
+    private Boolean stored;
+
+    @Null
+    private WorkPlace workPlace;
 
     public TimeCardResource addDailyAttendance(DailyAttendanceResource dailyAttendanceResource) {
         if (attendances == null) {
@@ -30,4 +39,5 @@ public class TimeCardResource implements Serializable {
         attendances.add(dailyAttendanceResource);
         return this;
     }
+
 }

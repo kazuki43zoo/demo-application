@@ -13,17 +13,25 @@ import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
 
 @Data
 public class DailyAttendanceResource implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     private LocalDate targetDate;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime beginTime;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime finishTime;
+
     private boolean paidLeave;
+
     @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
     private String specialWorkCode;
+
     @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
     private String note;
+
     @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
     private String workPlaceUuid;
 

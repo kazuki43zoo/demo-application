@@ -24,19 +24,27 @@
 
     <entry key="targetMonth">対象月</entry>
     <entry key="workPlace">勤務先</entry>
-    <entry key="days">日</entry>
-    <entry key="beginTime">出勤</entry>
-    <entry key="finishTime">退勤</entry>
-    <entry key="paidLeave">有給</entry>
-    <entry key="specialWork">特殊</entry>
+    <entry key="targetDays">対象日</entry>
+    <entry key="beginTime">出勤時間</entry>
+    <entry key="finishTime">退勤時間</entry>
+    <entry key="paidLeave">有給休暇</entry>
+    <entry key="specialWork">特殊勤務</entry>
     <entry key="note">備考</entry>
-    <entry key="actualWorkTime">実働</entry>
-    <entry key="compensationTime">補填</entry>
-    <entry key="midnightWorkingTime">深夜</entry>
-    <entry key="tardyOrEarlyLeaving">遅早</entry>
+    <entry key="actualWorkTime">実働時間</entry>
+    <entry key="compensationTime">補填時間</entry>
+    <entry key="midnightWorkingTime">深夜時間</entry>
+    <entry key="tardyOrEarlyLeaving">遅刻早退</entry>
     <entry key="absence">欠勤</entry>
     <entry key="dayOfWeek">曜日</entry>
+
     <entry key="total">合計</entry>
+    <entry key="workingDays">営業日数</entry>
+    <entry key="tardyOrEarlyLeavingDays">遅刻/早退日数</entry>
+    <entry key="tardyOrEarlyLeavingPenaltyTargetDays">罰則対象日数</entry>
+    <entry key="absenceDays">欠勤日数</entry>
+    <entry key="paidLeaveDays">有給休暇日数</entry>
+
+    <entry key="days">日</entry>
 
     <entry key="thead.days">日</entry>
     <entry key="thead.dayOfWeek">曜</entry>
@@ -51,5 +59,11 @@
     <entry key="thead.tardyOrEarlyLeaving">遅早</entry>
     <entry key="thead.absence">欠勤</entry>
     <entry key="thead.workPlace">勤務先</entry>
+
+    <entry key="baseWorkingTime">規定時間</entry>
+    <entry key="workingTime">稼働時間</entry>
+    <entry key="liquidationTime">清算時間</entry>
+    <entry key="overtimeTime">残業時間</entry>
+    <entry key="penaltyTime">罰則時間</entry>
 
 </properties>

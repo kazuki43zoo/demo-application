@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,23 +28,27 @@ public class WorkPlace implements Serializable {
     private String workPlaceUuid;
     private String workPlaceName;
     private String workPlaceNameJa;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime baseBeginTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime baseFinishTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "H:mm")
     private LocalTime unitTime;
     private List<BreakTime> breakTimes;
 
+    @Setter(AccessLevel.NONE)
     private transient int baseWorkTimeMinute;
 
     public void initialize() {
 
         Interval baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
                 BASE_DATE.toDateTime(baseFinishTime));
-        this.baseWorkTimeMinute = toMinute(baseWorkTimeInterval)
+        this.baseWorkTimeMinute = (int) toMinute(baseWorkTimeInterval)
                 - calculateContainsBreakTimeMinute(baseWorkTimeInterval);
     }
 
     public int calculateWorkingMinute(Interval workTimeInterval) {
-        int workingMinute = toMinute(workTimeInterval)
+        int workingMinute = (int) toMinute(workTimeInterval)
                 - calculateContainsBreakTimeMinute(workTimeInterval);
         return truncateWithTimeUnit(workingMinute);
     }
@@ -74,9 +82,8 @@ public class WorkPlace implements Serializable {
         return minute;
     }
 
-    private int toMinute(Interval interval) {
-        long minute = TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
-        return Long.valueOf(minute).intValue();
+    private long toMinute(Interval interval) {
+        return TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
     }
 
 }

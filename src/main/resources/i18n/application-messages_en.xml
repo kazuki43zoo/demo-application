@@ -24,7 +24,7 @@
 
     <entry key="targetMonth">Target Month</entry>
     <entry key="workPlace">Work Place</entry>
-    <entry key="days">Days</entry>
+    <entry key="targetDays">Target Days</entry>
     <entry key="beginTime">Begin Time</entry>
     <entry key="finishTime">Finish Time</entry>
     <entry key="paidLeave">Paid Leave</entry>
@@ -36,20 +36,36 @@
     <entry key="tardyOrEarlyLeaving">Tardy Or Early Leaving</entry>
     <entry key="absence">Absence</entry>
     <entry key="dayOfWeek">Day Of Week</entry>
+
     <entry key="total">Total</entry>
+    <entry key="workingDays">Working Days</entry>
+    <entry key="tardyOrEarlyLeavingDays">Tardy Or Early Leaving Days</entry>
+    <entry key="tardyOrEarlyLeavingPenaltyTargetDays">Penalty Target Days</entry>
+    <entry key="absenceDays">Absence Days</entry>
+    <entry key="paidLeaveDays">Paid Leave Days</entry>
+
+    <entry key="days">Days</entry>
 
     <entry key="thead.days">D</entry>
     <entry key="thead.dayOfWeek">W</entry>
-    <entry key="thead.beginTime">B Time</entry>
-    <entry key="thead.finishTime">F Time</entry>
-    <entry key="thead.paidLeave">P L</entry>
-    <entry key="thead.specialWork">S W</entry>
+    <entry key="thead.beginTime">Begin Time</entry>
+    <entry key="thead.finishTime">Finish Time</entry>
+    <entry key="thead.paidLeave">Paid Lea ve</entry>
+    <entry key="thead.specialWork">Sp Wk</entry>
     <entry key="thead.note">Note</entry>
-    <entry key="thead.actualWorkTime">A W Time</entry>
-    <entry key="thead.compensationTime">C Time</entry>
-    <entry key="thead.midnightWorkingTime">M W Time</entry>
-    <entry key="thead.tardyOrEarlyLeaving">T E</entry>
-    <entry key="thead.absence">A</entry>
+    <entry key="thead.actualWorkTime">Act Work Time</entry>
+    <entry key="thead.compensationTime">Comp Time</entry>
+    <entry key="thead.midnightWorkingTime">Mid Wk Time</entry>
+    <entry key="thead.tardyOrEarlyLeaving">Tardy Early Leave</entry>
+    <entry key="thead.absence">Ab sen ce</entry>
     <entry key="thead.workPlace">Work Place</entry>
+
+    <entry key="baseWorkingTime">Base Working Time</entry>
+    <entry key="workingTime">Working Time</entry>
+    <entry key="liquidationTime">Liquidation Time</entry>
+    <entry key="overtimeTime">Overtime Time</entry>
+    <entry key="penaltyTime">Penalty Time</entry>
+
+
 
 </properties>

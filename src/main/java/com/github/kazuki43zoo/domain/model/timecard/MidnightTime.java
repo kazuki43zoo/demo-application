@@ -19,31 +19,26 @@ public class MidnightTime {
     static final MidnightTime INSTANCE = new MidnightTime();
 
     private MidnightTime() {
-        // 00:00-05:00
         midnightIntervals.add(new Interval(BASE_DATE.toDateTimeAtStartOfDay(), BASE_DATE
-                .toDateTime(MIDNIGHT_FINISH_TIME)));
-        // 22:00-05:00(29:00)
+                .toDateTime(MIDNIGHT_FINISH_TIME)));// 00:00-05:00
         midnightIntervals.add(new Interval(BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME), BASE_DATE
-                .toDateTime(MIDNIGHT_FINISH_TIME).plusDays(1)));
-        // 22:00(46:00)-00:00(48:00)
+                .toDateTime(MIDNIGHT_FINISH_TIME).plusDays(1))); // 22:00-05:00(29:00)
         midnightIntervals.add(new Interval(BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1),
-                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));
-
+                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));// 22:00(46:00)-00:00(48:00)
     }
 
     int calculateContainsMinute(Interval workTimeInterval) {
-        int minute = 0;
+        long minute = 0;
         for (Interval midnightInterval : midnightIntervals) {
             if (workTimeInterval.overlaps(midnightInterval)) {
-                minute += calculateIntervalMinute(workTimeInterval.overlap(midnightInterval));
+                minute += toMinute(workTimeInterval.overlap(midnightInterval));
             }
         }
-        return minute;
+        return (int) minute;
     }
 
-    private int calculateIntervalMinute(Interval interval) {
-        return Long.valueOf(TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis()))
-                .intValue();
+    private long toMinute(Interval interval) {
+        return TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
     }
 
 }

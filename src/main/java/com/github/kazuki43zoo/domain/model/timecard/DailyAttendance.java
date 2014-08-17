@@ -3,16 +3,18 @@ package com.github.kazuki43zoo.domain.model.timecard;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.springframework.util.StringUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,23 +29,34 @@ public class DailyAttendance implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String accountUuid;
+
     private LocalDate targetDate;
+
     private LocalTime beginTime;
+
     private LocalTime finishTime;
+
     private boolean paidLeave;
+
     private String specialWorkCode;
+
     private String note;
+
     private WorkPlace workPlace;
 
-    @Getter
+    @Setter(AccessLevel.NONE)
     transient private int actualWorkingMinute;
-    @Getter
+
+    @Setter(AccessLevel.NONE)
     transient private int compensationMinute;
-    @Getter
+
+    @Setter(AccessLevel.NONE)
     transient private int midnightWorkingMinute;
-    @Getter
+
+    @Setter(AccessLevel.NONE)
     transient private boolean tardyOrEarlyLeaving;
-    @Getter
+
+    @Setter(AccessLevel.NONE)
     transient private boolean absence;
 
     public void calculate() {
@@ -61,6 +74,7 @@ public class DailyAttendance implements Serializable {
 
         if (beginTime != null && finishTime != null) {
 
+            // decide work time interval
             DateTime beginDateTime = BASE_DATE.toDateTime(beginTime);
             DateTime finishDateTime = BASE_DATE.toDateTime(finishTime);
             if (!beginTime.isBefore(finishTime)) {
@@ -72,32 +86,27 @@ public class DailyAttendance implements Serializable {
             this.actualWorkingMinute = actualWorkPlace.calculateWorkingMinute(workTimeInterval);
 
             // calculate compensation minute
-            if (actualWorkingMinute < DEFAULT_ACTUAL_WORKING_MINUTE) {
+            if (actualWorkingMinute < DEFAULT_ACTUAL_WORKING_MINUTE && isWorkDay()) {
                 this.compensationMinute = DEFAULT_ACTUAL_WORKING_MINUTE - actualWorkingMinute;
             }
 
+            // calculate midnight working minute
             this.midnightWorkingMinute = actualWorkPlace.truncateWithTimeUnit(MidnightTime.INSTANCE
                     .calculateContainsMinute(workTimeInterval));
 
-        } else if (beginTime == null && finishTime == null) {
-            if (isWorkDay()) {
-                this.absence = true;
-            }
-
         } else {
             if (finishTime != null) {
-                finishTime = null;
+                setFinishTime(null);
             }
         }
 
         if (isWorkDay()) {
             this.tardyOrEarlyLeaving = actualWorkPlace.isTardyOrEarlyLeaving(beginTime, finishTime);
-        }
-
-        if (tardyOrEarlyLeaving) {
-            this.compensationMinute = 0;
-        } else {
-            this.specialWorkCode = null;
+            if (tardyOrEarlyLeaving) {
+                this.compensationMinute = 0;
+            } else if (beginTime == null && !StringUtils.hasLength(specialWorkCode)) {
+                this.absence = true;
+            }
         }
 
     }
@@ -109,7 +118,7 @@ public class DailyAttendance implements Serializable {
 
     public boolean isWorkDay() {
         if (targetDate == null) {
-            return false;
+            return true;
         }
         return !((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY) || (targetDate
                 .getDayOfWeek() == DateTimeConstants.SUNDAY));

@@ -10,6 +10,7 @@ input.beginTime, input.finishTime {
 thead>tr>th, tfoot>tr>th {
 	text-align: center;
 	vertical-align: middle !important;
+	background-color: #f2edf3;
 }
 
 tbody>tr>td>div {
@@ -19,18 +20,77 @@ tbody>tr>td>div {
 
 thead>tr>td {
 	vertical-align: middle !important;
-	border-bottom: 2px solid #ddd;
 }
 
 .targetDate {
 	text-align: center;
 }
 
-.listTable tbody, .listTable thead, .listTable tfoot {
-	border-style: inset;
+#attendanceInputArea {
+	padding: 0px 0px 0px 0px;
+	border-style: solid;
+	border-width: 2px;
+	margin-bottom: 20px;
+	border-width: 2px;
 }
 
-.listTable td, .listTable th {
+#attendanceInputArea td, .attendanceInputArea th {
+	padding: 2px !important;
+}
+
+#attendanceInputArea .table {
+	margin-bottom: 0px !important;
+}
+
+#attendanceInputArea thead th.targetDay {
+	width: 75px;
+}
+
+#attendanceInputArea thead th.time {
+	width: 100px;
+	text-align: center;
+}
+
+#attendanceInputArea thead th.paidLeave {
+	width: 45px;
+}
+
+#attendanceInputArea thead th.specialWork {
+	width: 80px;
+}
+
+#attendanceInputArea thead th.workPlace {
+	width: 150px;
+}
+
+#attendanceInputTable {
+	margin-bottom: 0px;
+}
+
+#attendanceInputCalculationResultTable {
+	margin-top: 0px;
+}
+
+#attendanceInputCalculationResultTable thead th {
+	width: 65px;
+}
+
+#attendanceInputCalculationResultTable thead td {
+	width: 45px;
+}
+
+#attendancesTable tbody, #attendancesTable thead, #attendancesTable tfoot
+	{
+	border-style: solid;
+	border-width: 2px;
+}
+
+#attendancesTable thead th {
+	border-bottom-color: gray;
+}
+
+#attendancesTable td, #attendancesTable th {
+	padding: 1px 5px 1px 5px !important;
 	border-left-style: dotted;
 	border-left-width: 1px;
 	border-right-style: dotted;
@@ -38,11 +98,101 @@ thead>tr>td {
 }
 
 .lastTd {
-	border-right-style: inset !important;
+	border-right-style: solid !important;
 	border-right-color: inherit !important;
-	border-right-width: 3px !important;
+	border-right-width: 2px !important;
 }
 
-.listTable .selected {
-	background-color: #fffeb4;
+#attendancesTable th, #daySummaryTable th {
+	background-color: #f2edf3;
+}
+
+#attendancesTable thead th.width-sm {
+	width: 30px;
+}
+
+#attendancesTable thead th.width-time {
+	width: 55px;
+}
+
+#attendancesTable thead th.width-workPlace {
+	width: 130px;
+}
+
+#daySummaryTable td, #daySummaryTable th {
+	padding: 1px 5px 1px 5px !important;
+	vertical-align: middle !important;
+	border-bottom-color: #444;
+}
+
+#daySummaryTable th {
+	text-align: center;
+	border-right-style: dotted;
+	border-left-style: solid;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	width: 23%;
+}
+
+#daySummaryTable td {
+	width: 9%;
+	font-size: medium;
+	font-weight: bolder;
+}
+
+#daySummaryTable td .daysText {
+	font-size: small !important;
+}
+
+#daySummaryTable {
+	border-style: solid;
+	border-width: 2px;
+}
+
+.noteArea td, .noteArea th {
+	padding: 2px !important;
+}
+
+#timeSummaryTable {
+	border-style: solid;
+	border-width: 2px;
+}
+
+#timeSummaryTable th, #timeSummaryTable td {
+	padding: 1px 5px 1px 5px !important;
+	border-bottom-color: #444;
+}
+
+#timeSummaryTable th {
+	padding-top: 5px !important;
+	background-color: #f2edf3;
+	border-right-style: dotted;
+	border-right-width: 1px;
+}
+
+th .breakdown {
+	padding-top: 5px;
+	padding-left: 30px !important;
+	font-weight: normal !important;
+	color: gray;
+	font-size: small;
+}
+
+.summary {
+	font-weight: bolder;
+	font-size: large;
+	font-weight: bolder;
+}
+
+td .breakdown {
+	padding-top: 3px;
+	color: gray;
+}
+
+.form-group {
+	margin-bottom: 7px;
+}
+
+.modal-dialog {
+	margin-top: 200px;
 }
