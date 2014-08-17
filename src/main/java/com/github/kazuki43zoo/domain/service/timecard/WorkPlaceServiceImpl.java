@@ -36,6 +36,11 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     }
 
     @Override
+    public WorkPlace getMainOffice() {
+        return getWorkPlace(WorkPlace.MAIN_OFFICE_UUID);
+    }
+
+    @Override
     public WorkPlace getWorkPlace(String workPlaceUuid) {
         if (workPlaceUuid == null) {
             workPlaceUuid = WorkPlace.MAIN_OFFICE_UUID;

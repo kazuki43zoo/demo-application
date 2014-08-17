@@ -14,14 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class TimeCard implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     private String accountUuid;
+
     private LocalDate targetMonth;
+
     private WorkPlace workPlace;
+
     private String note;
+
     private List<DailyAttendance> attendances;
 
-    public TimeCard addAttendance(DailyAttendance attendance) {
+    public TimeCard addAttendance(final DailyAttendance attendance) {
         if (attendances == null) {
             attendances = new ArrayList<>();
         }

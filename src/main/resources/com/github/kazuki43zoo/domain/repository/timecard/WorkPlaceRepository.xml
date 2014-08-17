@@ -42,6 +42,8 @@
                 ON w.work_place_uuid = b.work_place_uuid
         WHERE
             w.work_place_uuid = #{workPlaceUuid}
+        ORDER BY
+            b.begin_time
     </select>
 
 </mapper>

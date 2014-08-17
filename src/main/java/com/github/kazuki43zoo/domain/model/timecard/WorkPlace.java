@@ -7,9 +7,11 @@ import java.util.concurrent.TimeUnit;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -21,68 +23,87 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Data
 public class WorkPlace implements Serializable {
 
-    public static final String MAIN_OFFICE_UUID = "00000000-0000-0000-0000-000000000000";
-    private static final LocalDate BASE_DATE = new LocalDate(0);
     private static final long serialVersionUID = 1L;
 
+    private static final LocalDate BASE_DATE = new LocalDate(0);
+
+    public static final String MAIN_OFFICE_UUID = "00000000-0000-0000-0000-000000000000";
+
     private String workPlaceUuid;
+
     private String workPlaceName;
+
     private String workPlaceNameJa;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime baseBeginTime;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime baseFinishTime;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "H:mm")
     private LocalTime unitTime;
+
     private List<BreakTime> breakTimes;
 
     @Setter(AccessLevel.NONE)
     private transient int baseWorkTimeMinute;
 
-    public void initialize() {
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    private transient Interval baseWorkTimeInterval;
 
-        Interval baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
+    public void initialize() {
+        this.baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
                 BASE_DATE.toDateTime(baseFinishTime));
         this.baseWorkTimeMinute = (int) toMinute(baseWorkTimeInterval)
                 - calculateContainsBreakTimeMinute(baseWorkTimeInterval);
     }
 
-    public int calculateWorkingMinute(Interval workTimeInterval) {
+    int calculateWorkingMinute(final Interval workTimeInterval) {
         int workingMinute = (int) toMinute(workTimeInterval)
                 - calculateContainsBreakTimeMinute(workTimeInterval);
         return truncateWithTimeUnit(workingMinute);
     }
 
-    public int truncateWithTimeUnit(int minute) {
+    int truncateWithTimeUnit(final int minute) {
         int determinedMinute = 0;
         int undeterminedMinute = minute;
         if (baseWorkTimeMinute <= minute) {
             determinedMinute = baseWorkTimeMinute;
             undeterminedMinute = minute - baseWorkTimeMinute;
         }
-        return determinedMinute + undeterminedMinute
-                - (undeterminedMinute % getUnitTime().getMinuteOfHour());
+        final int unitTimeMinute = (getUnitTime().getHourOfDay() * 60)
+                + getUnitTime().getMinuteOfHour();
+        return determinedMinute + undeterminedMinute - (undeterminedMinute % unitTimeMinute);
     }
 
-    public boolean isTardyOrEarlyLeaving(LocalTime beginTime, LocalTime finishTime) {
-        if (beginTime != null && beginTime.isAfter(baseBeginTime)) {
+    boolean isTardyOrEarlyLeaving(final DateTime beginTime, final DateTime finishTime) {
+        if (beginTime != null && beginTime.isAfter(baseWorkTimeInterval.getStart())) {
             return true;
         }
-        if (finishTime != null && finishTime.isBefore(baseFinishTime)) {
+        if (finishTime != null && finishTime.isBefore(baseWorkTimeInterval.getEnd())) {
             return true;
         }
         return false;
     }
 
-    private int calculateContainsBreakTimeMinute(Interval workTimeInterval) {
+    int calculateContainsBreakTimeMinute(final Interval workTimeInterval) {
+        if (getBreakTimes() == null) {
+            return 0;
+        }
         int minute = 0;
-        for (BreakTime breakTime : getBreakTimes()) {
-            minute += breakTime.calculateContainsMinute(workTimeInterval);
+        for (final BreakTime breakTime : getBreakTimes()) {
+            final int containsMinute = breakTime.calculateContainsMinute(workTimeInterval);
+            if (containsMinute == 0 && breakTime.isFuture(workTimeInterval)) {
+                break;
+            }
+            minute += containsMinute;
         }
         return minute;
     }
 
-    private long toMinute(Interval interval) {
+    private long toMinute(final Interval interval) {
         return TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
     }
 

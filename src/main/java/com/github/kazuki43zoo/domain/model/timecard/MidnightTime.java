@@ -9,9 +9,11 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 public class MidnightTime {
+
     private static final LocalDate BASE_DATE = new LocalDate(0);
 
     private static final LocalTime MIDNIGHT_BEGIN_TIME = LocalTime.parse("22:00");
+
     private static final LocalTime MIDNIGHT_FINISH_TIME = LocalTime.parse("05:00");
 
     private final List<Interval> midnightIntervals = new ArrayList<>();
@@ -27,17 +29,27 @@ public class MidnightTime {
                 BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));// 22:00(46:00)-00:00(48:00)
     }
 
-    int calculateContainsMinute(Interval workTimeInterval) {
+    int calculateContainsMinute(final Interval workTimeInterval, final WorkPlace workPlace) {
         long minute = 0;
-        for (Interval midnightInterval : midnightIntervals) {
+        for (final Interval midnightInterval : midnightIntervals) {
             if (workTimeInterval.overlaps(midnightInterval)) {
-                minute += toMinute(workTimeInterval.overlap(midnightInterval));
+                final Interval overlappedInterval = workTimeInterval.overlap(midnightInterval);
+                minute += (toMinute(overlappedInterval) - workPlace
+                        .calculateContainsBreakTimeMinute(overlappedInterval));
+            } else {
+                if (midnightInterval.isAfter(workTimeInterval)) {
+                    break;
+                }
             }
         }
-        return (int) minute;
+        if (minute == 0) {
+            return 0;
+        } else {
+            return workPlace.truncateWithTimeUnit((int) minute);
+        }
     }
 
-    private long toMinute(Interval interval) {
+    private long toMinute(final Interval interval) {
         return TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
     }
 

@@ -132,10 +132,6 @@
         this.dateTimeService.getCurrentDateTime().then(exit);
     };
 
-    TimeCardController.prototype.changePaidLeave = function() {
-        this.timeCardService.changePaidLeave(this.editableAttendance, this.total);
-    }
-
     angular.module('app.usecase').controller('TimeCardController',
             [ '$location', 'timeCardService', 'dateTimeService', TimeCardController ]);
 

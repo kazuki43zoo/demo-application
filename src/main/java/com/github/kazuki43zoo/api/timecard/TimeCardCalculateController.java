@@ -35,7 +35,7 @@ public class TimeCardCalculateController {
         DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
         attendance.setWorkPlace(workPlaceService.getWorkPlace(attendance.getWorkPlace()
                 .getWorkPlaceUuid()));
-        attendance.calculate();
+        attendance.calculate(null, workPlaceService.getMainOffice());
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 
@@ -48,7 +48,7 @@ public class TimeCardCalculateController {
 
         DailyAttendance attendance = new DailyAttendance();
         attendance.setDefault(defaultWorkPlace);
-        attendance.calculate(defaultWorkPlace);
+        attendance.calculate(defaultWorkPlace, workPlaceService.getMainOffice());
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 }

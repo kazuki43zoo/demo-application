@@ -355,7 +355,7 @@
                                              &&
                                              timeCardCtrl.editableAttendance.absence === false)
                                             "
-                                        ng-change="timeCardCtrl.changePaidLeave()"></td>
+                                        ng-change="timeCardCtrl.calculateTime()"></td>
                                     <td><select id="specialWorkCode"
                                         class="form-control specialWorkCode"
                                         ng-model="timeCardCtrl.editableAttendance.specialWorkCode"

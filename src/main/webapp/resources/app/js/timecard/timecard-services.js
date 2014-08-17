@@ -143,6 +143,8 @@
                 calculatedAttendance.compensationMinute);
         total.midnightWorkingMinute += calculateDiff(originalAttendance.midnightWorkingMinute,
                 calculatedAttendance.midnightWorkingMinute);
+        total.paidLeaveCount += calculateCount(originalAttendance.paidLeave,
+                calculatedAttendance.paidLeave);
         total.tardyOrEarlyLeavingCount += calculateCount(originalAttendance.tardyOrEarlyLeaving,
                 calculatedAttendance.tardyOrEarlyLeaving);
         total.tardyOrEarlyLeavingPenaltyCount += calculateCount(
@@ -153,20 +155,6 @@
 
         this.calculateTotalMinute(total);
     };
-
-    TimeCardService.prototype.changePaidLeave = function(attendance, total) {
-        if (attendance.paidLeave === true) {
-            attendance.beginTime = '09:00';
-            attendance.finishTime = '17:45';
-            attendance.specialWorkCode = '';
-            attendance.workPlaceUuid = '';
-            attendance.absence = false;
-            total.paidLeaveCount++;
-            total.absenceCount--;
-        } else {
-            total.paidLeaveCount--;
-        }
-    }
 
     TimeCardService.prototype.saveTimeCard = function(targetMonth, timeCard) {
         return timeCard.$put({

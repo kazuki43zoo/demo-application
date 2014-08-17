@@ -30,10 +30,11 @@ public class TimeCardServiceImpl implements TimeCardService {
                 defaultWorkPlaceUuid = timeCard.getWorkPlace().getWorkPlaceUuid();
             }
             WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(defaultWorkPlaceUuid);
+            WorkPlace mainOffice = workPlaceService.getMainOffice();
             for (DailyAttendance attendance : timeCard.getAttendances()) {
                 attendance.setWorkPlace(workPlaceService.getWorkPlaceDetail(attendance
                         .getWorkPlace()));
-                attendance.calculate(defaultWorkPlace);
+                attendance.calculate(defaultWorkPlace, mainOffice);
             }
         }
         return timeCard;
@@ -43,11 +44,12 @@ public class TimeCardServiceImpl implements TimeCardService {
     public TimeCard getDefaultTimeCard(String accountUuid, LocalDate targetMonth) {
         TimeCard timeCard = new TimeCard();
         WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(null);
+        WorkPlace mainOffice = workPlaceService.getMainOffice();
         for (int i = 0; i < targetMonth.dayOfMonth().getMaximumValue(); i++) {
             DailyAttendance attendance = new DailyAttendance();
             attendance.setTargetDate(targetMonth.plusDays(i));
             timeCard.addAttendance(attendance);
-            attendance.calculate(defaultWorkPlace);
+            attendance.calculate(defaultWorkPlace, mainOffice);
         }
         return timeCard;
     }

@@ -17,8 +17,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
 public class BreakTime implements Serializable {
-    private static final LocalDate BASE_DATE = new LocalDate(0);
+
     private static final long serialVersionUID = 1L;
+
+    private static final LocalDate BASE_DATE = new LocalDate(0);
 
     private final String workPlaceUuid;
 
@@ -32,30 +34,38 @@ public class BreakTime implements Serializable {
 
     private String noteJa;
 
+    private final Interval breakTimeBaseInterval;
+
     @Getter(AccessLevel.NONE)
     private final List<Interval> breakTimeIntervals = new ArrayList<>();
 
-    public BreakTime(String workPlaceUuid, LocalTime beginTime, LocalTime finishTime) {
+    public BreakTime(final String workPlaceUuid, final LocalTime beginTime,
+            final LocalTime finishTime) {
         this.workPlaceUuid = workPlaceUuid;
         this.beginTime = beginTime;
         this.finishTime = finishTime;
-        breakTimeIntervals.add(new Interval(BASE_DATE.toDateTime(beginTime), BASE_DATE
-                .toDateTime(finishTime)));
+        this.breakTimeBaseInterval = new Interval(BASE_DATE.toDateTime(beginTime),
+                BASE_DATE.toDateTime(finishTime));
+        breakTimeIntervals.add(breakTimeBaseInterval);
         breakTimeIntervals.add(new Interval(BASE_DATE.toDateTime(beginTime).plusDays(1), BASE_DATE
                 .toDateTime(finishTime).plusDays(1)));
     }
 
-    public int calculateContainsMinute(Interval workTimeInterval) {
+    int calculateContainsMinute(final Interval workTimeInterval) {
         long minute = 0;
-        for (Interval midnightInterval : breakTimeIntervals) {
-            if (workTimeInterval.overlaps(midnightInterval)) {
-                minute += toMinute(workTimeInterval.overlap(midnightInterval));
+        for (final Interval breakTimeInterval : breakTimeIntervals) {
+            if (workTimeInterval.overlaps(breakTimeInterval)) {
+                minute += toMinute(workTimeInterval.overlap(breakTimeInterval));
             }
         }
         return (int) minute;
     }
 
-    private long toMinute(Interval interval) {
+    boolean isFuture(final Interval workTimeInterval) {
+        return breakTimeBaseInterval.isAfter(workTimeInterval);
+    }
+
+    private long toMinute(final Interval interval) {
         return TimeUnit.MILLISECONDS.toMinutes(interval.toDuration().getMillis());
     }
 
