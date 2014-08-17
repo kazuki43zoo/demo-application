@@ -17,10 +17,10 @@
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spirng Framework 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
-| Application Layer    | [Spirng Security 3.2.5.CI-SNAPSHOT](http://docs.spring.io/spring-security/site/docs/3.2.5.CI-SNAPSHOT/reference/htmlsingle/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spirng MVC 4.1.0.RC1](http://docs.spring.io/spring/docs/4.1.0.RC1/spring-framework-reference/htmlsingle/#mvc) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.1.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) を使用しています。|
+|                      | [Spring Framework 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spring Security 3.2.5.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spring MVC 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/#mvc) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.2.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
 |                      | JSPs | Formデータやドメインオブジェクトなどにアクセスし、プレゼンテーション用のコンポーネント(HTMLなど)を生成します。 |
@@ -37,7 +37,7 @@
 | ライブラリ(Group Id:Artifact Id) | バージョン | 説明 |
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.180 | H2データベースにアクセスするために依存しています。 |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | H2データベースにアクセスするために依存しています。 |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.3 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Jackson上でJoda-Timeを使うために依存しています。 |
@@ -49,14 +49,14 @@
 
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.0.RC1 | 3.2.10.RELEASE |
-| org.springframework.security | 3.2.5.CI-SNAPSHOT | 3.1.4.RELEASE |
+| org.springframework | 4.1.0.RC2 | 3.2.10.RELEASE |
+| org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
 | org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.1 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
-| org.hibernate.hibernate-validator | 5.1.1.Final | 4.3.1.Final |
+| org.hibernate.hibernate-validator | 5.1.2.Final | 4.3.1.Final |
 | jboss-logging | 3.1.4.GA | 3.1.0.GA |
 | org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
 | joda-time | 2.4 | 2.2 |
