@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.core.config;
 
-import javax.inject.Named;
-
 import lombok.Data;
 
-@Named
+import org.springframework.stereotype.Component;
+
+@Component
 @Data
 public class ApplicationConfigs {
 

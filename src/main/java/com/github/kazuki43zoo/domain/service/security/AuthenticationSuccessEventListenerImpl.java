@@ -1,20 +1,20 @@
 package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.stereotype.Component;
 
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 
 @Transactional(dontRollbackOn = ConcurrentLoginException.class)
-@Named
+@Component
 public class AuthenticationSuccessEventListenerImpl implements
         ApplicationListener<AuthenticationSuccessEvent> {
 

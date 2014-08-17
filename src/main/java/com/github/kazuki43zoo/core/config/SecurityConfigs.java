@@ -1,12 +1,11 @@
 package com.github.kazuki43zoo.core.config;
 
-import javax.inject.Named;
-
 import lombok.Data;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-@Named
+@Component
 @Data
 public class SecurityConfigs {
 

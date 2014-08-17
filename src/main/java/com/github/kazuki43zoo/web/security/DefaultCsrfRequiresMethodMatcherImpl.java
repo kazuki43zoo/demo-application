@@ -2,13 +2,13 @@ package com.github.kazuki43zoo.web.security;
 
 import java.util.regex.Pattern;
 
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.stereotype.Component;
 
-@Named("defaultCsrfRequiresMethodMatcher")
+@Component("defaultCsrfRequiresMethodMatcher")
 public class DefaultCsrfRequiresMethodMatcherImpl implements RequestMatcher {
 
     private Pattern allowedMethods;

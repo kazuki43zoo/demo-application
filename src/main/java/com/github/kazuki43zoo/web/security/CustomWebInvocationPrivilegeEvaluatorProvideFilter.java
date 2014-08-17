@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -17,8 +16,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
+import org.springframework.stereotype.Component;
 
-@Named
+@Component
 public class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements Filter,
         WebInvocationPrivilegeEvaluator, BeanPostProcessor {
 
