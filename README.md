@@ -18,9 +18,9 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spirng Framework 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spirng Security 3.2.5.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
-|                      | [Spirng MVC 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spring Framework 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spring Security 3.2.5.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/) | Provide mechanism of security on web application. |
+|                      | [Spring MVC 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/#mvc) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.2.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
