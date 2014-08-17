@@ -87,8 +87,8 @@
     </pluginRepositories>
     <properties>
         <!-- for dependency library version -->
-        <org.springframework-version>4.1.0.RC1</org.springframework-version>
-        <org.springframework.security.version>3.2.5.CI-SNAPSHOT</org.springframework.security.version>
+        <org.springframework-version>4.1.0.RC2</org.springframework-version>
+        <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
         <org.springframework.data.version>1.8.1.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.1</org.aspectj-version>
         <org.slf4j-version>1.7.7</org.slf4j-version>
@@ -99,7 +99,7 @@
         <com.google.guava.version>17.0</com.google.guava.version>
         <commons-beanutils.version>1.9.2</commons-beanutils.version>
         <commons-lang.version>3.3.2</commons-lang.version>
-        <org.hibernate.hibernate-validator.version>5.1.1.Final</org.hibernate.hibernate-validator.version>
+        <org.hibernate.hibernate-validator.version>5.1.2.Final</org.hibernate.hibernate-validator.version>
         <org.apache.tiles.version>3.0.4</org.apache.tiles.version>
         <!-- for dependency test library version -->
         <junit.version>4.11</junit.version>
@@ -166,7 +166,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.180</version>
+            <version>1.4.181</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -201,6 +201,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
