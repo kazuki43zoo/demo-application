@@ -1,8 +1,8 @@
--- DROP Tables for time-card
-DROP TABLE daily_attendance;
-DROP TABLE time_card;
-DROP TABLE break_time;
-DROP TABLE work_place;
+--DROP Tables for time-card
+--DROP TABLE daily_attendance;
+--DROP TABLE time_card;
+--DROP TABLE break_time;
+--DROP TABLE work_place;
 
 -- DROP Tables for account
 DROP TABLE account_authentication_histories;

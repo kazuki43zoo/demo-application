@@ -169,10 +169,6 @@
         <location>/WEB-INF/views/common/error/systemError.jsp</location>
     </error-page>
     <error-page>
-        <error-code>403</error-code>
-        <location>/WEB-INF/views/common/error/accessError.jsp</location>
-    </error-page>
-    <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp</location>
     </error-page>

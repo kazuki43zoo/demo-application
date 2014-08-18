@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width" />
 <meta name="contextPath" content="${contextPath}">
+<meta name="csrfHeaderName" content="${f:h(_csrf.headerName)}" />
+<meta name="csrfToken" content="${f:h(_csrf.token)}" />
+
 <c:set var="titleKey">
     <tiles:insertAttribute name="title" ignore="true" />
 </c:set>

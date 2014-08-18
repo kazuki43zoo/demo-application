@@ -15,6 +15,7 @@
     <entry key="e.demo.fw.6009">Type mismatch error occurred in request parameter or header or path variable.</entry>
     <entry key="e.demo.fw.7001">Illegal screen flow detected.</entry>
     <entry key="e.demo.fw.7002">Access denied.</entry>
+    <entry key="e.demo.fw.7003">Illegal access detected.</entry>
     <entry key="e.demo.fw.8001">Business error occurred.</entry>
     <entry key="e.demo.fw.8002">Conflict with other processing occurred.</entry>
     <entry key="e.demo.fw.9001">System error occurred.</entry>

@@ -10,6 +10,8 @@
 
     <sec:http pattern="/api/**" auto-config="true" use-expressions="true">
 
+        <sec:csrf />
+
         <sec:headers>
             <sec:cache-control />
         </sec:headers>
@@ -21,7 +23,9 @@
 
     <sec:http auto-config="true" use-expressions="true">
 
-        <sec:csrf request-matcher-ref="csrfRequestMatcher" />
+        <sec:access-denied-handler ref="customAccessDeniedHandler" />
+
+        <sec:csrf request-matcher-ref="customCsrfRequestMatcher" />
 
         <sec:headers>
             <sec:cache-control />
@@ -37,7 +41,7 @@
         <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
             username-parameter="accountId" password-parameter="password"
             authentication-details-source-ref="customAuthenticationDetailsSource"
-            authentication-failure-handler-ref="authenticationFailureHandler" />
+            authentication-failure-handler-ref="customAuthenticationFailureHandler" />
 
         <sec:logout logout-url="/auth/logout" invalidate-session="true" delete-cookies="JSESSIONID"
             success-handler-ref="customLogoutSuccessHandler" />
@@ -61,7 +65,24 @@
 
     <context:component-scan base-package="com.github.kazuki43zoo.web.security" />
 
-    <bean id="authenticationFailureHandler"
+    <bean id="customAccessDeniedHandler" class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+        <constructor-arg index="0">
+            <map>
+                <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+                    <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+                        <property name="errorPage" value="/WEB-INF/views/common/error/csrfTokenError.jsp" />
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+                <property name="errorPage" value="/WEB-INF/views/common/error/accessError.jsp" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="customAuthenticationFailureHandler"
         class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
         <property name="useForward" value="true" />
         <property name="defaultFailureUrl" value="/auth/login/error" />
@@ -73,7 +94,7 @@
         </property>
     </bean>
 
-    <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+    <bean id="customCsrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
         <constructor-arg>
             <list>
                 <ref bean="defaultCsrfRequiresMethodMatcher" />

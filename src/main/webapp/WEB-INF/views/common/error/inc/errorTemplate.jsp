@@ -2,10 +2,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width" />
 <meta name="contextPath" content="${contextPath}">
+<meta name="csrfHeaderName" content="${f:h(_csrf.headerName)}" />
+<meta name="csrfToken" content="${f:h(_csrf.token)}" />
+
 <title>${param.title}</title>
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -17,8 +21,8 @@
     <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" ng-controller="NavBarController as navBarCtrl"
-        ng-cloak>
+    <div class="navbar navbar-default navbar-fixed-top"
+        ng-controller="NavBarController as navBarCtrl" ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
     <div id="container">
