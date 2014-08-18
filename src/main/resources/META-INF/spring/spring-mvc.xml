@@ -112,6 +112,4 @@
     <context:component-scan base-package="com.github.kazuki43zoo.web.mvc" />
     <context:component-scan base-package="com.github.kazuki43zoo.app" />
 
-    <mvc:view-controller path="/admin/h2Console" view-name="admin/h2Console" />
-
 </beans>

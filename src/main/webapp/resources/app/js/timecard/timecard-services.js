@@ -32,22 +32,6 @@
         total.penaltyTime = 0;
     };
 
-    TimeCardService.prototype.setEmptyTimeCard = function(timeCard, targetMonth) {
-        var startDayOfTargetMonth = new Date(targetMonth);
-        var attendances = [];
-        for (var day = 1; day <= 31; day++) {
-            var targetDate = new Date(startDayOfTargetMonth.getFullYear(), startDayOfTargetMonth
-                    .getMonth(), day);
-            if (targetDate.getMonth() !== startDayOfTargetMonth.getMonth()) {
-                break;
-            }
-            attendances.push({
-                targetDate : targetDate
-            });
-        }
-        timeCard.attendances = attendances;
-    };
-
     TimeCardService.prototype.addCalculateResult = function(attendance, total) {
         total.actualWorkingMinute += attendance.actualWorkingMinute;
         total.compensationMinute += attendance.compensationMinute;
@@ -83,7 +67,7 @@
         var timeCard = TimeCardResource.get({
             targetMonth : targetMonth
         });
-        this.setEmptyTimeCard(timeCard, targetMonth);
+        setEmptyTimeCard(timeCard, targetMonth);
 
         var _this = this;
         var reflectTimeCard = function(timeCard) {
@@ -187,6 +171,22 @@
             targetDay : targetDay
         }, attendance).$promise;
     };
+
+    function setEmptyTimeCard(timeCard, targetMonth) {
+        var startDayOfTargetMonth = new Date(targetMonth);
+        var attendances = [];
+        for (var day = 1; day <= 31; day++) {
+            var targetDate = new Date(startDayOfTargetMonth.getFullYear(), startDayOfTargetMonth
+                    .getMonth(), day);
+            if (targetDate.getMonth() !== startDayOfTargetMonth.getMonth()) {
+                break;
+            }
+            attendances.push({
+                targetDate : targetDate
+            });
+        }
+        timeCard.attendances = attendances;
+    }
 
     function calculateDiff(before, after) {
         var diff = 0;
