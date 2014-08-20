@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
     href="${contextPath}/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/app/css/styles.css">
-<link rel="stylesheet" href="${contextPath}/resources/app/css/${usecaseName}.css">
+<link rel="stylesheet" href="${contextPath}/resources/app/styles.css">
+<link rel="stylesheet" href="${contextPath}/resources/app/${usecaseName}/${usecaseName}.css">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -48,14 +48,14 @@
     <script src="${contextPath}/resources/vendor/angular/angular.min.js"></script>
     <script src="${contextPath}/resources/vendor/angular-i18n/angular-locale_${locale}.js"></script>
     <script src="${contextPath}/resources/vendor/angular-resource/angular-resource.min.js"></script>
-    <script src="${contextPath}/resources/app/js/common/common-handlers.js"></script>
-    <script src="${contextPath}/resources/app/js/app.js"></script>
-    <script src="${contextPath}/resources/app/js/app-resources.js"></script>
-    <script src="${contextPath}/resources/app/js/app-filters.js"></script>
-    <script src="${contextPath}/resources/app/js/common/common-services.js"></script>
-    <script src="${contextPath}/resources/app/js/common/common-controllers.js"></script>
-    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}.js"></script>
-    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-controllers.js"></script>
-    <script src="${contextPath}/resources/app/js/${usecaseName}/${usecaseName}-services.js"></script>
+    <script src="${contextPath}/resources/app/common/common-handlers.js"></script>
+    <script src="${contextPath}/resources/app/app.js"></script>
+    <script src="${contextPath}/resources/app/app-resources.js"></script>
+    <script src="${contextPath}/resources/app/app-filters.js"></script>
+    <script src="${contextPath}/resources/app/common/common-services.js"></script>
+    <script src="${contextPath}/resources/app/common/common-controllers.js"></script>
+    <script src="${contextPath}/resources/app/${usecaseName}/${usecaseName}.js"></script>
+    <script src="${contextPath}/resources/app/${usecaseName}/${usecaseName}-controllers.js"></script>
+    <script src="${contextPath}/resources/app/${usecaseName}/${usecaseName}-services.js"></script>
 </body>
 </html>

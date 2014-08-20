@@ -1,77 +1,74 @@
 <div ng-controller="TimeCardController as timeCardCtrl" ng-init="timeCardCtrl.loadTimeCard()"
     ng-cloak>
 
-    <div>
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label for="targetMonth" class="control-label col-sm-2"><spring:message
-                        code="targetMonth" /></label>
-                <div class="col-sm-3">
-                    <input type="month" id="targetMonth" class="form-control targetMonth"
-                        min="1970-01" max="9999-12" placeholder="yyyy-MM"
-                        ng-model="timeCardCtrl.targetMonth" ng-change="timeCardCtrl.loadTimeCard()">
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-6">
-                    <button class="btn btn-default" data-toggle="modal"
-                        data-target="#attendanceEditModal" ng-disabled="timeCardCtrl.loading===true"
-                        ng-click="timeCardCtrl.loadToday()">
-                        <spring:message code="todayBtn" />
-                    </button>
-                </div>
+    <div id="timeCardForm" class="form-horizontal">
+        <div class="form-group">
+            <label for="targetMonth" class="control-label col-sm-2"><spring:message
+                    code="targetMonth" /></label>
+            <div class="col-sm-3">
+                <input type="month" id="targetMonth" class="form-control targetMonth" max="9999-12"
+                    placeholder="yyyy-MM" ng-model="timeCardCtrl.targetMonth"
+                    ng-change="timeCardCtrl.loadTimeCard()">
             </div>
+            <div class="col-sm-offset-1 col-sm-6">
+                <button class="btn btn-default" data-toggle="modal"
+                    data-target="#attendanceEditModal" ng-disabled="timeCardCtrl.loading===true"
+                    ng-click="timeCardCtrl.loadToday()">
+                    <spring:message code="todayBtn" />
+                </button>
+            </div>
+        </div>
 
-            <div class="form-group">
-                <label for="defaultWorkPlaceUuid" class="control-label col-sm-2"><spring:message
-                        code="workPlace" /></label>
-                <div class="col-sm-4">
-                    <select id="defaultWorkPlaceUuid" class="form-control workPlaceUuid"
-                        ng-model="timeCardCtrl.timeCard.workPlaceUuid"
-                        ng-change="timeCardCtrl.calculateTimeCard()">
-                        <option value=""></option>
-                        <c:forEach items="${CL_WORK_PLACE}" var="workPlaceEntry">
-                            <option value="${f:h(workPlaceEntry.key)}">
-                                ${f:h(workPlaceEntry.value)}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <button class="btn btn-default" ng-disabled="timeCardCtrl.loading===true"
-                        ng-click="timeCardCtrl.initTimeCard()">
-                        <spring:message code="initializeBtn" />
-                    </button>
-                    <button class="btn btn-default"
-                        ng-disabled="
+        <div class="form-group">
+            <label for="defaultWorkPlace" class="control-label col-sm-2"><spring:message
+                    code="workPlace" /></label>
+            <div class="col-sm-4">
+                <select id="defaultWorkPlace" class="form-control workPlace"
+                    ng-model="timeCardCtrl.timeCard.workPlaceUuid"
+                    ng-change="timeCardCtrl.calculateTimeCard()">
+                    <option value=""></option>
+                    <c:forEach items="${CL_WORK_PLACE}" var="workPlaceEntry">
+                        <option value="${f:h(workPlaceEntry.key)}">
+                            ${f:h(workPlaceEntry.value)}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <button id="initializeBtn" class="btn btn-default"
+                    ng-disabled="timeCardCtrl.loading===true" ng-click="timeCardCtrl.initTimeCard()">
+                    <spring:message code="initializeBtn" />
+                </button>
+                <button id="reloadBtn" class="btn btn-default"
+                    ng-disabled="
                             timeCardCtrl.loading===true
                             ||
                             timeCardCtrl.stored === false
                             ||
                             timeCardCtrl.needSaveTimeCard() === false
                             "
-                        ng-click="timeCardCtrl.loadTimeCard()">
-                        <span class="glyphicon glyphicon-refresh"></span>
-                        <spring:message code="reloadBtn" />
-                    </button>
-                    <button class="btn btn-default"
-                        ng-disabled="
+                    ng-click="timeCardCtrl.loadTimeCard()">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                    <spring:message code="reloadBtn" />
+                </button>
+                <button id="saveBtn" class="btn btn-default"
+                    ng-disabled="
                             timeCardCtrl.loading===true
                             ||
                             (timeCardCtrl.stored === true
                              &&
                              timeCardCtrl.needSaveTimeCard() === false)
                             "
-                        ng-click="timeCardCtrl.saveTimeCard()">
-                        <span class="glyphicon glyphicon-floppy-save"></span>
-                        <spring:message code="saveBtn" />
-                    </button>
-                </div>
+                    ng-click="timeCardCtrl.saveTimeCard()">
+                    <span class="glyphicon glyphicon-floppy-save"></span>
+                    <spring:message code="saveBtn" />
+                </button>
             </div>
         </div>
     </div>
 
     <table id="attendancesTable" class="table table-hover">
         <thead>
-            <tr>
+            <tr id="attendancesHeader">
                 <th class="width-sm" title="<spring:message code="days" />"><spring:message
                         code="thead.days" /></th>
                 <th class="width-sm" title="<spring:message code="dayOfWeek" />"><spring:message
@@ -100,9 +97,9 @@
             </tr>
         </thead>
 
-        <tbody>
-            <tr class="dayOfWeek{{attendance.targetDate | dayOfWeek}}" data-toggle="modal"
-                data-target="#attendanceEditModal"
+        <tbody data-toggle="modal" data-target="#attendanceEditModal">
+            <tr id="attendancesRow{{$index+1}}"
+                class="dayOfWeek{{attendance.targetDate | dayOfWeek}}"
                 ng-repeat="attendance in timeCardCtrl.timeCard.attendances"
                 ng-click=" 
                     timeCardCtrl.targetDay=$index+1;
@@ -134,7 +131,7 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr class="total">
+            <tr id="attendancesFooter" class="total">
                 <th colspan="4"><spring:message code="total" /></th>
                 <td class="time">{{timeCardCtrl.total.actualWorkingMinute | formatTime}}</td>
                 <td class="time">{{timeCardCtrl.total.compensationMinute | formatTime}}</td>
@@ -148,7 +145,7 @@
 
     <table id="daySummaryTable" class="table">
         <tbody>
-            <tr>
+            <tr id="daySummaryRow1">
                 <th><spring:message code="workingDays" /></th>
                 <td class="number">{{timeCardCtrl.total.baseWorkDays}} <span class="daysText"><spring:message
                             code="days" /></span></td>
@@ -161,7 +158,7 @@
                     class="daysText"><spring:message code="days" /></span>
                 </td>
             </tr>
-            <tr>
+            <tr id="daySummaryRow2">
                 <th><spring:message code="absenceDays" /></th>
                 <td class="number">{{timeCardCtrl.total.absenceCount}} <span class="daysText"><spring:message
                             code="days" /></span></td>
@@ -247,8 +244,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="6"><textarea class="form-control" rows="5"
-                                    ng-model="timeCardCtrl.timeCard.note"></textarea></td>
+                            <td colspan="6"><textarea id="timeCardNote" class="form-control"
+                                    rows="5" ng-model="timeCardCtrl.timeCard.note"></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -290,7 +287,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                    <button type="button" id="attendanceEditModalCloseBtn" class="close"
+                        data-dismiss="modal">
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
                     <h4
@@ -309,14 +307,14 @@
                                                 code="targetDays" /></label></th>
                                     <th class="time"><label for="beginTime"><spring:message
                                                 code="beginTime" /><br>
-                                            <button class="btn btn-default btn-xs"
+                                            <button id="enterBtn" class="btn btn-default btn-xs"
                                                 ng-disabled="timeCardCtrl.loading === true"
                                                 ng-click="timeCardCtrl.enter()">
                                                 <span class="glyphicon glyphicon-log-in"></span>
                                             </button></label></th>
                                     <th class="time"><label for="finishTime"><spring:message
                                                 code="finishTime" /><br>
-                                            <button class="btn btn-default btn-xs"
+                                            <button id="exitBtn" class="btn btn-default btn-xs"
                                                 ng-disabled="
                                                     timeCardCtrl.loading === true
                                                     ||
@@ -327,10 +325,10 @@
                                             </button></label></th>
                                     <th class="paidLeave"><label for="paidLeave"><spring:message
                                                 code="paidLeave" /></label></th>
-                                    <th class="specialWork"><label for="specialWorkCode"><spring:message
+                                    <th class="specialWork"><label for="specialWork"><spring:message
                                                 code="specialWork" /></label></th>
                                     <th><label for="note"><spring:message code="note" /></label></th>
-                                    <th class="workPlace"><label for="workPlaceUuid"><spring:message
+                                    <th class="workPlace"><label for="workPlace"><spring:message
                                                 code="workPlace" /></label></th>
                                 </tr>
                             </thead>
@@ -342,16 +340,14 @@
                                         ng-model="timeCardCtrl.targetDay"
                                         ng-disabled="timeCardCtrl.loading === true"
                                         ng-change="timeCardCtrl.setEditableAttendance()"></td>
-                                    <td><input type="time" id="beginTime"
-                                        class="form-control beginTime" maxlength="5"
-                                        placeholder="HH:mm"
+                                    <td><input type="time" id="beginTime" class="form-control"
+                                        maxlength="5" placeholder="HH:mm"
                                         ng-model="timeCardCtrl.editableAttendance.beginTime"
                                         ng-disabled="timeCardCtrl.loading === true"
                                         ng-readonly="timeCardCtrl.editableAttendance.paidLeave === true"
                                         ng-blur="timeCardCtrl.calculateTime('beginTime')"></td>
-                                    <td><input type="time" id="finishTime"
-                                        class="form-control finishTime" maxlength="5"
-                                        placeholder="HH:mm"
+                                    <td><input type="time" id="finishTime" class="form-control"
+                                        maxlength="5" placeholder="HH:mm"
                                         ng-model="timeCardCtrl.editableAttendance.finishTime"
                                         ng-disabled="timeCardCtrl.loading === true"
                                         ng-readonly="
@@ -361,7 +357,7 @@
                                             "
                                         ng-blur="timeCardCtrl.calculateTime('finishTime')"></td>
                                     <td class="center"><input type="checkbox" id="paidLeave"
-                                        class="paidLeave" value="true"
+                                        value="true"
                                         ng-model="timeCardCtrl.editableAttendance.paidLeave"
                                         ng-disabled="
                                             timeCardCtrl.loading === true
@@ -373,8 +369,7 @@
                                              timeCardCtrl.editableAttendance.absence === false)
                                             "
                                         ng-change="timeCardCtrl.calculateTime()"></td>
-                                    <td><select id="specialWorkCode"
-                                        class="form-control specialWorkCode"
+                                    <td><select id="specialWork" class="form-control"
                                         ng-model="timeCardCtrl.editableAttendance.specialWorkCode"
                                         ng-disabled="
                                             timeCardCtrl.loading === true
@@ -407,10 +402,9 @@
                                                 </c:choose>
                                             </c:forEach>
                                     </select></td>
-                                    <td><textarea id="note" class="form-control note"
+                                    <td><textarea id="note" class="form-control"
                                             ng-model="timeCardCtrl.editableAttendance.note" rows="1"></textarea></td>
-                                    <td><select id="workPlaceUuid"
-                                        class="form-control workPlaceUuid"
+                                    <td><select id="workPlace" class="form-control"
                                         ng-model="timeCardCtrl.editableAttendance.workPlaceUuid"
                                         ng-disabled="
                                             timeCardCtrl.loading === true
@@ -454,7 +448,7 @@
                                         class="glyphicon glyphicon-ok" ng-switch-when="true"></span><span
                                         ng-switch-default>-</span></td>
                                     <td class="center">
-                                        <button class="btn btn-default"
+                                        <button id="dailySaveBtn" class="btn btn-default"
                                             ng-disabled="
                                                 timeCardCtrl.loading === true
                                                 ||

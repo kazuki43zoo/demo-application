@@ -13,7 +13,3 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <spring:message var="dateTimeFormat" code="format.dateTime" />
 <spring:message var="timeZoneFormat" code="format.timeZone" />
-
-<c:set var="matchingPathPattern">
-${requestScope['org.springframework.web.servlet.HandlerMapping.bestMatchingPattern']}
-</c:set>
