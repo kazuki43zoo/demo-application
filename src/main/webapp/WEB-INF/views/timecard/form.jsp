@@ -4,7 +4,7 @@
     <div>
         <div class="form-horizontal">
             <div class="form-group">
-                <label for="targetMonth" class="control-label col-sm-2 "><spring:message
+                <label for="targetMonth" class="control-label col-sm-2"><spring:message
                         code="targetMonth" /></label>
                 <div class="col-sm-3">
                     <input type="month" id="targetMonth" class="form-control targetMonth"
@@ -13,8 +13,9 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-6">
-                    <button class="btn btn-default" ng-click="timeCardCtrl.loadToday()" data-toggle="modal"
-                data-target="#attendanceEditModal">
+                    <button class="btn btn-default" data-toggle="modal"
+                        data-target="#attendanceEditModal" ng-disabled="timeCardCtrl.loading===true"
+                        ng-click="timeCardCtrl.loadToday()">
                         <spring:message code="todayBtn" />
                     </button>
                 </div>
@@ -35,11 +36,14 @@
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <button class="btn btn-default" ng-click="timeCardCtrl.initTimeCard()">
+                    <button class="btn btn-default" ng-disabled="timeCardCtrl.loading===true"
+                        ng-click="timeCardCtrl.initTimeCard()">
                         <spring:message code="initializeBtn" />
                     </button>
                     <button class="btn btn-default"
                         ng-disabled="
+                            timeCardCtrl.loading===true
+                            ||
                             timeCardCtrl.stored === false
                             ||
                             timeCardCtrl.needSaveTimeCard() === false
@@ -50,9 +54,11 @@
                     </button>
                     <button class="btn btn-default"
                         ng-disabled="
-                            timeCardCtrl.stored === true
-                            &&
-                            timeCardCtrl.needSaveTimeCard() === false
+                            timeCardCtrl.loading===true
+                            ||
+                            (timeCardCtrl.stored === true
+                             &&
+                             timeCardCtrl.needSaveTimeCard() === false)
                             "
                         ng-click="timeCardCtrl.saveTimeCard()">
                         <span class="glyphicon glyphicon-floppy-save"></span>
@@ -304,13 +310,18 @@
                                     <th class="time"><label for="beginTime"><spring:message
                                                 code="beginTime" /><br>
                                             <button class="btn btn-default btn-xs"
+                                                ng-disabled="timeCardCtrl.loading === true"
                                                 ng-click="timeCardCtrl.enter()">
                                                 <span class="glyphicon glyphicon-log-in"></span>
                                             </button></label></th>
                                     <th class="time"><label for="finishTime"><spring:message
                                                 code="finishTime" /><br>
                                             <button class="btn btn-default btn-xs"
-                                                ng-disabled="timeCardCtrl.editableAttendance.beginTime == null"
+                                                ng-disabled="
+                                                    timeCardCtrl.loading === true
+                                                    ||
+                                                    timeCardCtrl.editableAttendance.beginTime == null
+                                                    "
                                                 ng-click="timeCardCtrl.exit()">
                                                 <span class="glyphicon glyphicon-log-out"></span>
                                             </button></label></th>
@@ -329,17 +340,20 @@
                                         class="form-control" required="required" min="1"
                                         max="{{timeCardCtrl.timeCard.attendances.length}}"
                                         ng-model="timeCardCtrl.targetDay"
+                                        ng-disabled="timeCardCtrl.loading === true"
                                         ng-change="timeCardCtrl.setEditableAttendance()"></td>
                                     <td><input type="time" id="beginTime"
                                         class="form-control beginTime" maxlength="5"
                                         placeholder="HH:mm"
                                         ng-model="timeCardCtrl.editableAttendance.beginTime"
+                                        ng-disabled="timeCardCtrl.loading === true"
                                         ng-readonly="timeCardCtrl.editableAttendance.paidLeave === true"
                                         ng-blur="timeCardCtrl.calculateTime('beginTime')"></td>
                                     <td><input type="time" id="finishTime"
                                         class="form-control finishTime" maxlength="5"
                                         placeholder="HH:mm"
                                         ng-model="timeCardCtrl.editableAttendance.finishTime"
+                                        ng-disabled="timeCardCtrl.loading === true"
                                         ng-readonly="
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             ||
@@ -350,6 +364,8 @@
                                         class="paidLeave" value="true"
                                         ng-model="timeCardCtrl.editableAttendance.paidLeave"
                                         ng-disabled="
+                                            timeCardCtrl.loading === true
+                                            ||
                                             (timeCardCtrl.editableAttendance.targetDate | isHoliday)
                                             ||
                                             (timeCardCtrl.editableAttendance.paidLeave === false
@@ -361,6 +377,8 @@
                                         class="form-control specialWorkCode"
                                         ng-model="timeCardCtrl.editableAttendance.specialWorkCode"
                                         ng-disabled="
+                                            timeCardCtrl.loading === true
+                                            ||
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             ||
                                             (timeCardCtrl.editableAttendance.targetDate | isHoliday)
@@ -394,7 +412,11 @@
                                     <td><select id="workPlaceUuid"
                                         class="form-control workPlaceUuid"
                                         ng-model="timeCardCtrl.editableAttendance.workPlaceUuid"
-                                        ng-disabled="timeCardCtrl.editableAttendance.paidLeave === true"
+                                        ng-disabled="
+                                            timeCardCtrl.loading === true
+                                            ||
+                                            timeCardCtrl.editableAttendance.paidLeave === true
+                                            "
                                         ng-change="timeCardCtrl.calculateTime()">
                                             <option value=""></option>
                                             <c:forEach items="${CL_WORK_PLACE}" var="workPlaceEntry">
@@ -434,6 +456,8 @@
                                     <td class="center">
                                         <button class="btn btn-default"
                                             ng-disabled="
+                                                timeCardCtrl.loading === true
+                                                ||
                                                 timeCardCtrl.stored === false
                                                 ||
                                                 timeCardCtrl.needSaveEditableAttendance() === false

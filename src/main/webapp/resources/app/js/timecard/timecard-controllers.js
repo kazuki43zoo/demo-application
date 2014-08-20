@@ -7,6 +7,7 @@
         this.dateTimeService = dateTimeService;
 
         this.originalAttendance = {};
+        this.loading = false;
         this.targetDay = 1;
         this.total = {};
         this.targetMonth = $location.path().substring(1);
@@ -18,6 +19,7 @@
         if (this.targetMonth === '') {
             this.loadToday();
         } else {
+            this.loading = true;
             this.timeCard = this.timeCardService.getTimeCard(this.targetMonth, this.total);
             var _this = this;
             var reflectLoadResult = function(timeCard) {
@@ -28,6 +30,7 @@
                 _this.$location.path(_this.targetMonth);
                 _this.loadedTimeCard = angular.copy(timeCard);
                 _this.setEditableAttendance();
+                _this.loading = false;
             };
             this.timeCard.$promise.then(reflectLoadResult);
         }
