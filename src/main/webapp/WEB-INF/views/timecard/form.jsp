@@ -13,7 +13,8 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-6">
-                    <button class="btn btn-default" ng-click="timeCardCtrl.loadToday()">
+                    <button class="btn btn-default" ng-click="timeCardCtrl.loadToday()" data-toggle="modal"
+                data-target="#attendanceEditModal">
                         <spring:message code="todayBtn" />
                     </button>
                 </div>
