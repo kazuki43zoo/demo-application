@@ -1,118 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="CL_AUTHORITY" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-        <property name="map">
+    <bean id="CL_AUTHORITY" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList"
+        p:map-ref="CL_AUTHORITY_MAP" />
+    <util:map id="CL_AUTHORITY_MAP">
+        <entry key="ROLE_ADMIN" value="Administrators" />
+        <entry key="ROLE_USER" value="Users" />
+        <entry key="ROLE_EMPLOYEE" value="Employees" />
+        <entry key="ROLE_GUEST" value="Guests" />
+        <entry key="ROLE_ACCOUNTMNG" value="Account Managers" />
+    </util:map>
+
+    <bean id="CL_ENABLED" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList"
+        p:map-ref="CL_ENABLED_MAP" />
+    <util:map id="CL_ENABLED_MAP">
+        <entry key="true" value="Enable" />
+        <entry key="false" value="Disable" />
+    </util:map>
+
+    <bean id="CL_AUTHENTICATION_RESULT" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList"
+        p:map-ref="CL_AUTHENTICATION_RESULT_MAP" />
+    <util:map id="CL_AUTHENTICATION_RESULT_MAP">
+        <entry key="true" value="Success" />
+        <entry key="false" value="Failure" />
+    </util:map>
+
+    <bean id="CL_ACCOUNT_SEARCH_TARGET" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList"
+        p:map-ref="CL_ACCOUNT_SEARCH_TARGET_MAP" />
+    <util:map id="CL_ACCOUNT_SEARCH_TARGET_MAP">
+        <entry key="accountId" value="Account ID" />
+        <entry key="accountName" value="Account Name" />
+    </util:map>
+
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList"
+        p:rows-ref="CL_ATTENDANCE_SPECIAL_WORK_ROWS" />
+    <util:map id="CL_ATTENDANCE_SPECIAL_WORK_ROWS">
+        <entry key="en">
             <map>
-                <entry key="ROLE_ADMIN" value="Administrators" />
-                <entry key="ROLE_USER" value="Users" />
-                <entry key="ROLE_EMPLOYEE" value="Employees" />
-                <entry key="ROLE_GUEST" value="Guests" />
-                <entry key="ROLE_ACCOUNTMNG" value="Account Managers" />
+                <entry key="00" value="Delayed by public transport" />
+                <entry key="01" value="Indicated by superiors" />
+                <entry key="10" value="Compensatory holiday" />
             </map>
-        </property>
-    </bean>
-
-    <bean id="CL_ENABLED" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-        <property name="map">
+        </entry>
+        <entry key="ja">
             <map>
-                <entry key="true" value="Enable" />
-                <entry key="false" value="Disable" />
+                <entry key="00" value="公共交通機関の遅延" />
+                <entry key="01" value="上長の指示" />
+                <entry key="10" value="代休" />
             </map>
-        </property>
-    </bean>
+        </entry>
+    </util:map>
 
-    <bean id="CL_AUTHENTICATION_RESULT" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-        <property name="map">
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList"
+        p:rows-ref="CL_ATTENDANCE_SPECIAL_WORK_DISP_ROWS" />
+    <util:map id="CL_ATTENDANCE_SPECIAL_WORK_DISP_ROWS">
+        <entry key="en">
             <map>
-                <entry key="true" value="Success" />
-                <entry key="false" value="Failure" />
+                <entry key="00" value="D" />
+                <entry key="01" value="I" />
+                <entry key="10" value="C" />
             </map>
-        </property>
-    </bean>
-
-
-    <bean id="CL_ACCOUNT_SEARCH_TARGET" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
-        <property name="map">
+        </entry>
+        <entry key="ja">
             <map>
-                <entry key="accountId" value="Account ID" />
-                <entry key="accountName" value="Account Name" />
+                <entry key="00" value="公" />
+                <entry key="01" value="上" />
+                <entry key="10" value="代" />
             </map>
-        </property>
-    </bean>
+        </entry>
+    </util:map>
 
-
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
-        <property name="rows">
-            <map>
-                <entry key="en">
-                    <map>
-                        <entry key="00" value="Delayed by public transport" />
-                        <entry key="01" value="Indicated by superiors" />
-                        <entry key="10" value="Compensatory holiday" />
-                    </map>
-                </entry>
-                <entry key="ja">
-                    <map>
-                        <entry key="00" value="公共交通機関の遅延" />
-                        <entry key="01" value="上長の指示" />
-                        <entry key="10" value="代休" />
-                    </map>
-                </entry>
-            </map>
-        </property>
-    </bean>
-
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
-        <property name="rows">
-            <map>
-                <entry key="en">
-                    <map>
-                        <entry key="00" value="D" />
-                        <entry key="01" value="I" />
-                        <entry key="10" value="C" />
-                    </map>
-                </entry>
-                <entry key="ja">
-                    <map>
-                        <entry key="00" value="公" />
-                        <entry key="01" value="上" />
-                        <entry key="10" value="代" />
-                    </map>
-                </entry>
-            </map>
-        </property>
-    </bean>
-
-    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
-        <property name="rowsByCodeList">
-            <map>
-                <entry key="en">
-                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList">
-                        <property name="jdbcTemplate" ref="jdbcTemplate" />
-                        <property name="valueColumn" value="work_place_uuid" />
-                        <property name="labelColumn" value="work_place_name" />
-                        <property name="querySql"
-                            value="SELECT work_place_uuid, work_place_name FROM work_place ORDER BY display_order, work_place_name" />
-                    </bean>
-                </entry>
-                <entry key="ja">
-                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList">
-                        <property name="jdbcTemplate" ref="jdbcTemplate" />
-                        <property name="valueColumn" value="work_place_uuid" />
-                        <property name="labelColumn" value="work_place_name_ja" />
-                        <property name="querySql"
-                            value="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name_ja" />
-                    </bean>
-                </entry>
-            </map>
-        </property>
-    </bean>
+    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList"
+        p:rowsByCodeList-ref="CL_WORK_PLACE_ROWS_BY_CODE_LIST" />
+    <util:map id="CL_WORK_PLACE_ROWS_BY_CODE_LIST">
+        <entry key="en">
+            <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
+                p:jdbcTemplate-ref="jdbcTemplate" p:labelColumn="work_place_name"
+                p:querySql="SELECT work_place_uuid, work_place_name FROM work_place ORDER BY display_order, work_place_name"
+                p:valueColumn="work_place_uuid" />
+        </entry>
+        <entry key="ja">
+            <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
+                p:valueColumn="work_place_uuid" p:labelColumn="work_place_name_ja"
+                p:querySql="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name_ja"
+                p:jdbcTemplate-ref="jdbcTemplate" />
+        </entry>
+    </util:map>
 
 </beans>

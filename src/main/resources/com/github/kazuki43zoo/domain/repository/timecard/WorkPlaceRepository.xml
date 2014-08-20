@@ -6,13 +6,14 @@
 <mapper namespace="com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository">
 
     <resultMap id="resultMap-WorkPlace" type="WorkPlace">
-        <id property="workPlaceUuid" column="work_place_uuid"/>
+        <id property="workPlaceUuid" column="work_place_uuid" />
         <result property="workPlaceName" column="work_place_name" />
         <result property="workPlaceNameJa" column="work_place_name_ja" />
         <result property="baseBeginTime" column="base_begin_time" />
         <result property="baseFinishTime" column="base_finish_time" />
         <result property="unitTime" column="unit_time" />
-        <collection property="breakTimes" javaType="ArrayList" ofType="BreakTime">
+        <collection property="breakTimes" javaType="ArrayList"
+            ofType="BreakTime">
             <constructor>
                 <idArg column="work_place_uuid" javaType="String" />
                 <idArg column="break_begin_time" javaType="LocalTime" />

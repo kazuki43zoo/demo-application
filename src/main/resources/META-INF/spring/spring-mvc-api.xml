@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
     xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
@@ -10,22 +11,20 @@
 
     <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
 
-    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="objectMapper">
-            <bean class="com.fasterxml.jackson.datatype.joda.JodaMapper">
-                <property name="dateFormat">
-                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
-                </property>
-            </bean>
-        </property>
-    </bean>
+    <bean id="jsonMessageConverter"
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+        p:objectMapper-ref="objectMapper" />
+    <bean id="objectMapper" class="com.fasterxml.jackson.datatype.joda.JodaMapper"
+        p:dateFormat-ref="objectMapperDateFormat" />
+    <bean id="objectMapperDateFormat" class="com.fasterxml.jackson.databind.util.StdDateFormat" />
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">
             <ref bean="jsonMessageConverter" />
         </mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+            <bean
+                class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
             <bean
                 class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver" />
         </mvc:argument-resolvers>
@@ -38,14 +37,12 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-        <property name="defaultLocale" value="en" />
-        <property name="cookieName" value="locale" />
-    </bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+        p:defaultLocale="en" p:cookieName="locale" />
 
-    <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
-        <property name="exceptionLogger" ref="exceptionLogger" />
-    </bean>
+    <bean id="handlerExceptionResolverLoggingInterceptor"
+        class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor"
+        p:exceptionLogger-ref="exceptionLogger" />
     <aop:config>
         <aop:advisor advice-ref="handlerExceptionResolverLoggingInterceptor"
             pointcut="execution(* org.springframework.web.servlet.HandlerExceptionResolver.resolveException(..))" />

@@ -6,20 +6,24 @@
 <tiles-definitions>
     <definition name="baseLayout" template="/WEB-INF/views/common/layout/template.jsp">
         <put-attribute name="title" value="Demo Application" />
-        <put-attribute name="topNavbar" value="/WEB-INF/views/common/layout/topNavbar.jsp" />
-        <put-attribute name="leftNavbar" value="/WEB-INF/views/common/layout/leftNavbar.jsp" />
+        <put-attribute name="topNavbar"
+            value="/WEB-INF/views/common/layout/topNavbar.jsp" />
+        <put-attribute name="leftNavbar"
+            value="/WEB-INF/views/common/layout/leftNavbar.jsp" />
         <put-attribute name="content" value="" />
         <put-attribute name="viewName" value="" />
     </definition>
 
     <definition name="auth/*" extends="baseLayout">
-        <put-attribute name="topNavbar" value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
+        <put-attribute name="topNavbar"
+            value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
         <put-attribute name="title" value="title.auth.{1}" />
         <put-attribute name="content" value="/WEB-INF/views/auth/{1}.jsp" />
         <put-attribute name="usecaseName" value="auth" />
     </definition>
     <definition name="password/*" extends="baseLayout">
-        <put-attribute name="topNavbar" value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
+        <put-attribute name="topNavbar"
+            value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
         <put-attribute name="title" value="title.password.{1}" />
         <put-attribute name="content" value="/WEB-INF/views/password/{1}.jsp" />
         <put-attribute name="usecaseName" value="password" />

@@ -7,14 +7,18 @@
 
     <resultMap id="resultMap-Account" type="Account">
         <id property="accountUuid" column="account_uuid" />
-        <association property="passwordLock" column="account_uuid" javaType="AccountPasswordLock"
-            select="findOnePasswordLock" fetchType="lazy" />
-        <collection property="authorities" column="account_uuid" javaType="ArrayList" ofType="AccountAuthority"
-            select="findAllAuthorityByAccountUuid" fetchType="lazy"/>
-        <collection property="passwordHistories" column="account_uuid" javaType="ArrayList" ofType="AccountPasswordHistory"
-            select="findAllPasswordHistoryByAccountUuid" fetchType="lazy"/>
-        <collection property="authenticationHistories" column="account_uuid" javaType="ArrayList" ofType="AccountAuthenticationHistory"
-            select="findAllAuthenticationHistoryByAccountUuid" fetchType="lazy"/>
+        <association property="passwordLock" column="account_uuid"
+            javaType="AccountPasswordLock" select="findOnePasswordLock"
+            fetchType="lazy" />
+        <collection property="authorities" column="account_uuid"
+            javaType="ArrayList" ofType="AccountAuthority" select="findAllAuthorityByAccountUuid"
+            fetchType="lazy" />
+        <collection property="passwordHistories" column="account_uuid"
+            javaType="ArrayList" ofType="AccountPasswordHistory" select="findAllPasswordHistoryByAccountUuid"
+            fetchType="lazy" />
+        <collection property="authenticationHistories" column="account_uuid"
+            javaType="ArrayList" ofType="AccountAuthenticationHistory"
+            select="findAllAuthenticationHistoryByAccountUuid" fetchType="lazy" />
     </resultMap>
 
     <sql id="selectAllColumnsOfAccountSql">
@@ -29,19 +33,22 @@
         FROM
             account
     </sql>
-    
+
     <sql id="whereCriteriaSql">
         <where>
             <if test="criteria.word != null">
                 <bind name="wildcardedWord"
-                    value="@org.terasoluna.gfw.common.query.QueryEscapeUtils@toContainingCondition(criteria.word)"/>
-                <foreach collection="criteria.targets" item="target" separator="OR">
+                    value="@org.terasoluna.gfw.common.query.QueryEscapeUtils@toContainingCondition(criteria.word)" />
+                <foreach collection="criteria.targets" item="target"
+                    separator="OR">
                     <choose>
                         <when test="target == 'accountId'">
                             account_id LIKE #{wildcardedWord} ESCAPE '~'
                         </when>
                         <when test="target == 'accountName'">
-                            first_name LIKE #{wildcardedWord} ESCAPE '~' OR last_name LIKE #{wildcardedWord} ESCAPE '~'
+                            first_name LIKE #{wildcardedWord} ESCAPE '~' 
+                            OR
+                            last_name LIKE #{wildcardedWord} ESCAPE '~'
                         </when>
                     </choose>
                 </foreach>

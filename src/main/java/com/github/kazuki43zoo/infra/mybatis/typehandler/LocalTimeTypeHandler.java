@@ -9,15 +9,18 @@ import java.sql.Time;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 @MappedTypes(LocalTime.class)
 public class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
 
+    private static final LocalDate BASE_DATE = new LocalDate(0);
+
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, LocalTime parameter,
             JdbcType jdbcType) throws SQLException {
-        ps.setTime(i, new Time(parameter.toDateTimeToday().getMillis()));
+        ps.setTime(i, new Time(BASE_DATE.toDateTime(parameter).getMillis()));
     }
 
     @Override
