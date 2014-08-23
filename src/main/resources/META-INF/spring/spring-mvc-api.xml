@@ -3,20 +3,26 @@
     xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
-    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        ">
 
     <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
 
     <bean id="jsonMessageConverter"
-        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
-        p:objectMapper-ref="objectMapper" />
-    <bean id="objectMapper" class="com.fasterxml.jackson.datatype.joda.JodaMapper"
-        p:dateFormat-ref="objectMapperDateFormat" />
-    <bean id="objectMapperDateFormat" class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.datatype.joda.JodaMapper">
+                <property name="dateFormat">
+                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+                </property>
+            </bean>
+        </property>
+    </bean>
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">

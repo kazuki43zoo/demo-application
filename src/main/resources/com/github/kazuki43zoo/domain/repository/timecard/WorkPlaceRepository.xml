@@ -5,7 +5,7 @@
 
 <mapper namespace="com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository">
 
-    <resultMap id="resultMap-WorkPlace" type="WorkPlace">
+    <resultMap id="workPlaceResultMap" type="WorkPlace">
         <id property="workPlaceUuid" column="work_place_uuid" />
         <result property="workPlaceName" column="work_place_name" />
         <result property="workPlaceNameJa" column="work_place_name_ja" />
@@ -24,7 +24,7 @@
         </collection>
     </resultMap>
     
-    <select id="findOne" resultMap="resultMap-WorkPlace">
+    <select id="findOne" resultMap="workPlaceResultMap">
         SELECT
             w.work_place_uuid
             ,w.work_place_name

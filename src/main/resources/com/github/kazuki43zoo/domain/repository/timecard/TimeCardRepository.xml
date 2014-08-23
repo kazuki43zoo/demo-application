@@ -5,7 +5,7 @@
 
 <mapper namespace="com.github.kazuki43zoo.domain.repository.timecard.TimeCardRepository">
 
-    <resultMap id="resultMap-TimeCard" type="TimeCard">
+    <resultMap id="timeCardResultMap" type="TimeCard">
         <id property="accountUuid" column="account_uuid" />
         <id property="targetMonth" column="target_month" />
         <result property="note" column="note" />
@@ -18,7 +18,7 @@
             fetchType="lazy" />
     </resultMap>
 
-    <select id="findOne" resultMap="resultMap-TimeCard">
+    <select id="findOne" resultMap="timeCardResultMap">
         SELECT
             account_uuid
             ,target_month
@@ -32,8 +32,7 @@
             target_month = #{targetMonth}
     </select>
 
-    <insert id="create"
-        parameterType="TimeCard">
+    <insert id="create">
         INSERT INTO
             time_card
         (
@@ -51,8 +50,7 @@
         )
     </insert>
     
-    <update id="update"
-        parameterType="TimeCard">
+    <update id="update">
         UPDATE
             time_card 
         SET
@@ -73,7 +71,7 @@
             target_month = #{targetMonth}
     </delete>
 
-    <resultMap id="resultMap-DailyAttendance" type="DailyAttendance">
+    <resultMap id="dailyAttendanceResultMap" type="DailyAttendance">
         <id property="accountUuid" column="account_uuid" />
         <id property="targetDate" column="target_date" />
         <result property="beginTime" column="begin_time" />
@@ -100,7 +98,7 @@
             daily_attendance
     </sql>
 
-    <select id="findOneDailyAttendance" resultMap="resultMap-DailyAttendance">
+    <select id="findOneDailyAttendance" resultMap="dailyAttendanceResultMap">
         <include refid="selectAllColumnsOfDailyAttendanceSql"/>
         WHERE
             account_uuid = #{accountUuid}
@@ -108,7 +106,7 @@
             target_date = #{targetDate}
     </select>
 
-    <select id="findAttendancesOfTargetMonth" resultMap="resultMap-DailyAttendance">
+    <select id="findAttendancesOfTargetMonth" resultMap="dailyAttendanceResultMap">
         <include refid="selectAllColumnsOfDailyAttendanceSql"/>
         <![CDATA[
         WHERE
@@ -120,8 +118,7 @@
         ]]>
     </select>
 
-    <insert id="createDailyAttendance"
-        parameterType="DailyAttendance">
+    <insert id="createDailyAttendance">
         INSERT INTO
             daily_attendance
         (
@@ -147,8 +144,7 @@
         )
     </insert>
 
-    <insert id="updateDailyAttendance"
-        parameterType="DailyAttendance">
+    <insert id="updateDailyAttendance">
         UPDATE 
             daily_attendance
         SET

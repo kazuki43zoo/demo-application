@@ -56,7 +56,7 @@ thead>tr>td {
 }
 
 #attendanceInputArea thead th.specialWork {
-	width: 80px;
+	width: 220px;
 }
 
 #attendanceInputArea thead th.workPlace {
@@ -195,4 +195,12 @@ td .breakdown {
 
 .modal-dialog {
 	margin-top: 200px;
+}
+
+#specialWork {
+	width: 100%!important;
+}
+
+#attendanceEditModal .modal-lg {
+	width: 80%;
 }

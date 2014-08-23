@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
 
     @Inject
+    @Named("workPlaceBatchModeRepository")
     WorkPlaceRepository workPlaceRepository;
 
     @PostConstruct

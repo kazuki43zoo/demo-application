@@ -1,6 +1,7 @@
 package com.github.kazuki43zoo.domain.service.timecard;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import org.joda.time.LocalDate;
@@ -19,6 +20,7 @@ public class TimeCardServiceImpl implements TimeCardService {
     WorkPlaceService workPlaceService;
 
     @Inject
+    @Named("timeCardBatchModeRepository")
     TimeCardRepository timeCardRepository;
 
     @Override
@@ -61,14 +63,16 @@ public class TimeCardServiceImpl implements TimeCardService {
         timeCard.setTargetMonth(targetMonth);
         if (loadedTimeCard == null) {
             timeCardRepository.create(timeCard);
+            for (DailyAttendance attendance : timeCard.getAttendances()) {
+                attendance.setAccountUuid(accountUuid);
+                timeCardRepository.createDailyAttendance(attendance);
+            }
         } else {
             timeCardRepository.update(timeCard);
-        }
-        if (timeCard.getAttendances() == null) {
-            return;
-        }
-        for (DailyAttendance attendance : timeCard.getAttendances()) {
-            saveDailyAttendance(accountUuid, attendance.getTargetDate(), attendance);
+            for (DailyAttendance attendance : timeCard.getAttendances()) {
+                attendance.setAccountUuid(accountUuid);
+                timeCardRepository.updateDailyAttendance(attendance);
+            }
         }
     }
 

@@ -3,10 +3,12 @@
     xmlns:sec="http://www.springframework.org/schema/security" xmlns:context="http://www.springframework.org/schema/context"
     xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
     xmlns:c="http://www.springframework.org/schema/c"
-    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        ">
 
     <sec:http pattern="/resources/**" security="none" />
     <sec:http pattern="/auth/logout\?success" request-matcher="regex"
@@ -88,32 +90,40 @@
     <!-- AuthenticationFailureHandler -->
     <bean id="customAuthenticationFailureHandler"
         class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler"
-        p:useForward="true" p:defaultFailureUrl="/auth/login/error"
-        p:exceptionMappings-ref="authenticationFailureHandlerExceptionMappings" />
-    <util:map id="authenticationFailureHandlerExceptionMappings">
-        <entry
-            key="org.springframework.security.authentication.CredentialsExpiredException"
-            value="/password?encourageChange" />
-    </util:map>
+        p:useForward="true" p:defaultFailureUrl="/auth/login/error">
+        <property name="exceptionMappings">
+            <util:map>
+                <entry
+                    key="org.springframework.security.authentication.CredentialsExpiredException"
+                    value="/password?encourageChange" />
+            </util:map>
+        </property>
+    </bean>
 
     <!-- CsrfRequestMatcher -->
     <bean id="customCsrfRequestMatcher"
-        class="org.springframework.security.web.util.matcher.AndRequestMatcher"
-        c:requestMatchers-ref="csrfRequestMatchers" />
-    <util:list id="csrfRequestMatchers">
-        <ref bean="defaultCsrfRequiresMethodMatcher" />
-        <bean
-            class="org.springframework.security.web.util.matcher.NegatedRequestMatcher"
-            c:requestMatcher-ref="csrfExclusionPathMatcher" />
-    </util:list>
-    <bean id="csrfExclusionPathMatcher"
-        class="org.springframework.security.web.util.matcher.OrRequestMatcher"
-        c:requestMatchers-ref="csrfExclusionPathMatchers" />
-    <util:list id="csrfExclusionPathMatchers">
-        <bean
-            class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
-            c:pattern="/vendor/h2/**" />
-    </util:list>
+        class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+        <constructor-arg index="0">
+            <util:list>
+                <ref bean="defaultCsrfRequiresMethodMatcher" />
+                <bean
+                    class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+                    <constructor-arg index="0">
+                        <bean id="csrfExclusionPathMatcher"
+                            class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+                            <constructor-arg index="0">
+                                <util:list>
+                                    <bean
+                                        class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
+                                        c:pattern="/vendor/h2/**" />
+                                </util:list>
+                            </constructor-arg>
+                        </bean>
+                    </constructor-arg>
+                </bean>
+            </util:list>
+        </constructor-arg>
+    </bean>
 
     <!-- UserIdMDCPutFilter -->
     <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter" />

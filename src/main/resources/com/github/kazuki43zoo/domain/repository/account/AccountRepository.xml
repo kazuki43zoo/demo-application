@@ -5,7 +5,7 @@
 
 <mapper namespace="com.github.kazuki43zoo.domain.repository.account.AccountRepository">
 
-    <resultMap id="resultMap-Account" type="Account">
+    <resultMap id="accountResultMap" type="Account">
         <id property="accountUuid" column="account_uuid" />
         <association property="passwordLock" column="account_uuid"
             javaType="AccountPasswordLock" select="findOnePasswordLock"
@@ -56,8 +56,7 @@
         </where>
     </sql>
 
-    <select id="countByCriteria"
-        resultType="long">
+    <select id="countByCriteria" resultType="long">
         SELECT
             COUNT(*)
         FROM
@@ -66,29 +65,26 @@
     </select>
 
     <select id="findAllByCriteria"
-        resultMap="resultMap-Account" resultSetType="SCROLL_INSENSITIVE">
+        resultMap="accountResultMap" resultSetType="SCROLL_INSENSITIVE">
         <include refid="selectAllColumnsOfAccountSql"/>
         <include refid="whereCriteriaSql"/>
         ORDER BY
             account_id
     </select>
 
-    <select id="findOneByAccountId"
-        parameterType="String" resultMap="resultMap-Account">
+    <select id="findOneByAccountId" resultMap="accountResultMap">
         <include refid="selectAllColumnsOfAccountSql" />
         WHERE
             account_id = #{accountId}
     </select>
 
-    <select id="findOne"
-        parameterType="String" resultMap="resultMap-Account">
+    <select id="findOne" resultMap="accountResultMap">
         <include refid="selectAllColumnsOfAccountSql" />
         WHERE
             account_uuid = #{accountUuid}
     </select>
 
-    <insert id="create"
-        parameterType="Account">
+    <insert id="create">
         <selectKey keyProperty="accountUuid" order="BEFORE" resultType="String">
             SELECT RANDOM_UUID()
         </selectKey>
@@ -115,8 +111,7 @@
         );
     </insert>
     
-    <update id="update"
-        parameterType="Account">
+    <update id="update">
         UPDATE
             account 
         SET
@@ -130,16 +125,14 @@
             account_uuid = #{accountUuid}
     </update>
 
-    <delete id="delete"
-        parameterType="String">
+    <delete id="delete">
         DELETE FROM
             account
         WHERE
             account_uuid = #{accountUuid}
     </delete>
 
-    <select id="findAllAuthorityByAccountUuid"
-        parameterType="String" resultType="AccountAuthority">
+    <select id="findAllAuthorityByAccountUuid" resultType="AccountAuthority">
         SELECT
             account_uuid
             ,authority
@@ -151,8 +144,7 @@
             authority
     </select>
     
-    <insert id="createAuthority"
-        parameterType="AccountAuthority">
+    <insert id="createAuthority">
         INSERT INTO
             account_authorities
         (
@@ -161,9 +153,9 @@
         )
         VALUES
         (
-            #{accountUuid},
-            #{authority}
-        );
+            #{accountUuid}
+            ,#{authority}
+        )
     </insert>
 
     <delete id="deleteAuthority">
@@ -175,16 +167,14 @@
             authority = #{authority}
     </delete>
 
-    <delete id="deleteAuthorities"
-        parameterType="String">
+    <delete id="deleteAuthorities">
         DELETE FROM
             account_authorities
         WHERE
             account_uuid = #{accountUuid}
     </delete>
     
-    <select id="findAllPasswordHistoryByAccountUuid"
-        parameterType="String" resultType="AccountPasswordHistory">
+    <select id="findAllPasswordHistoryByAccountUuid" resultType="AccountPasswordHistory">
         SELECT
             account_uuid
             ,password
@@ -194,8 +184,7 @@
             account_uuid = #{account_uuid}
     </select>
     
-    <insert id="createPasswordHistory"
-        parameterType="AccountPasswordHistory">
+    <insert id="createPasswordHistory">
         INSERT INTO
             account_password_histories
         (
@@ -211,16 +200,14 @@
         )
     </insert>
 
-    <delete id="deletePasswordHistories"
-        parameterType="String">
+    <delete id="deletePasswordHistories">
         DELETE FROM
             account_password_histories
         WHERE
             account_uuid = #{accountUuid}
     </delete>
     
-    <select id="findOnePasswordLock"
-        parameterType="String" resultType="AccountPasswordLock">
+    <select id="findOnePasswordLock" resultType="AccountPasswordLock">
         SELECT
             account_uuid
             ,failure_count
@@ -230,10 +217,9 @@
             account_uuid = #{accountUuid}
     </select>
     
-    <update id="savePasswordFailureCount"
-        parameterType="Account">
+    <update id="savePasswordFailureCount">
         <choose>
-            <when test="passwordLock==null">
+            <when test="passwordLock == null">
                 DELETE FROM
                     account_password_lock
                 WHERE
@@ -265,7 +251,7 @@
         </choose>
     </update>
     
-    <delete id="deletePasswordLock" parameterType="String">
+    <delete id="deletePasswordLock">
         DELETE FROM
             account_password_lock
         WHERE
@@ -288,7 +274,7 @@
     </sql>
 
     <select id="findAllAuthenticationHistoryByAccountUuid"
-        parameterType="String" resultType="AccountAuthenticationHistory">
+        resultType="AccountAuthenticationHistory">
         <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
         WHERE
             account_uuid = #{accountUuid}
@@ -297,8 +283,9 @@
         LIMIT
             100
     </select>
+
     <select id="findOneLastSuccessAuthenticationHistoryByAccountUuid"
-        parameterType="String" resultType="AccountAuthenticationHistory">
+        resultType="AccountAuthenticationHistory">
         <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
         WHERE
             account_uuid = #{accountUuid}
@@ -310,8 +297,7 @@
             1
     </select>
 
-    <insert id="createAuthenticationHistory"
-        parameterType="AccountAuthenticationHistory">
+    <insert id="createAuthenticationHistory">
         INSERT INTO
             account_authentication_histories
         (
@@ -339,8 +325,7 @@
         )
     </insert>
     
-    <delete id="deleteAuthenticationHistories"
-        parameterType="String">
+    <delete id="deleteAuthenticationHistories">
         DELETE FROM
             account_authentication_histories
         WHERE

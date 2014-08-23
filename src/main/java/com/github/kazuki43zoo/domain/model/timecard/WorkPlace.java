@@ -1,6 +1,9 @@
 package com.github.kazuki43zoo.domain.model.timecard;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +56,25 @@ public class WorkPlace implements Serializable {
     @Getter(AccessLevel.NONE)
     private transient Interval baseWorkTimeInterval;
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    private transient List<Interval> breakTimeIntervals;
+
     public void initialize() {
+        List<Interval> breakTimeIntervals = new ArrayList<>();
+        if (getBreakTimes() != null) {
+            for (BreakTime breakTime : getBreakTimes()) {
+                breakTimeIntervals.addAll(breakTime.toBreakTimeIntervals());
+            }
+            Collections.sort(breakTimeIntervals, new Comparator<Interval>() {
+                @Override
+                public int compare(Interval o1, Interval o2) {
+                    return o1.getStart().compareTo(o2.getStart());
+                }
+            });
+        }
+        this.breakTimeIntervals = breakTimeIntervals;
+        System.out.println(this.breakTimeIntervals);
         this.baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
                 BASE_DATE.toDateTime(baseFinishTime));
         this.baseWorkTimeMinute = (int) toMinute(baseWorkTimeInterval)
@@ -92,15 +113,13 @@ public class WorkPlace implements Serializable {
         if (getBreakTimes() == null) {
             return 0;
         }
-        int minute = 0;
-        for (final BreakTime breakTime : getBreakTimes()) {
-            final int containsMinute = breakTime.calculateContainsMinute(workTimeInterval);
-            if (containsMinute == 0 && breakTime.isFuture(workTimeInterval)) {
-                break;
+        long minute = 0;
+        for (final Interval breakTimeInterval : breakTimeIntervals) {
+            if (workTimeInterval.overlaps(breakTimeInterval)) {
+                minute += toMinute(workTimeInterval.overlap(breakTimeInterval));
             }
-            minute += containsMinute;
         }
-        return minute;
+        return (int) minute;
     }
 
     private long toMinute(final Interval interval) {

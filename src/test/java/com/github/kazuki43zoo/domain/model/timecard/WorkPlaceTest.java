@@ -304,6 +304,7 @@ public class WorkPlaceTest {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("09:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:45")));
@@ -317,6 +318,7 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("12:59")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:46")));
@@ -330,6 +332,7 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("09:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:45")));
@@ -343,6 +346,7 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("13:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("18:16")));
@@ -356,6 +360,7 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("09:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("12:00")));
@@ -369,6 +374,7 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("13:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:45")));
@@ -382,11 +388,136 @@ public class WorkPlaceTest {
         workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("12:00"),
                 LocalTime.parse("13:00")), new BreakTime("uuid", LocalTime.parse("17:45"),
                 LocalTime.parse("18:15"))));
+        workPlace.initialize();
 
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("18:15")),
                 BASE_DATE.toDateTime(LocalTime.parse("22:00")));
 
         assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(0));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsJustContain() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("00:00"),
+                LocalTime.parse("01:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:00")),
+                BASE_DATE.toDateTime(LocalTime.parse("01:00")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(60));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsForwardMatch() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("01:00"),
+                LocalTime.parse("02:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:59")),
+                BASE_DATE.toDateTime(LocalTime.parse("01:15")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(15));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsBackwardMatch() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("01:00"),
+                LocalTime.parse("02:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("01:45")),
+                BASE_DATE.toDateTime(LocalTime.parse("02:01")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(15));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsContain() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("00:00"),
+                LocalTime.parse("01:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:01")),
+                BASE_DATE.toDateTime(LocalTime.parse("00:59")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(58));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsInclude() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("01:00"),
+                LocalTime.parse("02:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:59")),
+                BASE_DATE.toDateTime(LocalTime.parse("02:01")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(60));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsBeforeRange() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("01:00"),
+                LocalTime.parse("02:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:00")),
+                BASE_DATE.toDateTime(LocalTime.parse("01:00")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(0));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsAfterRange() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("01:00"),
+                LocalTime.parse("02:00"))));
+        workPlace.initialize();
+
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("02:00")),
+                BASE_DATE.toDateTime(LocalTime.parse("03:00")));
+
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(0));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsMidnight() {
+
+        WorkPlace workPlace = new WorkPlace();
+        // 00:00 - 01:00 and 24:00 - 25:00
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("00:00"),
+                LocalTime.parse("01:00"))));
+        workPlace.initialize();
+
+        // 24:00 - 25:00
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:00"))
+                .plusDays(1), BASE_DATE.toDateTime(LocalTime.parse("01:00")).plusDays(1));
+
+        // 60 (00:00-01:00)
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(60));
+    }
+
+    @Test
+    public void calculateContainsBreakTimeMinuteWorkTimeIntervalIsMultipleMatch() {
+        WorkPlace workPlace = new WorkPlace();
+        // 00:00 - 01:00 and 24:00 - 25:00
+        workPlace.setBreakTimes(Arrays.asList(new BreakTime("uuid", LocalTime.parse("00:00"),
+                LocalTime.parse("01:00"))));
+        workPlace.initialize();
+
+        // 00:30 - 24:30
+        Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("00:30")),
+                BASE_DATE.toDateTime(LocalTime.parse("00:30")).plusDays(1));
+
+        // 30 (00:30-01:00) + 30(24:00-24:30)
+        assertThat(workPlace.calculateContainsBreakTimeMinute(workTimeInterval), is(60));
     }
 
 }
