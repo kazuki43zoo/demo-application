@@ -104,7 +104,7 @@
                 <entry key="ja">
                     <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
                         p:valueColumn="work_place_uuid" p:labelColumn="work_place_name_ja"
-                        p:querySql="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name_ja"
+                        p:querySql="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name"
                         p:jdbcTemplate-ref="jdbcTemplate" />
                 </entry>
             </util:map>

@@ -74,7 +74,6 @@ public class WorkPlace implements Serializable {
             });
         }
         this.breakTimeIntervals = breakTimeIntervals;
-        System.out.println(this.breakTimeIntervals);
         this.baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
                 BASE_DATE.toDateTime(baseFinishTime));
         this.baseWorkTimeMinute = (int) toMinute(baseWorkTimeInterval)

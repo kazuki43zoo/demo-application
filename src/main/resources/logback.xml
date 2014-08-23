@@ -71,6 +71,10 @@
     <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <level value="debug" />
     </logger>
+    
+    <logger name="Spring Security Debugger">
+        <level value="warn" />
+    </logger>
 
     <logger name="jdbc.sqltiming">
         <level value="debug" />

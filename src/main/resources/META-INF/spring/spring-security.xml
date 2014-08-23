@@ -11,10 +11,12 @@
         ">
 
     <sec:http pattern="/resources/**" security="none" />
+
     <sec:http pattern="/auth/logout\?success" request-matcher="regex"
         security="none" />
 
     <sec:http pattern="/api/**" auto-config="true" use-expressions="true">
+
         <sec:csrf />
 
         <sec:headers>
@@ -28,7 +30,9 @@
     </sec:http>
 
     <sec:http auto-config="true" use-expressions="true">
+
         <sec:access-denied-handler ref="customAccessDeniedHandler" />
+
         <sec:csrf request-matcher-ref="customCsrfRequestMatcher" />
 
         <sec:headers>
@@ -74,18 +78,23 @@
 
     <!-- AccessDeniedHandler -->
     <bean id="customAccessDeniedHandler"
-        class="org.springframework.security.web.access.DelegatingAccessDeniedHandler"
-        c:handlers-ref="accessDeniedHandlers" c:defaultHander-ref="defaultAccessDeniedHandler" />
-    <util:map id="accessDeniedHandlers">
-        <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
-            <bean
+        class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+        <constructor-arg index="0">
+            <util:map id="accessDeniedHandlers">
+                <entry
+                    key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+                    <bean
+                        class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
+                        p:errorPage="/WEB-INF/views/common/error/csrfTokenError.jsp" />
+                </entry>
+            </util:map>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <bean id="defaultAccessDeniedHandler"
                 class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-                p:errorPage="/WEB-INF/views/common/error/csrfTokenError.jsp" />
-        </entry>
-    </util:map>
-    <bean id="defaultAccessDeniedHandler"
-        class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-        p:errorPage="/WEB-INF/views/common/error/accessError.jsp" />
+                p:errorPage="/WEB-INF/views/common/error/accessError.jsp" />
+        </constructor-arg>
+    </bean>
 
     <!-- AuthenticationFailureHandler -->
     <bean id="customAuthenticationFailureHandler"

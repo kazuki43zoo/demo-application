@@ -34,7 +34,6 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
                     "Workplace record of main office has not been inserted. uuid : "
                             + WorkPlace.MAIN_OFFICE_UUID);
         }
-        cachedWorkPlaces.put("", workPlaceOfMainOffice);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
 
     @Override
     public WorkPlace getWorkPlace(String workPlaceUuid) {
-        if (workPlaceUuid == null) {
+        if (!StringUtils.hasLength(workPlaceUuid)) {
             workPlaceUuid = WorkPlace.MAIN_OFFICE_UUID;
         }
         WorkPlace workPlace = cachedWorkPlaces.get(workPlaceUuid);

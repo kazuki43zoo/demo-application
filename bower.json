@@ -6,6 +6,7 @@
         "angular-resource": "latest",
         "angular-i18n": "latest",
         "jquery": "latest",
+        "jquery-ui": "latest",
         "bootstrap": "latest"
     }
 }
