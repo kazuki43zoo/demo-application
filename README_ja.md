@@ -39,8 +39,8 @@
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | H2データベースにアクセスするために依存しています。 |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.1.3 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
-| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.1 | Jackson上でJoda-Timeを使うために依存しています。 |
+| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.2 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
+| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Jackson上でJoda-Timeを使うために依存しています。 |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Java標準の `@java.transaction.Transactinal` アノテーションを使用するために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
@@ -51,8 +51,8 @@
 | ----- | :-----: | :-----: |
 | org.springframework | 4.1.0.RC2 | 3.2.10.RELEASE |
 | org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
-| org.springframework.data | 1.8.1.RELEASE  | 1.6.4.RELEASE |
-| org.aspectj | 1.8.1 | 1.7.4 |
+| org.springframework.data | 1.8.2.RELEASE  | 1.6.4.RELEASE |
+| org.aspectj | 1.8.2 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
