@@ -92,14 +92,14 @@
             Framework) -->
         <org.springframework-version>4.1.0.RC2</org.springframework-version>
         <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
-        <org.springframework.data.version>1.8.2.RELEASE</org.springframework.data.version>
+        <org.springframework.data.version>1.8.4.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.2</org.aspectj-version>
         <org.slf4j-version>1.7.7</org.slf4j-version>
         <ch.qos.logback.version>1.1.2</ch.qos.logback.version>
         <jboss-logging.version>3.1.4.GA</jboss-logging.version>
         <joda-time.version>2.4</joda-time.version>
         <dozer.version>5.5.1</dozer.version>
-        <com.google.guava.version>17.0</com.google.guava.version>
+        <com.google.guava.version>18.0</com.google.guava.version>
         <commons-beanutils.version>1.9.2</commons-beanutils.version>
         <commons-lang.version>3.3.2</commons-lang.version>
         <org.hibernate.hibernate-validator.version>5.1.2.Final</org.hibernate.hibernate-validator.version>
