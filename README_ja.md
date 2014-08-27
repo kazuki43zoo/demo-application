@@ -52,7 +52,7 @@
 | ----- | :-----: | :-----: |
 | org.springframework | 4.1.0.RC2 | 3.2.10.RELEASE |
 | org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
-| org.springframework.data | 1.8.2.RELEASE  | 1.6.4.RELEASE |
+| org.springframework.data | 1.8.4.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.2 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
@@ -62,7 +62,7 @@
 | org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
 | joda-time | 2.4 | 2.2 |
 | dozer | 5.5.1 | 5.4.0 |
-| com.google.guava | 17.0 | 13.0.1 |
+| com.google.guava | 18.0 | 13.0.1 |
 | commons-beanutils | 1.9.2 | 1.8.3 |
 | commons-lang | 3.3.2 | 3.1 |
 | commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
