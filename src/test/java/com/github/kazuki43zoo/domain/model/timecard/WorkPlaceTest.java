@@ -52,7 +52,7 @@ public class WorkPlaceTest {
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("9:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:45")));
 
-        assertThat(workPlace.calculateWorkingMinute(workTimeInterval), is(465));
+        assertThat(workPlace.calculateWorkingMinute(workTimeInterval, workPlace), is(465));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class WorkPlaceTest {
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("9:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:44")));
 
-        assertThat(workPlace.calculateWorkingMinute(workTimeInterval), is(450));
+        assertThat(workPlace.calculateWorkingMinute(workTimeInterval, workPlace), is(450));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class WorkPlaceTest {
         Interval workTimeInterval = new Interval(BASE_DATE.toDateTime(LocalTime.parse("9:00")),
                 BASE_DATE.toDateTime(LocalTime.parse("17:46")));
 
-        assertThat(workPlace.calculateWorkingMinute(workTimeInterval), is(465));
+        assertThat(workPlace.calculateWorkingMinute(workTimeInterval, workPlace), is(465));
     }
 
     @Test

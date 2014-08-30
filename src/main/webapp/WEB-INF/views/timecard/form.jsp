@@ -1,5 +1,5 @@
-<div ng-controller="TimeCardController as timeCardCtrl" ng-init="timeCardCtrl.loadTimeCard()"
-    ng-cloak>
+<div data-ng-controller="TimeCardController as timeCardCtrl" data-ng-init="timeCardCtrl.loadTimeCard()"
+    data-ng-cloak>
 
     <div id="timeCardForm" class="form-horizontal">
         <div class="form-group">
@@ -7,13 +7,13 @@
                     code="targetMonth" /></label>
             <div class="col-sm-3">
                 <input type="month" id="targetMonth" class="form-control targetMonth" max="9999-12"
-                    placeholder="yyyy-MM" ng-model="timeCardCtrl.targetMonth"
-                    ng-change="timeCardCtrl.loadTimeCard()">
+                    placeholder="yyyy-MM" data-ng-model="timeCardCtrl.targetMonth"
+                    data-ng-change="timeCardCtrl.loadTimeCard()">
             </div>
             <div class="col-sm-offset-1 col-sm-6">
                 <button class="btn btn-default" data-toggle="modal"
-                    data-target="#attendanceEditModal" ng-disabled="timeCardCtrl.loading===true"
-                    ng-click="timeCardCtrl.loadToday()">
+                    data-target="#attendanceEditModal" data-ng-disabled="timeCardCtrl.loading===true"
+                    data-ng-click="timeCardCtrl.loadToday()">
                     <spring:message code="todayBtn" />
                 </button>
             </div>
@@ -24,8 +24,8 @@
                     code="workPlace" /></label>
             <div class="col-sm-4">
                 <select id="defaultWorkPlace" class="form-control workPlace"
-                    ng-model="timeCardCtrl.timeCard.workPlaceUuid"
-                    ng-change="timeCardCtrl.calculateTimeCard()">
+                    data-ng-model="timeCardCtrl.timeCard.workPlaceUuid"
+                    data-ng-change="timeCardCtrl.calculateTimeCard()">
                     <option value=""></option>
                     <c:forEach items="${CL_WORK_PLACE}" var="workPlaceEntry">
                         <option value="${f:h(workPlaceEntry.key)}">
@@ -35,30 +35,30 @@
             </div>
             <div class="col-sm-6">
                 <button id="initializeBtn" class="btn btn-default"
-                    ng-disabled="timeCardCtrl.loading===true" ng-click="timeCardCtrl.initTimeCard()">
+                    data-ng-disabled="timeCardCtrl.loading===true" data-ng-click="timeCardCtrl.initTimeCard()">
                     <spring:message code="initializeBtn" />
                 </button>
                 <button id="reloadBtn" class="btn btn-default"
-                    ng-disabled="
+                    data-ng-disabled="
                             timeCardCtrl.loading===true
                             ||
                             timeCardCtrl.stored === false
                             ||
                             timeCardCtrl.needSaveTimeCard() === false
                             "
-                    ng-click="timeCardCtrl.loadTimeCard()">
+                    data-ng-click="timeCardCtrl.loadTimeCard()">
                     <span class="glyphicon glyphicon-refresh"></span>
                     <spring:message code="reloadBtn" />
                 </button>
                 <button id="saveBtn" class="btn btn-default"
-                    ng-disabled="
+                    data-ng-disabled="
                             timeCardCtrl.loading===true
                             ||
                             (timeCardCtrl.stored === true
                              &&
                              timeCardCtrl.needSaveTimeCard() === false)
                             "
-                    ng-click="timeCardCtrl.saveTimeCard()">
+                    data-ng-click="timeCardCtrl.saveTimeCard()">
                     <span class="glyphicon glyphicon-floppy-save"></span>
                     <spring:message code="saveBtn" />
                 </button>
@@ -100,8 +100,8 @@
         <tbody data-toggle="modal" data-target="#attendanceEditModal">
             <tr id="attendancesRow{{$index+1}}"
                 class="dayOfWeek{{attendance.targetDate | dayOfWeek}}"
-                ng-repeat="attendance in timeCardCtrl.timeCard.attendances"
-                ng-click=" 
+                data-ng-repeat="attendance in timeCardCtrl.timeCard.attendances"
+                data-ng-click=" 
                     timeCardCtrl.targetDay=$index+1;
                     timeCardCtrl.setEditableAttendance();
                     ">
@@ -113,20 +113,20 @@
                 <td class="time">{{attendance.compensationMinute | formatTime:true}}</td>
                 <td class="time">{{attendance.midnightWorkingMinute | formatTime:true}}</td>
                 <td class="check"><span class="glyphicon glyphicon-ok"
-                    ng-show="attendance.tardyOrEarlyLeaving === true"></span></td>
+                    data-ng-show="attendance.tardyOrEarlyLeaving === true"></span></td>
                 <td class="check"><span class="glyphicon glyphicon-ok"
-                    ng-show="attendance.absence === true"></span></td>
+                    data-ng-show="attendance.absence === true"></span></td>
                 <td class="check"><span class="glyphicon glyphicon-ok"
-                    ng-show="attendance.paidLeave === true"></span></td>
+                    data-ng-show="attendance.paidLeave === true"></span></td>
                 <td class="codeName"><c:forEach var="specialWorkEntry"
                         items="${CL_ATTENDANCE_SPECIAL_WORK_DISP}">
                         <span title="${f:h(CL_ATTENDANCE_SPECIAL_WORK[specialWorkEntry.key])}"
-                            ng-show="attendance.specialWorkCode === '${f:h(specialWorkEntry.key)}'">${f:h(specialWorkEntry.value)}</span>
+                            data-ng-show="attendance.specialWorkCode === '${f:h(specialWorkEntry.key)}'">${f:h(specialWorkEntry.value)}</span>
                     </c:forEach></td>
                 <td class="text">{{attendance.note}}</td>
                 <td><c:forEach var="workPlaceEntry" items="${CL_WORK_PLACE}">
                         <span class="text"
-                            ng-show="attendance.workPlaceUuid === '${f:h(workPlaceEntry.key)}'">${f:h(workPlaceEntry.value)}</span>
+                            data-ng-show="attendance.workPlaceUuid === '${f:h(workPlaceEntry.key)}'">${f:h(workPlaceEntry.value)}</span>
                     </c:forEach></td>
             </tr>
         </tbody>
@@ -215,13 +215,13 @@
                         </th>
                         <td>
                             <div class="time summary"
-                                ng-class="{minus:timeCardCtrl.total.liquidationMinute < 0}">
+                                data-ng-class="{minus:timeCardCtrl.total.liquidationMinute < 0}">
                                 {{timeCardCtrl.total.liquidationMinute | formatTime}}</div>
                             <div class="time breakdown"
-                                ng-class="{minus:timeCardCtrl.total.overtimeTime < 0}">
+                                data-ng-class="{minus:timeCardCtrl.total.overtimeTime < 0}">
                                 {{timeCardCtrl.total.overtimeTime | formatTime}}</div>
                             <div class="time breakdown"
-                                ng-class="{minus:timeCardCtrl.total.penaltyTime < 0}">
+                                data-ng-class="{minus:timeCardCtrl.total.penaltyTime < 0}">
                                 {{timeCardCtrl.total.penaltyTime | formatTime}}</div>
                         </td>
                     </tr>
@@ -245,7 +245,7 @@
                     <tbody>
                         <tr>
                             <td colspan="6"><textarea id="timeCardNote" class="form-control"
-                                    rows="5" ng-model="timeCardCtrl.timeCard.note"></textarea></td>
+                                    rows="5" data-ng-model="timeCardCtrl.timeCard.note"></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -308,19 +308,19 @@
                                     <th class="time"><label for="beginTime"><spring:message
                                                 code="beginTime" /><br>
                                             <button id="enterBtn" class="btn btn-default btn-xs"
-                                                ng-disabled="timeCardCtrl.loading === true"
-                                                ng-click="timeCardCtrl.enter()">
+                                                data-ng-disabled="timeCardCtrl.loading === true"
+                                                data-ng-click="timeCardCtrl.enter()">
                                                 <span class="glyphicon glyphicon-log-in"></span>
                                             </button></label></th>
                                     <th class="time"><label for="finishTime"><spring:message
                                                 code="finishTime" /><br>
                                             <button id="exitBtn" class="btn btn-default btn-xs"
-                                                ng-disabled="
+                                                data-ng-disabled="
                                                     timeCardCtrl.loading === true
                                                     ||
                                                     timeCardCtrl.editableAttendance.beginTime == null
                                                     "
-                                                ng-click="timeCardCtrl.exit()">
+                                                data-ng-click="timeCardCtrl.exit()">
                                                 <span class="glyphicon glyphicon-log-out"></span>
                                             </button></label></th>
                                     <th class="paidLeave"><label for="paidLeave"><spring:message
@@ -337,29 +337,29 @@
                                     <td><input type="number" id="targetDay"
                                         class="form-control" required="required" min="1"
                                         max="{{timeCardCtrl.timeCard.attendances.length}}"
-                                        ng-model="timeCardCtrl.targetDay"
-                                        ng-disabled="timeCardCtrl.loading === true"
-                                        ng-change="timeCardCtrl.setEditableAttendance()"></td>
+                                        data-ng-model="timeCardCtrl.targetDay"
+                                        data-ng-disabled="timeCardCtrl.loading === true"
+                                        data-ng-change="timeCardCtrl.setEditableAttendance()"></td>
                                     <td><input type="time" id="beginTime" class="form-control"
                                         maxlength="5" placeholder="HH:mm"
-                                        ng-model="timeCardCtrl.editableAttendance.beginTime"
-                                        ng-disabled="timeCardCtrl.loading === true"
-                                        ng-readonly="timeCardCtrl.editableAttendance.paidLeave === true"
-                                        ng-blur="timeCardCtrl.calculateTime('beginTime')"></td>
+                                        data-ng-model="timeCardCtrl.editableAttendance.beginTime"
+                                        data-ng-disabled="timeCardCtrl.loading === true"
+                                        data-ng-readonly="timeCardCtrl.editableAttendance.paidLeave === true"
+                                        data-ng-blur="timeCardCtrl.calculateTime('beginTime')"></td>
                                     <td><input type="time" id="finishTime" class="form-control"
                                         maxlength="5" placeholder="HH:mm"
-                                        ng-model="timeCardCtrl.editableAttendance.finishTime"
-                                        ng-disabled="timeCardCtrl.loading === true"
-                                        ng-readonly="
+                                        data-ng-model="timeCardCtrl.editableAttendance.finishTime"
+                                        data-ng-disabled="timeCardCtrl.loading === true"
+                                        data-ng-readonly="
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             ||
                                             timeCardCtrl.editableAttendance.beginTime == null
                                             "
-                                        ng-blur="timeCardCtrl.calculateTime('finishTime')"></td>
+                                        data-ng-blur="timeCardCtrl.calculateTime('finishTime')"></td>
                                     <td class="center"><input type="checkbox" id="paidLeave"
                                         value="true"
-                                        ng-model="timeCardCtrl.editableAttendance.paidLeave"
-                                        ng-disabled="
+                                        data-ng-model="timeCardCtrl.editableAttendance.paidLeave"
+                                        data-ng-disabled="
                                             timeCardCtrl.loading === true
                                             ||
                                             (timeCardCtrl.editableAttendance.targetDate | isHoliday)
@@ -368,17 +368,17 @@
                                              &&
                                              timeCardCtrl.editableAttendance.absence === false)
                                             "
-                                        ng-change="timeCardCtrl.calculateTime()"></td>
+                                        data-ng-change="timeCardCtrl.calculateTime()"></td>
                                     <td><select id="specialWork" class="form-control"
-                                        ng-model="timeCardCtrl.editableAttendance.specialWorkCode"
-                                        ng-disabled="
+                                        data-ng-model="timeCardCtrl.editableAttendance.specialWorkCode"
+                                        data-ng-disabled="
                                             timeCardCtrl.loading === true
                                             ||
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             ||
                                             (timeCardCtrl.editableAttendance.targetDate | isHoliday)
                                             "
-                                        ng-change="timeCardCtrl.calculateTime()">
+                                        data-ng-change="timeCardCtrl.calculateTime()">
                                             <option value=""></option>
                                             <c:forEach items="${CL_ATTENDANCE_SPECIAL_WORK}"
                                                 var="specialWorkEntry">
@@ -386,7 +386,7 @@
                                                     <c:when
                                                         test="${fn:startsWith(specialWorkEntry.key,'0')}">
                                                         <option value="${f:h(specialWorkEntry.key)}"
-                                                            ng-if="
+                                                            data-ng-if="
                                                                 timeCardCtrl.editableAttendance.beginTime != null
                                                                 &&
                                                                 timeCardCtrl.editableAttendance.tardyOrEarlyLeaving === true
@@ -396,22 +396,22 @@
                                                     <c:when
                                                         test="${fn:startsWith(specialWorkEntry.key,'1')}">
                                                         <option value="${f:h(specialWorkEntry.key)}"
-                                                            ng-if="timeCardCtrl.editableAttendance.beginTime == null">
+                                                            data-ng-if="timeCardCtrl.editableAttendance.beginTime == null">
                                                             ${f:h(specialWorkEntry.value)}</option>
                                                     </c:when>
                                                 </c:choose>
                                             </c:forEach>
                                     </select></td>
                                     <td><textarea id="note" class="form-control"
-                                            ng-model="timeCardCtrl.editableAttendance.note" rows="1"></textarea></td>
+                                            data-ng-model="timeCardCtrl.editableAttendance.note" rows="1"></textarea></td>
                                     <td><select id="workPlace" class="form-control"
-                                        ng-model="timeCardCtrl.editableAttendance.workPlaceUuid"
-                                        ng-disabled="
+                                        data-ng-model="timeCardCtrl.editableAttendance.workPlaceUuid"
+                                        data-ng-disabled="
                                             timeCardCtrl.loading === true
                                             ||
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             "
-                                        ng-change="timeCardCtrl.calculateTime()">
+                                        data-ng-change="timeCardCtrl.calculateTime()">
                                             <option value=""></option>
                                             <c:forEach items="${CL_WORK_PLACE}" var="workPlaceEntry">
                                                 <option value="${f:h(workPlaceEntry.key)}">
@@ -437,26 +437,26 @@
                                         {{timeCardCtrl.editableAttendance.midnightWorkingMinute |
                                         formatTime}}</td>
                                     <th><spring:message code="tardyOrEarlyLeaving" /></th>
-                                    <td class="check" ng-switch
-                                        on="timeCardCtrl.editableAttendance.tardyOrEarlyLeaving">
-                                        <span class="glyphicon glyphicon-ok" ng-switch-when="true"></span>
-                                        <span ng-switch-default>-</span>
+                                    <td class="check" data-ng-switch
+                                        data-on="timeCardCtrl.editableAttendance.tardyOrEarlyLeaving">
+                                        <span class="glyphicon glyphicon-ok" data-ng-switch-when="true"></span>
+                                        <span data-ng-switch-default>-</span>
                                     </td>
                                     <th><spring:message code="absence" /></th>
-                                    <td class="check" ng-switch
-                                        on="timeCardCtrl.editableAttendance.absence"><span
-                                        class="glyphicon glyphicon-ok" ng-switch-when="true"></span><span
-                                        ng-switch-default>-</span></td>
+                                    <td class="check" data-ng-switch
+                                        data-on="timeCardCtrl.editableAttendance.absence"><span
+                                        class="glyphicon glyphicon-ok" data-ng-switch-when="true"></span><span
+                                        data-ng-switch-default>-</span></td>
                                     <td class="center">
                                         <button id="dailySaveBtn" class="btn btn-default"
-                                            ng-disabled="
+                                            data-ng-disabled="
                                                 timeCardCtrl.loading === true
                                                 ||
                                                 timeCardCtrl.stored === false
                                                 ||
                                                 timeCardCtrl.needSaveEditableAttendance() === false
                                                 "
-                                            ng-click="timeCardCtrl.saveDailyAttendance()">
+                                            data-ng-click="timeCardCtrl.saveDailyAttendance()">
                                             <span class="glyphicon glyphicon-floppy-save"></span>
                                             <spring:message code="saveBtn" />
                                         </button>

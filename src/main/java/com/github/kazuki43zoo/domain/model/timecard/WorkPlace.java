@@ -80,15 +80,24 @@ public class WorkPlace implements Serializable {
                 - calculateContainsBreakTimeMinute(baseWorkTimeInterval);
     }
 
-    int calculateWorkingMinute(final Interval workTimeInterval) {
+    int calculateWorkingMinute(final Interval workTimeInterval, final WorkPlace mainOffice) {
         int workingMinute = (int) toMinute(workTimeInterval)
                 - calculateContainsBreakTimeMinute(workTimeInterval);
-        return truncateWithTimeUnit(workingMinute);
+        return truncateWithTimeUnit(workingMinute, mainOffice);
     }
 
     int truncateWithTimeUnit(final int minute) {
+        return truncateWithTimeUnit(minute, this);
+    }
+
+    int truncateWithTimeUnit(final int minute, final WorkPlace mainOffice) {
         int determinedMinute = 0;
         int undeterminedMinute = minute;
+        int baseWorkTimeMinute = this.baseWorkTimeMinute;
+        if (baseWorkTimeMinute < mainOffice.getBaseWorkTimeMinute()
+                && mainOffice.getBaseWorkTimeMinute() <= minute) {
+            baseWorkTimeMinute = mainOffice.getBaseWorkTimeMinute();
+        }
         if (baseWorkTimeMinute <= minute) {
             determinedMinute = baseWorkTimeMinute;
             undeterminedMinute = minute - baseWorkTimeMinute;

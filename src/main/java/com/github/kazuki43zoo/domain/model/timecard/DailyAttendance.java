@@ -89,7 +89,8 @@ public class DailyAttendance implements Serializable {
             final Interval workTimeInterval = new Interval(beginDateTime, finishDateTime);
 
             // calculate working minute
-            this.actualWorkingMinute = actualWorkPlace.calculateWorkingMinute(workTimeInterval);
+            this.actualWorkingMinute = actualWorkPlace.calculateWorkingMinute(workTimeInterval,
+                    mainOffice);
 
             // calculate compensation minute
             if (actualWorkingMinute < mainOffice.getBaseWorkTimeMinute() && isWorkDay()) {

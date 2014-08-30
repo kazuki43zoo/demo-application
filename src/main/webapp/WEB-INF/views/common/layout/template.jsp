@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html data-ng-app="app">
 <head>
 
 <meta charset="utf-8" />
@@ -30,7 +30,7 @@
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top"
-        ng-controller="NavBarController as navBarCtrl" ng-cloak>
+        data-controller="NavBarController as navBarCtrl" data-ng-cloak>
         <tiles:insertAttribute name="topNavbar" />
     </div>
     <div class="container">
