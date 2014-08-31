@@ -100,6 +100,7 @@
         <tbody data-toggle="modal" data-target="#attendanceEditModal">
             <tr id="attendancesRow{{$index+1}}"
                 class="dayOfWeek{{attendance.targetDate | dayOfWeek}}"
+                data-ng-class="{holiday : attendance.holiday}"
                 data-ng-repeat="attendance in timeCardCtrl.timeCard.attendances"
                 data-ng-click=" 
                     timeCardCtrl.targetDay=$index+1;
@@ -293,6 +294,7 @@
                     </button>
                     <h4
                         class="modal-title dayOfWeek{{timeCardCtrl.editableAttendance.targetDate | dayOfWeek}}"
+                        data-ng-class="{holiday : timeCardCtrl.editableAttendance.holiday}"
                         id="attendanceEditModalLabel">
                         <span class="date">{{timeCardCtrl.editableAttendance.targetDate |
                             date:'yyyy/MM/dd (EEE)'}}</span>
@@ -362,7 +364,7 @@
                                         data-ng-disabled="
                                             timeCardCtrl.loading === true
                                             ||
-                                            (timeCardCtrl.editableAttendance.targetDate | isHoliday)
+                                            timeCardCtrl.editableAttendance.holiday === true
                                             ||
                                             (timeCardCtrl.editableAttendance.paidLeave === false
                                              &&
@@ -376,7 +378,7 @@
                                             ||
                                             timeCardCtrl.editableAttendance.paidLeave === true
                                             ||
-                                            (timeCardCtrl.editableAttendance.targetDate | isHoliday)
+                                            timeCardCtrl.editableAttendance.holiday === true
                                             "
                                         data-ng-change="timeCardCtrl.calculateTime()">
                                             <option value=""></option>

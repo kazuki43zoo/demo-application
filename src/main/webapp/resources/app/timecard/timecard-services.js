@@ -48,7 +48,7 @@
         if (attendance.absence === true) {
             total.absenceCount++;
         }
-        if (!this.dateTimeService.isHoliday(attendance.targetDate)) {
+        if (!attendance.holiday === true) {
             total.baseWorkDays++;
         }
     }
@@ -105,8 +105,9 @@
     TimeCardService.prototype.initTimeCardByDefaultAttendance = function(timeCard, total,
             defaultAttendance) {
         angular.forEach(timeCard.attendances, function(attendance) {
+            delete defaultAttendance.holiday
             angular.extend(attendance, defaultAttendance);
-            if (this.dateTimeService.isHoliday(attendance.targetDate)) {
+            if (attendance.holiday === true) {
                 attendance.beginTime = null;
                 attendance.finishTime = null;
                 attendance.actualWorkingMinute = 0;

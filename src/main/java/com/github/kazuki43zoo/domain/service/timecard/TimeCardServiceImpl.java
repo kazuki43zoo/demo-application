@@ -1,5 +1,7 @@
 package com.github.kazuki43zoo.domain.service.timecard;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -7,17 +9,22 @@ import javax.transaction.Transactional;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 
+import com.github.kazuki43zoo.domain.model.calendar.Holiday;
 import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.github.kazuki43zoo.domain.repository.timecard.TimeCardRepository;
+import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
 
 @Transactional
 @Service
 public class TimeCardServiceImpl implements TimeCardService {
 
     @Inject
-    WorkPlaceService workPlaceService;
+    WorkPlaceSharedService workPlaceSharedService;
+
+    @Inject
+    CalendarSharedService calendarSharedService;
 
     @Inject
     @Named("timeCardBatchModeRepository")
@@ -31,12 +38,13 @@ public class TimeCardServiceImpl implements TimeCardService {
             if (timeCard.getWorkPlace() != null) {
                 defaultWorkPlaceUuid = timeCard.getWorkPlace().getWorkPlaceUuid();
             }
-            WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(defaultWorkPlaceUuid);
-            WorkPlace mainOffice = workPlaceService.getMainOffice();
+            WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(defaultWorkPlaceUuid);
+            WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
+            Map<LocalDate, Holiday> holidaies = calendarSharedService.getHolodaies(targetMonth);
             for (DailyAttendance attendance : timeCard.getAttendances()) {
-                attendance.setWorkPlace(workPlaceService.getWorkPlaceDetail(attendance
+                attendance.setWorkPlace(workPlaceSharedService.getWorkPlaceDetail(attendance
                         .getWorkPlace()));
-                attendance.calculate(defaultWorkPlace, mainOffice);
+                attendance.calculate(defaultWorkPlace, mainOffice, holidaies);
             }
         }
         return timeCard;
@@ -45,13 +53,14 @@ public class TimeCardServiceImpl implements TimeCardService {
     @Override
     public TimeCard getDefaultTimeCard(String accountUuid, LocalDate targetMonth) {
         TimeCard timeCard = new TimeCard();
-        WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(null);
-        WorkPlace mainOffice = workPlaceService.getMainOffice();
+        WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(null);
+        WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
+        Map<LocalDate, Holiday> holidaies = calendarSharedService.getHolodaies(targetMonth);
         for (int i = 0; i < targetMonth.dayOfMonth().getMaximumValue(); i++) {
             DailyAttendance attendance = new DailyAttendance();
             attendance.setTargetDate(targetMonth.plusDays(i));
             timeCard.addAttendance(attendance);
-            attendance.calculate(defaultWorkPlace, mainOffice);
+            attendance.calculate(defaultWorkPlace, mainOffice, holidaies);
         }
         return timeCard;
     }

@@ -18,7 +18,7 @@ import com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository;
 
 @Transactional
 @Service
-public class WorkPlaceServiceImpl implements WorkPlaceService {
+public class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
     private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
 

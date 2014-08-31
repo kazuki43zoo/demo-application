@@ -74,6 +74,31 @@ CREATE TABLE IF NOT EXISTS break_time(
     note_ja nvarchar(512),
     constraint pk_break_time primary key (work_place_uuid, begin_time)
 );
+CREATE TABLE IF NOT EXISTS fixed_holiday(
+    target_month smallint,
+    target_day smallint,
+    holiday_name nvarchar(64) not null,
+    holiday_name_ja nvarchar(64) not null,
+    transferred_later_days smallint,
+    begin_year smallint not null,
+    end_year smallint not null,
+    constraint pk_fixed_holiday primary key (target_month, target_day)
+);
+CREATE TABLE IF NOT EXISTS happy_monday_holiday(
+    target_month smallint,
+    target_week smallint,
+    holiday_name nvarchar(64) not null,
+    holiday_name_ja nvarchar(64) not null,
+    begin_year smallint not null,
+    end_year smallint not null,
+    constraint pk_happy_monday_holiday primary key (target_month, target_week)
+);
+CREATE TABLE IF NOT EXISTS seasonal_holiday(
+    target_date date,
+    holiday_name nvarchar(64) not null,
+    holiday_name_ja nvarchar(64) not null,
+    constraint pk_seasonal_holiday primary key (target_date)
+);
 CREATE TABLE IF NOT EXISTS time_card(
     account_uuid nvarchar(36),
     target_month date,

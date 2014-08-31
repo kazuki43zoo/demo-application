@@ -18,7 +18,7 @@ import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.github.kazuki43zoo.domain.service.timecard.TimeCardService;
-import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceService;
+import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
 import com.github.kazuki43zoo.web.security.CurrentUser;
 
 @RequestMapping("timecards/{targetMonth}")
@@ -29,7 +29,7 @@ public class TimeCardRestController {
     TimeCardService timeCardService;
 
     @Inject
-    WorkPlaceService workPlaceService;
+    WorkPlaceSharedService workPlaceSharedService;
 
     @Inject
     Mapper beanMapper;
@@ -52,7 +52,7 @@ public class TimeCardRestController {
         }
         TimeCardResource resource = beanMapper.map(timeCard, TimeCardResource.class);
         resource.setStored(stored);
-        resource.setWorkPlace(workPlaceService.getWorkPlace(defaultWorkPlaceUuid));
+        resource.setWorkPlace(workPlaceSharedService.getWorkPlace(defaultWorkPlaceUuid));
         return resource;
     }
 

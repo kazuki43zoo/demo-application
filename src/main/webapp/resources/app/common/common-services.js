@@ -24,7 +24,7 @@
         if (targetDate == undefined) {
             return false;
         }
-        var targetDayOfWeek = new Date(targetDate).getDay();
+        var targetDayOfWeek = this.getDayOfWeek(targetDate);
         return targetDayOfWeek === SUNDAY || targetDayOfWeek === SATURDAY;
     };
 

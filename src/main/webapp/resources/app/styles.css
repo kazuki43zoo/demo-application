@@ -295,12 +295,16 @@ footer {
 	text-align: center;
 }
 
-.dayOfWeek6 .day, .dayOfWeek6 .dayOfWeek, .dayOfWeek6 .date {
-	color: blue;
+.holiday .day, .holiday .dayOfWeek, .holiday .date {
+	color: red;
 }
 
 .dayOfWeek0 .day, .dayOfWeek0 .dayOfWeek, .dayOfWeek0 .date {
 	color: red;
+}
+
+.dayOfWeek6 .day, .dayOfWeek6 .dayOfWeek, .dayOfWeek6 .date {
+	color: blue;
 }
 
 td.center {

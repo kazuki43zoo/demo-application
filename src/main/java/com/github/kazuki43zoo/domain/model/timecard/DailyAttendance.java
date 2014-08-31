@@ -1,6 +1,8 @@
 package com.github.kazuki43zoo.domain.model.timecard;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Map;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +16,8 @@ import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.springframework.util.StringUtils;
+
+import com.github.kazuki43zoo.domain.model.calendar.Holiday;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -55,9 +59,26 @@ public class DailyAttendance implements Serializable {
     @Setter(AccessLevel.NONE)
     transient private boolean absence;
 
+    @Setter(AccessLevel.NONE)
+    transient private boolean holiday;
+
     public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice) {
+        Map<LocalDate, Holiday> holidaies = Collections.emptyMap();
+        calculate(defaultWorkPlace, mainOffice, holidaies);
+    }
+
+    public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice,
+            Map<LocalDate, Holiday> holidaies) {
 
         clearCalculate();
+
+        if (targetDate != null) {
+            if ((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY)
+                    || (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY)
+                    || holidaies.containsKey(targetDate)) {
+                this.holiday = true;
+            }
+        }
 
         if (paidLeave) {
             setBeginTime(mainOffice.getBaseBeginTime());
@@ -93,7 +114,7 @@ public class DailyAttendance implements Serializable {
                     mainOffice);
 
             // calculate compensation minute
-            if (actualWorkingMinute < mainOffice.getBaseWorkTimeMinute() && isWorkDay()) {
+            if (actualWorkingMinute < mainOffice.getBaseWorkTimeMinute() && !holiday) {
                 this.compensationMinute = mainOffice.getBaseWorkTimeMinute() - actualWorkingMinute;
             }
 
@@ -108,7 +129,7 @@ public class DailyAttendance implements Serializable {
             }
         }
 
-        if (isWorkDay()) {
+        if (!holiday) {
             this.tardyOrEarlyLeaving = actualWorkPlace.isTardyOrEarlyLeaving(beginDateTime,
                     finishDateTime);
             if (tardyOrEarlyLeaving) {
@@ -123,14 +144,6 @@ public class DailyAttendance implements Serializable {
     public void setDefault(final WorkPlace defaultWorkPlace) {
         setBeginTime(defaultWorkPlace.getBaseBeginTime());
         setFinishTime(defaultWorkPlace.getBaseFinishTime());
-    }
-
-    private boolean isWorkDay() {
-        if (targetDate == null) {
-            return true;
-        }
-        return !((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY) || (targetDate
-                .getDayOfWeek() == DateTimeConstants.SUNDAY));
     }
 
     private void clearCalculate() {

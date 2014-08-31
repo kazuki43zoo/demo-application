@@ -40,5 +40,6 @@ public class DailyAttendanceResource implements Serializable {
     private int midnightWorkingMinute;
     private boolean tardyOrEarlyLeaving;
     private boolean absence;
+    private boolean holiday;
 
 }

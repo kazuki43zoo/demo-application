@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
-import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceService;
+import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
+import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
 
 @RequestMapping("timecards/calculate")
 @Controller
 public class TimeCardCalculateController {
 
     @Inject
-    WorkPlaceService workPlaceService;
+    WorkPlaceSharedService workPlaceSharedService;
+
+    @Inject
+    CalendarSharedService calendarSharedService;
 
     @Inject
     Mapper beanMapper;
@@ -33,9 +37,13 @@ public class TimeCardCalculateController {
     public DailyAttendanceResource calculate(
             @RequestBody @Validated DailyAttendanceResource resource) {
         DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
-        attendance.setWorkPlace(workPlaceService.getWorkPlace(attendance.getWorkPlace()
+        attendance.setWorkPlace(workPlaceSharedService.getWorkPlace(attendance.getWorkPlace()
                 .getWorkPlaceUuid()));
-        attendance.calculate(null, workPlaceService.getMainOffice());
+        attendance.calculate(
+                null,
+                workPlaceSharedService.getMainOffice(),
+                calendarSharedService.getHolodaies(attendance.getTargetDate().dayOfMonth()
+                        .withMinimumValue()));
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 
@@ -44,11 +52,11 @@ public class TimeCardCalculateController {
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource getDefaultAttendanceResource(
             @RequestParam(value = "workPlaceUuid", required = false) String workPlaceUuid) {
-        WorkPlace defaultWorkPlace = workPlaceService.getWorkPlace(workPlaceUuid);
+        WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(workPlaceUuid);
 
         DailyAttendance attendance = new DailyAttendance();
         attendance.setDefault(defaultWorkPlace);
-        attendance.calculate(defaultWorkPlace, workPlaceService.getMainOffice());
+        attendance.calculate(defaultWorkPlace, workPlaceSharedService.getMainOffice());
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 }
