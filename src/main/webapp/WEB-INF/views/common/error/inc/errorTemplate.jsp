@@ -1,6 +1,6 @@
 <%@page session="false"%>
 <!DOCTYPE html>
-<html ng-app="app">
+<html data-ng-app="app">
 <head>
 
 <meta charset="utf-8" />
@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top"
-        ng-controller="NavBarController as navBarCtrl" ng-cloak>
+        data-ng-controller="NavBarController as navBarCtrl" data-ng-cloak>
         <jsp:include page="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp" />
     </div>
     <div id="container">
