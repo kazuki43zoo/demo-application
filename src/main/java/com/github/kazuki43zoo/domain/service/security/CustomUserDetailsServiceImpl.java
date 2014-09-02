@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.domain.service.security;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.joda.time.DateTime;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,19 +20,16 @@ import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Service("customUserDetailsService")
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
-    @Inject
-    AccountRepository accountRepository;
+    private final @NonNull AccountRepository accountRepository;
 
-    @Inject
-    MessageSource messageSource;
+    private final @NonNull MessageSource messageSource;
 
-    @Inject
-    DateFactory dateFactory;
+    private final @NonNull DateFactory dateFactory;
 
-    @Inject
-    SecurityConfigs securityConfigs;
+    private final @NonNull SecurityConfigs securityConfigs;
 
     @Transactional(readOnly = true)
     @Override

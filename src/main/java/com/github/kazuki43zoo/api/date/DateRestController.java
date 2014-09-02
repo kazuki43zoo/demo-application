@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.api.date;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,10 +14,10 @@ import org.terasoluna.gfw.common.date.DateFactory;
 
 @RequestMapping("dates")
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class DateRestController {
 
-    @Inject
-    DateFactory dateFactory;
+    private final @NonNull DateFactory dateFactory;
 
     @RequestMapping(value = "currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

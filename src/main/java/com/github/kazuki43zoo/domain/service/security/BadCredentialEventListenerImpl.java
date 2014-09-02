@@ -3,6 +3,9 @@ package com.github.kazuki43zoo.domain.service.security;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
@@ -14,17 +17,15 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class BadCredentialEventListenerImpl implements
         ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
-    @Inject
-    AuthenticationService authenticationService;
+    private final @NonNull AuthenticationService authenticationService;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final @NonNull PasswordSharedService passwordSharedService;
 
-    @Inject
-    Mapper beanMapper;
+    private final @NonNull Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {

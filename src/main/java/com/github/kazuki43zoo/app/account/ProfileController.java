@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.app.account;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -25,13 +28,12 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 @TransactionTokenCheck("profile")
 @RequestMapping("profile")
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ProfileController {
 
-    @Inject
-    AccountService accountService;
+    private final @NonNull AccountService accountService;
 
-    @Inject
-    Mapper beanMapper;
+    private final @NonNull Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public String show(@CurrentUser CustomUserDetails currentUser, Model model) {

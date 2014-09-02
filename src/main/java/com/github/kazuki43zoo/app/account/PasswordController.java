@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.app.account;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +30,12 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 @TransactionTokenCheck("password")
 @RequestMapping("password")
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class PasswordController {
 
-    @Inject
-    PasswordService passwordService;
+    private final @NonNull PasswordService passwordService;
 
-    @Inject
-    Mapper beanMapper;
+    private final @NonNull Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {

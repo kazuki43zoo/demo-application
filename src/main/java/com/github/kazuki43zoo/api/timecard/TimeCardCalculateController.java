@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.api.timecard;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,16 +23,14 @@ import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
 
 @RequestMapping("timecards/calculate")
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardCalculateController {
 
-    @Inject
-    WorkPlaceSharedService workPlaceSharedService;
+    private final @NonNull WorkPlaceSharedService workPlaceSharedService;
 
-    @Inject
-    CalendarSharedService calendarSharedService;
+    private final @NonNull CalendarSharedService calendarSharedService;
 
-    @Inject
-    Mapper beanMapper;
+    private final @NonNull Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

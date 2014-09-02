@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.api.error;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
@@ -21,13 +24,12 @@ import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 
 @ControllerAdvice
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Inject
-    ApiErrorCreator apiErrorCreator;
+    private final @NonNull ApiErrorCreator apiErrorCreator;
 
-    @Inject
-    ExceptionCodeResolver exceptionCodeResolver;
+    private final @NonNull ExceptionCodeResolver exceptionCodeResolver;
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,

@@ -2,6 +2,9 @@ package com.github.kazuki43zoo.api.timecard;
 
 import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,17 +26,15 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 
 @RequestMapping("timecards/{targetMonth}")
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardRestController {
 
-    @Inject
-    TimeCardService timeCardService;
+    private final @NonNull TimeCardService timeCardService;
 
-    @Inject
-    WorkPlaceSharedService workPlaceSharedService;
+    private final @NonNull WorkPlaceSharedService workPlaceSharedService;
 
-    @Inject
-    Mapper beanMapper;
-
+    private final @NonNull Mapper beanMapper;
+    
     @RequestMapping(method = { RequestMethod.HEAD, RequestMethod.GET })
     @ResponseStatus(HttpStatus.OK)
     public TimeCardResource getTimeCard(@CurrentUser CustomUserDetails currentUser,

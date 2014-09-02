@@ -3,6 +3,9 @@ package com.github.kazuki43zoo.api.error;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +16,10 @@ import org.springframework.web.context.request.WebRequest;
 
 @RequestMapping("error")
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ApiErrorPageController {
 
-    @Inject
-    ApiErrorCreator apiErrorCreator;
+    private final @NonNull ApiErrorCreator apiErrorCreator;
 
     @RequestMapping
     public ResponseEntity<ApiError> handleErrorPage(@RequestParam("errorCode") String errorCode,

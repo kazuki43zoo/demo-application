@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.exception.SystemException;
@@ -18,13 +21,13 @@ import com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
-    private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
-
-    @Inject
     @Named("workPlaceBatchModeRepository")
-    WorkPlaceRepository workPlaceRepository;
+    private final @NonNull WorkPlaceRepository workPlaceRepository;
+
+    private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void loadWorkPlaceOfMainOffice() {

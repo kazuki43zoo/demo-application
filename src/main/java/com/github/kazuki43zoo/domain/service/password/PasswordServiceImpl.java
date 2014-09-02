@@ -3,6 +3,9 @@ package com.github.kazuki43zoo.domain.service.password;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.joda.time.DateTime;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,19 +19,16 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class PasswordServiceImpl implements PasswordService {
 
-    @Inject
-    PasswordEncoder passwordEncoder;
+    private final @NonNull PasswordEncoder passwordEncoder;
 
-    @Inject
-    DateFactory dateFactory;
+    private final @NonNull DateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final @NonNull AccountRepository accountRepository;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final @NonNull PasswordSharedService passwordSharedService;
 
     @Override
     public Account change(String accountId, String rawOldPassword, String rawNewPassword) {
@@ -55,12 +55,10 @@ public class PasswordServiceImpl implements PasswordService {
 
     private void authenticate(Account currentAccount, String rawPassword) {
         if (currentAccount == null) {
-            throw new ResourceNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
+            throw new ResourceNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
         if (!passwordEncoder.matches(rawPassword, currentAccount.getPassword())) {
-            throw new ResourceNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
+            throw new ResourceNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
     }
 

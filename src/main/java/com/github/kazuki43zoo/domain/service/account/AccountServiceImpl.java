@@ -6,6 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import org.dozer.Mapper;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
@@ -27,19 +30,16 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 
 @Transactional
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AccountServiceImpl implements AccountService {
 
-    @Inject
-    Mapper beanMapper;
+    private final @NonNull Mapper beanMapper;
 
-    @Inject
-    DateFactory dateFactory;
+    private final @NonNull DateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final @NonNull AccountRepository accountRepository;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final @NonNull PasswordSharedService passwordSharedService;
 
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
