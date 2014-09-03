@@ -1,5 +1,5 @@
-<div ng-app="app" ng-controller="TimeCardController as timeCardCtrl"
-    ng-init="timeCardCtrl.loadTimeCard()" ng-cloak>
+<div ng-controller="TimeCardController as timeCardCtrl" ng-init="timeCardCtrl.loadTimeCard()"
+    ng-cloak>
     <div id="timeCardForm" class="form-horizontal">
         <div class="form-group">
             <label for="targetMonth" class="control-label col-sm-2"><spring:message
@@ -17,7 +17,6 @@
                 </button>
             </div>
         </div>
-
         <div class="form-group">
             <label for="defaultWorkPlace" class="control-label col-sm-2"><spring:message
                     code="workPlace" /></label>

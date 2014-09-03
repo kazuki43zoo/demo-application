@@ -1,6 +1,5 @@
 (function() {
     'use strict';
-    angular.module('app.usecase', []);
     angular.module('app', [ 'filters', 'common-controllers', 'app.usecase' ])
     //
     .constant("apiBasePath",
