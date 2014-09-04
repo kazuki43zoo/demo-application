@@ -48,5 +48,6 @@
     <script src="${contextPath}/resources/app/app-filters.js"></script>
     <script src="${contextPath}/resources/app/common/common-controllers.js"></script>
     <script src="${contextPath}/resources/app/common/common-services.js"></script>
+    <script src="${contextPath}/resources/app/error/error.js"></script>
 </body>
 </html>
