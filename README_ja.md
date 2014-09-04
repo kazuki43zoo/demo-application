@@ -18,9 +18,9 @@
 |                      | [jQuery UI 1.11.1](http://jqueryui.com/) | jQueryの機能を利用して、ユーザーインタフェースを向上させる相互作用、効果、ウィジェット、テーマなどを提供しています。|
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+|                      | [Spring Framework 4.1.0.RELEASE](http://docs.spring.io/spring/docs/4.1.0.RELEASE/spring-framework-reference/htmlsingle/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://docs.spring.io/spring-security/site/docs/3.2.5.RELEASE/reference/htmlsingle/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.1.0.RC2](http://docs.spring.io/spring/docs/4.1.0.RC2/spring-framework-reference/htmlsingle/#mvc) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Spring MVC 4.1.0.RELEASE](http://docs.spring.io/spring/docs/4.1.0.RELEASE/spring-framework-reference/htmlsingle/#mvc) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.2.Final](http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
