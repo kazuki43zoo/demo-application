@@ -16,7 +16,6 @@ Structure of this application is following.<br><br>
 | Client Layer         | [jQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
 |                      | [AngularJS 1.2.23](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
-|                      | [jQuery UI 1.11.1](http://jqueryui.com/) | Provide user interface interactions, effects, widgets, and themes built on top of the jQuery. |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
 |                      | [Spring Framework 4.1.0.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
@@ -39,10 +38,11 @@ The following libraries is dependency for application-specific without relate on
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | Depends on to access H2 database. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.4 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** |
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.2 | Depends on to bind JSON. |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Depends on to use Joda-Time on the Jackson. |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Depends on to use the `@java.transaction.Transactinal` annotation of Java standard API. |
+| [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | Depends on to support HATEOAS as REST AIP. |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
@@ -51,7 +51,7 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | ----- | :-----: | :-----: |
 | org.springframework | 4.1.0.RELEASE | 3.2.10.RELEASE |
 | org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
-| org.springframework.data | 1.8.4.RELEASE  | 1.6.4.RELEASE |
+| org.springframework.data | 1.9.0.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.2 | 1.7.4 |
 | org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
