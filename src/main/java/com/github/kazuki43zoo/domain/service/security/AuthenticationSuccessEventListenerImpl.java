@@ -3,9 +3,6 @@ package com.github.kazuki43zoo.domain.service.security;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -18,15 +15,15 @@ import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 
 @Transactional(dontRollbackOn = ConcurrentLoginException.class)
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AuthenticationSuccessEventListenerImpl implements
         ApplicationListener<AuthenticationSuccessEvent> {
 
-    private final @NonNull MessageSource messageSource;
+    private final @lombok.NonNull MessageSource messageSource;
 
-    private final @NonNull AuthenticationService authenticationService;
+    private final @lombok.NonNull AuthenticationService authenticationService;
 
-    private final @NonNull Mapper beanMapper;
+    private final @lombok.NonNull Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {

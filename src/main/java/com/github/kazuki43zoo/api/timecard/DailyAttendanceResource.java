@@ -2,17 +2,18 @@ package com.github.kazuki43zoo.api.timecard;
 
 import java.io.Serializable;
 
-import lombok.Data;
-
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
 
-@Data
-public class DailyAttendanceResource implements Serializable {
+@lombok.Data
+@lombok.EqualsAndHashCode(callSuper = true)
+@lombok.ToString(callSuper = true)
+public class DailyAttendanceResource extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

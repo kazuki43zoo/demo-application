@@ -6,13 +6,9 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@lombok.AllArgsConstructor
+@lombok.NoArgsConstructor
+@lombok.Data
 public class TimeCard implements Serializable {
 
     private static final long serialVersionUID = 1L;

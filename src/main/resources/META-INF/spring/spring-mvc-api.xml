@@ -29,12 +29,18 @@
             <ref bean="jsonMessageConverter" />
         </mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean
-                class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+            <ref bean="hateoasPageableHandlerMethodArgumentResolver"/>
+            <bean class="org.springframework.data.web.PagedResourcesAssemblerArgumentResolver">
+                <constructor-arg index="0" ref="hateoasPageableHandlerMethodArgumentResolver" />
+                <constructor-arg index="1"><null /></constructor-arg>
+            </bean>
             <bean
                 class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver" />
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
+    
+    <bean id="hateoasPageableHandlerMethodArgumentResolver" class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver" />
 
     <mvc:interceptors>
         <mvc:interceptor>

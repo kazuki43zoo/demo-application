@@ -7,14 +7,16 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
 
-import lombok.Data;
+import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
 
-@Data
-public class TimeCardResource implements Serializable {
+@lombok.Data
+@lombok.EqualsAndHashCode(callSuper = true)
+@lombok.ToString(callSuper = true)
+public class TimeCardResource extends ResourceSupport implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)

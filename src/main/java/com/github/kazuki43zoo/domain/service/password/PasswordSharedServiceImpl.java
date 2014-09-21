@@ -3,9 +3,6 @@ package com.github.kazuki43zoo.domain.service.password;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.joda.time.DateTime;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,14 +15,14 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class PasswordSharedServiceImpl implements PasswordSharedService {
 
-    private final @NonNull PasswordEncoder passwordEncoder;
+    private final @lombok.NonNull PasswordEncoder passwordEncoder;
 
-    private final @NonNull DateFactory dateFactory;
+    private final @lombok.NonNull DateFactory dateFactory;
 
-    private final @NonNull AccountRepository accountRepository;
+    private final @lombok.NonNull AccountRepository accountRepository;
 
     @Override
     public void validatePassword(String rawPassword, Account account) {

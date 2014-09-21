@@ -4,16 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import org.joda.time.DateTime;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@lombok.AllArgsConstructor
+@lombok.NoArgsConstructor
+@lombok.Data
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;

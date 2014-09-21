@@ -3,9 +3,6 @@ package com.github.kazuki43zoo.domain.service.security;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.terasoluna.gfw.common.date.DateFactory;
@@ -17,12 +14,12 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Transactional
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final @NonNull DateFactory dateFactory;
+    private final @lombok.NonNull DateFactory dateFactory;
 
-    private final @NonNull AccountRepository accountRepository;
+    private final @lombok.NonNull AccountRepository accountRepository;
 
     @Override
     public boolean isLogin(Account account) {

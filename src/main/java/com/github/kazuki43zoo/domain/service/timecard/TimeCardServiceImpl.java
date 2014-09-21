@@ -6,9 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +18,15 @@ import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
 
 @Transactional
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardServiceImpl implements TimeCardService {
 
-    private final @NonNull WorkPlaceSharedService workPlaceSharedService;
+    private final @lombok.NonNull WorkPlaceSharedService workPlaceSharedService;
 
-    private final @NonNull CalendarSharedService calendarSharedService;
+    private final @lombok.NonNull CalendarSharedService calendarSharedService;
 
     @Named("timeCardBatchModeRepository")
-    private final @NonNull TimeCardRepository timeCardRepository;
+    private final @lombok.NonNull TimeCardRepository timeCardRepository;
 
     @Override
     public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {
@@ -98,6 +95,11 @@ public class TimeCardServiceImpl implements TimeCardService {
             attendance.setAccountUuid(accountUuid);
             timeCardRepository.updateDailyAttendance(attendance);
         }
+    }
+
+    @Override
+    public DailyAttendance getDailyAttendance(String accountUuid, LocalDate targetDate) {
+        return timeCardRepository.findOneDailyAttendance(accountUuid, targetDate);
     }
 
 }

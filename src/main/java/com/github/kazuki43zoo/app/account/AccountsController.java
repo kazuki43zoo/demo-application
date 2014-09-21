@@ -2,9 +2,6 @@ package com.github.kazuki43zoo.app.account;
 
 import javax.inject.Inject;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -32,12 +29,12 @@ import com.github.kazuki43zoo.domain.service.account.AccountService;
 @TransactionTokenCheck("accounts")
 @RequestMapping("accounts")
 @Controller
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AccountsController {
 
-    private final @NonNull Mapper beanMapper;
+    private final @lombok.NonNull Mapper beanMapper;
 
-    private final @NonNull AccountService accountService;
+    private final @lombok.NonNull AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(@Validated AccountsSearchQuery query, BindingResult bindingResult,

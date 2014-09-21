@@ -2,9 +2,6 @@ package com.github.kazuki43zoo.api.error;
 
 import javax.inject.Inject;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
@@ -16,10 +13,10 @@ import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ApiErrorCreator {
 
-    private final @NonNull MessageSource messageSource;
+    private final @lombok.NonNull @Inject MessageSource messageSource;
 
     public ApiError createApiError(WebRequest request, String errorCode,
             String defaultErrorMessage, Object... arguments) {

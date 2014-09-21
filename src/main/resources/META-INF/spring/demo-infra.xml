@@ -20,14 +20,14 @@
         p:dataSource-ref="dataSource" p:configLocation="classpath:/META-INF/mybatis/mybatis-config.xml" />
 
     <mybatis:scan base-package="com.github.kazuki43zoo.domain.repository"
-        template-ref="batchModeSqlSessionTemplate"
+        template-ref="sqlSessionTemplateForBatch"
         name-generator="com.github.kazuki43zoo.infra.mybatis.spring.BatchModeRepositoryBeanNameGenerator" />
-    <bean id="batchModeSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+    <bean id="sqlSessionTemplateForBatch" class="org.mybatis.spring.SqlSessionTemplate"
         c:sqlSessionFactory-ref="sqlSessionFactory" c:executorType="BATCH" />
 
     <mybatis:scan base-package="com.github.kazuki43zoo.domain.repository"
-        template-ref="simpleModeSqlSessionTemplate" />
-    <bean id="simpleModeSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+        template-ref="sqlSessionTemplateForSimple" />
+    <bean id="sqlSessionTemplateForSimple" class="org.mybatis.spring.SqlSessionTemplate"
         c:sqlSessionFactory-ref="sqlSessionFactory" c:executorType="SIMPLE" />
 
 

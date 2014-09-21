@@ -6,9 +6,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import lombok.Data;
-
-@Data
+@lombok.Data
 public class AccountsSearchCriteria {
 
     private static final List<String> DEFAULT_TARGETS = Collections.unmodifiableList(Arrays.asList(

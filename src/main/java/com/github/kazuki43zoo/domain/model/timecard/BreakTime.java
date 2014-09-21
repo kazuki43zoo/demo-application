@@ -4,15 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Data
+@lombok.Data
 public class BreakTime implements Serializable {
 
     private static final long serialVersionUID = 1L;

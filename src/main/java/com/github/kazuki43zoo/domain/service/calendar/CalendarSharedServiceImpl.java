@@ -10,9 +10,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
@@ -26,14 +23,14 @@ import com.github.kazuki43zoo.domain.repository.calendar.HappyMondayHolidayRepos
 import com.github.kazuki43zoo.domain.repository.calendar.SeasonalHolidayRepository;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class CalendarSharedServiceImpl implements CalendarSharedService {
 
-    private final @NonNull FixedHolidayRepository fixedHolidayRepository;
+    private final @lombok.NonNull FixedHolidayRepository fixedHolidayRepository;
 
-    private final @NonNull HappyMondayHolidayRepository happyMondayHolidayRepository;
+    private final @lombok.NonNull HappyMondayHolidayRepository happyMondayHolidayRepository;
 
-    private final @NonNull SeasonalHolidayRepository seasonalHolidayRepository;
+    private final @lombok.NonNull SeasonalHolidayRepository seasonalHolidayRepository;
 
     private Map<Integer, List<FixedHoliday>> fixedHolodaiesMapping;
 

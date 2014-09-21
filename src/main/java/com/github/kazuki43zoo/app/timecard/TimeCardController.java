@@ -13,8 +13,8 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 public class TimeCardController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewTimeCard(@CurrentUser CustomUserDetails currentUser, Model model) {
-        model.addAttribute(currentUser.getAccount());
+    public String viewTimeCard(@CurrentUser CustomUserDetails authenticatedUser, Model model) {
+        model.addAttribute(authenticatedUser.getAccount());
         return "timecard/form";
     }
 

@@ -2,11 +2,8 @@ package com.github.kazuki43zoo.domain.service.security;
 
 import java.io.Serializable;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-@Data
-@RequiredArgsConstructor
+@lombok.Data
+@lombok.RequiredArgsConstructor
 public class CustomAuthenticationDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;

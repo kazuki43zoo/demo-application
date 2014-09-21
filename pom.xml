@@ -92,7 +92,7 @@
             Framework) -->
         <org.springframework-version>4.1.0.RELEASE</org.springframework-version>
         <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
-        <org.springframework.data.version>1.8.4.RELEASE</org.springframework.data.version>
+        <org.springframework.data.version>1.9.0.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.2</org.aspectj-version>
         <org.slf4j-version>1.7.7</org.slf4j-version>
         <ch.qos.logback.version>1.1.2</ch.qos.logback.version>
@@ -110,10 +110,11 @@
         <com.fasterxml.jackson.datatype.version>2.4.2</com.fasterxml.jackson.datatype.version>
         <org.mybatis.version>3.3.0-SNAPSHOT</org.mybatis.version>
         <org.apache.commons.commons-dbcp2.version>2.0.1</org.apache.commons.commons-dbcp2.version>
-        <org.projectlombok.version>1.14.4</org.projectlombok.version>
+        <org.projectlombok.version>1.14.8</org.projectlombok.version>
         <javax.transaction.version>1.2</javax.transaction.version>
         <org.apache.tomcat.version>7.0.55</org.apache.tomcat.version>
         <com.h2database.version>1.4.181</com.h2database.version>
+        <org.springframework.hateoas>0.16.0.RELEASE</org.springframework.hateoas>
 
         <!-- for dependency test library version -->
         <junit.version>4.11</junit.version>
@@ -246,6 +247,26 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-joda</artifactId>
             <version>${com.fasterxml.jackson.datatype.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>${org.springframework.hateoas}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

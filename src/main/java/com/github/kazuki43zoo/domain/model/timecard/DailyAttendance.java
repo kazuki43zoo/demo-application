@@ -4,12 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Interval;
@@ -19,9 +13,9 @@ import org.springframework.util.StringUtils;
 
 import com.github.kazuki43zoo.domain.model.calendar.Holiday;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@lombok.AllArgsConstructor
+@lombok.NoArgsConstructor
+@lombok.Data
 public class DailyAttendance implements Serializable {
 
     private static final LocalDate BASE_DATE = new LocalDate(0);
@@ -44,22 +38,22 @@ public class DailyAttendance implements Serializable {
 
     private WorkPlace workPlace;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private int actualWorkingMinute;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private int compensationMinute;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private int midnightWorkingMinute;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private boolean tardyOrEarlyLeaving;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private boolean absence;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     transient private boolean holiday;
 
     public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice) {

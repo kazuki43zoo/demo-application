@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -28,16 +25,16 @@ import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 @Transactional
 @Component
 @Aspect
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()
             .concat(".logout");
 
-    private final @NonNull AuthenticationService authenticationService;
+    private final @lombok.NonNull AuthenticationService authenticationService;
 
-    private final @NonNull Mapper beanMapper;
+    private final @lombok.NonNull Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(HttpSessionDestroyedEvent event) {

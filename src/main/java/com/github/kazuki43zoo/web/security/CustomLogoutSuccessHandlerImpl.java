@@ -7,9 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -22,12 +19,12 @@ import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @Component("customLogoutSuccessHandler")
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler {
 
-    private final @NonNull AuthenticationService authenticationService;
+    private final @lombok.NonNull AuthenticationService authenticationService;
 
-    private final @NonNull Mapper beanMapper;
+    private final @lombok.NonNull Mapper beanMapper;
 
     @Value("${CustomLogoutSuccessHandlerImpl.defaultTargetUrl:/auth/logout?success}")
     public void setDefaultTargetUrl(String defaultTargetUrl) {

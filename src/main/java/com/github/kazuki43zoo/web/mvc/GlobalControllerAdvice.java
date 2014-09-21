@@ -5,9 +5,6 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,14 +18,14 @@ import com.github.kazuki43zoo.core.config.ApplicationConfigs;
 import com.github.kazuki43zoo.core.config.SecurityConfigs;
 
 @ControllerAdvice
-@RequiredArgsConstructor(onConstructor = @__(@Inject))
+@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class GlobalControllerAdvice {
 
-    private final @NonNull SecurityConfigs securityConfigs;
+    private final @lombok.NonNull SecurityConfigs securityConfigs;
 
-    private final @NonNull ApplicationConfigs applicationConfigs;
+    private final @lombok.NonNull ApplicationConfigs applicationConfigs;
 
-    private final @NonNull DateFactory dateFactory;
+    private final @lombok.NonNull DateFactory dateFactory;
 
     @ModelAttribute
     public SecurityConfigs setUpSecurityConfigs() {

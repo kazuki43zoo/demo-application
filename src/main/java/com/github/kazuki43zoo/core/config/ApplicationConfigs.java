@@ -1,11 +1,9 @@
 package com.github.kazuki43zoo.core.config;
 
-import lombok.Data;
-
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@lombok.Data
 public class ApplicationConfigs {
 
 }

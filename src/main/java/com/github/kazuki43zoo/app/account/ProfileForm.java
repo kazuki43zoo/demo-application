@@ -1,12 +1,10 @@
 package com.github.kazuki43zoo.app.account;
 
-import lombok.Data;
-
 import com.github.kazuki43zoo.core.validation.AccountId;
 import com.github.kazuki43zoo.core.validation.FirstName;
 import com.github.kazuki43zoo.core.validation.LastName;
 
-@Data
+@lombok.Data
 public class ProfileForm {
 
     @AccountId

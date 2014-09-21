@@ -13,6 +13,8 @@ public interface TimeCardService {
 
     void saveTimeCard(String accountUuid, LocalDate targetMonth, TimeCard timeCard);
 
+    DailyAttendance getDailyAttendance(String accountUuid, LocalDate targetDate);
+
     void saveDailyAttendance(String accountUuid, LocalDate targetDate, DailyAttendance attendance);
 
 }

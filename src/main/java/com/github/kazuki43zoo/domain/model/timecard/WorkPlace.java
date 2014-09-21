@@ -7,13 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
@@ -21,9 +14,9 @@ import org.joda.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@lombok.AllArgsConstructor
+@lombok.NoArgsConstructor
+@lombok.Data
 public class WorkPlace implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,15 +42,15 @@ public class WorkPlace implements Serializable {
 
     private List<BreakTime> breakTimes;
 
-    @Setter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
     private transient int baseWorkTimeMinute;
 
-    @Setter(AccessLevel.NONE)
-    @Getter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private transient Interval baseWorkTimeInterval;
 
-    @Setter(AccessLevel.NONE)
-    @Getter(AccessLevel.NONE)
+    @lombok.Setter(lombok.AccessLevel.NONE)
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private transient List<Interval> breakTimeIntervals;
 
     public void initialize() {
