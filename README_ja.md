@@ -13,7 +13,7 @@
 | レイヤ | コンポーネント/ライブラリ | 主な役割 |
 | :-----: | --------- | --------------------- |
 | Client Layer         | [jQuery 2.1.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
-|                      | [AngularJS 1.2.23](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
+|                      | [AngularJS 1.2.25](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
