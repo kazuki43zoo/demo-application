@@ -4,3 +4,5 @@
 .tern-project
 /.settings
 .springBeans
+.idea
+*.iml
