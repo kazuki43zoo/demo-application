@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
 
 @Component
-public class SessionFixationProtectionEventListenerImpl implements
+public final class SessionFixationProtectionEventListenerImpl implements
         ApplicationListener<SessionFixationProtectionEvent> {
 
     @Override

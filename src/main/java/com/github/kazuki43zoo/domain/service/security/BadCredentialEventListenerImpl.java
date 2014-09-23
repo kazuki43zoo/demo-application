@@ -15,7 +15,7 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 @Transactional
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class BadCredentialEventListenerImpl implements
+public final class BadCredentialEventListenerImpl implements
         ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     private final @lombok.NonNull AuthenticationService authenticationService;

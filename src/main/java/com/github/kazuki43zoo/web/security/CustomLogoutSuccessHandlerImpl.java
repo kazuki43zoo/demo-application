@@ -20,7 +20,7 @@ import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 
 @Component("customLogoutSuccessHandler")
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler {
+public final class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccessHandler {
 
     private final @lombok.NonNull AuthenticationService authenticationService;
 

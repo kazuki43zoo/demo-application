@@ -14,7 +14,7 @@ import com.github.kazuki43zoo.core.validation.Password;
 
 @Confirm(field = "password")
 @lombok.Data
-public class AccountForm implements Serializable {
+public final class AccountForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

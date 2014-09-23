@@ -15,7 +15,7 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 @Transactional(dontRollbackOn = ConcurrentLoginException.class)
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class InteractiveAuthenticationSuccessEventListenerImpl implements
+public final class InteractiveAuthenticationSuccessEventListenerImpl implements
         ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
     private final @lombok.NonNull AuthenticationService authenticationService;

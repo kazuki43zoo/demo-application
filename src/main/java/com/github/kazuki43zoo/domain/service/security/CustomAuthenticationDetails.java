@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 @lombok.Data
 @lombok.RequiredArgsConstructor
-public class CustomAuthenticationDetails implements Serializable {
+public final class CustomAuthenticationDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

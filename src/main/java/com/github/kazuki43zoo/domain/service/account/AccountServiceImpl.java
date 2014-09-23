@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import org.dozer.Mapper;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,9 +27,7 @@ import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class AccountServiceImpl implements AccountService {
-
-    private final @lombok.NonNull Mapper beanMapper;
+public final class AccountServiceImpl implements AccountService {
 
     private final @lombok.NonNull DateFactory dateFactory;
 

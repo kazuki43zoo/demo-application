@@ -12,7 +12,7 @@ import org.apache.ibatis.type.MappedTypes;
 import org.joda.time.DateTime;
 
 @MappedTypes(DateTime.class)
-public class DateTimeTypeHandler extends BaseTypeHandler<DateTime> {
+public final class DateTimeTypeHandler extends BaseTypeHandler<DateTime> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, DateTime parameter,

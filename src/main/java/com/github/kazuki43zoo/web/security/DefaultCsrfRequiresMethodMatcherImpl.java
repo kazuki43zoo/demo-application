@@ -9,7 +9,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
 @Component("defaultCsrfRequiresMethodMatcher")
-public class DefaultCsrfRequiresMethodMatcherImpl implements RequestMatcher {
+public final class DefaultCsrfRequiresMethodMatcherImpl implements RequestMatcher {
 
     private Pattern allowedMethods;
 

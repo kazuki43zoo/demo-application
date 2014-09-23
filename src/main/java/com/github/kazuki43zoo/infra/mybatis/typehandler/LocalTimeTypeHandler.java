@@ -13,7 +13,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 @MappedTypes(LocalTime.class)
-public class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
+public final class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
 
     private static final LocalDate BASE_DATE = new LocalDate(0);
 

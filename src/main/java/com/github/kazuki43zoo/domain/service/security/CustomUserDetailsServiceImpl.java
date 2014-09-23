@@ -18,7 +18,7 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 
 @Service("customUserDetailsService")
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class CustomUserDetailsServiceImpl implements UserDetailsService {
+public final class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     private final @lombok.NonNull AccountRepository accountRepository;
 
@@ -39,15 +39,13 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
         DateTime currentDateTime = dateFactory.newDateTime();
 
-        boolean accountNonExpired = true;
-
         boolean passwordNonExpired = account.isPasswordNonExpired(currentDateTime,
                 securityConfigs.getPasswordValidDays());
 
         boolean accountNonLock = account.isAccountNonLock(securityConfigs
                 .getAuthenticationFailureMaxCount());
 
-        return new CustomUserDetails(account, accountNonExpired, passwordNonExpired, accountNonLock);
+        return new CustomUserDetails(account, true, passwordNonExpired, accountNonLock);
     }
 
 }

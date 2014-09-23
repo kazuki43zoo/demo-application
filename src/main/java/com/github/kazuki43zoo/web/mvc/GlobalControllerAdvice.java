@@ -19,7 +19,7 @@ import com.github.kazuki43zoo.core.config.SecurityConfigs;
 
 @ControllerAdvice
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class GlobalControllerAdvice {
+public final class GlobalControllerAdvice {
 
     private final @lombok.NonNull SecurityConfigs securityConfigs;
 

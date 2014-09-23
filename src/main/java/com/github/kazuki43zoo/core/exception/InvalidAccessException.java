@@ -5,7 +5,7 @@ import org.terasoluna.gfw.common.message.ResultMessages;
 
 import com.github.kazuki43zoo.core.message.Message;
 
-public class InvalidAccessException extends ResultMessagesNotificationException {
+public final class InvalidAccessException extends ResultMessagesNotificationException {
 
     private static final long serialVersionUID = 1L;
 

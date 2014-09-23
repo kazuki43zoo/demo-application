@@ -14,7 +14,7 @@ import org.terasoluna.gfw.common.message.ResultMessages;
 
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class ApiErrorCreator {
+public final class ApiErrorCreator {
 
     private final @lombok.NonNull @Inject MessageSource messageSource;
 

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
 
-public class CustomUserDetails extends User implements UserDetails {
+public final class CustomUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     private final Account account;

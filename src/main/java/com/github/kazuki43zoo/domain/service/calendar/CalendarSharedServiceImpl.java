@@ -24,7 +24,7 @@ import com.github.kazuki43zoo.domain.repository.calendar.SeasonalHolidayReposito
 
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class CalendarSharedServiceImpl implements CalendarSharedService {
+public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
     private final @lombok.NonNull FixedHolidayRepository fixedHolidayRepository;
 

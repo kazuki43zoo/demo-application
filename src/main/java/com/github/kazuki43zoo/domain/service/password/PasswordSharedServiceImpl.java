@@ -16,7 +16,7 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class PasswordSharedServiceImpl implements PasswordSharedService {
+public final class PasswordSharedServiceImpl implements PasswordSharedService {
 
     private final @lombok.NonNull PasswordEncoder passwordEncoder;
 

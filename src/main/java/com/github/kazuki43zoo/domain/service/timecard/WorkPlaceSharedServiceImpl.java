@@ -19,7 +19,7 @@ import com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository;
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
+public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
     @Named("workPlaceBatchModeRepository")
     private final @lombok.NonNull WorkPlaceRepository workPlaceRepository;

@@ -19,7 +19,7 @@ import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class TimeCardServiceImpl implements TimeCardService {
+public final class TimeCardServiceImpl implements TimeCardService {
 
     private final @lombok.NonNull WorkPlaceSharedService workPlaceSharedService;
 

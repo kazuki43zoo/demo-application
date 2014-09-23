@@ -16,7 +16,7 @@ import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 @Transactional(dontRollbackOn = ConcurrentLoginException.class)
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class AuthenticationSuccessEventListenerImpl implements
+public final class AuthenticationSuccessEventListenerImpl implements
         ApplicationListener<AuthenticationSuccessEvent> {
 
     private final @lombok.NonNull MessageSource messageSource;

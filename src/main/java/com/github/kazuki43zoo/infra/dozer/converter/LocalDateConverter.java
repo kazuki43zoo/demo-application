@@ -3,7 +3,7 @@ package com.github.kazuki43zoo.infra.dozer.converter;
 import org.dozer.DozerConverter;
 import org.joda.time.LocalDate;
 
-public class LocalDateConverter extends DozerConverter<LocalDate, LocalDate> {
+public final class LocalDateConverter extends DozerConverter<LocalDate, LocalDate> {
 
     public LocalDateConverter() {
         super(LocalDate.class, LocalDate.class);

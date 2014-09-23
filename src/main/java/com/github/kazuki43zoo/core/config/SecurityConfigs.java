@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @lombok.Data
-public class SecurityConfigs {
+public final class SecurityConfigs {
 
     @Value("${security.authenticationFailureMaxCount:5}")
     private int authenticationFailureMaxCount;

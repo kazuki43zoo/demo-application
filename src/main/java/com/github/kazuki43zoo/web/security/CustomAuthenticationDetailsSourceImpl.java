@@ -11,13 +11,13 @@ import com.github.kazuki43zoo.web.CustomHttpHeaders;
 import com.google.common.net.HttpHeaders;
 
 @Component("customAuthenticationDetailsSource")
-public class CustomAuthenticationDetailsSourceImpl implements
+public final class CustomAuthenticationDetailsSourceImpl implements
         AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> {
 
     @Override
     public CustomAuthenticationDetails buildDetails(HttpServletRequest request) {
         String forwardedFor = request.getHeader(HttpHeaders.X_FORWARDED_FOR);
-        String remoteAddress = null;
+        String remoteAddress;
         if (forwardedFor != null) {
             remoteAddress = forwardedFor;
         } else {

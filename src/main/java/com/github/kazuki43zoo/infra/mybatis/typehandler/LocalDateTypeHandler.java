@@ -12,7 +12,7 @@ import org.apache.ibatis.type.MappedTypes;
 import org.joda.time.LocalDate;
 
 @MappedTypes(LocalDate.class)
-public class LocalDateTypeHandler extends BaseTypeHandler<LocalDate> {
+public final class LocalDateTypeHandler extends BaseTypeHandler<LocalDate> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, LocalDate parameter,

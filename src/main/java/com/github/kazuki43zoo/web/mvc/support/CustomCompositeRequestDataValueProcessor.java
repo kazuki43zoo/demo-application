@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
 import org.terasoluna.gfw.web.mvc.support.CompositeRequestDataValueProcessor;
 
-public class CustomCompositeRequestDataValueProcessor extends CompositeRequestDataValueProcessor
+public final class CustomCompositeRequestDataValueProcessor extends CompositeRequestDataValueProcessor
         implements RequestDataValueProcessor {
 
     private interface ProcessActionInvoker {

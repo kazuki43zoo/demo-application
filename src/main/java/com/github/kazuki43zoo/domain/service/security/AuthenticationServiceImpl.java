@@ -15,7 +15,7 @@ import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class AuthenticationServiceImpl implements AuthenticationService {
+public final class AuthenticationServiceImpl implements AuthenticationService {
 
     private final @lombok.NonNull DateFactory dateFactory;
 

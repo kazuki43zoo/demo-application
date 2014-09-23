@@ -4,7 +4,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public class PageParams extends RowBounds implements Pageable {
+public final class PageParams extends RowBounds implements Pageable {
 
     private final Pageable pageable;
 

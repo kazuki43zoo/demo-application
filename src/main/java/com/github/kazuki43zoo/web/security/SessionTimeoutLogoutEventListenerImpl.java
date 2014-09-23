@@ -26,7 +26,7 @@ import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 @Component
 @Aspect
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class SessionTimeoutLogoutEventListenerImpl implements
+public final class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()
@@ -39,7 +39,7 @@ public class SessionTimeoutLogoutEventListenerImpl implements
     @Override
     public void onApplicationEvent(HttpSessionDestroyedEvent event) {
         Boolean isHandleLogout = (Boolean) event.getSession().getAttribute(HANDLE_LOGOUT_KEY);
-        if (isHandleLogout != null && isHandleLogout.booleanValue()) {
+        if (isHandleLogout != null && isHandleLogout) {
             return;
         }
         List<SecurityContext> securityContexts = event.getSecurityContexts();

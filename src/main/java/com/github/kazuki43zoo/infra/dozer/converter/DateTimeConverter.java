@@ -3,7 +3,7 @@ package com.github.kazuki43zoo.infra.dozer.converter;
 import org.dozer.DozerConverter;
 import org.joda.time.DateTime;
 
-public class DateTimeConverter extends DozerConverter<DateTime, DateTime> {
+public final class DateTimeConverter extends DozerConverter<DateTime, DateTime> {
 
     public DateTimeConverter() {
         super(DateTime.class, DateTime.class);

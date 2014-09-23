@@ -19,7 +19,7 @@ import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements Filter,
+public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements Filter,
         WebInvocationPrivilegeEvaluator, BeanPostProcessor {
 
     private List<WebInvocationPrivilegeEvaluator> webInvocationPrivilegeEvaluators = new ArrayList<>();

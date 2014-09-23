@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 @lombok.Data
-public class AccountsSearchCriteria {
+public final class AccountsSearchCriteria {
 
     private static final List<String> DEFAULT_TARGETS = Collections.unmodifiableList(Arrays.asList(
             "accountId", "accountName"));

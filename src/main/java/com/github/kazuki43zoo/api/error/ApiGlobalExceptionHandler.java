@@ -22,7 +22,7 @@ import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 
 @ControllerAdvice
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final @lombok.NonNull ApiErrorCreator apiErrorCreator;
 

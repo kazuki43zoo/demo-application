@@ -4,6 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @lombok.Data
-public class ApplicationConfigs {
+public final class ApplicationConfigs {
 
 }

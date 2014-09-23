@@ -7,10 +7,14 @@ import javax.validation.constraints.NotNull;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
-public class LoginForm implements Serializable {
+public final class LoginForm implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @NotNull
     private String accountId;
+
     @NotNull
     private String password;
+
 }
