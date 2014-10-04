@@ -91,7 +91,6 @@
         <!-- for dependency library version (Override version of TERASOLUNA Global 
             Framework) -->
         <org.springframework-version>4.1.1.RELEASE</org.springframework-version>
-        <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
         <org.springframework.data.version>1.9.0.RELEASE</org.springframework.data.version>
         <org.aspectj-version>1.8.2</org.aspectj-version>
         <org.slf4j-version>1.7.7</org.slf4j-version>
