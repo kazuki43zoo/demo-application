@@ -14,13 +14,13 @@ Structure of this application is following.<br><br>
 | Layer | Component/Library | Main responsibilities |
 | :-----: | --------- | --------------------- |
 | Client Layer         | [jQuery 2.1.1](http://jquery.com/) | Provide the useful javascript operations. |
-|                      | [AngularJS 1.2.25](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
+|                      | [AngularJS 1.2.26](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spring Framework 4.1.0.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+|                      | [Spring Framework 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
-|                      | [Spring MVC 4.1.0.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spring MVC 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.2.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
@@ -43,6 +43,7 @@ The following libraries is dependency for application-specific without relate on
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Depends on to use Joda-Time on the Jackson. |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Depends on to use the `@java.transaction.Transactinal` annotation of Java standard API. |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | Depends on to support HATEOAS as REST AIP. |
+| [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
@@ -53,7 +54,6 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
 | org.springframework.data | 1.9.0.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.2 | 1.7.4 |
-| org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
 | org.hibernate.hibernate-validator | 5.1.2.Final | 4.3.1.Final |
@@ -64,8 +64,10 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | com.google.guava | 18.0 | 13.0.1 |
 | commons-beanutils | 1.9.2 | 1.8.3 |
 | commons-lang | 3.3.2 | 3.1 |
-| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 | org.apache.tiles | 3.0.4 | 2.2.2 |
+| org.codehaus.jackson | exclusion | 1.9.7 |
+| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
+| org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
 ## 2.3. Java package Structure
 
