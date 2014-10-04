@@ -1,32 +1,44 @@
 package com.github.kazuki43zoo.domain.service.timecard;
 
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Transactional;
-
-import org.joda.time.LocalDate;
-import org.springframework.stereotype.Service;
-
 import com.github.kazuki43zoo.domain.model.calendar.Holiday;
 import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.github.kazuki43zoo.domain.repository.timecard.TimeCardRepository;
 import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
+import org.apache.ibatis.executor.BatchResult;
+import org.joda.time.LocalDate;
+import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Service
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class TimeCardServiceImpl implements TimeCardService {
 
-    private final @lombok.NonNull WorkPlaceSharedService workPlaceSharedService;
+    private final
+    @lombok.NonNull
+    WorkPlaceSharedService workPlaceSharedService;
 
-    private final @lombok.NonNull CalendarSharedService calendarSharedService;
+    private final
+    @lombok.NonNull
+    CalendarSharedService calendarSharedService;
 
-    @Named("timeCardBatchModeRepository")
-    private final @lombok.NonNull TimeCardRepository timeCardRepository;
+    private final
+    @lombok.NonNull
+    TimeCardRepository timeCardRepository;
+
+    @Inject
+    public TimeCardServiceImpl(WorkPlaceSharedService workPlaceSharedService, CalendarSharedService calendarSharedService, @Named("timeCardBatchModeRepository") TimeCardRepository timeCardRepository) {
+        this.workPlaceSharedService = workPlaceSharedService;
+        this.calendarSharedService = calendarSharedService;
+        this.timeCardRepository = timeCardRepository;
+    }
 
     @Override
     public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {
@@ -85,7 +97,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
 
     @Override
     public void saveDailyAttendance(String accountUuid, LocalDate targetDate,
-            DailyAttendance attendance) {
+                                    DailyAttendance attendance) {
         DailyAttendance loadedAttendance = timeCardRepository.findOneDailyAttendance(accountUuid,
                 targetDate);
         if (loadedAttendance == null) {

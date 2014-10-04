@@ -26,9 +26,9 @@
         c:sqlSessionFactory-ref="sqlSessionFactory" c:executorType="BATCH" />
 
     <mybatis:scan base-package="com.github.kazuki43zoo.domain.repository"
-        template-ref="sqlSessionTemplateForSimple" />
-    <bean id="sqlSessionTemplateForSimple" class="org.mybatis.spring.SqlSessionTemplate"
-        c:sqlSessionFactory-ref="sqlSessionFactory" c:executorType="SIMPLE" />
+        template-ref="sqlSessionTemplateForReuse" />
+    <bean id="sqlSessionTemplateForReuse" class="org.mybatis.spring.SqlSessionTemplate"
+        c:sqlSessionFactory-ref="sqlSessionFactory" c:executorType="REUSE" />
 
 
 </beans>

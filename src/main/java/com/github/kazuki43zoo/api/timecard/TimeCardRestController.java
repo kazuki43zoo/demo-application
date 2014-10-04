@@ -35,11 +35,9 @@ public class TimeCardRestController {
 
     private static final String TARGET_MONTH_FORMAT = "yyyy-MM";
 
-    private final @lombok.NonNull TimeCardService timeCardService;
-
-    private final @lombok.NonNull WorkPlaceSharedService workPlaceSharedService;
-
-    private final @lombok.NonNull Mapper beanMapper;
+    private final TimeCardService timeCardService;
+    private final WorkPlaceSharedService workPlaceSharedService;
+    private final Mapper beanMapper;
 
     /**
      * Retrieve the specified month's time card.
