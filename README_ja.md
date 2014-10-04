@@ -38,7 +38,7 @@
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | H2データベースにアクセスするために依存しています。 |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
 | [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.3 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Jackson上でJoda-Timeを使うために依存しています。 |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Java標準の `@java.transaction.Transactinal` アノテーションを使用するために依存しています。 |
