@@ -13,13 +13,13 @@
 | レイヤ | コンポーネント/ライブラリ | 主な役割 |
 | :-----: | --------- | --------------------- |
 | Client Layer         | [jQuery 2.1.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
-|                      | [AngularJS 1.2.25](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
+|                      | [AngularJS 1.2.26](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.1.0.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+|                      | [Spring Framework 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.1.0.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Spring MVC 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.2.Final](http://hibernate.org/validator/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
@@ -39,10 +39,11 @@
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | H2データベースにアクセスするために依存しています。 |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.2 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
+| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.3 | リクエストデータとレスポンスデータをJSONに変換するために依存しています。jackson1の後継ライブラリです。 |
 | [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Jackson上でJoda-Timeを使うために依存しています。 |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Java標準の `@java.transaction.Transactinal` アノテーションを使用するために依存しています。 |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
+| [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 
@@ -54,7 +55,6 @@
 | org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
 | org.springframework.data | 1.9.0.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.2 | 1.7.4 |
-| org.codehaus.jackson | exclusion | 1.9.7 |
 | org.slf4j | 1.7.7 | 1.7.5 |
 | ch.qos.logback | 1.1.2 | 1.0.13 |
 | org.hibernate.hibernate-validator | 5.1.2.Final | 4.3.1.Final |
@@ -65,8 +65,10 @@
 | com.google.guava | 18.0 | 13.0.1 |
 | commons-beanutils | 1.9.2 | 1.8.3 |
 | commons-lang | 3.3.2 | 3.1 |
-| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 | org.apache.tiles | 3.0.4 | 2.2.2 |
+| org.codehaus.jackson | exclusion | 1.9.7 |
+| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
+| org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
 ## 2.3. Java package Structure
 
