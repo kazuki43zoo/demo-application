@@ -52,7 +52,6 @@
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
 | org.springframework | 4.1.1.RELEASE | 3.2.10.RELEASE |
-| org.springframework.security | 3.2.5.RELEASE | 3.1.4.RELEASE |
 | org.springframework.data | 1.9.0.RELEASE  | 1.6.4.RELEASE |
 | org.aspectj | 1.8.2 | 1.7.4 |
 | org.slf4j | 1.7.7 | 1.7.5 |
