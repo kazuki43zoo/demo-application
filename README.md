@@ -28,7 +28,7 @@ Structure of this application is following.<br><br>
 | Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
-| Infrastructure Layer | [Mybatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
+| Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
