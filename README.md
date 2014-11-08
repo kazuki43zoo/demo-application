@@ -49,7 +49,7 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
 | org.springframework | 4.1.1.RELEASE | 4.0.7.RELEASE |
-| commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
+| commons-dbcp | exclusion | 1.4 |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
 ## 2.3. Java package Structure
