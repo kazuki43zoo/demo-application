@@ -21,14 +21,14 @@ Structure of this application is following.<br><br>
 |                      | [Spring Framework 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
 |                      | [Spring MVC 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.2.Final](http://hibernate.org/validator/) as implementation provider.|
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.0.3.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
 | Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
-| Infrastructure Layer | [Mybatis 3.3.0-SNAPSHOT](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
+| Infrastructure Layer | [Mybatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, Codelist, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
@@ -37,10 +37,8 @@ The following libraries is dependency for application-specific without relate on
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
 | [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.181 | Depends on to access H2 database. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
-| [com.fasterxml.jackson.core:jackson-databind](http://wiki.fasterxml.com/JacksonHome) | 2.4.3 | Depends on to bind JSON. |
-| [com.fasterxml.jackson.datatype:jackson-datatype-joda](http://wiki.fasterxml.com/JacksonModuleJoda) | 2.4.2 | Depends on to use Joda-Time on the Jackson. |
+| [com.h2database:h2](http://www.h2database.com/) | 1.3.176 | Depends on to access H2 database. |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.6 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Depends on to use the `@java.transaction.Transactinal` annotation of Java standard API. |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | Depends on to support HATEOAS as REST AIP. |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. |
@@ -50,21 +48,7 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.1.RELEASE | 3.2.10.RELEASE |
-| org.springframework.data | 1.9.0.RELEASE  | 1.6.4.RELEASE |
-| org.aspectj | 1.8.2 | 1.7.4 |
-| org.slf4j | 1.7.7 | 1.7.5 |
-| ch.qos.logback | 1.1.2 | 1.0.13 |
-| org.hibernate.hibernate-validator | 5.1.2.Final | 4.3.1.Final |
-| jboss-logging | 3.1.4.GA | 3.1.0.GA |
-| org.mybatis | 3.3.0-SNAPSHOT | 3.2.7 |
-| joda-time | 2.4 | 2.2 |
-| dozer | 5.5.1 | 5.4.0 |
-| com.google.guava | 18.0 | 13.0.1 |
-| commons-beanutils | 1.9.2 | 1.8.3 |
-| commons-lang | 3.3.2 | 3.1 |
-| org.apache.tiles | 3.0.4 | 2.2.2 |
-| org.codehaus.jackson | exclusion | 1.9.7 |
+| org.springframework | 4.1.1.RELEASE | 4.0.7.RELEASE |
 | commons-dbcp | exclusion | 1.2.2.patch_DBCP264_DBCP372 |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
