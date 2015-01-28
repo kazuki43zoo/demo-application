@@ -1,9 +1,9 @@
 # 1. Demo Application
 
-This is sample application for develop using [TERASOLUNA Global Framework](http://terasoluna.org).<br>
+This is sample application for develop using [TERASOLUNA Server Framework for Java 5.x](http://terasoluna.org).<br>
 **Currently, this application is under developing !!!**
 
-This application is developed based [TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
+This application is developed based [TERASOLUNA Server Framework for Java Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
 But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
 
 # 2. Application Structure
@@ -18,10 +18,10 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spring Framework 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+|                      | [Spring Framework 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
-|                      | [Spring MVC 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.0.3.Final](http://hibernate.org/validator/) as implementation provider.|
+|                      | [Spring MVC 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.3.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controllers | Handle a request & delegate a business procedure to the services.  |
 |                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
 |                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
@@ -29,17 +29,15 @@ Structure of this application is following.<br><br>
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries               | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries               | [TERASOLUNA Server Framework for Java Common Library 5.0.0.RC5](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
 
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
-| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | Depends on to provide DataSource(Connection pooling) |
-| [com.h2database:h2](http://www.h2database.com/) | 1.3.176 | Depends on to access H2 database. |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.6 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
-| [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Depends on to use the `@java.transaction.Transactinal` annotation of Java standard API. |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.183 | Depends on to access H2 database. |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | Depends on to support HATEOAS as REST API. |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. |
 
@@ -48,8 +46,6 @@ The following libraries are version up from version that TERASOLUNA Global Frame
 
 | Library | In this application | TERASOLUNA<br>Global Framework |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.1.RELEASE | 4.0.7.RELEASE |
-| commons-dbcp | exclusion | 1.4 |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
 ## 2.3. Java package Structure
