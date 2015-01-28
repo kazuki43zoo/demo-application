@@ -1,19 +1,18 @@
 package com.github.kazuki43zoo.core.validation;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
+import javax.validation.Constraint;
+import javax.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = { ConfirmValidator.class })
-@Target({ TYPE, ANNOTATION_TYPE })
+@Constraint(validatedBy = {ConfirmValidator.class})
+@Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 public @interface Confirm {
     String message() default "{com.github.kazuki43zoo.core.validation.Confirm.message}";
@@ -24,7 +23,7 @@ public @interface Confirm {
 
     Class<? extends Payload>[] payload() default {};
 
-    @Target({ TYPE, ANNOTATION_TYPE })
+    @Target({TYPE, ANNOTATION_TYPE})
     @Retention(RUNTIME)
     @Documented
     public @interface List {

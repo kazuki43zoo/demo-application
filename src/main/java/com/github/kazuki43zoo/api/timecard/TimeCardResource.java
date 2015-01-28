@@ -1,17 +1,15 @@
 package com.github.kazuki43zoo.api.timecard;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
+import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerializer;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
-
-import org.springframework.hateoas.ResourceSupport;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
-import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @lombok.Data
 @lombok.EqualsAndHashCode(callSuper = true)
@@ -19,13 +17,13 @@ import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
 public class TimeCardResource extends ResourceSupport implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    @JsonSerialize(nullsUsing = EmptyStringSerializer.class)
     private String workPlaceUuid;
 
     @Valid
     private List<DailyAttendanceResource> attendances;
 
-    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    @JsonSerialize(nullsUsing = EmptyStringSerializer.class)
     private String note;
 
     @Null

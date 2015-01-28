@@ -1,4 +1,4 @@
-<t:messagesPanel />
+<t:messagesPanel/>
 
 <form action="${contextPath}/profile" class="form-horizontal" method="get">
 
@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/account/inc/accountDisplay.jsp" />
+    <jsp:include page="/WEB-INF/views/account/inc/accountDisplay.jsp"/>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">

@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:c="http://www.springframework.org/schema/c"
-    xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         ">
 
-    <context:property-placeholder location="classpath*:/META-INF/spring/*.properties" />
+    <context:property-placeholder
+            location="classpath*:/META-INF/spring/*.properties"/>
 
     <bean id="passwordEncoder"
-        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <bean class="org.dozer.spring.DozerBeanMapperFactoryBean"
-        p:mappingFiles="classpath*:/META-INF/dozer/**/*-mapping.xml" />
+          p:mappingFiles="classpath*:/META-INF/dozer/**/*-mapping.xml"/>
 
     <!-- Message -->
     <bean id="messageSource"
-        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <util:list>
                 <value>classpath:i18n/application-messages</value>
@@ -30,42 +33,52 @@
 
     <!-- Exception Code Resolver. -->
     <bean id="exceptionCodeResolver"
-        class="org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver"
-        p:defaultExceptionCode="e.demo.fw.9001">
+          class="org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver"
+          p:defaultExceptionCode="e.demo.fw.9001">
         <property name="exceptionMappings">
             <util:map>
-                <entry key="ResourceNotFoundException" value="e.demo.fw.5001" />
-                <entry key="HttpRequestMethodNotSupportedException" value="e.demo.fw.6001" />
-                <entry key="MediaTypeNotAcceptableException" value="e.demo.fw.6002" />
-                <entry key="HttpMediaTypeNotSupportedException" value="e.demo.fw.6003" />
-                <entry key="MethodArgumentNotValidException" value="e.demo.fw.6004" />
-                <entry key="BindException" value="e.demo.fw.6005" />
-                <entry key="JsonParseException" value="e.demo.fw.6006" />
-                <entry key="UnrecognizedPropertyException" value="e.demo.fw.6007" />
-                <entry key="JsonMappingException" value="e.demo.fw.6008" />
-                <entry key="TypeMismatchException" value="e.demo.fw.6009" />
-                <entry key="InvalidTransactionTokenException" value="e.demo.fw.7001" />
-                <entry key="InvalidAccessException" value="e.demo.fw.7002" />
-                <entry key="BusinessException" value="e.demo.fw.8001" />
-                <entry key="OptimisticLockingFailureException" value="e.demo.fw.8002" />
-                <entry key="PessimisticLockingFailureException" value="e.demo.fw.8002" />
-                <entry key="DataAccessException" value="e.demo.fw.9002" />
+                <entry key="ResourceNotFoundException" value="e.demo.fw.5001"/>
+                <entry key="HttpRequestMethodNotSupportedException"
+                       value="e.demo.fw.6001"/>
+                <entry key="MediaTypeNotAcceptableException"
+                       value="e.demo.fw.6002"/>
+                <entry key="HttpMediaTypeNotSupportedException"
+                       value="e.demo.fw.6003"/>
+                <entry key="MethodArgumentNotValidException"
+                       value="e.demo.fw.6004"/>
+                <entry key="BindException" value="e.demo.fw.6005"/>
+                <entry key="JsonParseException" value="e.demo.fw.6006"/>
+                <entry key="UnrecognizedPropertyException"
+                       value="e.demo.fw.6007"/>
+                <entry key="JsonMappingException" value="e.demo.fw.6008"/>
+                <entry key="TypeMismatchException" value="e.demo.fw.6009"/>
+                <entry key="InvalidTransactionTokenException"
+                       value="e.demo.fw.7001"/>
+                <entry key="InvalidAccessException" value="e.demo.fw.7002"/>
+                <entry key="BusinessException" value="e.demo.fw.8001"/>
+                <entry key="OptimisticLockingFailureException"
+                       value="e.demo.fw.8002"/>
+                <entry key="PessimisticLockingFailureException"
+                       value="e.demo.fw.8002"/>
+                <entry key="DataAccessException" value="e.demo.fw.9002"/>
             </util:map>
         </property>
     </bean>
 
     <!-- Exception Logger. -->
-    <bean id="exceptionLogger" class="org.terasoluna.gfw.common.exception.ExceptionLogger"
-        p:exceptionCodeResolver-ref="exceptionCodeResolver" />
+    <bean id="exceptionLogger"
+          class="org.terasoluna.gfw.common.exception.ExceptionLogger"
+          p:exceptionCodeResolver-ref="exceptionCodeResolver"/>
 
     <!-- Filter. -->
-    <bean id="exceptionLoggingFilter" class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter"
-        p:exceptionLogger-ref="exceptionLogger" />
+    <bean id="exceptionLoggingFilter"
+          class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter"
+          p:exceptionLogger-ref="exceptionLogger"/>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.core" />
+    <context:component-scan base-package="com.github.kazuki43zoo.core"/>
 
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
-    <import resource="classpath:/META-INF/spring/demo-domain.xml" />
+    <import resource="classpath:/META-INF/spring/demo-domain.xml"/>
 
 </beans>

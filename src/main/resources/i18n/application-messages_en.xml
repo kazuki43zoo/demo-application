@@ -13,7 +13,8 @@
     <entry key="menu.timeCard">Time Card</entry>
 
     <entry key="userMenu.editProfile">Edit Profile</entry>
-    <entry key="userMenu.authenticationHistories">Authentication Histories</entry>
+    <entry key="userMenu.authenticationHistories">Authentication Histories
+    </entry>
     <entry key="userMenu.changePassword">Change Password</entry>
     <entry key="userMenu.logout">Logout</entry>
 
@@ -40,7 +41,8 @@
     <entry key="total">Total</entry>
     <entry key="workingDays">Working Days</entry>
     <entry key="tardyOrEarlyLeavingDays">Tardy Or Early Leaving Days</entry>
-    <entry key="tardyOrEarlyLeavingPenaltyTargetDays">Penalty Target Days</entry>
+    <entry key="tardyOrEarlyLeavingPenaltyTargetDays">Penalty Target Days
+    </entry>
     <entry key="absenceDays">Absence Days</entry>
     <entry key="paidLeaveDays">Paid Leave Days</entry>
 
@@ -65,7 +67,6 @@
     <entry key="liquidationTime">Liquidation Time</entry>
     <entry key="overtimeTime">Overtime Time</entry>
     <entry key="penaltyTime">Penalty Time</entry>
-
 
 
 </properties>

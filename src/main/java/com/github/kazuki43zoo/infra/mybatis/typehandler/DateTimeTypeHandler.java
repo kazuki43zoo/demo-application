@@ -1,22 +1,18 @@
 package com.github.kazuki43zoo.infra.mybatis.typehandler;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.joda.time.DateTime;
+
+import java.sql.*;
 
 @MappedTypes(DateTime.class)
 public final class DateTimeTypeHandler extends BaseTypeHandler<DateTime> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, DateTime parameter,
-            JdbcType jdbcType) throws SQLException {
+                                    JdbcType jdbcType) throws SQLException {
         ps.setTimestamp(i, new Timestamp(parameter.getMillis()));
     }
 

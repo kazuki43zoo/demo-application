@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.domain.model.timecard;
 
+import org.joda.time.LocalDate;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.joda.time.LocalDate;
 
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor

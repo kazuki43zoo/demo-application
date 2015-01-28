@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    metadata-complete="false">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         metadata-complete="false">
 
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
     </listener>
     <listener>
-        <listener-class>org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener</listener-class>
+        <listener-class>
+            org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener
+        </listener-class>
     </listener>
     <listener>
-        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
     </listener>
 
     <context-param>
@@ -25,7 +30,8 @@
 
     <filter>
         <filter-name>MDCClearFilter</filter-name>
-        <filter-class>org.terasoluna.gfw.web.logging.mdc.MDCClearFilter</filter-class>
+        <filter-class>org.terasoluna.gfw.web.logging.mdc.MDCClearFilter
+        </filter-class>
     </filter>
     <filter-mapping>
         <filter-name>MDCClearFilter</filter-name>
@@ -34,7 +40,8 @@
 
     <filter>
         <filter-name>ExceptionLoggingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>
             <param-value>exceptionLoggingFilter</param-value>
@@ -47,7 +54,8 @@
 
     <filter>
         <filter-name>XTrackMDCPutFilter</filter-name>
-        <filter-class>org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter</filter-class>
+        <filter-class>org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter
+        </filter-class>
     </filter>
     <filter-mapping>
         <filter-name>XTrackMDCPutFilter</filter-name>
@@ -56,7 +64,8 @@
 
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -73,7 +82,8 @@
 
     <filter>
         <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter
+        </filter-class>
     </filter>
     <filter-mapping>
         <filter-name>HiddenHttpMethodFilter</filter-name>
@@ -81,21 +91,26 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter
+        </filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>
-            <param-value>customWebInvocationPrivilegeEvaluatorProvideFilter</param-value>
+            <param-value>customWebInvocationPrivilegeEvaluatorProvideFilter
+            </param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter</filter-name>
+        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter
+        </filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <filter>
         <filter-name>SpringSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>
             <param-value>springSecurityFilterChain</param-value>
@@ -113,7 +128,8 @@
     <servlet>
         <description>DispatcherServlet for application processing.</description>
         <servlet-name>AppServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath*:META-INF/spring/spring-mvc.xml</param-value>
@@ -128,10 +144,12 @@
     <servlet>
         <description>DispatcherServlet for API processing.</description>
         <servlet-name>ApiServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:META-INF/spring/spring-mvc-api.xml</param-value>
+            <param-value>classpath*:META-INF/spring/spring-mvc-api.xml
+            </param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
@@ -171,7 +189,8 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp</location>
+        <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp
+        </location>
     </error-page>
     <error-page>
         <error-code>405</error-code>
@@ -179,7 +198,8 @@
     </error-page>
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/WEB-INF/views/common/error/unhandledSystemError.html</location>
+        <location>/WEB-INF/views/common/error/unhandledSystemError.html
+        </location>
     </error-page>
 
     <session-config>

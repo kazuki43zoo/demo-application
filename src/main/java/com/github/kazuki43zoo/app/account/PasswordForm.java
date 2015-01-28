@@ -1,11 +1,10 @@
 package com.github.kazuki43zoo.app.account;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.NotNull;
-
 import com.github.kazuki43zoo.core.validation.Confirm;
 import com.github.kazuki43zoo.core.validation.Password;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Confirm(field = "password")
 @lombok.Data

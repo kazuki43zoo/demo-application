@@ -1,21 +1,20 @@
 package com.github.kazuki43zoo.domain.repository.account;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
 import com.github.kazuki43zoo.domain.model.account.AccountPasswordHistory;
 import com.github.kazuki43zoo.domain.repository.PageParams;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AccountRepository {
 
     long countByCriteria(@Param("criteria") AccountsSearchCriteria criteria);
 
     List<Account> findAllByCriteria(@Param("criteria") AccountsSearchCriteria criteria,
-            @Param("pageParams") PageParams pageParams);
+                                    @Param("pageParams") PageParams pageParams);
 
     Account findOneByAccountId(String accountId);
 
@@ -30,7 +29,7 @@ public interface AccountRepository {
     boolean createAuthority(AccountAuthority authority);
 
     boolean deleteAuthority(@Param("accountUuid") String accountUuid,
-            @Param("authority") String authority);
+                            @Param("authority") String authority);
 
     int deleteAuthorities(String accountUuid);
 

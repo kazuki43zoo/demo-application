@@ -1,11 +1,11 @@
 package com.github.kazuki43zoo.infra.mybatis.spring;
 
-import java.beans.Introspector;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.util.ClassUtils;
+
+import java.beans.Introspector;
 
 public abstract class AbstractRepositoryBeanNameGenerator implements BeanNameGenerator {
 

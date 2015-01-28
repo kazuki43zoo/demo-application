@@ -1,14 +1,13 @@
 package com.github.kazuki43zoo.api.timecard;
 
-import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerializer;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.springframework.hateoas.ResourceSupport;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.github.kazuki43zoo.infra.jackson.map.EmptyStringSerialilzer;
+import java.io.Serializable;
 
 @lombok.Data
 @lombok.EqualsAndHashCode(callSuper = true)
@@ -27,13 +26,13 @@ public class DailyAttendanceResource extends ResourceSupport implements Serializ
 
     private boolean paidLeave;
 
-    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    @JsonSerialize(nullsUsing = EmptyStringSerializer.class)
     private String specialWorkCode;
 
-    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    @JsonSerialize(nullsUsing = EmptyStringSerializer.class)
     private String note;
 
-    @JsonSerialize(nullsUsing = EmptyStringSerialilzer.class)
+    @JsonSerialize(nullsUsing = EmptyStringSerializer.class)
     private String workPlaceUuid;
 
     private int actualWorkingMinute;

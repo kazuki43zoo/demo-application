@@ -1,22 +1,16 @@
 package com.github.kazuki43zoo.web.security;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements Filter,
@@ -52,7 +46,7 @@ public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements
 
     @Override
     public boolean isAllowed(String contextPath, String uri, String method,
-            Authentication authentication) {
+                             Authentication authentication) {
         for (WebInvocationPrivilegeEvaluator privilegeEvaluator : webInvocationPrivilegeEvaluators) {
             if (!privilegeEvaluator.isAllowed(contextPath, uri, method, authentication)) {
                 return false;

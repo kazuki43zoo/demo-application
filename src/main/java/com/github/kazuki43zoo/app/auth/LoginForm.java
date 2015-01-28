@@ -1,8 +1,7 @@
 package com.github.kazuki43zoo.app.auth;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor

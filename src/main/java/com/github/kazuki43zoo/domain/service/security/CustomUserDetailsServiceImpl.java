@@ -1,7 +1,9 @@
 package com.github.kazuki43zoo.domain.service.security;
 
-import javax.inject.Inject;
-
+import com.github.kazuki43zoo.core.config.SecurityConfigs;
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 import org.joda.time.DateTime;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,24 +11,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.terasoluna.gfw.common.date.DateFactory;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
-import com.github.kazuki43zoo.core.config.SecurityConfigs;
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.account.Account;
-import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
+import javax.inject.Inject;
 
 @Service("customUserDetailsService")
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class CustomUserDetailsServiceImpl implements UserDetailsService {
 
-    private final @lombok.NonNull AccountRepository accountRepository;
+    @lombok.NonNull
+    private final AccountRepository accountRepository;
 
-    private final @lombok.NonNull MessageSource messageSource;
+    @lombok.NonNull
+    private final MessageSource messageSource;
 
-    private final @lombok.NonNull DateFactory dateFactory;
+    @lombok.NonNull
+    private final JodaTimeDateFactory dateFactory;
 
-    private final @lombok.NonNull SecurityConfigs securityConfigs;
+    @lombok.NonNull
+    private final SecurityConfigs securityConfigs;
 
     @Transactional(readOnly = true)
     @Override

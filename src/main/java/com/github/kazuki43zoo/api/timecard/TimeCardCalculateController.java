@@ -1,33 +1,30 @@
 package com.github.kazuki43zoo.api.timecard;
 
-import javax.inject.Inject;
-
-import org.dozer.Mapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
 import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
+import org.dozer.Mapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
 
 @RequestMapping("timecards/calculate")
 @Controller
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardCalculateController {
 
-    private final @lombok.NonNull WorkPlaceSharedService workPlaceSharedService;
+    @lombok.NonNull
+    private final WorkPlaceSharedService workPlaceSharedService;
 
-    private final @lombok.NonNull CalendarSharedService calendarSharedService;
+    @lombok.NonNull
+    private final CalendarSharedService calendarSharedService;
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

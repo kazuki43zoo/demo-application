@@ -1,130 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:sec="http://www.springframework.org/schema/security" xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:c="http://www.springframework.org/schema/c"
-    xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         ">
 
-    <sec:http pattern="/resources/**" security="none" />
+    <sec:http pattern="/resources/**" security="none"/>
 
     <sec:http pattern="/auth/logout\?success" request-matcher="regex"
-        security="none" />
+              security="none"/>
 
     <sec:http pattern="/api/**" auto-config="true" use-expressions="true">
-
-        <sec:csrf />
-
+        <sec:csrf/>
         <sec:headers>
-            <sec:cache-control />
+            <sec:cache-control/>
         </sec:headers>
-
-        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
-
+        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
         <sec:intercept-url pattern="/api/*/timecards/**"
-            access="hasAnyRole('ROLE_EMPLOYEE')" />
+                           access="hasAnyRole('ROLE_EMPLOYEE')"/>
     </sec:http>
 
     <sec:http auto-config="true" use-expressions="true">
-
-        <sec:access-denied-handler ref="customAccessDeniedHandler" />
-
-        <sec:csrf request-matcher-ref="customCsrfRequestMatcher" />
-
+        <sec:access-denied-handler ref="customAccessDeniedHandler"/>
+        <sec:csrf request-matcher-ref="customCsrfRequestMatcher"/>
         <sec:headers>
-            <sec:cache-control />
-            <sec:frame-options policy="SAMEORIGIN" />
-            <sec:hsts />
-            <sec:content-type-options />
-            <sec:xss-protection />
+            <sec:cache-control/>
+            <sec:frame-options policy="SAMEORIGIN"/>
+            <sec:hsts/>
+            <sec:content-type-options/>
+            <sec:xss-protection/>
         </sec:headers>
-
-        <sec:session-management invalid-session-url="/error/invalidSession"
-            session-fixation-protection="migrateSession" />
-
-        <sec:form-login login-processing-url="/auth/authenticate"
-            login-page="/auth/login?encourage" username-parameter="accountId"
-            password-parameter="password" authentication-details-source-ref="customAuthenticationDetailsSource"
-            authentication-failure-handler-ref="customAuthenticationFailureHandler" />
-
-        <sec:logout logout-url="/auth/logout" invalidate-session="true"
-            delete-cookies="JSESSIONID" success-handler-ref="customLogoutSuccessHandler" />
-
-        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER" />
-
-        <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <sec:intercept-url pattern="/vendor/h2/**" access="hasRole('ROLE_ADMIN')" />
+        <sec:session-management invalid-session-url="/error/invalidSession"/>
+        <sec:form-login
+                login-processing-url="/auth/authenticate"
+                login-page="/auth/login?encourage"
+                username-parameter="accountId"
+                password-parameter="password"
+                authentication-details-source-ref="customAuthenticationDetailsSource"
+                authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
+        <sec:logout
+                logout-url="/auth/logout"
+                delete-cookies="JSESSIONID"
+                success-handler-ref="customLogoutSuccessHandler"/>
+        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
+        <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/vendor/h2/**"
+                           access="hasRole('ROLE_ADMIN')"/>
         <sec:intercept-url pattern="/profile/**"
-            access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+                           access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
         <sec:intercept-url pattern="/timecards/**"
-            access="hasAnyRole('ROLE_EMPLOYEE')" />
+                           access="hasAnyRole('ROLE_EMPLOYEE')"/>
         <sec:intercept-url pattern="/accounts/**"
-            access="hasRole('ROLE_ACCOUNTMNG')" />
-        <sec:intercept-url pattern="/auth/login" access="!isAuthenticated()" />
+                           access="hasRole('ROLE_ACCOUNTMNG')"/>
+        <sec:intercept-url pattern="/auth/login" access="!isAuthenticated()"/>
     </sec:http>
 
     <sec:authentication-manager>
         <sec:authentication-provider
-            user-service-ref="customUserDetailsService">
-            <sec:password-encoder ref="passwordEncoder" />
+                user-service-ref="customUserDetailsService">
+            <sec:password-encoder ref="passwordEncoder"/>
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.web.security" />
+    <context:component-scan base-package="com.github.kazuki43zoo.web.security"/>
 
     <!-- AccessDeniedHandler -->
     <bean id="customAccessDeniedHandler"
-        class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+          class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
         <constructor-arg index="0">
-            <util:map id="accessDeniedHandlers">
-                <entry
-                    key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
-                    <bean
-                        class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-                        p:errorPage="/WEB-INF/views/common/error/csrfTokenError.jsp" />
+            <util:map>
+                <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
+                    <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
+                          p:errorPage="/WEB-INF/views/common/error/csrfTokenError.jsp"/>
                 </entry>
             </util:map>
         </constructor-arg>
         <constructor-arg index="1">
-            <bean id="defaultAccessDeniedHandler"
-                class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-                p:errorPage="/WEB-INF/views/common/error/accessError.jsp" />
+            <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
+                  p:errorPage="/WEB-INF/views/common/error/accessError.jsp"/>
         </constructor-arg>
     </bean>
 
     <!-- AuthenticationFailureHandler -->
     <bean id="customAuthenticationFailureHandler"
-        class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler"
-        p:useForward="true" p:defaultFailureUrl="/auth/login/error">
+          class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler"
+          p:useForward="true"
+          p:defaultFailureUrl="/auth/login/error">
         <property name="exceptionMappings">
             <util:map>
-                <entry
-                    key="org.springframework.security.authentication.CredentialsExpiredException"
-                    value="/password?encourageChange" />
+                <entry key="org.springframework.security.authentication.CredentialsExpiredException"
+                       value="/password?encourageChange"/>
             </util:map>
         </property>
     </bean>
 
     <!-- CsrfRequestMatcher -->
     <bean id="customCsrfRequestMatcher"
-        class="org.springframework.security.web.util.matcher.AndRequestMatcher">
-        <constructor-arg index="0">
+          class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+        <constructor-arg>
             <util:list>
-                <ref bean="defaultCsrfRequiresMethodMatcher" />
-                <bean
-                    class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
-                    <constructor-arg index="0">
-                        <bean id="csrfExclusionPathMatcher"
-                            class="org.springframework.security.web.util.matcher.OrRequestMatcher">
-                            <constructor-arg index="0">
+                <bean class="org.springframework.security.web.csrf.CsrfFilter$DefaultRequiresCsrfMatcher"/>
+                <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+                    <constructor-arg>
+                        <bean class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+                            <constructor-arg>
                                 <util:list>
-                                    <bean
-                                        class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
-                                        c:pattern="/vendor/h2/**" />
+                                    <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
+                                          c:pattern="/vendor/h2/**"/>
                                 </util:list>
                             </constructor-arg>
                         </bean>
@@ -135,6 +125,7 @@
     </bean>
 
     <!-- UserIdMDCPutFilter -->
-    <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter" />
+    <bean id="userIdMDCPutFilter"
+          class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>
 
 </beans>

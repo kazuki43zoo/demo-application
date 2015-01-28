@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
-    xsi:schemaLocation="
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-        ">
 
-    <import resource="classpath:/META-INF/spring/spring-mvc-common.xml" />
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="classpath:/META-INF/spring/spring-mvc-common.xml"/>
 
     <bean id="jsonMessageConverter"
-        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="objectMapper">
             <bean class="com.fasterxml.jackson.datatype.joda.JodaMapper">
                 <property name="dateFormat">
-                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat"/>
                 </property>
             </bean>
         </property>
@@ -26,29 +23,32 @@
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">
-            <ref bean="jsonMessageConverter" />
+            <ref bean="jsonMessageConverter"/>
         </mvc:message-converters>
         <mvc:argument-resolvers>
-            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver"/>
             <ref bean="hateoasPageableHandlerMethodArgumentResolver"/>
             <bean class="org.springframework.data.web.PagedResourcesAssemblerArgumentResolver">
-                <constructor-arg index="0" ref="hateoasPageableHandlerMethodArgumentResolver" />
-                <constructor-arg index="1"><null /></constructor-arg>
+                <constructor-arg index="0"
+                                 ref="hateoasPageableHandlerMethodArgumentResolver"/>
+                <constructor-arg index="1">
+                    <null/>
+                </constructor-arg>
             </bean>
-            <bean
-                class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver" />
+            <bean class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver"/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
-    
-    <bean id="hateoasPageableHandlerMethodArgumentResolver" class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver" />
+
+    <bean id="hateoasPageableHandlerMethodArgumentResolver"
+          class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
-            <bean class="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor" />
+            <mvc:mapping path="/**"/>
+            <bean class="org.terasoluna.gfw.web.logging.TraceLoggingInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.api" />
+    <context:component-scan base-package="com.github.kazuki43zoo.api"/>
 
 </beans>

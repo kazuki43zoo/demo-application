@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <setting name="aggressiveLazyLoading" value="false" />
-        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
-        <typeAlias type="org.joda.time.DateTime" />
-        <typeAlias type="org.joda.time.LocalDate" />
-        <typeAlias type="org.joda.time.LocalTime" />
-        <typeAlias type="org.joda.time.LocalDateTime" />
-        <package name="com.github.kazuki43zoo.domain.model" />
+        <typeAlias type="org.joda.time.DateTime"/>
+        <typeAlias type="org.joda.time.LocalDate"/>
+        <typeAlias type="org.joda.time.LocalTime"/>
+        <typeAlias type="org.joda.time.LocalDateTime"/>
+        <package name="com.github.kazuki43zoo.domain.model"/>
     </typeAliases>
     <typeHandlers>
-        <package name="com.github.kazuki43zoo.infra.mybatis.typehandler" />
+        <package name="com.github.kazuki43zoo.infra.mybatis.typehandler"/>
     </typeHandlers>
 </configuration>

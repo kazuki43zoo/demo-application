@@ -1,7 +1,6 @@
 package com.github.kazuki43zoo.app.auth;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.github.kazuki43zoo.core.message.Message;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.message.Message;
+import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("auth/login")
 @Controller
@@ -48,7 +47,7 @@ public class LoginController {
 
     @RequestMapping(value = "error", method = RequestMethod.POST)
     public String handleLoginError(LoginForm form, RedirectAttributes redirectAttributes,
-            HttpServletRequest request) {
+                                   HttpServletRequest request) {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
                 request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));

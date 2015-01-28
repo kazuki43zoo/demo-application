@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>1.1.0-SNAPSHOT</version>
+        <version>5.0.0.RC5</version>
     </parent>
 
     <repositories>
@@ -88,10 +88,6 @@
 
     <properties>
 
-        <!-- for dependency library version (Override version of TERASOLUNA Global
-            Framework) -->
-        <spring.version>4.1.1.RELEASE</spring.version>
-
         <!-- for dependency library version (Project-specific) -->
         <org.bgee.log4jdbc-log4j2.version>1.16</org.bgee.log4jdbc-log4j2.version>
         <cglib.version>2.2.2</cglib.version>
@@ -117,6 +113,10 @@
         </dependency>
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-jodatime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
             <artifactId>terasoluna-gfw-security-web</artifactId>
         </dependency>
         <dependency>
@@ -127,16 +127,6 @@
             <groupId>org.terasoluna.gfw</groupId>
             <artifactId>terasoluna-gfw-recommended-dependencies</artifactId>
             <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-dbcp</groupId>
-                    <artifactId>commons-dbcp</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-pool</groupId>
-                    <artifactId>commons-pool</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
@@ -144,46 +134,15 @@
             <type>pom</type>
         </dependency>
 
-        <!-- Database -->
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Servlet API/ JSP API -->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jsp-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Transaction API -->
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>javax.transaction-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.hateoas</groupId>
-            <artifactId>spring-hateoas</artifactId>
         </dependency>
 
         <dependency>
@@ -198,6 +157,18 @@
             <artifactId>cglib</artifactId>
             <version>${cglib.version}</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

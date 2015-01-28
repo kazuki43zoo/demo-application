@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="
         http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd
         ">
 
@@ -8,17 +9,17 @@
         <relationship-type>non-cumulative</relationship-type>
         <custom-converters>
             <converter
-                type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
+                    type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
                 <class-a>org.joda.time.DateTime</class-a>
                 <class-b>org.joda.time.DateTime</class-b>
             </converter>
             <converter
-                type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
+                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
                 <class-a>org.joda.time.LocalDate</class-a>
                 <class-b>org.joda.time.LocalDate</class-b>
             </converter>
             <converter
-                type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
+                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
                 <class-a>org.joda.time.LocalTime</class-a>
                 <class-b>org.joda.time.LocalTime</class-b>
             </converter>

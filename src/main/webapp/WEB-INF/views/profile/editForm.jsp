@@ -1,25 +1,28 @@
-
-<t:messagesPanel />
+<t:messagesPanel/>
 
 <form:form action="${contextPath}/profile" class="form-horizontal" method="post"
-    modelAttribute="profileForm">
+           modelAttribute="profileForm">
 
     <div class="form-group">
-        <form:label path="accountId" class="col-sm-2 control-label">Account ID</form:label>
+        <form:label path="accountId"
+                    class="col-sm-2 control-label">Account ID</form:label>
         <div class="col-sm-8">
-            <form:input cssClass="form-control" path="accountId" />
-            <form:errors path="accountId" />
+            <form:input cssClass="form-control" path="accountId"/>
+            <form:errors path="accountId"/>
         </div>
     </div>
     <div class="form-group">
-        <form:label path="firstName" class="col-sm-2 control-label">Name</form:label>
+        <form:label path="firstName"
+                    class="col-sm-2 control-label">Name</form:label>
         <div class="col-sm-4">
-            <form:input cssClass="form-control" path="firstName" placeholder="First Name" />
-            <form:errors path="firstName" />
+            <form:input cssClass="form-control" path="firstName"
+                        placeholder="First Name"/>
+            <form:errors path="firstName"/>
         </div>
         <div class="col-sm-4">
-            <form:input cssClass="form-control" path="lastName" placeholder="Last name" />
-            <form:errors path="lastName" />
+            <form:input cssClass="form-control" path="lastName"
+                        placeholder="Last name"/>
+            <form:errors path="lastName"/>
         </div>
     </div>
     <div class="form-group">
@@ -28,7 +31,7 @@
                 <span class="glyphicon glyphicon-floppy-save"></span> Save
             </button>
             <a href="${contextPath}/profile" class="btn btn-default"> <span
-                class="glyphicon glyphicon-step-backward"></span> Back
+                    class="glyphicon glyphicon-step-backward"></span> Back
             </a>
         </div>
     </div>

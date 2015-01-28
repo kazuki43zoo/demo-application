@@ -1,25 +1,26 @@
 package com.github.kazuki43zoo.domain.service.security;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
-import org.joda.time.DateTime;
-import org.springframework.stereotype.Service;
-import org.terasoluna.gfw.common.date.DateFactory;
-
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
+import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+
+import javax.inject.Inject;
 
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final @lombok.NonNull DateFactory dateFactory;
+    @lombok.NonNull
+    private final JodaTimeDateFactory dateFactory;
 
-    private final @lombok.NonNull AccountRepository accountRepository;
+    @lombok.NonNull
+    private final AccountRepository accountRepository;
 
     @Override
     public boolean isLogin(Account account) {
@@ -33,8 +34,8 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void createAuthenticationFailureHistory(String failedAccountId,
-            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
-            String failureReason) {
+                                                   AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+                                                   String failureReason) {
         Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
@@ -46,13 +47,13 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void createAuthenticationSuccessHistory(Account account,
-            AccountAuthenticationHistory authenticationHistory, AuthenticationType type) {
+                                                   AccountAuthenticationHistory authenticationHistory, AuthenticationType type) {
         createAuthenticationHistory(account, authenticationHistory, type, true);
     }
 
     private void createAuthenticationHistory(Account account,
-            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
-            boolean result) {
+                                             AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+                                             boolean result) {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         authenticationHistory.setAccountUuid(account.getAccountUuid());

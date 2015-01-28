@@ -1,31 +1,30 @@
 package com.github.kazuki43zoo.domain.service.timecard;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
+import com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.terasoluna.gfw.common.exception.SystemException;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.terasoluna.gfw.common.exception.SystemException;
-
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
-import com.github.kazuki43zoo.domain.repository.timecard.WorkPlaceRepository;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Transactional
 @Service
 public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
-    private final @lombok.NonNull WorkPlaceRepository workPlaceRepository;
+    @lombok.NonNull
+    private final WorkPlaceRepository workPlaceRepository;
 
     private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
 
     @Inject
-    public WorkPlaceSharedServiceImpl(@Named("workPlaceBatchModeRepository") WorkPlaceRepository workPlaceRepository){
+    public WorkPlaceSharedServiceImpl(@Named("workPlaceBatchModeRepository") WorkPlaceRepository workPlaceRepository) {
         this.workPlaceRepository = workPlaceRepository;
     }
 

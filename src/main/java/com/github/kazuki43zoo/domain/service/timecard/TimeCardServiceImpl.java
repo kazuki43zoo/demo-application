@@ -6,32 +6,26 @@ import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.github.kazuki43zoo.domain.repository.timecard.TimeCardRepository;
 import com.github.kazuki43zoo.domain.service.calendar.CalendarSharedService;
-import org.apache.ibatis.executor.BatchResult;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Transactional
 @Service
 public final class TimeCardServiceImpl implements TimeCardService {
 
-    private final
     @lombok.NonNull
-    WorkPlaceSharedService workPlaceSharedService;
+    private final WorkPlaceSharedService workPlaceSharedService;
 
-    private final
     @lombok.NonNull
-    CalendarSharedService calendarSharedService;
+    private final CalendarSharedService calendarSharedService;
 
-    private final
     @lombok.NonNull
-    TimeCardRepository timeCardRepository;
+    private final TimeCardRepository timeCardRepository;
 
     @Inject
     public TimeCardServiceImpl(WorkPlaceSharedService workPlaceSharedService, CalendarSharedService calendarSharedService, @Named("timeCardBatchModeRepository") TimeCardRepository timeCardRepository) {

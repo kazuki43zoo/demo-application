@@ -1,8 +1,8 @@
 package com.github.kazuki43zoo.domain.model.account;
 
-import java.io.Serializable;
-
 import org.joda.time.DateTime;
+
+import java.io.Serializable;
 
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor

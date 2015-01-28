@@ -1,7 +1,10 @@
 package com.github.kazuki43zoo.app.account;
 
-import javax.inject.Inject;
-
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.service.account.AccountService;
+import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
+import com.github.kazuki43zoo.web.security.CurrentUser;
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -16,11 +19,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.account.Account;
-import com.github.kazuki43zoo.domain.service.account.AccountService;
-import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
-import com.github.kazuki43zoo.web.security.CurrentUser;
+import javax.inject.Inject;
 
 @TransactionTokenCheck("profile")
 @RequestMapping("profile")
@@ -28,9 +27,11 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ProfileController {
 
-    private final @lombok.NonNull AccountService accountService;
+    @lombok.NonNull
+    private final AccountService accountService;
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public String show(@CurrentUser CustomUserDetails authenticatedUser, Model model) {
@@ -41,7 +42,7 @@ public class ProfileController {
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET, params = "edit")
     public String edit(@CurrentUser CustomUserDetails authenticatedUser, ProfileForm form,
-            Model model) {
+                       Model model) {
         beanMapper.map(authenticatedUser.getAccount(), form);
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";
@@ -50,8 +51,8 @@ public class ProfileController {
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.PATCH)
     public String save(@CurrentUser CustomUserDetails authenticatedUser,
-            @Validated ProfileForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                       @Validated ProfileForm form, BindingResult bindingResult, Model model,
+                       RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return edit(authenticatedUser, form, model);
@@ -80,14 +81,14 @@ public class ProfileController {
     }
 
     public String editRedo(@CurrentUser CustomUserDetails authenticatedUser, ProfileForm form,
-            Model model) {
+                           Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";
     }
 
     @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
     public String showAuthenticationHistoryList(@CurrentUser CustomUserDetails authenticatedUser,
-            Model model) {
+                                                Model model) {
         Account account = accountService
                 .getAccount(authenticatedUser.getAccount().getAccountUuid());
         model.addAttribute(account);

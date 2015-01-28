@@ -1,16 +1,12 @@
 package com.github.kazuki43zoo.infra.mybatis.typehandler;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+
+import java.sql.*;
 
 @MappedTypes(LocalTime.class)
 public final class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
@@ -19,7 +15,7 @@ public final class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, LocalTime parameter,
-            JdbcType jdbcType) throws SQLException {
+                                    JdbcType jdbcType) throws SQLException {
         ps.setTime(i, new Time(BASE_DATE.toDateTime(parameter).getMillis()));
     }
 

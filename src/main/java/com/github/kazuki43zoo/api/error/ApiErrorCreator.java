@@ -1,7 +1,5 @@
 package com.github.kazuki43zoo.api.error;
 
-import javax.inject.Inject;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Component;
@@ -12,21 +10,24 @@ import org.springframework.web.context.request.WebRequest;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
+import javax.inject.Inject;
+
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class ApiErrorCreator {
 
-    private final @lombok.NonNull @Inject MessageSource messageSource;
+    @lombok.NonNull
+    private final MessageSource messageSource;
 
     public ApiError createApiError(WebRequest request, String errorCode,
-            String defaultErrorMessage, Object... arguments) {
+                                   String defaultErrorMessage, Object... arguments) {
         String localizedMessage = messageSource.getMessage(errorCode, arguments,
                 defaultErrorMessage, request.getLocale());
         return new ApiError(errorCode, localizedMessage);
     }
 
     public ApiError createBindingResultApiError(WebRequest request, String errorCode,
-            BindingResult bindingResult, String defaultErrorMessage) {
+                                                BindingResult bindingResult, String defaultErrorMessage) {
         ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             apiError.addDetail(createApiError(request, fieldError, fieldError.getField()));
@@ -38,13 +39,13 @@ public final class ApiErrorCreator {
     }
 
     private ApiError createApiError(WebRequest request,
-            DefaultMessageSourceResolvable messageResolvable, String target) {
+                                    DefaultMessageSourceResolvable messageResolvable, String target) {
         String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
         return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 
     public ApiError createResultMessagesApiError(WebRequest request, String rootErrorCode,
-            ResultMessages resultMessages, String defaultErrorMessage) {
+                                                 ResultMessages resultMessages, String defaultErrorMessage) {
         ApiError apiError;
         if (resultMessages.getList().size() == 1) {
             ResultMessage resultMessage = resultMessages.iterator().next();

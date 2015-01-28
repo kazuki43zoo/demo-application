@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.domain.repository.account;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
 
 @lombok.Data
 public final class AccountsSearchCriteria {

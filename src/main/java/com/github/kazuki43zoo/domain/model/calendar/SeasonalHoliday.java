@@ -1,8 +1,8 @@
 package com.github.kazuki43zoo.domain.model.calendar;
 
-import java.io.Serializable;
-
 import org.joda.time.LocalDate;
+
+import java.io.Serializable;
 
 @lombok.Data
 public class SeasonalHoliday implements Holiday, Serializable {

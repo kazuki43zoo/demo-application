@@ -1,8 +1,7 @@
 package com.github.kazuki43zoo.domain.repository.timecard;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
+import org.apache.ibatis.annotations.Param;
 
 public interface WorkPlaceRepository {
 

@@ -1,9 +1,8 @@
 package com.github.kazuki43zoo.core.exception;
 
+import com.github.kazuki43zoo.core.message.Message;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 import org.terasoluna.gfw.common.message.ResultMessages;
-
-import com.github.kazuki43zoo.core.message.Message;
 
 public final class InvalidAccessException extends ResultMessagesNotificationException {
 

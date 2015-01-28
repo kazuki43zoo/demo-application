@@ -1,10 +1,7 @@
 package com.github.kazuki43zoo.web.mvc;
 
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
+import com.github.kazuki43zoo.core.config.ApplicationConfigs;
+import com.github.kazuki43zoo.core.config.SecurityConfigs;
 import org.joda.time.DateTime;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
@@ -12,20 +9,24 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.support.RequestContextUtils;
-import org.terasoluna.gfw.common.date.DateFactory;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
-import com.github.kazuki43zoo.core.config.ApplicationConfigs;
-import com.github.kazuki43zoo.core.config.SecurityConfigs;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 @ControllerAdvice
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class GlobalControllerAdvice {
 
-    private final @lombok.NonNull SecurityConfigs securityConfigs;
+    @lombok.NonNull
+    private final SecurityConfigs securityConfigs;
 
-    private final @lombok.NonNull ApplicationConfigs applicationConfigs;
+    @lombok.NonNull
+    private final ApplicationConfigs applicationConfigs;
 
-    private final @lombok.NonNull DateFactory dateFactory;
+    @lombok.NonNull
+    private final JodaTimeDateFactory dateFactory;
 
     @ModelAttribute
     public SecurityConfigs setUpSecurityConfigs() {

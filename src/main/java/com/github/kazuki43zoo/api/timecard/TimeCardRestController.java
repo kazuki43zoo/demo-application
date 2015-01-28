@@ -1,22 +1,5 @@
 package com.github.kazuki43zoo.api.timecard;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-
-import javax.inject.Inject;
-
-import org.dozer.Mapper;
-import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.hateoas.Link;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.github.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.github.kazuki43zoo.domain.model.timecard.TimeCard;
 import com.github.kazuki43zoo.domain.model.timecard.WorkPlace;
@@ -24,6 +7,18 @@ import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.github.kazuki43zoo.domain.service.timecard.TimeCardService;
 import com.github.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
 import com.github.kazuki43zoo.web.security.CurrentUser;
+import org.dozer.Mapper;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * REST API for time card resource.
@@ -35,18 +30,23 @@ public class TimeCardRestController {
 
     private static final String TARGET_MONTH_FORMAT = "yyyy-MM";
 
+    @lombok.NonNull
     private final TimeCardService timeCardService;
+
+    @lombok.NonNull
     private final WorkPlaceSharedService workPlaceSharedService;
+
+    @lombok.NonNull
     private final Mapper beanMapper;
 
     /**
      * Retrieve the specified month's time card.
-     * 
-     * @param currentUser
+     *
+     * @param authenticatedUser
      * @param targetMonth
      * @return
      */
-    @RequestMapping(method = { RequestMethod.HEAD, RequestMethod.GET })
+    @RequestMapping(method = {RequestMethod.HEAD, RequestMethod.GET})
     @ResponseStatus(HttpStatus.OK)
     public TimeCardResource getTimeCard(
             @CurrentUser CustomUserDetails authenticatedUser,
@@ -102,7 +102,7 @@ public class TimeCardRestController {
                 timeCard);
     }
 
-    @RequestMapping(value = "/{targetDay}", method = { RequestMethod.HEAD, RequestMethod.GET })
+    @RequestMapping(value = "/{targetDay}", method = {RequestMethod.HEAD, RequestMethod.GET})
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource getDailyAttendance(
             @CurrentUser CustomUserDetails authenticatedUser,

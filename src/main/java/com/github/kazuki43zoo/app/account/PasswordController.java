@@ -1,7 +1,12 @@
 package com.github.kazuki43zoo.app.account;
 
-import javax.inject.Inject;
-
+import com.github.kazuki43zoo.app.auth.LoginForm;
+import com.github.kazuki43zoo.core.exception.InvalidAccessException;
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.service.password.PasswordService;
+import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
+import com.github.kazuki43zoo.web.security.CurrentUser;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +21,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.app.auth.LoginForm;
-import com.github.kazuki43zoo.core.exception.InvalidAccessException;
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.account.Account;
-import com.github.kazuki43zoo.domain.service.password.PasswordService;
-import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
-import com.github.kazuki43zoo.web.security.CurrentUser;
+import javax.inject.Inject;
 
 @TransactionTokenCheck("password")
 @RequestMapping("password")
@@ -30,9 +29,11 @@ import com.github.kazuki43zoo.web.security.CurrentUser;
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class PasswordController {
 
-    private final @lombok.NonNull PasswordService passwordService;
+    @lombok.NonNull
+    private final PasswordService passwordService;
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {
@@ -59,8 +60,8 @@ public class PasswordController {
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "change")
     public String change(@CurrentUser CustomUserDetails currentUser, @Validated PasswordForm form,
-            BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
-            TransactionTokenContext transactionTokenContext) {
+                         BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                         TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return showChangeForm();
@@ -97,8 +98,8 @@ public class PasswordController {
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "changeAndLogin")
     public String changeAndLogin(@CurrentUser CustomUserDetails currentUser,
-            @Validated PasswordForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                                 @Validated PasswordForm form, BindingResult bindingResult, Model model,
+                                 RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         if (currentUser != null) {
             throw new InvalidAccessException();

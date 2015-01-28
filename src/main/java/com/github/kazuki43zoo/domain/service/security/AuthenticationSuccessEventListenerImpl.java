@@ -1,29 +1,31 @@
 package com.github.kazuki43zoo.domain.service.security;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
+import javax.inject.Inject;
 
-@Transactional(dontRollbackOn = ConcurrentLoginException.class)
+@Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class AuthenticationSuccessEventListenerImpl implements
         ApplicationListener<AuthenticationSuccessEvent> {
 
-    private final @lombok.NonNull MessageSource messageSource;
+    @lombok.NonNull
+    private final MessageSource messageSource;
 
-    private final @lombok.NonNull AuthenticationService authenticationService;
+    @lombok.NonNull
+    private final AuthenticationService authenticationService;
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {

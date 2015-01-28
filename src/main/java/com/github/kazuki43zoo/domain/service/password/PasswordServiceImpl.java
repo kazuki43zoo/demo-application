@@ -1,31 +1,34 @@
 package com.github.kazuki43zoo.domain.service.password;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
-import org.joda.time.DateTime;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.terasoluna.gfw.common.date.DateFactory;
-import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
-
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountPasswordHistory;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
+import org.joda.time.DateTime;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
+
+import javax.inject.Inject;
 
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class PasswordServiceImpl implements PasswordService {
 
-    private final @lombok.NonNull PasswordEncoder passwordEncoder;
+    @lombok.NonNull
+    private final PasswordEncoder passwordEncoder;
 
-    private final @lombok.NonNull DateFactory dateFactory;
+    @lombok.NonNull
+    private final JodaTimeDateFactory dateFactory;
 
-    private final @lombok.NonNull AccountRepository accountRepository;
+    @lombok.NonNull
+    private final AccountRepository accountRepository;
 
-    private final @lombok.NonNull PasswordSharedService passwordSharedService;
+    @lombok.NonNull
+    private final PasswordSharedService passwordSharedService;
 
     @Override
     public Account change(String accountId, String rawOldPassword, String rawNewPassword) {

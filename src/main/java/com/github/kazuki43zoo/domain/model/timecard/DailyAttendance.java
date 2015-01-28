@@ -1,17 +1,12 @@
 package com.github.kazuki43zoo.domain.model.timecard;
 
+import com.github.kazuki43zoo.domain.model.calendar.Holiday;
+import org.joda.time.*;
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.springframework.util.StringUtils;
-
-import com.github.kazuki43zoo.domain.model.calendar.Holiday;
 
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
@@ -62,7 +57,7 @@ public class DailyAttendance implements Serializable {
     }
 
     public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice,
-            Map<LocalDate, Holiday> holidaies) {
+                          Map<LocalDate, Holiday> holidaies) {
 
         clearCalculate();
 

@@ -1,20 +1,5 @@
 package com.github.kazuki43zoo.domain.service.account;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
-import org.joda.time.DateTime;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.terasoluna.gfw.common.date.DateFactory;
-import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
-
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
@@ -23,17 +8,33 @@ import com.github.kazuki43zoo.domain.repository.PageParams;
 import com.github.kazuki43zoo.domain.repository.account.AccountRepository;
 import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
+import org.joda.time.DateTime;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
+
+import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 
 @Transactional
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class AccountServiceImpl implements AccountService {
 
-    private final @lombok.NonNull DateFactory dateFactory;
+    @lombok.NonNull
+    private final JodaTimeDateFactory dateFactory;
 
-    private final @lombok.NonNull AccountRepository accountRepository;
+    @lombok.NonNull
+    private final AccountRepository accountRepository;
 
-    private final @lombok.NonNull PasswordSharedService passwordSharedService;
+    @lombok.NonNull
+    private final PasswordSharedService passwordSharedService;
 
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {

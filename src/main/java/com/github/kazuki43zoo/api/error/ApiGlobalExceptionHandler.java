@@ -1,7 +1,5 @@
 package com.github.kazuki43zoo.api.error;
 
-import javax.inject.Inject;
-
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
@@ -20,17 +18,21 @@ import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 
+import javax.inject.Inject;
+
 @ControllerAdvice
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final @lombok.NonNull ApiErrorCreator apiErrorCreator;
+    @lombok.NonNull
+    private final ApiErrorCreator apiErrorCreator;
 
-    private final @lombok.NonNull ExceptionCodeResolver exceptionCodeResolver;
+    @lombok.NonNull
+    private final ExceptionCodeResolver exceptionCodeResolver;
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
+                                                             HttpHeaders headers, HttpStatus status, WebRequest request) {
         final Object apiError;
         if (body == null) {
             String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
@@ -50,12 +52,12 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
 
     @Override
     protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+                                                         HttpStatus status, WebRequest request) {
         return handleBindingResult(ex, ex.getBindingResult(), headers, status, request);
     }
 
     private ResponseEntity<Object> handleBindingResult(Exception ex, BindingResult bindingResult,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
+                                                       HttpHeaders headers, HttpStatus status, WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
         ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode,
                 bindingResult, ex.getMessage());
@@ -76,7 +78,7 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex,
-            WebRequest request) {
+                                                                  WebRequest request) {
         return handleResultMessagesNotificationException(ex, null, HttpStatus.NOT_FOUND, request);
     }
 
@@ -94,8 +96,8 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
-    @ExceptionHandler({ OptimisticLockingFailureException.class,
-            PessimisticLockingFailureException.class })
+    @ExceptionHandler({OptimisticLockingFailureException.class,
+            PessimisticLockingFailureException.class})
     public ResponseEntity<Object> handleLockingFailureException(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, null, null, HttpStatus.CONFLICT, request);
     }

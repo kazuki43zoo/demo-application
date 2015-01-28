@@ -1,28 +1,30 @@
 package com.github.kazuki43zoo.domain.service.security;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
+import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
+import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
+import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
-import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
-import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
+import javax.inject.Inject;
 
-@Transactional(dontRollbackOn = ConcurrentLoginException.class)
+@Transactional(noRollbackFor = ConcurrentLoginException.class)
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class InteractiveAuthenticationSuccessEventListenerImpl implements
         ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
-    private final @lombok.NonNull AuthenticationService authenticationService;
+    @lombok.NonNull
+    private final AuthenticationService authenticationService;
 
-    private final @lombok.NonNull PasswordSharedService passwordSharedService;
+    @lombok.NonNull
+    private final PasswordSharedService passwordSharedService;
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {

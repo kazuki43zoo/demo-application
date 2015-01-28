@@ -1,19 +1,5 @@
 package com.github.kazuki43zoo.domain.service.calendar;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.springframework.stereotype.Service;
-
 import com.github.kazuki43zoo.domain.model.calendar.FixedHoliday;
 import com.github.kazuki43zoo.domain.model.calendar.HappyMondayHoliday;
 import com.github.kazuki43zoo.domain.model.calendar.Holiday;
@@ -21,16 +7,26 @@ import com.github.kazuki43zoo.domain.model.calendar.SeasonalHoliday;
 import com.github.kazuki43zoo.domain.repository.calendar.FixedHolidayRepository;
 import com.github.kazuki43zoo.domain.repository.calendar.HappyMondayHolidayRepository;
 import com.github.kazuki43zoo.domain.repository.calendar.SeasonalHolidayRepository;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.util.*;
 
 @Service
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
-    private final @lombok.NonNull FixedHolidayRepository fixedHolidayRepository;
+    @lombok.NonNull
+    private final FixedHolidayRepository fixedHolidayRepository;
 
-    private final @lombok.NonNull HappyMondayHolidayRepository happyMondayHolidayRepository;
+    @lombok.NonNull
+    private final HappyMondayHolidayRepository happyMondayHolidayRepository;
 
-    private final @lombok.NonNull SeasonalHolidayRepository seasonalHolidayRepository;
+    @lombok.NonNull
+    private final SeasonalHolidayRepository seasonalHolidayRepository;
 
     private Map<Integer, List<FixedHoliday>> fixedHolodaiesMapping;
 

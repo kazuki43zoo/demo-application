@@ -5,14 +5,24 @@
     <entry key="e.demo.fw.5001">Page is not found.</entry>
     <entry key="e.demo.fw.5002">Valid session is not exists.</entry>
     <entry key="e.demo.fw.6001">Request method not supported.</entry>
-    <entry key="e.demo.fw.6002">Specified representation format not supported.</entry>
-    <entry key="e.demo.fw.6003">Specified media type in the request body not supported.</entry>
-    <entry key="e.demo.fw.6004">Validation error occurred on item in the request body.</entry>
-    <entry key="e.demo.fw.6005">Validation error occurred on item in the request parameters.</entry>
+    <entry key="e.demo.fw.6002">Specified representation format not supported.
+    </entry>
+    <entry key="e.demo.fw.6003">Specified media type in the request body not
+        supported.
+    </entry>
+    <entry key="e.demo.fw.6004">Validation error occurred on item in the request
+        body.
+    </entry>
+    <entry key="e.demo.fw.6005">Validation error occurred on item in the request
+        parameters.
+    </entry>
     <entry key="e.demo.fw.6006">Request body format error occurred.</entry>
     <entry key="e.demo.fw.6007">Unknown field exists in JSON.</entry>
-    <entry key="e.demo.fw.6008">Type mismatch error occurred in JSON field.</entry>
-    <entry key="e.demo.fw.6009">Type mismatch error occurred in request parameter or header or path variable.</entry>
+    <entry key="e.demo.fw.6008">Type mismatch error occurred in JSON field.
+    </entry>
+    <entry key="e.demo.fw.6009">Type mismatch error occurred in request
+        parameter or header or path variable.
+    </entry>
     <entry key="e.demo.fw.7001">Illegal screen flow detected.</entry>
     <entry key="e.demo.fw.7002">Access denied.</entry>
     <entry key="e.demo.fw.7003">Illegal access detected.</entry>
@@ -25,19 +35,31 @@
     <entry key="i.demo.account.0003">Account was deleted.</entry>
     <entry key="i.demo.account.0004">Account was unlocked.</entry>
     <entry key="i.demo.account.0005">Profile was edited.</entry>
-    <entry key="e.demo.account.2001">Specified account id is already used by another user.</entry>
-    <entry key="i.demo.auth.0001">Please login from this page to view the specified page.</entry>
+    <entry key="e.demo.account.2001">Specified account id is already used by
+        another user.
+    </entry>
+    <entry key="i.demo.auth.0001">Please login from this page to view the
+        specified page.
+    </entry>
     <entry key="i.demo.auth.0002">Logout was completed.</entry>
-    <entry key="e.demo.auth.2001">Password has expired. Please change the password.</entry>
+    <entry key="e.demo.auth.2001">Password has expired. Please change the
+        password.
+    </entry>
     <entry key="i.demo.password.0001">Password was changed.</entry>
-    <entry key="e.demo.password.2001">Specified password is already used past. You cannot use same password during
-        certain period of time.</entry>
-    <entry key="e.demo.password.2002">Specified password is contains in account id. You cannot use password that
-        contains account id.</entry>
+    <entry key="e.demo.password.2001">Specified password is already used past.
+        You cannot use same password during
+        certain period of time.
+    </entry>
+    <entry key="e.demo.password.2002">Specified password is contains in account
+        id. You cannot use password that
+        contains account id.
+    </entry>
     <entry key="e.demo.security.5001">Account not found.</entry>
-    <entry key="e.demo.security.8001">Already has login by another session.</entry>
+    <entry key="e.demo.security.8001">Already has login by another session.
+    </entry>
 
-    <entry key="NotNull.loginForm.accountId">"Account ID" may not be null.</entry>
+    <entry key="NotNull.loginForm.accountId">"Account ID" may not be null.
+    </entry>
     <entry key="NotNull.loginForm.password">"Password" may not be null.</entry>
 
     <entry key="format.dateTime">yyyy/MM/dd HH:mm:ss Z</entry>

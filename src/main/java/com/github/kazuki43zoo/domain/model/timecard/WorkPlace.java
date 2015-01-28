@@ -1,18 +1,17 @@
 package com.github.kazuki43zoo.domain.model.timecard;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor

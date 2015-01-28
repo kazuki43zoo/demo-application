@@ -1,7 +1,10 @@
 package com.github.kazuki43zoo.app.account;
 
-import javax.inject.Inject;
-
+import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
+import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
+import com.github.kazuki43zoo.domain.service.account.AccountService;
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -20,11 +23,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import com.github.kazuki43zoo.core.message.Message;
-import com.github.kazuki43zoo.domain.model.account.Account;
-import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
-import com.github.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
-import com.github.kazuki43zoo.domain.service.account.AccountService;
+import javax.inject.Inject;
 
 @TransactionTokenCheck("accounts")
 @RequestMapping("accounts")
@@ -32,13 +31,15 @@ import com.github.kazuki43zoo.domain.service.account.AccountService;
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AccountsController {
 
-    private final @lombok.NonNull Mapper beanMapper;
+    @lombok.NonNull
+    private final Mapper beanMapper;
 
-    private final @lombok.NonNull AccountService accountService;
+    @lombok.NonNull
+    private final AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(@Validated AccountsSearchQuery query, BindingResult bindingResult,
-            @PageableDefault(size = 15) Pageable pageable, Model model) {
+                       @PageableDefault(size = 15) Pageable pageable, Model model) {
         if (bindingResult.hasErrors()) {
             return "account/list";
         }
@@ -65,7 +66,7 @@ public class AccountsController {
     @TransactionTokenCheck(value = "create")
     @RequestMapping(method = RequestMethod.POST)
     public String create(@Validated AccountForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                         RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
         if (bindingResult.hasErrors()) {
             return createForm(form);
         }
@@ -94,7 +95,7 @@ public class AccountsController {
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.GET, params = "form=edit")
     public String editForm(@PathVariable("accountUuid") String accountUuid, AccountForm form,
-            Model model) {
+                           Model model) {
         Account account = accountService.getAccount(accountUuid);
         model.addAttribute(account);
         beanMapper.map(account, form);
@@ -108,8 +109,8 @@ public class AccountsController {
     @TransactionTokenCheck(value = "edit")
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.PUT)
     public String edit(@PathVariable("accountUuid") String accountUuid,
-            @Validated AccountForm form, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                       @Validated AccountForm form, BindingResult bindingResult, Model model,
+                       RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return editRedo(accountUuid, form, model);
@@ -138,7 +139,7 @@ public class AccountsController {
     @TransactionTokenCheck
     @RequestMapping(value = "{accountUuid}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("accountUuid") String accountUuid,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                         RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         accountService.delete(accountUuid);
 
@@ -151,7 +152,7 @@ public class AccountsController {
     @TransactionTokenCheck
     @RequestMapping(value = "{accountUuid}/unlock", method = RequestMethod.POST)
     public String unlock(@PathVariable("accountUuid") String accountUuid,
-            RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+                         RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
 
         accountService.unlock(accountUuid);
 
@@ -167,7 +168,7 @@ public class AccountsController {
     }
 
     private String redirectDetailView(RedirectAttributes redirectAttributes, String accountUuid,
-            Message message) {
+                                      Message message) {
         redirectAttributes.addFlashAttribute(message.resultMessages());
         redirectAttributes.addAttribute("accountUuid", accountUuid);
         return "redirect:/accounts/{accountUuid}";
