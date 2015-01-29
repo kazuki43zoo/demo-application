@@ -16,11 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("auth/login")
 @Controller
+@LoginFormControllerAdvice.LoginFormModelAttribute
 public class LoginController {
-    @ModelAttribute
-    public LoginForm setUpLoginForm() {
-        return new LoginForm();
-    }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET)
