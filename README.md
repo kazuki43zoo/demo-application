@@ -277,16 +277,15 @@ For forward to the authentication processing of Spring Security, as the settings
   </filter>
   <filter-mapping>
       <filter-name>SpringSecurityFilterChain</filter-name>
-      <servlet-name>AppServlet</servlet-name>
-      <servlet-name>ApiServlet</servlet-name>
-      <servlet-name>H2ConsoleServlet</servlet-name>
-      <dispatcher>REQUEST</dispatcher>
+      <url-pattern>/auth/authenticate</url-pattern>
       <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+  <filter-mapping>
+      <filter-name>SpringSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   ```
-  > ![alt text](./images/tip.png "Tip")<br>
-  > **As the way to map to this servlet filter, i will recommend to use the `<servlet-name>` element.**
-  > **If specify `<url-pattern>/*</url-pattern>`, this servlet filter would has been applied at the jsp forwarding.**
 
 ### Receive the login(authentication) request by the Spring Security
 
