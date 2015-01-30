@@ -109,17 +109,16 @@
             <util:list>
                 <bean class="org.springframework.security.web.csrf.CsrfFilter$DefaultRequiresCsrfMatcher"/>
                 <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
-                    <constructor-arg>
-                        <bean class="org.springframework.security.web.util.matcher.OrRequestMatcher">
-                            <constructor-arg>
-                                <util:list>
-                                    <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
-                                          c:pattern="/vendor/h2/**"/>
-                                </util:list>
-                            </constructor-arg>
-                        </bean>
-                    </constructor-arg>
+                    <constructor-arg ref="csrfExclusionPathMatcher" />
                 </bean>
+            </util:list>
+        </constructor-arg>
+    </bean>
+    <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+        <constructor-arg>
+            <util:list>
+                <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
+                      c:pattern="/vendor/h2/**"/>
             </util:list>
         </constructor-arg>
     </bean>
