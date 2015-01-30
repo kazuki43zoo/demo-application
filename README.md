@@ -408,7 +408,7 @@ Coming soon...
 <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
     <constructor-arg>
         <list>
-            <ref bean="defaultCsrfRequiresMethodMatcher" />
+            <bean class="org.springframework.security.web.csrf.CsrfFilter$DefaultRequiresCsrfMatcher"/>
             <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
                 <constructor-arg ref="csrfExclusionPathMatcher" />
             </bean>
@@ -418,7 +418,7 @@ Coming soon...
 <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
     <constructor-arg>
         <list>
-            <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+            <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
                 <constructor-arg index="0" value="/vendor/h2/**" />
             </bean>
         </list>
