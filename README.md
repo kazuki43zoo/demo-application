@@ -88,11 +88,11 @@ Functionalities of this application is following.<br>
 This section describe about authentication in this application.<br>
 In this application, authentication(login and logout) processing are implements using Spring Security and Spring MVC.<br>
 
-> ![alt text](./images/info.png "Note")<br>
-> **Responsibility of each other are following.** 
->
-> * **Spring Security has responsible for the authentication processing.**
-> * **Spring MVC has responsible for input values validation and the screen control.**
+  > ![alt text](./images/info.png "Note")<br>
+  > **Responsibility of each other are following.** 
+  >
+  > * **Spring Security has responsible for the authentication processing.**
+  > * **Spring MVC has responsible for input values validation and the screen control.**
 
 ## 4.1. View the login form
 
@@ -145,8 +145,9 @@ public class LoginController {
     // omit
 }
 ```
-> ![alt text](./images/info.png "Note")<br>
-> **When view the login form page, global transaction for transaction token check is begun.**
+
+  > ![alt text](./images/info.png "Note")<br>
+  > **When view the login form page, global transaction for transaction token check is begun.**
 
 
 Generate screen data(response data) by the `auth/loginForm` view(JSP). 
@@ -177,10 +178,11 @@ Generate screen data(response data) by the `auth/loginForm` view(JSP).
     </button>
 </form:form>
 ```
-> ![alt text](./images/info.png "Note")<br>
-> **`loginForm.jsp` is included from the `src/main/webapp/WEB-INF/views/common/layout/topNavbar.jsp`.**
-> **Hence, in this JSP, use the `including` parameter to judge the included / not included.**
-> **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
+
+  > ![alt text](./images/info.png "Note")<br>
+  > **`loginForm.jsp` is included from the `src/main/webapp/WEB-INF/views/common/layout/topNavbar.jsp`.**
+  > **Hence, in this JSP, use the `including` parameter to judge the included / not included.**
+  > **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
 
 
 ### Actual screen(response) are following.
@@ -218,8 +220,8 @@ In this application, parameter name of username and password has change the defa
 
 In this application, `LoginController` receive the login request, and execute validation of login form data. If not exists violation, `LoginContoller` forward to the authentication processing of Spring Security.
 
-> ![alt text](./images/tip.png "Tip")<br>
-> **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
+  > ![alt text](./images/tip.png "Tip")<br>
+  > **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
 `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
@@ -243,8 +245,9 @@ public class LoginController {
     // omit
 }
 ```
-> ![alt text](./images/info.png "Note")<br>
-> **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
+
+  > ![alt text](./images/info.png "Note")<br>
+  > **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
 
 `src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
 
@@ -292,8 +295,8 @@ For forward to the authentication processing of Spring Security, as the settings
 Spring Security execute the authentication processing when was accessed to the url that is defined in `login-processing-url` attribute of `sec:form-login` element.
 In this application, `login-processing-url` & `username-parameter` & `password-parameter` attribute of `sec:form-login` element has change the default settings of Spring Security.<br>
 
-> ![alt text](./images/important.png "Important")<br>
-> **Reason of changing default settings is to hide the fact that are using the Spring Security as security countermeasure. If occur the security vulnerability in the Spring Security, be able to reduce the risk of attack to this application.**
+  > ![alt text](./images/important.png "Important")<br>
+  > **Reason of changing default settings is to hide the fact that are using the Spring Security as security countermeasure. If occur the security vulnerability in the Spring Security, be able to reduce the risk of attack to this application.**
 
 `src/main/resources/META-INF/spring/spring-security.xml`
 
@@ -314,9 +317,8 @@ In this application, authentication realize using the `DaoAuthenticationProvider
 `DaoAuthenticationProvider` has authenticate by using the user information that are loaded from the data store.<br>
 In `DaoAuthenticationProvider`, be able to check for the status of loaded user. Actually checking contents are following.
 
-> ![alt text](./images/info.png "Note")<br>
-> **User information are loaded as instance of the `CustomUserDetails` (extended class in this application).
-In this application, load the user information via the `CustomUserDetailService` (extended class in this application).**
+  > ![alt text](./images/info.png "Note")<br>
+  > **User information are loaded as instance of the `CustomUserDetails` (extended class in this application). In this application, load the user information via the `CustomUserDetailService` (extended class in this application).**
 
 
 | No | Checking content | Specification in this application |
@@ -338,9 +340,9 @@ In this application, load the user information via the `CustomUserDetailService`
 </sec:authentication-manager>
 ```
 
-> ![alt text](./images/info.png "Note")<br>
-> **`customUserDetailsService` are scan by component-scan.**
-> **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
+  > ![alt text](./images/info.png "Note")<br>
+  > **`customUserDetailsService` are scan by component-scan.**
+  > **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
 ### Execute authentication success processing
 
