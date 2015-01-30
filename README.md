@@ -104,83 +104,83 @@ Display processing flow of login form are following.
 
 If access the protected page when not authenticate, spring-security redirect to the uri(page) that is defined in `login-page` attribute of `sec:form-login` element.
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
-          username-parameter="accountId" password-parameter="password"
-          authentication-details-source-ref="customAuthenticationDetailsSource"
-          authentication-failure-handler-ref="authenticationFailureHandler" />
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+        username-parameter="accountId" password-parameter="password"
+        authentication-details-source-ref="customAuthenticationDetailsSource"
+        authentication-failure-handler-ref="authenticationFailureHandler" />
+    <!-- omit -->
+</sec:http>
+```
 
 ### Encourage the login
 
 Request of `GET /auth/login?encourage` and `GET /auth/login` are handled `LoginController`.
 In the `LoginController`, set the message and view the login form page.
 
-* `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
+`src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
-  ```java
-  @RequestMapping("auth/login")
-  @Controller
-  public class LoginController {
-      // omit
+```java
+@RequestMapping("auth/login")
+@Controller
+public class LoginController {
+    // omit
 
-      @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-      @RequestMapping(method = RequestMethod.GET)
-      public String showLoginForm() {
-          return "auth/loginForm";
-      }
+    @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
+    @RequestMapping(method = RequestMethod.GET)
+    public String showLoginForm() {
+        return "auth/loginForm";
+    }
 
-      @RequestMapping(method = RequestMethod.GET, params = "encourage")
-      public String encourageLogin(RedirectAttributes redirectAttributes) {
-          redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
-          return "redirect:/auth/login";
-      }
+    @RequestMapping(method = RequestMethod.GET, params = "encourage")
+    public String encourageLogin(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.buildResultMessages());
+        return "redirect:/auth/login";
+    }
 
-      // omit
-  }
-  ```
-  > ![alt text](./images/info.png "Note")<br>
-  > **When view the login form page, global transaction for transaction token check is begun.**
+    // omit
+}
+```
+> ![alt text](./images/info.png "Note")<br>
+> **When view the login form page, global transaction for transaction token check is begun.**
 
 
 Generate screen data(response data) by the `auth/loginForm` view(JSP). 
 
-* `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
+`src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
-  ```jsp
-  <c:if test="${!param.including}">
-      <t:messagesPanel messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" messagesType="danger" />
-      <t:messagesPanel />
-      <spring:hasBindErrors name="loginForm">
-          <spring:nestedPath path="loginForm">
-              <div class="alert alert-danger">
-                  <form:errors path="*" />
-              </div>
-          </spring:nestedPath>
-      </spring:hasBindErrors>
-  </c:if>
-  <form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
-      <div class="form-group">
-          <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
-      </div>
-      <div class="form-group">
-          <form:password path="password" class="form-control" placeholder="Password" />
-      </div>
-      <button class="btn">
-          <span class="glyphicon glyphicon-log-in"></span>
-      </button>
-  </form:form>
-  ```
-  > ![alt text](./images/info.png "Note")<br>
-  > **`loginForm.jsp` is included from the `src/main/webapp/WEB-INF/views/common/layout/topNavbar.jsp`.**
-  > **Hence, in this JSP, use the `including` parameter to judge the included / not included.**
-  > **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
+```jsp
+<c:if test="${!param.including}">
+    <t:messagesPanel messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" messagesType="danger" />
+    <t:messagesPanel />
+    <spring:hasBindErrors name="loginForm">
+        <spring:nestedPath path="loginForm">
+            <div class="alert alert-danger">
+                <form:errors path="*" />
+            </div>
+        </spring:nestedPath>
+    </spring:hasBindErrors>
+</c:if>
+<form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
+    <div class="form-group">
+        <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
+    </div>
+    <div class="form-group">
+        <form:password path="password" class="form-control" placeholder="Password" />
+    </div>
+    <button class="btn">
+        <span class="glyphicon glyphicon-log-in"></span>
+    </button>
+</form:form>
+```
+> ![alt text](./images/info.png "Note")<br>
+> **`loginForm.jsp` is included from the `src/main/webapp/WEB-INF/views/common/layout/topNavbar.jsp`.**
+> **Hence, in this JSP, use the `including` parameter to judge the included / not included.**
+> **When are included from `topNavbar.jsp`, error message does not displayed in this page.** 
 
 
 ### Actual screen(response) are following.
@@ -198,21 +198,21 @@ Login processing flow are following.
 
 In this application, parameter name of username and password has change the default settings of Spring Security.
 
-* `src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
+`src/main/webapp/WEB-INF/views/auth/loginForm.jsp`
 
-  ```jsp
-  <form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
-      <div class="form-group">
-          <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
-      </div>
-      <div class="form-group">
-          <form:password path="password" class="form-control" placeholder="Password" />
-      </div>
-      <button class="btn">
-          <span class="glyphicon glyphicon-log-in"></span>
-      </button>
-  </form:form>
-  ```
+```jsp
+<form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
+    <div class="form-group">
+        <form:input type="text" path="accountId" class="form-control" placeholder="Account ID" />
+    </div>
+    <div class="form-group">
+        <form:password path="password" class="form-control" placeholder="Password" />
+    </div>
+    <button class="btn">
+        <span class="glyphicon glyphicon-log-in"></span>
+    </button>
+</form:form>
+```
 
 ### Receive the login request by the Spring MVC
 
@@ -221,71 +221,71 @@ In this application, `LoginController` receive the login request, and execute va
 > ![alt text](./images/tip.png "Tip")<br>
 > **If not exists requirement as input value validation or re-display, Spring MVC is not required.**
 
-* `src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
+`src/main/java/com/github/kazuki43zoo/app/auth/LoginController.java`
 
-  ```java
-  @RequestMapping("auth/login")
-  @Controller
-  public class LoginController {
-      // omit
+```java
+@RequestMapping("auth/login")
+@Controller
+public class LoginController {
+    // omit
 
-      @TransactionTokenCheck
-      @RequestMapping(method = RequestMethod.POST)
-      public String login(@Validated LoginForm form, BindingResult bindingResult) {
+    @TransactionTokenCheck
+    @RequestMapping(method = RequestMethod.POST)
+    public String login(@Validated LoginForm form, BindingResult bindingResult) {
 
-          if (bindingResult.hasErrors()) {
-              return showLoginForm();
-          }
+        if (bindingResult.hasErrors()) {
+            return showLoginForm();
+        }
 
-          return "forward:/auth/authenticate";
-      }
+        return "forward:/auth/authenticate";
+    }
 
-      // omit
-  }
-  ```
-  > ![alt text](./images/info.png "Note")<br>
-  > **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
+    // omit
+}
+```
+> ![alt text](./images/info.png "Note")<br>
+> **In the login processing , execute global transaction token check. Global transaction are begin when view the welcom page or the login page.**
 
-* `src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
+`src/main/java/com/github/kazuki43zoo/app/auth/LoginForm.java`
 
-  ```java
-  @AllArgsConstructor
-  @NoArgsConstructor
-  @Data
-  public class LoginForm implements Serializable {
-      private static final long serialVersionUID = 1L;
-      @NotNull
-      private String accountId;
-      @NotNull
-      private String password;
-  }
-  ```
+```java
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class LoginForm implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @NotNull
+    private String accountId;
+    @NotNull
+    private String password;
+}
+```
 
 ![alt text](./images/point.png "Point")<br>
 For forward to the authentication processing of Spring Security, as the settings of `SpringSecurityFilterChain`, need add `<dispatcher>FORWARD</dispatcher>` .
 
-* `src/main/webapp/WEB-INF/web.xml`
+`src/main/webapp/WEB-INF/web.xml`
 
-  ```xml
-  <filter>
-      <filter-name>SpringSecurityFilterChain</filter-name>
-      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-      <init-param>
-          <param-name>targetBeanName</param-name>
-          <param-value>springSecurityFilterChain</param-value>
-      </init-param>
-  </filter>
-  <filter-mapping>
-      <filter-name>SpringSecurityFilterChain</filter-name>
-      <url-pattern>/auth/authenticate</url-pattern>
-      <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
-  <filter-mapping>
-      <filter-name>SpringSecurityFilterChain</filter-name>
-      <url-pattern>/*</url-pattern>
-  </filter-mapping>
+```xml
+<filter>
+    <filter-name>SpringSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+        <param-name>targetBeanName</param-name>
+        <param-value>springSecurityFilterChain</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>SpringSecurityFilterChain</filter-name>
+    <url-pattern>/auth/authenticate</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>SpringSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 
-  ```
+```
 
 ### Receive the login(authentication) request by the Spring Security
 
@@ -295,18 +295,18 @@ In this application, `login-processing-url` & `username-parameter` & `password-p
 > ![alt text](./images/important.png "Important")<br>
 > **Reason of changing default settings is to hide the fact that are using the Spring Security as security countermeasure. If occur the security vulnerability in the Spring Security, be able to reduce the risk of attack to this application.**
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
-          username-parameter="accountId" password-parameter="password"
-          authentication-details-source-ref="customAuthenticationDetailsSource"
-          authentication-failure-handler-ref="authenticationFailureHandler" />
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:form-login login-processing-url="/auth/authenticate" login-page="/auth/login?encourage"
+        username-parameter="accountId" password-parameter="password"
+        authentication-details-source-ref="customAuthenticationDetailsSource"
+        authentication-failure-handler-ref="authenticationFailureHandler" />
+    <!-- omit -->
+</sec:http>
+```
 
 ### Execute authentication processing
 
@@ -328,19 +328,19 @@ In this application, load the user information via the `CustomUserDetailService`
 | 5 | Specified user's password is not expired ? | Fetches the last modified date time of password. If it not modified during the password valid days period, encourage the password changing. |
 | 6 | Matches the specified password ? | Fetches the password. If it not matches the specified password, occur the authentication error as bad credential.  |
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:authentication-manager>
-      <sec:authentication-provider user-service-ref="customUserDetailsService">
-          <sec:password-encoder ref="passwordEncoder" />
-      </sec:authentication-provider>
-  </sec:authentication-manager>
-  ```
+```xml
+<sec:authentication-manager>
+    <sec:authentication-provider user-service-ref="customUserDetailsService">
+        <sec:password-encoder ref="passwordEncoder" />
+    </sec:authentication-provider>
+</sec:authentication-manager>
+```
 
-  > ![alt text](./images/info.png "Note")<br>
-  > **`customUserDetailsService` are scan by component-scan.**
-  > **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
+> ![alt text](./images/info.png "Note")<br>
+> **`customUserDetailsService` are scan by component-scan.**
+> **`passwordEncoder` are defined in `src/main/resources/META-INF/spring/applicationContext.xml`. In this application, use the `BCryptPasswordEncoder`.**
 
 ### Execute authentication success processing
 
@@ -379,84 +379,84 @@ This section describe about other security countermeasure in this application.<b
 ## 6.1. Session Fixation Attacks Protection
 Coming soon...
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:session-management invalid-session-url="/error/invalidSession"
-          session-fixation-protection="migrateSession"  />
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:session-management invalid-session-url="/error/invalidSession"
+        session-fixation-protection="migrateSession"  />
+    <!-- omit -->
+</sec:http>
+```
 
 ## 6.2. CSRF Attacks Protection
 Coming soon...
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:csrf request-matcher-ref="csrfRequestMatcher" />
-      <!-- omit -->
-  </sec:http>
-  ```
-  ```xml
-  <bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
-      <constructor-arg>
-          <list>
-              <ref bean="defaultCsrfRequiresMethodMatcher" />
-              <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
-                  <constructor-arg ref="csrfExclusionPathMatcher" />
-              </bean>
-          </list>
-      </constructor-arg>
-  </bean>
-  <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
-      <constructor-arg>
-          <list>
-              <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
-                  <constructor-arg index="0" value="/vendor/h2/**" />
-              </bean>
-          </list>
-      </constructor-arg>
-  </bean>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:csrf request-matcher-ref="csrfRequestMatcher" />
+    <!-- omit -->
+</sec:http>
+```
+```xml
+<bean id="csrfRequestMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+    <constructor-arg>
+        <list>
+            <ref bean="defaultCsrfRequiresMethodMatcher" />
+            <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
+                <constructor-arg ref="csrfExclusionPathMatcher" />
+            </bean>
+        </list>
+    </constructor-arg>
+</bean>
+<bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+    <constructor-arg>
+        <list>
+            <bean id="h2ConsolePathMatcher" class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                <constructor-arg index="0" value="/vendor/h2/**" />
+            </bean>
+        </list>
+    </constructor-arg>
+</bean>
+```
 
 ## 6.3. XSS attacks Protection
 Coming soon...
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:headers>
-          <!-- omit -->
-          <sec:content-type-options />
-          <sec:xss-protection/>
-      </sec:headers>
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:headers>
+        <!-- omit -->
+        <sec:content-type-options />
+        <sec:xss-protection/>
+    </sec:headers>
+    <!-- omit -->
+</sec:http>
+```
 
 ## 6.4. Clickjacking Attacks Protection
 Coming soon...
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:headers>
-          <!-- omit -->
-          <sec:frame-options policy="SAMEORIGIN" />
-          <!-- omit -->
-      </sec:headers>
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:headers>
+        <!-- omit -->
+        <sec:frame-options policy="SAMEORIGIN" />
+        <!-- omit -->
+    </sec:headers>
+    <!-- omit -->
+</sec:http>
+```
 
 ## 6.5. Directory Traversal Attacks Protection
 Coming soon...
@@ -464,35 +464,35 @@ Coming soon...
 
 ## 6.6. Protected resource not cache
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:headers>
-          <sec:cache-control />
-          <!-- omit -->
-      </sec:headers>
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:headers>
+        <sec:cache-control />
+        <!-- omit -->
+    </sec:headers>
+    <!-- omit -->
+</sec:http>
+```
 
 ## 6.7. HTTP Strict Transport Security (HSTS)
 Coming soon...
 
-* `src/main/resources/META-INF/spring/spring-security.xml`
+`src/main/resources/META-INF/spring/spring-security.xml`
 
-  ```xml
-  <sec:http auto-config="true" use-expressions="true">
-      <!-- omit -->
-      <sec:headers>
-          <!-- omit -->
-          <sec:hsts />
-          <!-- omit -->
-      </sec:headers>
-      <!-- omit -->
-  </sec:http>
-  ```
+```xml
+<sec:http auto-config="true" use-expressions="true">
+    <!-- omit -->
+    <sec:headers>
+        <!-- omit -->
+        <sec:hsts />
+        <!-- omit -->
+    </sec:headers>
+    <!-- omit -->
+</sec:http>
+```
 
 
 # 7. Session Management
