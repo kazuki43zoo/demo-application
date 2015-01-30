@@ -1,9 +1,9 @@
 # 1. Demo Application
 
-This is sample application for develop using [TERASOLUNA Server Framework for Java 5.x](http://terasoluna.org).<br>
+This is sample application for develop using [TERASOLUNA Server Framework for Java (5.x)](http://terasoluna.org).<br>
 **Currently, this application is under developing !!!**
 
-This application is developed based [TERASOLUNA Server Framework for Java Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
+This application is developed based [TERASOLUNA Server Framework for Java (5.x) Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
 But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
 
 # 2. Application Structure
@@ -29,10 +29,10 @@ Structure of this application is following.<br><br>
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries               | [TERASOLUNA Server Framework for Java Common Library 5.0.0.RC5](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries               | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.0.RC5](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
-The following libraries is dependency for application-specific without relate on TERASOLUNA Global Framewrok.
+The following libraries is dependency for application-specific without relate on TERASOLUNA Server Framewrok for Java (5.x).
 
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
@@ -42,9 +42,9 @@ The following libraries is dependency for application-specific without relate on
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. |
 
 ## 2.2. Version up of dependency libraries for application-specific  
-The following libraries are version up from version that TERASOLUNA Global Framework depend on. Reason of version up is to try the latest version.
+The following libraries are version up from version that TERASOLUNA Server Framework for Java (5.x) depend on. Reason of version up is to try the latest version.
 
-| Library | In this application | TERASOLUNA<br>Global Framework |
+| Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
