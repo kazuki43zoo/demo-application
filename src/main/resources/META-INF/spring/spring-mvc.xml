@@ -16,7 +16,7 @@
 
     <mvc:resources mapping="/resources/**"
                    location="/resources/">
-        <mvc:resource-chain resource-cache="true" auto-registration="true">
+        <mvc:resource-chain resource-cache="false">
             <mvc:resolvers>
                 <mvc:version-resolver>
                     <mvc:content-version-strategy patterns="/**" />
