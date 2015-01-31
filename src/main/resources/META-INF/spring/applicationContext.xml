@@ -19,7 +19,7 @@
           class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <bean class="org.dozer.spring.DozerBeanMapperFactoryBean"
-          p:mappingFiles="classpath*:/META-INF/dozer/**/*-mapping.xml"/>
+          p:mappingFiles="classpath*:/META-INF/dozer/**/dozer-*.xml"/>
 
     <!-- Message -->
     <bean id="messageSource"
@@ -37,7 +37,8 @@
           p:defaultExceptionCode="e.demo.fw.9001">
         <property name="exceptionMappings">
             <util:map>
-                <entry key="ResourceNotFoundException" value="e.demo.fw.5001"/>
+                <entry key="ResourceNotFoundException"
+                       value="e.demo.fw.5001"/>
                 <entry key="HttpRequestMethodNotSupportedException"
                        value="e.demo.fw.6001"/>
                 <entry key="MediaTypeNotAcceptableException"
@@ -46,21 +47,28 @@
                        value="e.demo.fw.6003"/>
                 <entry key="MethodArgumentNotValidException"
                        value="e.demo.fw.6004"/>
-                <entry key="BindException" value="e.demo.fw.6005"/>
-                <entry key="JsonParseException" value="e.demo.fw.6006"/>
+                <entry key="BindException"
+                       value="e.demo.fw.6005"/>
+                <entry key="JsonParseException"
+                       value="e.demo.fw.6006"/>
                 <entry key="UnrecognizedPropertyException"
                        value="e.demo.fw.6007"/>
-                <entry key="JsonMappingException" value="e.demo.fw.6008"/>
-                <entry key="TypeMismatchException" value="e.demo.fw.6009"/>
+                <entry key="JsonMappingException"
+                       value="e.demo.fw.6008"/>
+                <entry key="TypeMismatchException"
+                       value="e.demo.fw.6009"/>
                 <entry key="InvalidTransactionTokenException"
                        value="e.demo.fw.7001"/>
-                <entry key="InvalidAccessException" value="e.demo.fw.7002"/>
-                <entry key="BusinessException" value="e.demo.fw.8001"/>
+                <entry key="InvalidAccessException"
+                       value="e.demo.fw.7002"/>
+                <entry key="BusinessException"
+                       value="e.demo.fw.8001"/>
                 <entry key="OptimisticLockingFailureException"
                        value="e.demo.fw.8002"/>
                 <entry key="PessimisticLockingFailureException"
                        value="e.demo.fw.8002"/>
-                <entry key="DataAccessException" value="e.demo.fw.9002"/>
+                <entry key="DataAccessException"
+                       value="e.demo.fw.9002"/>
             </util:map>
         </property>
     </bean>

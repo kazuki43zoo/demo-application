@@ -23,10 +23,10 @@ public final class CustomAuthenticationDetailsSourceImpl implements
             remoteAddress = request.getRemoteAddr();
         }
         HttpSession session = request.getSession(false);
-        String sessionId = (session != null) ? session.getId() : null;
+        String requestedSessionId = (session != null) ? session.getId() : null;
         String agent = request.getHeader(HttpHeaders.USER_AGENT);
         String trackingId = (String) request.getAttribute(CustomHttpHeaders.X_TRACK);
-        return new CustomAuthenticationDetails(remoteAddress, sessionId, agent, trackingId);
+        return new CustomAuthenticationDetails(remoteAddress, requestedSessionId, agent, trackingId);
     }
 
 }

@@ -5,27 +5,6 @@
         http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd
         ">
 
-    <configuration>
-        <relationship-type>non-cumulative</relationship-type>
-        <custom-converters>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
-                <class-a>org.joda.time.DateTime</class-a>
-                <class-b>org.joda.time.DateTime</class-b>
-            </converter>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
-                <class-a>org.joda.time.LocalDate</class-a>
-                <class-b>org.joda.time.LocalDate</class-b>
-            </converter>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
-                <class-a>org.joda.time.LocalTime</class-a>
-                <class-b>org.joda.time.LocalTime</class-b>
-            </converter>
-        </custom-converters>
-    </configuration>
-
     <mapping>
         <class-a>com.github.kazuki43zoo.app.account.AccountForm</class-a>
         <class-b>com.github.kazuki43zoo.domain.model.account.Account</class-b>

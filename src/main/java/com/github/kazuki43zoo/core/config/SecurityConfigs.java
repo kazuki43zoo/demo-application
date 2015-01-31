@@ -13,4 +13,10 @@ public final class SecurityConfigs {
     @Value("${security.passwordValidDays:90}")
     private int passwordValidDays;
 
+    @Value("${security.login.parameter.username:accountId}")
+    private String usernameParameter;
+
+    @Value("${security.login.parameter.password:password}")
+    private String passwordParameter;
+
 }

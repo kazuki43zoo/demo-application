@@ -7,7 +7,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -15,18 +15,18 @@
 
     <sec:http pattern="/resources/**" security="none"/>
 
-    <sec:http pattern="/auth/logout\?success" request-matcher="regex"
-              security="none"/>
+    <sec:http pattern="/auth/logout\?success" request-matcher="regex" security="none"/>
 
-    <sec:http pattern="/api/**" auto-config="true" use-expressions="true">
+    <sec:http pattern="/api/**" auto-config="false" use-expressions="true" entry-point-ref="http403ForbiddenEntryPoint">
         <sec:csrf/>
-        <sec:headers>
-            <sec:cache-control/>
-        </sec:headers>
+        <sec:headers />
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
         <sec:intercept-url pattern="/api/*/timecards/**"
                            access="hasAnyRole('ROLE_EMPLOYEE')"/>
     </sec:http>
+
+    <bean id="http403ForbiddenEntryPoint"
+          class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
     <sec:http auto-config="true" use-expressions="true">
         <sec:access-denied-handler ref="customAccessDeniedHandler"/>
@@ -38,12 +38,14 @@
             <sec:content-type-options/>
             <sec:xss-protection/>
         </sec:headers>
-        <sec:session-management invalid-session-url="/error/invalidSession"/>
+        <sec:session-management invalid-session-url="/error/invalidSession">
+            <sec:concurrency-control error-if-maximum-exceeded="true" />
+        </sec:session-management>
         <sec:form-login
                 login-processing-url="/auth/authenticate"
                 login-page="/auth/login?encourage"
-                username-parameter="accountId"
-                password-parameter="password"
+                username-parameter="${security.login.parameter.username}"
+                password-parameter="${security.login.parameter.password}"
                 authentication-details-source-ref="customAuthenticationDetailsSource"
                 authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
         <sec:logout
@@ -51,7 +53,8 @@
                 delete-cookies="JSESSIONID"
                 success-handler-ref="customLogoutSuccessHandler"/>
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
-        <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/admin/**"
+                           access="hasRole('ROLE_ADMIN')"/>
         <sec:intercept-url pattern="/vendor/h2/**"
                            access="hasRole('ROLE_ADMIN')"/>
         <sec:intercept-url pattern="/profile/**"
@@ -60,7 +63,8 @@
                            access="hasAnyRole('ROLE_EMPLOYEE')"/>
         <sec:intercept-url pattern="/accounts/**"
                            access="hasRole('ROLE_ACCOUNTMNG')"/>
-        <sec:intercept-url pattern="/auth/login" access="!isAuthenticated()"/>
+        <sec:intercept-url pattern="/auth/login"
+                           access="!isAuthenticated()"/>
     </sec:http>
 
     <sec:authentication-manager>
@@ -70,6 +74,7 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
+    <!-- Scan Components -->
     <context:component-scan base-package="com.github.kazuki43zoo.web.security"/>
 
     <!-- AccessDeniedHandler -->
@@ -91,7 +96,7 @@
 
     <!-- AuthenticationFailureHandler -->
     <bean id="customAuthenticationFailureHandler"
-          class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler"
+          class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
           p:useForward="true"
           p:defaultFailureUrl="/auth/login/error">
         <property name="exceptionMappings">
@@ -101,6 +106,11 @@
             </util:map>
         </property>
     </bean>
+
+    <!-- LogoutSuccessHandler -->
+    <bean id="customLogoutSuccessHandler"
+          class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandlerImpl"
+          p:defaultTargetUrl="/auth/logout?success" />
 
     <!-- CsrfRequestMatcher -->
     <bean id="customCsrfRequestMatcher"

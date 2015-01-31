@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 
-@Transactional(noRollbackFor = ConcurrentLoginException.class)
+@Transactional
 @Component
 @lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class InteractiveAuthenticationSuccessEventListenerImpl implements
