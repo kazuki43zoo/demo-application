@@ -15,8 +15,15 @@
     <mvc:default-servlet-handler/>
 
     <mvc:resources mapping="/resources/**"
-                   location="/resources/,classpath:META-INF/resources/"
-                   cache-period="#{60 * 60}"/>
+                   location="/resources/">
+        <mvc:resource-chain resource-cache="true" auto-registration="true">
+            <mvc:resolvers>
+                <mvc:version-resolver>
+                    <mvc:content-version-strategy patterns="/**" />
+                </mvc:version-resolver>
+            </mvc:resolvers>
+        </mvc:resource-chain>
+    </mvc:resources>
 
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
@@ -73,7 +80,8 @@
     </bean>
 
     <bean class="org.terasoluna.gfw.web.exception.SystemExceptionResolver"
-          p:exceptionCodeResolver-ref="exceptionCodeResolver" p:order="3"
+          p:exceptionCodeResolver-ref="exceptionCodeResolver"
+          p:order="3"
           p:defaultErrorView="common/error/systemError"
           p:defaultStatusCode="500">
         <property name="exceptionMappings">

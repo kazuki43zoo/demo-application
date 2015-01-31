@@ -7,8 +7,8 @@
             angular.element("meta[name='contextPath']").attr('content') + '/api/v1')
     //
     .config([ '$httpProvider', function($httpProvider) {
-        var csrfHeaderName = angular.element("meta[name='csrfHeaderName']").attr('content');
-        var csrfToken = angular.element("meta[name='csrfToken']").attr('content');
+        var csrfHeaderName = angular.element("meta[name='_csrf_header']").attr('content');
+        var csrfToken = angular.element("meta[name='_csrf']").attr('content');
         $httpProvider.defaults.headers.common[csrfHeaderName] = csrfToken;
     } ]);
 

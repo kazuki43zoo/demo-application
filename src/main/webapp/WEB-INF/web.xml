@@ -93,7 +93,8 @@
     <filter>
         <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter
         </filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        <filter-class>
+            org.springframework.web.filter.DelegatingFilterProxy
         </filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>
@@ -104,6 +105,17 @@
     <filter-mapping>
         <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter
         </filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>ResourceUrlEncodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.servlet.resource.ResourceUrlEncodingFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ResourceUrlEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -195,7 +207,8 @@
     </error-page>
     <error-page>
         <error-code>405</error-code>
-        <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp</location>
+        <location>/WEB-INF/views/common/error/resourceNotFoundError.jsp
+        </location>
     </error-page>
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
