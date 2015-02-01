@@ -15,7 +15,7 @@
         <tiles:insertAttribute name="usecaseName" ignore="true"/>
     </c:set>
 
-    <title><spring:message code="${titleKey}" text="Demo Application"/></title>
+    <title><spring:message code="${titleKey}" text="Demo Application using TERASOLUNA Server Framework for Java (5.x)"/></title>
 
     <link rel="stylesheet"
           href="<c:url value="/resources/vendor/bootstrap/dist/css/bootstrap.min.css"/>">
