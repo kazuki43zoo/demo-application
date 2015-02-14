@@ -58,9 +58,13 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "change")
-    public String change(@CurrentUser CustomUserDetails currentUser, @Validated PasswordForm form,
-                         BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
-                         TransactionTokenContext transactionTokenContext) {
+    public String change(
+            @CurrentUser CustomUserDetails currentUser,
+            @Validated PasswordForm form,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
             return showChangeForm();
@@ -96,9 +100,12 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "changeAndLogin")
-    public String changeAndLogin(@CurrentUser CustomUserDetails currentUser,
-                                 @Validated PasswordForm form, BindingResult bindingResult, Model model,
-                                 RedirectAttributes redirectAttributes, TransactionTokenContext transactionTokenContext) {
+    public String changeAndLogin(
+            @CurrentUser CustomUserDetails currentUser,
+            @Validated PasswordForm form,
+            BindingResult bindingResult,
+            Model model,
+            TransactionTokenContext transactionTokenContext) {
 
         if (currentUser != null) {
             throw new InvalidAccessException();
@@ -117,7 +124,12 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        return "forward:/auth/authenticate";
+        Account account = currentUser.getAccount();
+        boolean enabledAutoLogin = false;
+        if (account != null) {
+            enabledAutoLogin = account.isEnabledAutoLogin();
+        }
+        return "forward:/auth/authenticate?remember_me=" + enabledAutoLogin;
     }
 
 }

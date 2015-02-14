@@ -49,7 +49,6 @@ public class LoginController {
         if (account != null) {
             enabledAutoLogin = account.isEnabledAutoLogin();
         }
-
         return "forward:/auth/authenticate?remember_me=" + enabledAutoLogin;
     }
 
