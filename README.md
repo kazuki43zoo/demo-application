@@ -29,7 +29,7 @@ Structure of this application is following.<br><br>
 |                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries               | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.0.RC5](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries               | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.0.RC7](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Server Framewrok for Java (5.x).
