@@ -40,7 +40,9 @@ public final class AccountServiceImpl implements AccountService {
     PersistentTokenRepository persistentTokenRepository;
 
     @Override
-    public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
+    public Page<Account> searchAccounts(
+            AccountsSearchCriteria criteria,
+            Pageable pageable) {
         criteria.determineCriteria();
         long totalCount = accountRepository.countByCriteria(criteria);
         List<Account> accounts;

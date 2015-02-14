@@ -12,7 +12,8 @@
         <result property="baseBeginTime" column="base_begin_time"/>
         <result property="baseFinishTime" column="base_finish_time"/>
         <result property="unitTime" column="unit_time"/>
-        <collection property="breakTimes" javaType="ArrayList"
+        <collection property="breakTimes"
+                    javaType="ArrayList"
                     ofType="BreakTime">
             <constructor>
                 <idArg column="work_place_uuid" javaType="String"/>

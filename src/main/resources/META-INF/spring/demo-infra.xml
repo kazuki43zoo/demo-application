@@ -7,7 +7,7 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
-        ">
+       ">
 
     <import resource="classpath:META-INF/spring/demo-env.xml"/>
 

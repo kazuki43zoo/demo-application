@@ -6,11 +6,15 @@ import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 
 public interface AuthenticationService {
 
-    void createAuthenticationSuccessHistory(Account account,
-                                            AccountAuthenticationHistory authenticationHistory, AuthenticationType type);
+    void createAuthenticationSuccessHistory(
+            Account account,
+            AccountAuthenticationHistory authenticationHistory,
+            AuthenticationType type);
 
-    void createAuthenticationFailureHistory(String failedAccountId,
-                                            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
-                                            String failureReason);
+    void createAuthenticationFailureHistory(
+            String failedAccountId,
+            AccountAuthenticationHistory authenticationHistory,
+            AuthenticationType type,
+            String failureReason);
 
 }

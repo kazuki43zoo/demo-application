@@ -30,7 +30,9 @@ public final class TimeCardServiceImpl implements TimeCardService {
 
 
     @Override
-    public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {
+    public TimeCard getTimeCard(
+            String accountUuid,
+            LocalDate targetMonth) {
         TimeCard timeCard = timeCardRepository.findOne(accountUuid, targetMonth);
         if (timeCard != null) {
             String defaultWorkPlaceUuid = null;
@@ -50,7 +52,9 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public TimeCard getDefaultTimeCard(String accountUuid, LocalDate targetMonth) {
+    public TimeCard getDefaultTimeCard(
+            String accountUuid,
+            LocalDate targetMonth) {
         TimeCard timeCard = new TimeCard();
         WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(null);
         WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
@@ -65,7 +69,10 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public void saveTimeCard(String accountUuid, LocalDate targetMonth, TimeCard timeCard) {
+    public void saveTimeCard(
+            String accountUuid,
+            LocalDate targetMonth,
+            TimeCard timeCard) {
         TimeCard loadedTimeCard = timeCardRepository.findOne(accountUuid, targetMonth);
         timeCard.setAccountUuid(accountUuid);
         timeCard.setTargetMonth(targetMonth);
@@ -85,8 +92,10 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public void saveDailyAttendance(String accountUuid, LocalDate targetDate,
-                                    DailyAttendance attendance) {
+    public void saveDailyAttendance(
+            String accountUuid,
+            LocalDate targetDate,
+            DailyAttendance attendance) {
         DailyAttendance loadedAttendance = timeCardRepository.findOneDailyAttendance(accountUuid,
                 targetDate);
         if (loadedAttendance == null) {
@@ -99,7 +108,9 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public DailyAttendance getDailyAttendance(String accountUuid, LocalDate targetDate) {
+    public DailyAttendance getDailyAttendance(
+            String accountUuid,
+            LocalDate targetDate) {
         return timeCardRepository.findOneDailyAttendance(accountUuid, targetDate);
     }
 

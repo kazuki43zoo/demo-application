@@ -18,15 +18,21 @@ public final class ApiErrorCreator {
     @Inject
     MessageSource messageSource;
 
-    public ApiError createApiError(WebRequest request, String errorCode,
-                                   String defaultErrorMessage, Object... arguments) {
+    public ApiError createApiError(
+            WebRequest request,
+            String errorCode,
+            String defaultErrorMessage,
+            Object... arguments) {
         String localizedMessage = messageSource.getMessage(errorCode, arguments,
                 defaultErrorMessage, request.getLocale());
         return new ApiError(errorCode, localizedMessage);
     }
 
-    public ApiError createBindingResultApiError(WebRequest request, String errorCode,
-                                                BindingResult bindingResult, String defaultErrorMessage) {
+    public ApiError createBindingResultApiError(
+            WebRequest request,
+            String errorCode,
+            BindingResult bindingResult,
+            String defaultErrorMessage) {
         ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             apiError.addDetail(createApiError(request, fieldError, fieldError.getField()));
@@ -37,14 +43,19 @@ public final class ApiErrorCreator {
         return apiError;
     }
 
-    private ApiError createApiError(WebRequest request,
-                                    DefaultMessageSourceResolvable messageResolvable, String target) {
+    private ApiError createApiError(
+            WebRequest request,
+            DefaultMessageSourceResolvable messageResolvable,
+            String target) {
         String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
         return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 
-    public ApiError createResultMessagesApiError(WebRequest request, String rootErrorCode,
-                                                 ResultMessages resultMessages, String defaultErrorMessage) {
+    public ApiError createResultMessagesApiError(
+            WebRequest request,
+            String rootErrorCode,
+            ResultMessages resultMessages,
+            String defaultErrorMessage) {
         ApiError apiError;
         if (resultMessages.getList().size() == 1) {
             ResultMessage resultMessage = resultMessages.iterator().next();

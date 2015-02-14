@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 @Transactional
 @Service
-public final class AccountServiceSharedImpl implements AccountSharedService {
+public final class AccountSharedServiceImpl implements AccountSharedService {
 
     @Inject
     AccountRepository accountRepository;

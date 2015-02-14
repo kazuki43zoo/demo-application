@@ -23,7 +23,10 @@ public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(
+            ServletRequest request,
+            ServletResponse response,
+            FilterChain chain)
             throws IOException, ServletException {
         request.setAttribute(WebAttributes.WEB_INVOCATION_PRIVILEGE_EVALUATOR_ATTRIBUTE, this);
         chain.doFilter(request, response);
@@ -35,7 +38,9 @@ public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements
     }
 
     @Override
-    public boolean isAllowed(String uri, Authentication authentication) {
+    public boolean isAllowed(
+            String uri,
+            Authentication authentication) {
         for (WebInvocationPrivilegeEvaluator privilegeEvaluator : webInvocationPrivilegeEvaluators) {
             if (!privilegeEvaluator.isAllowed(uri, authentication)) {
                 return false;
@@ -45,8 +50,11 @@ public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements
     }
 
     @Override
-    public boolean isAllowed(String contextPath, String uri, String method,
-                             Authentication authentication) {
+    public boolean isAllowed(
+            String contextPath,
+            String uri,
+            String method,
+            Authentication authentication) {
         for (WebInvocationPrivilegeEvaluator privilegeEvaluator : webInvocationPrivilegeEvaluators) {
             if (!privilegeEvaluator.isAllowed(contextPath, uri, method, authentication)) {
                 return false;
@@ -56,14 +64,16 @@ public final class CustomWebInvocationPrivilegeEvaluatorProvideFilter implements
     }
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName)
-            throws BeansException {
+    public Object postProcessBeforeInitialization(
+            Object bean,
+            String beanName) throws BeansException {
         return bean;
     }
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName)
-            throws BeansException {
+    public Object postProcessAfterInitialization(
+            Object bean,
+            String beanName) throws BeansException {
         if (bean instanceof WebInvocationPrivilegeEvaluator
                 && !bean.getClass().isAssignableFrom(getClass())) {
             webInvocationPrivilegeEvaluators.add((WebInvocationPrivilegeEvaluator) bean);

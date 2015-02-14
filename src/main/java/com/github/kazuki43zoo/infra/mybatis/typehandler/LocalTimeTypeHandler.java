@@ -14,23 +14,32 @@ public final class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
     private static final LocalDate BASE_DATE = new LocalDate(0);
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, LocalTime parameter,
-                                    JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(
+            PreparedStatement ps,
+            int i,
+            LocalTime parameter,
+            JdbcType jdbcType) throws SQLException {
         ps.setTime(i, new Time(BASE_DATE.toDateTime(parameter).getMillis()));
     }
 
     @Override
-    public LocalTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public LocalTime getNullableResult(
+            ResultSet rs,
+            String columnName) throws SQLException {
         return toLocalTime(rs.getTime(columnName));
     }
 
     @Override
-    public LocalTime getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public LocalTime getNullableResult(
+            ResultSet rs,
+            int columnIndex) throws SQLException {
         return toLocalTime(rs.getTime(columnIndex));
     }
 
     @Override
-    public LocalTime getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public LocalTime getNullableResult(
+            CallableStatement cs,
+            int columnIndex) throws SQLException {
         return toLocalTime(cs.getTime(columnIndex));
     }
 

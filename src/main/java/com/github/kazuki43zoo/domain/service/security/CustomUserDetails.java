@@ -16,8 +16,11 @@ public final class CustomUserDetails extends User implements UserDetails {
     private static final long serialVersionUID = 1L;
     private final Account account;
 
-    public CustomUserDetails(Account account, boolean accountNonExpired,
-                             boolean passwordNonExpired, boolean accountNonLock) {
+    public CustomUserDetails(
+            Account account,
+            boolean accountNonExpired,
+            boolean passwordNonExpired,
+            boolean accountNonLock) {
         super(account.getAccountId(), account.getPassword(), account.isEnabled(),
                 accountNonExpired, passwordNonExpired, accountNonLock,
                 toGrantedAuthorities(account));

@@ -38,7 +38,9 @@ public class LoginController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST)
-    public String login(@Validated LoginForm form, BindingResult bindingResult) {
+    public String login(
+            @Validated LoginForm form,
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return showLoginForm();
@@ -53,8 +55,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "error", method = RequestMethod.POST)
-    public String handleLoginError(LoginForm form, RedirectAttributes redirectAttributes,
-                                   HttpServletRequest request) {
+    public String handleLoginError(
+            LoginForm form,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request) {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
                 request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));

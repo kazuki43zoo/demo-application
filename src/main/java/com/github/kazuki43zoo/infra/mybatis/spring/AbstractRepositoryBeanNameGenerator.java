@@ -16,7 +16,9 @@ public abstract class AbstractRepositoryBeanNameGenerator implements BeanNameGen
     }
 
     @Override
-    public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
+    public String generateBeanName(
+            BeanDefinition definition,
+            BeanDefinitionRegistry registry) {
         String defaultBeanName = Introspector.decapitalize(ClassUtils.getShortName(definition
                 .getBeanClassName()));
         String repositoryBeanName = defaultBeanName.replaceAll("Repository", suffix);

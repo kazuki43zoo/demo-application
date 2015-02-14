@@ -39,8 +39,10 @@ public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenti
     Mapper beanMapper;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
         if (exception instanceof AuthenticationServiceException) {
             throw new SystemException(Message.FW_SYSTEM_ERROR.code(), exception);
         }
