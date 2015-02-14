@@ -6,8 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="CL_AUTHORITY"
-          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_AUTHORITY" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="ROLE_ADMIN" value="Administrators"/>
@@ -19,8 +18,7 @@
         </property>
     </bean>
 
-    <bean id="CL_ENABLED"
-          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_ENABLED" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="true" value="Enable"/>
@@ -29,8 +27,7 @@
         </property>
     </bean>
 
-    <bean id="CL_AUTHENTICATION_RESULT"
-          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_AUTHENTICATION_RESULT" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="true" value="Success"/>
@@ -39,8 +36,7 @@
         </property>
     </bean>
 
-    <bean id="CL_ACCOUNT_SEARCH_TARGET"
-          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_ACCOUNT_SEARCH_TARGET" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="accountId" value="Account ID"/>
@@ -49,8 +45,7 @@
         </property>
     </bean>
 
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK"
-          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rows">
             <util:map>
                 <entry key="en">
@@ -71,8 +66,7 @@
         </property>
     </bean>
 
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP"
-          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rows">
             <util:map>
                 <entry key="en">
@@ -93,8 +87,7 @@
         </property>
     </bean>
 
-    <bean id="CL_WORK_PLACE"
-          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rowsByCodeList">
             <util:map>
                 <entry key="en">

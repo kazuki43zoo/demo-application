@@ -13,11 +13,10 @@ import javax.servlet.RequestDispatcher;
 
 @RequestMapping("error")
 @RestController
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ApiErrorPageController {
 
-    @lombok.NonNull
-    private final ApiErrorCreator apiErrorCreator;
+    @Inject
+    ApiErrorCreator apiErrorCreator;
 
     @RequestMapping
     public ResponseEntity<ApiError> handleErrorPage(@RequestParam("errorCode") String errorCode,

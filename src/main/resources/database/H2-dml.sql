@@ -28,7 +28,7 @@ DELETE FROM seasonal_holiday;
 -- INSERT Demo Data
 -- ADMIN USER
 INSERT INTO account
-    VALUES('f87ddd5e-f3ec-11e3-9125-b2227cce2b54','admin01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Administrator01','',true);
+    VALUES('f87ddd5e-f3ec-11e3-9125-b2227cce2b54','admin01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Administrator01','',true,false);
 INSERT INTO account_authorities
     VALUES('f87ddd5e-f3ec-11e3-9125-b2227cce2b54','ADMIN');
 INSERT INTO account_authorities
@@ -39,7 +39,7 @@ INSERT INTO account_password_histories
     VALUES('f87ddd5e-f3ec-11e3-9125-b2227cce2b54','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
 INSERT INTO account
-    VALUES('f88a7cf8-f3ec-11e3-9125-b2227cce2b54','admin02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Administrator02','',false);
+    VALUES('f88a7cf8-f3ec-11e3-9125-b2227cce2b54','admin02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Administrator02','',false,false);
 INSERT INTO account_authorities
     VALUES('f88a7cf8-f3ec-11e3-9125-b2227cce2b54','ADMIN');
 INSERT INTO account_authorities
@@ -49,7 +49,7 @@ INSERT INTO account_password_histories
 
 -- GUEST USER
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','guest01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset01','',true);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','guest01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset01','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','GUEST');
 INSERT INTO account_authorities
@@ -58,7 +58,7 @@ INSERT INTO account_password_histories
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','guest02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset02','',true);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','guest02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset02','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','GUEST');
 INSERT INTO account_authorities
@@ -67,7 +67,7 @@ INSERT INTO account_password_histories
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','guest03','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset03','',true);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','guest03','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset03','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','GUEST');
 INSERT INTO account_authorities
@@ -77,7 +77,7 @@ INSERT INTO account_password_histories
 
 -- ACCOUNTS MANAGER USER
 INSERT INTO account
-    VALUES('b655e0e6-f457-11e3-9c20-b2227cce2b54','user01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'User01','',true);
+    VALUES('b655e0e6-f457-11e3-9c20-b2227cce2b54','user01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'User01','',true,false);
 INSERT INTO account_authorities
     VALUES('b655e0e6-f457-11e3-9c20-b2227cce2b54','USER');
 INSERT INTO account_authorities

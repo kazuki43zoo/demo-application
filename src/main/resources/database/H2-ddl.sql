@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS account(
     first_name nvarchar(128) not null,
     last_name nvarchar(128),
     enabled boolean not null,
+    enabled_auto_login boolean not null,
     constraint pk_account primary key (account_uuid),
     constraint uk_account_1 unique key (account_id)
 );
@@ -116,6 +117,13 @@ CREATE TABLE IF NOT EXISTS daily_attendance(
     note nvarchar(512),
     work_place_uuid nvarchar(36),
     constraint pk_daily_attendance primary key (account_uuid, target_date)
+);
+
+CREATE TABLE IF NOT EXISTS persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) primary key,
+    token varchar(64) not null,
+    last_used timestamp not null
 );
 
 COMMIT;

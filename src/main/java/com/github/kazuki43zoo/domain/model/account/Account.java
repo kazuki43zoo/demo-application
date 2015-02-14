@@ -20,6 +20,7 @@ public class Account implements Serializable {
     private String firstName;
     private String lastName;
     private boolean enabled;
+    private boolean enabledAutoLogin;
     private AccountPasswordLock passwordLock;
     private List<AccountAuthority> authorities;
     private List<AccountPasswordHistory> passwordHistories;

@@ -28,14 +28,13 @@ import javax.inject.Inject;
 @TransactionTokenCheck("accounts")
 @RequestMapping("accounts")
 @Controller
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AccountsController {
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
-    @lombok.NonNull
-    private final AccountService accountService;
+    @Inject
+    AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(@Validated AccountsSearchQuery query, BindingResult bindingResult,

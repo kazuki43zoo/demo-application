@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -24,17 +25,19 @@ import java.util.List;
 
 @Transactional
 @Service
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class AccountServiceImpl implements AccountService {
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
-    @lombok.NonNull
-    private final AccountRepository accountRepository;
+    @Inject
+    AccountRepository accountRepository;
 
-    @lombok.NonNull
-    private final PasswordSharedService passwordSharedService;
+    @Inject
+    PasswordSharedService passwordSharedService;
+
+    @Inject
+    PersistentTokenRepository persistentTokenRepository;
 
     @Override
     public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
@@ -63,10 +66,11 @@ public final class AccountServiceImpl implements AccountService {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         String rawPassword = inputAccount.getPassword();
-        if (!StringUtils.hasLength(rawPassword)) {
+        if (StringUtils.hasLength(rawPassword)) {
+            passwordSharedService.validatePassword(rawPassword, inputAccount);
+        } else {
             rawPassword = passwordSharedService.generateNewPassword();
         }
-        passwordSharedService.validatePassword(rawPassword, inputAccount);
 
         String encodedPassword = passwordSharedService.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
@@ -93,7 +97,12 @@ public final class AccountServiceImpl implements AccountService {
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
+        currentAccount.setEnabledAutoLogin(inputAccount.isEnabledAutoLogin());
         accountRepository.update(currentAccount);
+
+        if (!currentAccount.isEnabledAutoLogin()) {
+            persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
+        }
 
         return getAccount(accountUuid);
     }
@@ -106,11 +115,6 @@ public final class AccountServiceImpl implements AccountService {
 
         DateTime currentDateTime = dateFactory.newDateTime();
 
-        currentAccount.setAccountId(inputAccount.getAccountId());
-        currentAccount.setFirstName(inputAccount.getFirstName());
-        currentAccount.setLastName(inputAccount.getLastName());
-        currentAccount.setEnabled(inputAccount.isEnabled());
-
         AccountPasswordHistory passwordHistory = null;
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
@@ -121,6 +125,11 @@ public final class AccountServiceImpl implements AccountService {
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
                     currentDateTime);
         }
+        currentAccount.setAccountId(inputAccount.getAccountId());
+        currentAccount.setFirstName(inputAccount.getFirstName());
+        currentAccount.setLastName(inputAccount.getLastName());
+        currentAccount.setEnabled(inputAccount.isEnabled());
+        currentAccount.setEnabledAutoLogin(inputAccount.isEnabledAutoLogin());
         accountRepository.update(currentAccount);
 
         for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
@@ -137,15 +146,23 @@ public final class AccountServiceImpl implements AccountService {
             accountRepository.createPasswordHistory(passwordHistory);
         }
 
+        if (!currentAccount.isEnabledAutoLogin()) {
+            persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
+        }
+
     }
 
     @Override
     public void delete(String accountUuid) {
+        Account account = accountRepository.findOne(accountUuid);
         accountRepository.deleteAuthenticationHistories(accountUuid);
         accountRepository.deletePasswordHistories(accountUuid);
         accountRepository.deletePasswordLock(accountUuid);
         accountRepository.deleteAuthorities(accountUuid);
         accountRepository.delete(accountUuid);
+        if (account != null) {
+            persistentTokenRepository.removeUserTokens(account.getAccountId());
+        }
     }
 
     @Override

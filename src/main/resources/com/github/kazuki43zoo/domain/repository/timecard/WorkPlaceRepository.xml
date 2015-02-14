@@ -26,25 +26,24 @@
 
     <select id="findOne" resultMap="workPlaceResultMap">
         SELECT
-        w.work_place_uuid
-        ,w.work_place_name
-        ,w.work_place_name_ja
-        ,w.base_begin_time
-        ,w.base_finish_time
-        ,w.unit_time
-        ,b.begin_time AS break_begin_time
-        ,b.finish_time AS break_finish_time
-        ,b.note As break_time_note
-        ,b.note_ja As break_time_note_ja
+            w.work_place_uuid
+            ,w.work_place_name
+            ,w.work_place_name_ja
+            ,w.base_begin_time
+            ,w.base_finish_time
+            ,w.unit_time
+            ,b.begin_time AS break_begin_time
+            ,b.finish_time AS break_finish_time
+            ,b.note As break_time_note
+            ,b.note_ja As break_time_note_ja
         FROM
-        work_place w
+            work_place w
         LEFT OUTER JOIN
-        break_time b
-        ON w.work_place_uuid = b.work_place_uuid
+            break_time b ON w.work_place_uuid = b.work_place_uuid
         WHERE
-        w.work_place_uuid = #{workPlaceUuid}
+            w.work_place_uuid = #{workPlaceUuid}
         ORDER BY
-        b.begin_time
+            b.begin_time
     </select>
 
 </mapper>

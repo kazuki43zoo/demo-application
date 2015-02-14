@@ -25,19 +25,18 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @RequestMapping("/timecards/{targetMonth}")
 @RestController
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardRestController {
 
     private static final String TARGET_MONTH_FORMAT = "yyyy-MM";
 
-    @lombok.NonNull
-    private final TimeCardService timeCardService;
+    @Inject
+    TimeCardService timeCardService;
 
-    @lombok.NonNull
-    private final WorkPlaceSharedService workPlaceSharedService;
+    @Inject
+    WorkPlaceSharedService workPlaceSharedService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     /**
      * Retrieve the specified month's time card.

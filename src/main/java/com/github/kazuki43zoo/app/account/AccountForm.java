@@ -33,6 +33,9 @@ public final class AccountForm implements Serializable {
     @NotNull
     private Boolean enabled;
 
+    @NotNull
+    private Boolean enabledAutoLogin;
+
     public void addAuthority(String authority) {
         if (authorities == null) {
             authorities = new ArrayList<>();

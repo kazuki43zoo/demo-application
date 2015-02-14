@@ -13,11 +13,10 @@ import org.terasoluna.gfw.common.message.ResultMessages;
 import javax.inject.Inject;
 
 @Component
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class ApiErrorCreator {
 
-    @lombok.NonNull
-    private final MessageSource messageSource;
+    @Inject
+    MessageSource messageSource;
 
     public ApiError createApiError(WebRequest request, String errorCode,
                                    String defaultErrorMessage, Object... arguments) {

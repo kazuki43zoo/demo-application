@@ -41,10 +41,8 @@
     </mapping>
 
     <mapping>
-        <class-a>com.github.kazuki43zoo.api.timecard.DailyAttendanceResource
-        </class-a>
-        <class-b>com.github.kazuki43zoo.domain.model.timecard.DailyAttendance
-        </class-b>
+        <class-a>com.github.kazuki43zoo.api.timecard.DailyAttendanceResource</class-a>
+        <class-b>com.github.kazuki43zoo.domain.model.timecard.DailyAttendance</class-b>
         <field>
             <a>workPlaceUuid</a>
             <b>workPlace.workPlaceUuid</b>

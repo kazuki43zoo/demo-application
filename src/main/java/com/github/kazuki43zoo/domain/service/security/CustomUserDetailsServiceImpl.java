@@ -16,20 +16,19 @@ import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import javax.inject.Inject;
 
 @Service("customUserDetailsService")
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class CustomUserDetailsServiceImpl implements UserDetailsService {
 
-    @lombok.NonNull
-    private final AccountRepository accountRepository;
+    @Inject
+    AccountRepository accountRepository;
 
-    @lombok.NonNull
-    private final MessageSource messageSource;
+    @Inject
+    MessageSource messageSource;
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
-    @lombok.NonNull
-    private final SecurityConfigs securityConfigs;
+    @Inject
+    SecurityConfigs securityConfigs;
 
     @Transactional(readOnly = true)
     @Override

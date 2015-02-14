@@ -16,17 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 @ControllerAdvice
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class GlobalControllerAdvice {
 
-    @lombok.NonNull
-    private final SecurityConfigs securityConfigs;
+    @Inject
+    SecurityConfigs securityConfigs;
 
-    @lombok.NonNull
-    private final ApplicationConfigs applicationConfigs;
+    @Inject
+    ApplicationConfigs applicationConfigs;
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
     @ModelAttribute
     public SecurityConfigs setUpSecurityConfigs() {

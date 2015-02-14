@@ -7,13 +7,13 @@
 
     <select id="findAll" resultType="SeasonalHoliday">
         SELECT
-        target_date
-        ,holiday_name
-        ,holiday_name_ja
+            target_date
+            ,holiday_name
+            ,holiday_name_ja
         FROM
-        seasonal_holiday
+            seasonal_holiday
         ORDER BY
-        target_date
+            target_date
     </select>
 
 </mapper>

@@ -21,8 +21,8 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2 control-label">Enabled</label>
-
+    <form:label path="enabled"
+                cssClass="col-sm-2 control-label">Enabled</form:label>
     <div class="col-sm-4">
         <c:forEach var="enabledCodeListElement" items="${CL_ENABLED}">
             <div class="radio-inline">
@@ -35,7 +35,22 @@
             <form:errors path="enabled"/>
         </div>
     </div>
-
+</div>
+<div class="form-group">
+    <form:label path="enabledAutoLogin"
+                cssClass="col-sm-2 control-label">Auto Login</form:label>
+    <div class="col-sm-4">
+        <c:forEach var="enabledAutoLoginCodeListElement" items="${CL_ENABLED}">
+            <div class="radio-inline">
+                <form:radiobutton path="enabledAutoLogin"
+                                  value="${enabledAutoLoginCodeListElement.key}"
+                                  label="${enabledAutoLoginCodeListElement.value}"/>
+            </div>
+        </c:forEach>
+        <div>
+            <form:errors path="enabledAutoLogin"/>
+        </div>
+    </div>
 </div>
 <div class="form-group">
     <form:label path="password"

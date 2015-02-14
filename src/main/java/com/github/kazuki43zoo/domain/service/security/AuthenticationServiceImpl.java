@@ -13,29 +13,19 @@ import javax.inject.Inject;
 
 @Transactional
 @Service
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class AuthenticationServiceImpl implements AuthenticationService {
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
-    @lombok.NonNull
-    private final AccountRepository accountRepository;
-
-    @Override
-    public boolean isLogin(Account account) {
-        AccountAuthenticationHistory lastSuccessAuthenticationHistory = accountRepository
-                .findOneLastSuccessAuthenticationHistoryByAccountUuid(account.getAccountUuid());
-        if (lastSuccessAuthenticationHistory == null) {
-            return false;
-        }
-        return lastSuccessAuthenticationHistory.getAuthenticationType() == AuthenticationType.LOGIN;
-    }
+    @Inject
+    AccountRepository accountRepository;
 
     @Override
-    public void createAuthenticationFailureHistory(String failedAccountId,
-                                                   AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
-                                                   String failureReason) {
+    public void createAuthenticationFailureHistory(
+            String failedAccountId,
+            AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
+            String failureReason) {
         Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
@@ -46,14 +36,18 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void createAuthenticationSuccessHistory(Account account,
-                                                   AccountAuthenticationHistory authenticationHistory, AuthenticationType type) {
+    public void createAuthenticationSuccessHistory(
+            Account account,
+            AccountAuthenticationHistory authenticationHistory,
+            AuthenticationType type) {
         createAuthenticationHistory(account, authenticationHistory, type, true);
     }
 
-    private void createAuthenticationHistory(Account account,
-                                             AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
-                                             boolean result) {
+    private void createAuthenticationHistory(
+            Account account,
+            AccountAuthenticationHistory authenticationHistory,
+            AuthenticationType type,
+            boolean result) {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         authenticationHistory.setAccountUuid(account.getAccountUuid());

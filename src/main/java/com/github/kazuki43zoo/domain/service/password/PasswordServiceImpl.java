@@ -15,20 +15,19 @@ import javax.inject.Inject;
 
 @Transactional
 @Service
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class PasswordServiceImpl implements PasswordService {
 
-    @lombok.NonNull
-    private final PasswordEncoder passwordEncoder;
+    @Inject
+    PasswordEncoder passwordEncoder;
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
-    @lombok.NonNull
-    private final AccountRepository accountRepository;
+    @Inject
+    AccountRepository accountRepository;
 
-    @lombok.NonNull
-    private final PasswordSharedService passwordSharedService;
+    @Inject
+    PasswordSharedService passwordSharedService;
 
     @Override
     public Account change(String accountId, String rawOldPassword, String rawNewPassword) {

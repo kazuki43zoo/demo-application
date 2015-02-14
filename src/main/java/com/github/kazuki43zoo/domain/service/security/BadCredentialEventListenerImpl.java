@@ -13,18 +13,17 @@ import javax.inject.Inject;
 
 @Transactional
 @Component
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class BadCredentialEventListenerImpl implements
         ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
-    @lombok.NonNull
-    private final AuthenticationService authenticationService;
+    @Inject
+    AuthenticationService authenticationService;
 
-    @lombok.NonNull
-    private final PasswordSharedService passwordSharedService;
+    @Inject
+    PasswordSharedService passwordSharedService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {

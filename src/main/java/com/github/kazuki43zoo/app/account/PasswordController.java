@@ -26,14 +26,13 @@ import javax.inject.Inject;
 @TransactionTokenCheck("password")
 @RequestMapping("password")
 @Controller
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class PasswordController {
 
-    @lombok.NonNull
-    private final PasswordService passwordService;
+    @Inject
+    PasswordService passwordService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {

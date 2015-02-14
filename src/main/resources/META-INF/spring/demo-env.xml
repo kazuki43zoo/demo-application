@@ -9,16 +9,12 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         ">
 
-    <bean id="dateFactory"
-          class="org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory"/>
+    <bean id="dateFactory" class="org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory"/>
 
-    <bean id="dataSource"
-          class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy"
+    <bean id="dataSource" class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy"
           c:realDataSource-ref="realDataSource"/>
 
-    <bean id="realDataSource"
-          class="org.apache.commons.dbcp2.BasicDataSource"
-          destroy-method="close"
+    <bean id="realDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"
           p:driverClassName="${database.driverClassName}"
           p:url="${database.url}"
           p:username="${database.username}"
@@ -29,8 +25,7 @@
           p:minIdle="${cp.minIdle}"
           p:maxWaitMillis="${cp.maxWaitMillis}"/>
 
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
 
     <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">

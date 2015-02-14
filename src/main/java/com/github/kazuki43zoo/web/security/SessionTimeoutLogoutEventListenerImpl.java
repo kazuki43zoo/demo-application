@@ -23,18 +23,17 @@ import java.util.List;
 @Transactional
 @Component
 @Aspect
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class SessionTimeoutLogoutEventListenerImpl implements
         ApplicationListener<HttpSessionDestroyedEvent> {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()
             .concat(".logout");
 
-    @lombok.NonNull
-    private final AuthenticationService authenticationService;
+    @Inject
+    AuthenticationService authenticationService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     @Override
     public void onApplicationEvent(HttpSessionDestroyedEvent event) {

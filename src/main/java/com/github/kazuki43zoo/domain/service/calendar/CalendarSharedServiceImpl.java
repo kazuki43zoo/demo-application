@@ -16,17 +16,16 @@ import javax.inject.Inject;
 import java.util.*;
 
 @Service
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
-    @lombok.NonNull
-    private final FixedHolidayRepository fixedHolidayRepository;
+    @Inject
+    FixedHolidayRepository fixedHolidayRepository;
 
-    @lombok.NonNull
-    private final HappyMondayHolidayRepository happyMondayHolidayRepository;
+    @Inject
+    HappyMondayHolidayRepository happyMondayHolidayRepository;
 
-    @lombok.NonNull
-    private final SeasonalHolidayRepository seasonalHolidayRepository;
+    @Inject
+    SeasonalHolidayRepository seasonalHolidayRepository;
 
     private Map<Integer, List<FixedHoliday>> fixedHolodaiesMapping;
 

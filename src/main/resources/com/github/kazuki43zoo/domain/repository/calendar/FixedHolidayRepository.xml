@@ -7,18 +7,18 @@
 
     <select id="findAll" resultType="FixedHoliday">
         SELECT
-        target_month
-        ,target_day
-        ,holiday_name
-        ,holiday_name_ja
-        ,transferred_later_days
-        ,begin_year
-        ,end_year
+            target_month
+            ,target_day
+            ,holiday_name
+            ,holiday_name_ja
+            ,transferred_later_days
+            ,begin_year
+            ,end_year
         FROM
-        fixed_holiday
+            fixed_holiday
         ORDER BY
-        target_month
-        ,target_day
+            target_month
+            ,target_day
     </select>
 
 </mapper>

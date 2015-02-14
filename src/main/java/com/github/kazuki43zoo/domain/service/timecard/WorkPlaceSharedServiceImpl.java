@@ -18,15 +18,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
-    @lombok.NonNull
-    private final WorkPlaceRepository workPlaceRepository;
-
     private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
 
     @Inject
-    public WorkPlaceSharedServiceImpl(@Named("workPlaceBatchModeRepository") WorkPlaceRepository workPlaceRepository) {
-        this.workPlaceRepository = workPlaceRepository;
-    }
+    @Named("workPlaceBatchModeRepository")
+    WorkPlaceRepository workPlaceRepository;
 
     @PostConstruct
     public void loadWorkPlaceOfMainOffice() {

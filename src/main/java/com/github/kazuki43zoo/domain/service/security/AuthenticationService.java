@@ -13,6 +13,4 @@ public interface AuthenticationService {
                                             AccountAuthenticationHistory authenticationHistory, AuthenticationType type,
                                             String failureReason);
 
-    boolean isLogin(Account account);
-
 }

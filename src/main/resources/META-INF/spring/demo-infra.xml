@@ -11,17 +11,14 @@
 
     <import resource="classpath:META-INF/spring/demo-env.xml"/>
 
-    <bean id="jdbcTemplate"
-          class="org.springframework.jdbc.core.JdbcTemplate"
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
           p:dataSource-ref="dataSource"
           p:fetchSize="100"/>
 
-    <bean id="jdbcOperations"
-          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"
+    <bean id="jdbcOperations" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"
           c:classicJdbcTemplate-ref="jdbcTemplate"/>
 
-    <bean id="sqlSessionFactory"
-          class="org.mybatis.spring.SqlSessionFactoryBean"
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:/META-INF/mybatis/mybatis-config.xml"/>
 
@@ -30,19 +27,10 @@
             template-ref="sqlSessionTemplateForBatch"
             name-generator="com.github.kazuki43zoo.infra.mybatis.spring.BatchModeRepositoryBeanNameGenerator"/>
 
-    <bean id="sqlSessionTemplateForBatch"
-          class="org.mybatis.spring.SqlSessionTemplate"
+    <bean id="sqlSessionTemplateForBatch" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="getExecutorType"
           c:sqlSessionFactory-ref="sqlSessionFactory"
           c:executorType="BATCH"/>
 
-    <mybatis:scan
-            base-package="com.github.kazuki43zoo.domain.repository"
-            template-ref="sqlSessionTemplateForReuse"/>
-
-    <bean id="sqlSessionTemplateForReuse"
-          class="org.mybatis.spring.SqlSessionTemplate"
-          c:sqlSessionFactory-ref="sqlSessionFactory"
-          c:executorType="REUSE"/>
-
+    <mybatis:scan base-package="com.github.kazuki43zoo.domain.repository"/>
 
 </beans>

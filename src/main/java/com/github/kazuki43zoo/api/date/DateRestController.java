@@ -11,11 +11,10 @@ import javax.inject.Inject;
 
 @RequestMapping("dates")
 @RestController
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class DateRestController {
 
-    @lombok.NonNull
-    private final JodaTimeDateFactory dateFactory;
+    @Inject
+    JodaTimeDateFactory dateFactory;
 
     @RequestMapping(value = "currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

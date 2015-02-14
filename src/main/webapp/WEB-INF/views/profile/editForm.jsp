@@ -26,6 +26,22 @@
         </div>
     </div>
     <div class="form-group">
+        <form:label path="enabledAutoLogin"
+                    cssClass="col-sm-2 control-label">Auto Login</form:label>
+        <div class="col-sm-4">
+            <c:forEach var="enabledAutoLoginCodeListElement" items="${CL_ENABLED}">
+                <div class="radio-inline">
+                    <form:radiobutton path="enabledAutoLogin"
+                                      value="${enabledAutoLoginCodeListElement.key}"
+                                      label="${enabledAutoLoginCodeListElement.value}"/>
+                </div>
+            </c:forEach>
+            <div>
+                <form:errors path="enabledAutoLogin"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <button class="btn btn-default" name="_method" value="patch">
                 <span class="glyphicon glyphicon-floppy-save"></span> Save

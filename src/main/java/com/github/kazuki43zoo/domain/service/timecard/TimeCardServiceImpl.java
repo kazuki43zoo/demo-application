@@ -18,21 +18,16 @@ import java.util.Map;
 @Service
 public final class TimeCardServiceImpl implements TimeCardService {
 
-    @lombok.NonNull
-    private final WorkPlaceSharedService workPlaceSharedService;
-
-    @lombok.NonNull
-    private final CalendarSharedService calendarSharedService;
-
-    @lombok.NonNull
-    private final TimeCardRepository timeCardRepository;
+    @Inject
+    WorkPlaceSharedService workPlaceSharedService;
 
     @Inject
-    public TimeCardServiceImpl(WorkPlaceSharedService workPlaceSharedService, CalendarSharedService calendarSharedService, @Named("timeCardBatchModeRepository") TimeCardRepository timeCardRepository) {
-        this.workPlaceSharedService = workPlaceSharedService;
-        this.calendarSharedService = calendarSharedService;
-        this.timeCardRepository = timeCardRepository;
-    }
+    CalendarSharedService calendarSharedService;
+
+    @Inject
+    @Named("timeCardBatchModeRepository")
+    TimeCardRepository timeCardRepository;
+
 
     @Override
     public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {

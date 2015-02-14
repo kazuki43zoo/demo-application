@@ -24,14 +24,13 @@ import javax.inject.Inject;
 @TransactionTokenCheck("profile")
 @RequestMapping("profile")
 @Controller
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class ProfileController {
 
-    @lombok.NonNull
-    private final AccountService accountService;
+    @Inject
+    AccountService accountService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public String show(@CurrentUser CustomUserDetails authenticatedUser, Model model) {

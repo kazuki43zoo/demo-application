@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.0.0.RC5</version>
+        <version>5.0.0.RC7</version>
     </parent>
 
     <repositories>
@@ -203,4 +203,5 @@
             </build>
         </profile>
     </profiles>
+
 </project>

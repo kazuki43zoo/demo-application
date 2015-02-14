@@ -14,17 +14,16 @@ import javax.inject.Inject;
 
 @RequestMapping("timecards/calculate")
 @Controller
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class TimeCardCalculateController {
 
-    @lombok.NonNull
-    private final WorkPlaceSharedService workPlaceSharedService;
+    @Inject
+    WorkPlaceSharedService workPlaceSharedService;
 
-    @lombok.NonNull
-    private final CalendarSharedService calendarSharedService;
+    @Inject
+    CalendarSharedService calendarSharedService;
 
-    @lombok.NonNull
-    private final Mapper beanMapper;
+    @Inject
+    Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

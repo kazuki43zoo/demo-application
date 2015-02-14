@@ -21,14 +21,13 @@ import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 import javax.inject.Inject;
 
 @ControllerAdvice
-@lombok.RequiredArgsConstructor(onConstructor = @__(@Inject))
 public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @lombok.NonNull
-    private final ApiErrorCreator apiErrorCreator;
+    @Inject
+    ApiErrorCreator apiErrorCreator;
 
-    @lombok.NonNull
-    private final ExceptionCodeResolver exceptionCodeResolver;
+    @Inject
+    ExceptionCodeResolver exceptionCodeResolver;
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,

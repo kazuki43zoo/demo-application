@@ -3,6 +3,7 @@ package com.github.kazuki43zoo.domain.service.security;
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthority;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

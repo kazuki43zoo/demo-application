@@ -4,6 +4,7 @@ import com.github.kazuki43zoo.core.validation.AccountId;
 import com.github.kazuki43zoo.core.validation.FirstName;
 import com.github.kazuki43zoo.core.validation.LastName;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @lombok.Data
@@ -19,5 +20,8 @@ public final class ProfileForm implements Serializable {
 
     @LastName
     private String lastName;
+
+    @NotNull
+    private Boolean enabledAutoLogin;
 
 }
