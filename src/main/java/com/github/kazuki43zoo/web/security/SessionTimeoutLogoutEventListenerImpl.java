@@ -43,10 +43,10 @@ public final class SessionTimeoutLogoutEventListenerImpl implements
         }
         List<SecurityContext> securityContexts = event.getSecurityContexts();
         for (SecurityContext securityContext : securityContexts) {
-            CustomUserDetails userDetails = (CustomUserDetails) securityContext.getAuthentication()
-                    .getPrincipal();
-            AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext
-                    .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+            CustomUserDetails userDetails =
+                    CustomUserDetails.getInstance(securityContext.getAuthentication());
+            AccountAuthenticationHistory authenticationHistory =
+                    beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
             authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
                     authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
         }

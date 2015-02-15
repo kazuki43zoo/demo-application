@@ -1,5 +1,7 @@
 package com.github.kazuki43zoo.domain.service.security;
 
+import org.springframework.security.core.Authentication;
+
 import java.io.Serializable;
 
 @lombok.Data
@@ -13,5 +15,12 @@ public final class CustomAuthenticationDetails implements Serializable {
     private final String agent;
     private final String trackingId;
     private String sessionId;
+
+    public static CustomAuthenticationDetails getInstance(Authentication authentication) {
+        CustomAuthenticationDetails authenticationDetails = (CustomAuthenticationDetails) authentication
+                .getDetails();
+        return authenticationDetails;
+
+    }
 
 }

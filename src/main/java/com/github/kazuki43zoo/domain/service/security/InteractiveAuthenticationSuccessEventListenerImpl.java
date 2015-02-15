@@ -28,15 +28,12 @@ public final class InteractiveAuthenticationSuccessEventListenerImpl implements
 
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
-        CustomUserDetails userDetails = (CustomUserDetails) event.getAuthentication()
-                .getPrincipal();
+        CustomUserDetails userDetails = CustomUserDetails.getInstance(event.getAuthentication());
 
         passwordSharedService.resetPasswordLock(userDetails.getAccount());
 
-        CustomAuthenticationDetails authenticationDetails = (CustomAuthenticationDetails) event
-                .getAuthentication().getDetails();
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails,
-                AccountAuthenticationHistory.class);
+        AccountAuthenticationHistory authenticationHistory =
+                beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         AuthenticationType authenticationType;
         if (event.getAuthentication() instanceof RememberMeAuthenticationToken) {
             authenticationType = AuthenticationType.AUTO_LOGIN;

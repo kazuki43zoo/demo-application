@@ -64,18 +64,6 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
         return handleBindingResult(ex, ex.getBindingResult(), headers, status, request);
     }
 
-    private ResponseEntity<Object> handleBindingResult(
-            Exception ex,
-            BindingResult bindingResult,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode,
-                bindingResult, ex.getMessage());
-        return handleExceptionInternal(ex, apiError, headers, status, request);
-    }
-
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(
             HttpMessageNotReadableException ex,
@@ -104,17 +92,6 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
         return handleResultMessagesNotificationException(ex, null, HttpStatus.CONFLICT, request);
     }
 
-    private ResponseEntity<Object> handleResultMessagesNotificationException(
-            ResultMessagesNotificationException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode,
-                ex.getResultMessages(), ex.getMessage());
-        return handleExceptionInternal(ex, apiError, headers, status, request);
-    }
-
     @ExceptionHandler({OptimisticLockingFailureException.class,
             PessimisticLockingFailureException.class})
     public ResponseEntity<Object> handleLockingFailureException(
@@ -128,6 +105,30 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
             Exception ex,
             WebRequest request) {
         return handleExceptionInternal(ex, null, null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+
+    private ResponseEntity<Object> handleBindingResult(
+            Exception ex,
+            BindingResult bindingResult,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode,
+                bindingResult, ex.getMessage());
+        return handleExceptionInternal(ex, apiError, headers, status, request);
+    }
+
+    private ResponseEntity<Object> handleResultMessagesNotificationException(
+            ResultMessagesNotificationException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
+        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode,
+                ex.getResultMessages(), ex.getMessage());
+        return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
 }

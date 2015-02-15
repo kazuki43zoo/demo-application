@@ -1,6 +1,7 @@
 package com.github.kazuki43zoo.app.account;
 
 import com.github.kazuki43zoo.app.auth.LoginForm;
+import com.github.kazuki43zoo.app.auth.LoginHelper;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.Account;
@@ -30,6 +31,9 @@ public class PasswordController {
 
     @Inject
     PasswordService passwordService;
+
+    @Inject
+    LoginHelper loginHelper;
 
     @Inject
     Mapper beanMapper;
@@ -70,7 +74,7 @@ public class PasswordController {
             return showChangeForm();
         }
 
-        Account changedAccount = null;
+        Account changedAccount;
         try {
             String accountId;
             if (currentUser != null) {
@@ -124,12 +128,7 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        Account account = currentUser.getAccount();
-        boolean enabledAutoLogin = false;
-        if (account != null) {
-            enabledAutoLogin = account.isEnabledAutoLogin();
-        }
-        return "forward:/auth/authenticate?remember_me=" + enabledAutoLogin;
+        return loginHelper.generateAuthenticationProcessingUrl(form.getAccountId());
     }
 
 }

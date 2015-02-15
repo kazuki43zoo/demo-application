@@ -27,10 +27,10 @@ public final class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccess
             HttpServletRequest request,
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        CustomUserDetails userDetails = CustomUserDetails.getInstance(authentication);
 
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(
-                authentication.getDetails(), AccountAuthenticationHistory.class);
+        AccountAuthenticationHistory authenticationHistory =
+                beanMapper.map(authentication.getDetails(), AccountAuthenticationHistory.class);
 
         authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
                 authenticationHistory, AuthenticationType.LOGOUT);

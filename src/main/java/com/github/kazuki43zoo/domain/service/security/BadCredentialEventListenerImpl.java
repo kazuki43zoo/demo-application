@@ -31,8 +31,8 @@ public final class BadCredentialEventListenerImpl implements
 
         passwordSharedService.countUpPasswordFailureCount(failedAccountId);
 
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(event
-                .getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        AccountAuthenticationHistory authenticationHistory =
+                beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         authenticationService.createAuthenticationFailureHistory(failedAccountId,
                 authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
     }

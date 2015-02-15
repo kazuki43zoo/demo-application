@@ -49,9 +49,10 @@ public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenti
         if (exception instanceof SessionAuthenticationException) {
             String accountId = request.getParameter(securityConfigs.getUsernameParameter());
             String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
-            CustomAuthenticationDetails authenticationDetails = authenticationDetailsSource.buildDetails(request);
-            AccountAuthenticationHistory authenticationHistory = beanMapper.map(
-                    authenticationDetails, AccountAuthenticationHistory.class);
+            CustomAuthenticationDetails authenticationDetails =
+                    authenticationDetailsSource.buildDetails(request);
+            AccountAuthenticationHistory authenticationHistory =
+                    beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
             authenticationService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
         }
         super.onAuthenticationFailure(request, response, exception);
