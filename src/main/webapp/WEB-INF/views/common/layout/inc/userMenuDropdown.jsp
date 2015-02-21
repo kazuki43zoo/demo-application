@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav">
     <li class="dropdown">
         <a id="userMenuLink"
-           href="#"
+           href="javascript:void(0);"
            class="dropdown-toggle"
            data-toggle="dropdown">
             <span class="glyphicon glyphicon-user"></span>
@@ -42,3 +42,4 @@
 </ul>
 
 <form:form id="logoutForm" action="${contextPath}/auth/logout" class="sr-only"/>
+

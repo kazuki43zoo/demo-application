@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav">
     <li class="dropdown">
         <a id="languageSwitchLink"
-           href="#"
+           href="javascript:void(0);"
            class="dropdown-toggle"
            data-toggle="dropdown">
             <spring:message code="language"/>
