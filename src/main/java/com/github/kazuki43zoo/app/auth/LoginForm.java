@@ -6,6 +6,7 @@ import java.io.Serializable;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
+@lombok.ToString(exclude = "password")
 public final class LoginForm implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,10 +6,14 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
        ">
 
     <context:property-placeholder
@@ -18,11 +22,13 @@
     <bean id="passwordEncoder"
           class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-    <bean id="beanMapper" class="org.dozer.spring.DozerBeanMapperFactoryBean"
+    <bean id="beanMapper"
+          class="org.dozer.spring.DozerBeanMapperFactoryBean"
           p:mappingFiles="classpath*:/META-INF/dozer/**/dozer-*.xml"/>
 
     <!-- Message -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <util:list>
                 <value>classpath:i18n/application-messages</value>
@@ -31,7 +37,8 @@
     </bean>
 
     <!-- Exception Code Resolver. -->
-    <bean id="exceptionCodeResolver" class="org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver"
+    <bean id="exceptionCodeResolver"
+          class="org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver"
           p:defaultExceptionCode="e.demo.fw.9001">
         <property name="exceptionMappings">
             <util:map>
@@ -72,16 +79,18 @@
     </bean>
 
     <!-- Exception Logger. -->
-    <bean id="exceptionLogger" class="org.terasoluna.gfw.common.exception.ExceptionLogger"
+    <bean id="exceptionLogger"
+          class="org.terasoluna.gfw.common.exception.ExceptionLogger"
           p:exceptionCodeResolver-ref="exceptionCodeResolver"/>
 
     <!-- Filter. -->
-    <bean id="exceptionLoggingFilter" class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter"
+    <bean id="exceptionLoggingFilter"
+          class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter"
           p:exceptionLogger-ref="exceptionLogger"/>
 
     <context:component-scan base-package="com.github.kazuki43zoo.core"/>
 
-    <aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy />
 
     <import resource="classpath:/META-INF/spring/demo-domain.xml"/>
 

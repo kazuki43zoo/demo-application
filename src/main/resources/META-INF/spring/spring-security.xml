@@ -9,12 +9,18 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
        ">
 
     <sec:http pattern="/resources/**"
@@ -115,23 +121,24 @@
     <!-- Scan Components -->
     <context:component-scan base-package="com.github.kazuki43zoo.web.security"/>
 
-    <bean id="http403ForbiddenEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+    <bean id="http403ForbiddenEntryPoint"
+          class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
     <!-- Remember Me Service -->
-    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
-        <constructor-arg index="0" value="demo-application-tk" />
-        <constructor-arg index="1" ref="customUserDetailsService" />
-        <constructor-arg index="2" ref="rememberMeTokenRepository" />
-        <property name="authenticationDetailsSource" ref="customAuthenticationDetailsSource" />
-        <property name="parameter" value="remember_me" />
-        <property name="cookieName" value="remember_me" />
-        <property name="tokenValiditySeconds" value="#{30 * 24 * 60 * 60}" />
-    </bean>
+    <bean id="rememberMeServices"
+          class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"
+          c:key="demo-application-tk"
+          c:userDetailsService-ref="customUserDetailsService"
+          c:tokenRepository-ref="rememberMeTokenRepository"
+          p:authenticationDetailsSource-ref="customAuthenticationDetailsSource"
+          p:parameter="remember_me"
+          p:cookieName="remember_me"
+          p:tokenValiditySeconds="#{30 * 24 * 60 * 60}" />
 
     <!-- Remember Me Token Repository -->
-    <bean id="rememberMeTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <bean id="rememberMeTokenRepository"
+          class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"
+          p:dataSource-ref="dataSource" />
     <tx:advice id="persistentTokenRepositoryTxAdvice">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>
@@ -147,7 +154,8 @@
     </aop:config>
 
     <!-- AccessDeniedHandler -->
-    <bean id="customAccessDeniedHandler" class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
+    <bean id="customAccessDeniedHandler"
+          class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
         <constructor-arg index="0">
             <util:map>
                 <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
@@ -163,7 +171,8 @@
     </bean>
 
     <!-- AuthenticationFailureHandler -->
-    <bean id="customAuthenticationFailureHandler" class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
+    <bean id="customAuthenticationFailureHandler"
+          class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
           p:useForward="true"
           p:defaultFailureUrl="/auth/login/error">
         <property name="exceptionMappings">
@@ -175,7 +184,8 @@
     </bean>
 
     <!-- LogoutSuccessHandler -->
-    <bean id="customLogoutSuccessHandler" class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandlerImpl"
+    <bean id="customLogoutSuccessHandler"
+          class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandlerImpl"
           p:defaultTargetUrl="/auth/logout?success" />
 
     <!-- CsrfRequestMatcher -->
@@ -184,13 +194,13 @@
         <constructor-arg>
             <util:list>
                 <bean class="org.springframework.security.web.csrf.CsrfFilter$DefaultRequiresCsrfMatcher"/>
-                <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher">
-                    <constructor-arg ref="csrfExclusionPathMatcher" />
-                </bean>
+                <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher"
+                      c:requestMatcher-ref="csrfExclusionPathMatcher" />
             </util:list>
         </constructor-arg>
     </bean>
-    <bean id="csrfExclusionPathMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+    <bean id="csrfExclusionPathMatcher"
+          class="org.springframework.security.web.util.matcher.OrRequestMatcher">
         <constructor-arg>
             <util:list>
                 <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
@@ -200,6 +210,7 @@
     </bean>
 
     <!-- UserIdMDCPutFilter -->
-    <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>
+    <bean id="userIdMDCPutFilter"
+          class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>
 
 </beans>

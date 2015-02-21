@@ -9,6 +9,7 @@ import java.util.List;
 
 @Confirm(field = "password")
 @lombok.Data
+@lombok.ToString(exclude = {"password", "confirmPassword"})
 public final class AccountForm implements Serializable {
 
     private static final long serialVersionUID = 1L;

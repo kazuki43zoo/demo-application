@@ -22,7 +22,8 @@
         </property>
     </bean>
 
-    <bean id="hateoasPageableHandlerMethodArgumentResolver" class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver"/>
+    <bean id="hateoasPageableHandlerMethodArgumentResolver"
+          class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">

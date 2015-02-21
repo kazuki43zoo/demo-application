@@ -4,9 +4,9 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="baseLayout"
-                template="/WEB-INF/views/common/layout/template.jsp">
-        <put-attribute name="title" value="Demo Application"/>
+    <definition name="baseLayout" template="/WEB-INF/views/common/layout/template.jsp">
+        <put-attribute name="title"
+                       value="Demo Application"/>
         <put-attribute name="topNavbar"
                        value="/WEB-INF/views/common/layout/topNavbar.jsp"/>
         <put-attribute name="leftNavbar"
@@ -18,23 +18,32 @@
     <definition name="auth/*" extends="baseLayout">
         <put-attribute name="topNavbar"
                        value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp"/>
-        <put-attribute name="title" value="title.auth.{1}"/>
-        <put-attribute name="content" value="/WEB-INF/views/auth/{1}.jsp"/>
-        <put-attribute name="usecaseName" value="auth"/>
+        <put-attribute name="title"
+                       value="title.auth.{1}"/>
+        <put-attribute name="content"
+                       value="/WEB-INF/views/auth/{1}.jsp"/>
+        <put-attribute name="usecaseName"
+                       value="auth"/>
     </definition>
 
     <definition name="password/*" extends="baseLayout">
         <put-attribute name="topNavbar"
                        value="/WEB-INF/views/common/layout/topNavbarNoLoginForm.jsp"/>
-        <put-attribute name="title" value="title.password.{1}"/>
-        <put-attribute name="content" value="/WEB-INF/views/password/{1}.jsp"/>
-        <put-attribute name="usecaseName" value="password"/>
+        <put-attribute name="title"
+                       value="title.password.{1}"/>
+        <put-attribute name="content"
+                       value="/WEB-INF/views/password/{1}.jsp"/>
+        <put-attribute name="usecaseName"
+                       value="password"/>
     </definition>
 
     <definition name="*/*" extends="baseLayout">
-        <put-attribute name="title" value="title.{1}.{2}"/>
-        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
-        <put-attribute name="usecaseName" value="{1}"/>
+        <put-attribute name="title"
+                       value="title.{1}.{2}"/>
+        <put-attribute name="content"
+                       value="/WEB-INF/views/{1}/{2}.jsp"/>
+        <put-attribute name="usecaseName"
+                       value="{1}"/>
     </definition>
 
 </tiles-definitions>

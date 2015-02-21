@@ -43,8 +43,8 @@ public final class GlobalControllerAdvice {
     }
 
     @ModelAttribute("locale")
-    public Locale setUpLocale(HttpServletRequest req) {
-        return RequestContextUtils.getLocale(req);
+    public Locale setUpLocale(Locale locale) {
+        return locale;
     }
 
     @InitBinder

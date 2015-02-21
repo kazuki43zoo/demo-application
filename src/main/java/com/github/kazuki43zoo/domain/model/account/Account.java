@@ -10,6 +10,7 @@ import java.util.List;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
+@lombok.ToString(exclude = "password")
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;

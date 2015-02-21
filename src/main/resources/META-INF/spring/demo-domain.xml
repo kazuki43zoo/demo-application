@@ -6,10 +6,14 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
        ">
 
     <import resource="classpath:META-INF/spring/demo-infra.xml"/>
@@ -21,7 +25,8 @@
     <context:component-scan base-package="com.github.kazuki43zoo.domain"/>
 
     <!-- AOP. -->
-    <bean id="resultMessagesLoggingInterceptor" class="org.terasoluna.gfw.common.exception.ResultMessagesLoggingInterceptor"
+    <bean id="resultMessagesLoggingInterceptor"
+          class="org.terasoluna.gfw.common.exception.ResultMessagesLoggingInterceptor"
           p:exceptionLogger-ref="exceptionLogger"/>
     <aop:config>
         <aop:advisor

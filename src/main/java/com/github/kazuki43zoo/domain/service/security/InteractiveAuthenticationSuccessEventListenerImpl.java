@@ -40,6 +40,7 @@ public final class InteractiveAuthenticationSuccessEventListenerImpl implements
         } else {
             authenticationType = AuthenticationType.LOGIN;
         }
+
         authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
                 authenticationHistory, authenticationType);
     }

@@ -13,8 +13,9 @@ public interface AccountRepository {
 
     long countByCriteria(@Param("criteria") AccountsSearchCriteria criteria);
 
-    List<Account> findAllByCriteria(@Param("criteria") AccountsSearchCriteria criteria,
-                                    @Param("pageParams") PageParams pageParams);
+    List<Account> findAllByCriteria(
+            @Param("criteria") AccountsSearchCriteria criteria,
+            @Param("pageParams") PageParams pageParams);
 
     Account findOneByAccountId(String accountId);
 
@@ -28,8 +29,9 @@ public interface AccountRepository {
 
     boolean createAuthority(AccountAuthority authority);
 
-    boolean deleteAuthority(@Param("accountUuid") String accountUuid,
-                            @Param("authority") String authority);
+    boolean deleteAuthority(
+            @Param("accountUuid") String accountUuid,
+            @Param("authority") String authority);
 
     int deleteAuthorities(String accountUuid);
 
@@ -45,7 +47,6 @@ public interface AccountRepository {
 
     int deleteAuthenticationHistories(String accountUuid);
 
-    AccountAuthenticationHistory findOneLastSuccessAuthenticationHistoryByAccountUuid(
-            String accountUuid);
+    AccountAuthenticationHistory findOneLastSuccessAuthenticationHistoryByAccountUuid(String accountUuid);
 
 }

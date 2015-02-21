@@ -6,18 +6,21 @@ import org.apache.ibatis.annotations.Param;
 import org.joda.time.LocalDate;
 
 public interface TimeCardRepository {
-    TimeCard findOne(@Param("accountUuid") String accountUuid,
-                     @Param("targetMonth") LocalDate targetMonth);
+    TimeCard findOne(
+            @Param("accountUuid") String accountUuid,
+            @Param("targetMonth") LocalDate targetMonth);
 
     boolean create(TimeCard timeCard);
 
     boolean update(TimeCard timeCard);
 
-    boolean delete(@Param("accountUuid") String accountUuid,
-                   @Param("targetMonth") LocalDate targetMonth);
+    boolean delete(
+            @Param("accountUuid") String accountUuid,
+            @Param("targetMonth") LocalDate targetMonth);
 
-    DailyAttendance findOneDailyAttendance(@Param("accountUuid") String accountUuid,
-                                           @Param("targetDate") LocalDate targetDate);
+    DailyAttendance findOneDailyAttendance(
+            @Param("accountUuid") String accountUuid,
+            @Param("targetDate") LocalDate targetDate);
 
     boolean createDailyAttendance(DailyAttendance dailyAttendance);
 

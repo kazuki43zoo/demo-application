@@ -20,7 +20,6 @@ public final class CustomAuthenticationDetails implements Serializable {
         CustomAuthenticationDetails authenticationDetails = (CustomAuthenticationDetails) authentication
                 .getDetails();
         return authenticationDetails;
-
     }
 
 }

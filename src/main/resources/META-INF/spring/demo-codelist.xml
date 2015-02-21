@@ -4,11 +4,19 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
        ">
 
-    <bean id="CL_AUTHORITY" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="abstractJdbcCodeList"
+          class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
+          abstract="true"
+          p:jdbcTemplate-ref="jdbcTemplate" />
+
+    <bean id="CL_AUTHORITY"
+          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="ROLE_ADMIN" value="Administrators"/>
@@ -20,7 +28,8 @@
         </property>
     </bean>
 
-    <bean id="CL_ENABLED" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_ENABLED"
+          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="true" value="Enable"/>
@@ -29,7 +38,8 @@
         </property>
     </bean>
 
-    <bean id="CL_AUTHENTICATION_RESULT" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_AUTHENTICATION_RESULT"
+          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="true" value="Success"/>
@@ -38,7 +48,8 @@
         </property>
     </bean>
 
-    <bean id="CL_ACCOUNT_SEARCH_TARGET" class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
+    <bean id="CL_ACCOUNT_SEARCH_TARGET"
+          class="org.terasoluna.gfw.common.codelist.SimpleMapCodeList">
         <property name="map">
             <util:map>
                 <entry key="accountId" value="Account ID"/>
@@ -47,7 +58,8 @@
         </property>
     </bean>
 
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK"
+          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rows">
             <util:map>
                 <entry key="en">
@@ -68,7 +80,8 @@
         </property>
     </bean>
 
-    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_ATTENDANCE_SPECIAL_WORK_DISP"
+          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rows">
             <util:map>
                 <entry key="en">
@@ -89,22 +102,21 @@
         </property>
     </bean>
 
-    <bean id="CL_WORK_PLACE" class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
+    <bean id="CL_WORK_PLACE"
+          class="org.terasoluna.gfw.common.codelist.i18n.SimpleI18nCodeList">
         <property name="rowsByCodeList">
             <util:map>
                 <entry key="en">
-                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
-                          p:jdbcTemplate-ref="jdbcTemplate"
+                    <bean parent="abstractJdbcCodeList"
                           p:labelColumn="work_place_name"
                           p:querySql="SELECT work_place_uuid, work_place_name FROM work_place ORDER BY display_order, work_place_name"
                           p:valueColumn="work_place_uuid"/>
                 </entry>
                 <entry key="ja">
-                    <bean class="org.terasoluna.gfw.common.codelist.JdbcCodeList"
+                    <bean parent="abstractJdbcCodeList"
                           p:valueColumn="work_place_uuid"
                           p:labelColumn="work_place_name_ja"
-                          p:querySql="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name"
-                          p:jdbcTemplate-ref="jdbcTemplate"/>
+                          p:querySql="SELECT work_place_uuid, work_place_name_ja FROM work_place ORDER BY display_order, work_place_name" />
                 </entry>
             </util:map>
         </property>
