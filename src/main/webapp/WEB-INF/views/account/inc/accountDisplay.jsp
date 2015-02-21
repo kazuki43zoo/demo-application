@@ -26,7 +26,7 @@
                 <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
                     <span class="glyphicon glyphicon-lock"></span>
                 </c:if>
-                    ${f:h(account.passwordLock.failureCount)}
+                ${f:h(account.passwordLock.failureCount)}
             </div>
         </div>
     </c:if>
@@ -44,10 +44,11 @@
         <span class="form-control">***************</span>
     </div>
     <div class="col-sm-5">
-        <span class="form-control">Modified at : <joda:format
-                value="${account.passwordModifiedAt}"
-                pattern="${dateTimeFormat}"
-                dateTimeZone="${timeZoneFormat}"/></span>
+        <span class="form-control">
+            Modified at : <joda:format value="${account.passwordModifiedAt}"
+                                       pattern="${dateTimeFormat}"
+                                       dateTimeZone="${timeZoneFormat}"/>
+        </span>
     </div>
 </div>
 
