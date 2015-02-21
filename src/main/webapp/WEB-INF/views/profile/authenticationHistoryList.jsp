@@ -23,9 +23,11 @@
         <c:set var="strAuthenticationResult">${authenticationHistory.authenticationResult}</c:set>
         <tr>
             <td>${f:h(rowStatus.count)}</td>
-            <td><joda:format value="${authenticationHistory.createdAt}"
+            <td>
+                <joda:format value="${authenticationHistory.createdAt}"
                              pattern="${dateTimeFormat}"
-                             dateTimeZone="${timeZoneFormat}"/></td>
+                             dateTimeZone="${timeZoneFormat}"/>
+            </td>
             <td>${f:h(authenticationHistory.authenticationType)}</td>
             <td>${f:h(CL_AUTHENTICATION_RESULT[strAuthenticationResult])}</td>
             <td>${f:h(authenticationHistory.failureReason)}</td>
