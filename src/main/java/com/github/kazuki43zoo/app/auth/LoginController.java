@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Inject
-    LoginHelper loginHelper;
+    LoginSharedHelper loginSharedHelper;
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return showLoginForm();
         }
-        return loginHelper.generateAuthenticationProcessingUrl(form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getAccountId());
     }
 
     @RequestMapping(value = "error", method = RequestMethod.POST)

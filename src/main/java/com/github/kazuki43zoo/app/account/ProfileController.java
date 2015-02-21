@@ -68,7 +68,7 @@ public class ProfileController {
         Account inputAccount = beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(authenticatedUser.getAccount().getAccountUuid());
 
-        Account changedAccount = null;
+        Account changedAccount;
         try {
             changedAccount = accountService.changeProfile(inputAccount);
         } catch (DuplicateKeyException e) {
@@ -87,13 +87,6 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    public String editRedo(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            Model model) {
-        model.addAttribute(authenticatedUser.getAccount());
-        return "profile/editForm";
-    }
-
     @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
     public String showAuthenticationHistoryList(
             @CurrentUser CustomUserDetails authenticatedUser,
@@ -103,4 +96,12 @@ public class ProfileController {
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
     }
+
+    private String editRedo(
+            @CurrentUser CustomUserDetails authenticatedUser,
+            Model model) {
+        model.addAttribute(authenticatedUser.getAccount());
+        return "profile/editForm";
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.github.kazuki43zoo.app.account;
 
 import com.github.kazuki43zoo.app.auth.LoginForm;
-import com.github.kazuki43zoo.app.auth.LoginHelper;
+import com.github.kazuki43zoo.app.auth.LoginSharedHelper;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.Account;
@@ -33,7 +33,7 @@ public class PasswordController {
     PasswordService passwordService;
 
     @Inject
-    LoginHelper loginHelper;
+    LoginSharedHelper loginSharedHelper;
 
     @Inject
     Mapper beanMapper;
@@ -128,7 +128,7 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        return loginHelper.generateAuthenticationProcessingUrl(form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getAccountId());
     }
 
 }

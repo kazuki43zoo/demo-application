@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 @Component
-public class LoginHelper {
+public class LoginSharedHelper {
 
     @Inject
     AccountSharedService accountSharedService;

@@ -13,7 +13,7 @@
                 <li>
                     <a id="profileUserMenuLink" href="${contextPath}/profile">
                         <span class="glyphicon glyphicon-edit"></span>
-                        <spring:message code="userMenu.editProfile"/
+                        <spring:message code="userMenu.editProfile" />
                     </a>
                 </li>
                 <li>

@@ -42,7 +42,7 @@ public final class GlobalControllerAdvice {
         return dateFactory.newDateTime();
     }
 
-    @ModelAttribute("locale")
+    @ModelAttribute
     public Locale setUpLocale(Locale locale) {
         return locale;
     }
