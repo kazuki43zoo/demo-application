@@ -2,9 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-    <entry key="language">Language</entry>
-    <entry key="language.english">English</entry>
-    <entry key="language.japanese">Japanese</entry>
+    <entry key="home">Home</entry>
 
     <entry key="menu">Menu</entry>
     <entry key="menu.h2AdminConsole">H2 Admin Console</entry>
@@ -13,10 +11,11 @@
     <entry key="menu.timeCard">Time Card</entry>
 
     <entry key="userMenu.editProfile">Edit Profile</entry>
-    <entry key="userMenu.authenticationHistories">Authentication Histories
-    </entry>
+    <entry key="userMenu.authenticationHistories">Authentication Histories</entry>
     <entry key="userMenu.changePassword">Change Password</entry>
     <entry key="userMenu.logout">Logout</entry>
+
+    <entry key="welcome.message">Welcome Demo Application using TERASOLUNA Server Framework for Java (5.x) !!</entry>
 
     <entry key="todayBtn">Today</entry>
     <entry key="initializeBtn">Initialize</entry>
@@ -68,5 +67,12 @@
     <entry key="overtimeTime">Overtime Time</entry>
     <entry key="penaltyTime">Penalty Time</entry>
 
+    <entry key="accountId">Account ID</entry>
+    <entry key="password">Password</entry>
+    <entry key="currentPassword">Current Password</entry>
+    <entry key="newPassword">New Password</entry>
+    <entry key="confirmPassword">Confirm Password</entry>
+    <entry key="change">Change</entry>
+    <entry key="changeAndLogin">Change and Login</entry>
 
 </properties>

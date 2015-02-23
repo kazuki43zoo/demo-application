@@ -21,12 +21,18 @@ public class MidnightTime {
     static final MidnightTime INSTANCE = new MidnightTime();
 
     private MidnightTime() {
-        midnightIntervals.add(new Interval(BASE_DATE.toDateTimeAtStartOfDay(), BASE_DATE
-                .toDateTime(MIDNIGHT_FINISH_TIME)));// 00:00-05:00
-        midnightIntervals.add(new Interval(BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME), BASE_DATE
-                .toDateTime(MIDNIGHT_FINISH_TIME).plusDays(1))); // 22:00-05:00(29:00)
-        midnightIntervals.add(new Interval(BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1),
-                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));// 22:00(46:00)-00:00(48:00)
+        // 00:00-05:00
+        midnightIntervals.add(new Interval(
+                BASE_DATE.toDateTimeAtStartOfDay(),
+                BASE_DATE.toDateTime(MIDNIGHT_FINISH_TIME)));
+        // 22:00-05:00(29:00)
+        midnightIntervals.add(new Interval(
+                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME),
+                BASE_DATE.toDateTime(MIDNIGHT_FINISH_TIME).plusDays(1)));
+        // 22:00(46:00)-00:00(48:00)
+        midnightIntervals.add(new Interval(
+                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1),
+                BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));
     }
 
     int calculateContainsMinute(final Interval workTimeInterval, final WorkPlace workPlace) {
@@ -34,19 +40,12 @@ public class MidnightTime {
         for (final Interval midnightInterval : midnightIntervals) {
             if (workTimeInterval.overlaps(midnightInterval)) {
                 final Interval overlappedInterval = workTimeInterval.overlap(midnightInterval);
-                minute += (toMinute(overlappedInterval) - workPlace
-                        .calculateContainsBreakTimeMinute(overlappedInterval));
-            } else {
-                if (midnightInterval.isAfter(workTimeInterval)) {
-                    break;
-                }
+                minute += (toMinute(overlappedInterval) - workPlace.calculateContainsBreakTimeMinute(overlappedInterval));
+            } else if (midnightInterval.isAfter(workTimeInterval)) {
+                break;
             }
         }
-        if (minute == 0) {
-            return 0;
-        } else {
-            return workPlace.truncateWithTimeUnit((int) minute);
-        }
+        return minute == 0 ? 0 : workPlace.truncateWithTimeUnit((int) minute);
     }
 
     private long toMinute(final Interval interval) {

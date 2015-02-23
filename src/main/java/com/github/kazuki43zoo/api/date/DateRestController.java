@@ -9,18 +9,24 @@ import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
 import javax.inject.Inject;
 
-@RequestMapping("dates")
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+@RequestMapping("/dates")
 @RestController
 public class DateRestController {
+
+    private final DateRestController linkController = methodOn(getClass());
 
     @Inject
     JodaTimeDateFactory dateFactory;
 
-    @RequestMapping(value = "currentDateTime", method = RequestMethod.GET)
+    @RequestMapping(value = "/currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public DateResource getCurrentTimeDate() {
         DateResource responseResource = new DateResource();
         responseResource.setDateTime(dateFactory.newDateTime());
+        responseResource.add(linkTo(linkController.getCurrentTimeDate()).withSelfRel());
         return responseResource;
     }
 

@@ -8,7 +8,6 @@ import org.springframework.hateoas.ResourceSupport;
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @lombok.Data
@@ -31,13 +30,5 @@ public class TimeCardResource extends ResourceSupport implements Serializable {
 
     @Null
     private WorkPlace workPlace;
-
-    public TimeCardResource addDailyAttendance(DailyAttendanceResource dailyAttendanceResource) {
-        if (attendances == null) {
-            this.attendances = new ArrayList<>();
-        }
-        attendances.add(dailyAttendanceResource);
-        return this;
-    }
 
 }

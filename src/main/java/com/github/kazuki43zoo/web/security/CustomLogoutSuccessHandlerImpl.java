@@ -27,6 +27,13 @@ public final class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccess
             HttpServletRequest request,
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
+
+        createLogoutSuccessHistory(authentication);
+
+        super.onLogoutSuccess(request, response, authentication);
+    }
+
+    private void createLogoutSuccessHistory(Authentication authentication) {
         CustomUserDetails userDetails = CustomUserDetails.getInstance(authentication);
 
         AccountAuthenticationHistory authenticationHistory =
@@ -34,8 +41,6 @@ public final class CustomLogoutSuccessHandlerImpl extends SimpleUrlLogoutSuccess
 
         authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
                 authenticationHistory, AuthenticationType.LOGOUT);
-
-        super.onLogoutSuccess(request, response, authentication);
     }
 
 }

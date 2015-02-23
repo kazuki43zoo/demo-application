@@ -26,9 +26,10 @@
         <div class="col-sm-4">
             <c:forEach var="enabledAutoLoginCodeListElement" items="${CL_ENABLED}">
                 <div class="radio-inline">
-                    <form:radiobutton path="enabledAutoLogin"
-                                      value="${enabledAutoLoginCodeListElement.key}"
-                                      label="${enabledAutoLoginCodeListElement.value}"/>
+                    <form:radiobutton
+                            path="enabledAutoLogin"
+                            value="${enabledAutoLoginCodeListElement.key}"
+                            label="${enabledAutoLoginCodeListElement.value}"/>
                 </div>
             </c:forEach>
             <div>

@@ -12,10 +12,18 @@
 </c:if>
 <form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
     <div class="form-group">
-        <form:input type="text" path="accountId" class="form-control" placeholder="Account ID"/>
+        <spring:message var="labelAccountId" code="accountId" />
+        <form:input
+                path="accountId"
+                class="form-control"
+                placeholder="${f:h(labelAccountId)}"/>
     </div>
     <div class="form-group">
-        <form:password path="password" class="form-control" placeholder="Password"/>
+        <spring:message var="labelPassword" code="password" />
+        <form:password
+                path="password"
+                class="form-control"
+                placeholder="${f:h(labelPassword)}"/>
     </div>
     <button class="btn">
         <span class="glyphicon glyphicon-log-in"></span>

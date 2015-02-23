@@ -66,7 +66,8 @@ public class ProfileController {
         }
 
         Account inputAccount = beanMapper.map(form, Account.class);
-        inputAccount.setAccountUuid(authenticatedUser.getAccount().getAccountUuid());
+        inputAccount.setAccountUuid(
+                authenticatedUser.getAccount().getAccountUuid());
 
         Account changedAccount;
         try {
@@ -83,7 +84,9 @@ public class ProfileController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.resultMessages());
+        redirectAttributes.addFlashAttribute(
+                Message.ACCOUNT_PROFILE_EDITED.resultMessages());
+
         return "redirect:/profile";
     }
 

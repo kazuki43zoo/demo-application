@@ -52,19 +52,19 @@ public class DailyAttendance implements Serializable {
     transient private boolean holiday;
 
     public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice) {
-        Map<LocalDate, Holiday> holidaies = Collections.emptyMap();
-        calculate(defaultWorkPlace, mainOffice, holidaies);
+        Map<LocalDate, Holiday> holidays = Collections.emptyMap();
+        calculate(defaultWorkPlace, mainOffice, holidays);
     }
 
     public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice,
-                          Map<LocalDate, Holiday> holidaies) {
+                          final Map<LocalDate, Holiday> holidays) {
 
         clearCalculate();
 
         if (targetDate != null) {
             if ((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY)
                     || (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY)
-                    || holidaies.containsKey(targetDate)) {
+                    || holidays.containsKey(targetDate)) {
                 this.holiday = true;
             }
         }

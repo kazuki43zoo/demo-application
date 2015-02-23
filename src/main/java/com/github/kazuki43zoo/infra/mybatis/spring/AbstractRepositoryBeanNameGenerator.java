@@ -9,11 +9,7 @@ import java.beans.Introspector;
 
 public abstract class AbstractRepositoryBeanNameGenerator implements BeanNameGenerator {
 
-    private final String suffix;
-
-    protected AbstractRepositoryBeanNameGenerator() {
-        this.suffix = getClass().getSimpleName().replaceAll("BeanNameGenerator", "");
-    }
+    private final String suffix = getClass().getSimpleName().replaceAll("BeanNameGenerator", "");
 
     @Override
     public String generateBeanName(
@@ -21,8 +17,7 @@ public abstract class AbstractRepositoryBeanNameGenerator implements BeanNameGen
             BeanDefinitionRegistry registry) {
         String defaultBeanName = Introspector.decapitalize(ClassUtils.getShortName(definition
                 .getBeanClassName()));
-        String repositoryBeanName = defaultBeanName.replaceAll("Repository", suffix);
-        return repositoryBeanName;
+        return defaultBeanName.replaceAll("Repository", suffix);
     }
 
 }

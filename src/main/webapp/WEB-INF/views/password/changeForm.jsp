@@ -10,41 +10,63 @@
         </c:when>
         <c:otherwise>
             <div class="form-group">
-                <form:label path="accountId" cssClass="col-sm-2 control-label">Account ID</form:label>
+                <spring:message var="labelAccountId" code="accountId" />
+                <form:label path="accountId" cssClass="col-sm-2 control-label">
+                    ${f:h(labelAccountId)}
+                </form:label>
                 <div class="col-sm-8">
-                    <form:input cssClass="form-control" path="accountId" placeholder="Account ID"/>
+                    <form:input
+                            cssClass="form-control"
+                            path="accountId"
+                            placeholder="${f:h(labelAccountId)}"/>
                     <form:errors path="accountId"/>
                 </div>
             </div>
         </c:otherwise>
     </c:choose>
     <div class="form-group">
-        <form:label path="oldPassword" class="col-sm-2 control-label">Old Password</form:label>
+        <spring:message var="labelCurrentPassword" code="currentPassword" />
+        <form:label path="currentPassword" class="col-sm-2 control-label">
+            ${f:h(labelCurrentPassword)}
+        </form:label>
         <div class="col-sm-4">
-            <form:password cssClass="form-control" path="oldPassword" placeholder="Old Password"/>
-            <form:errors path="oldPassword"/>
+            <form:password
+                    cssClass="form-control"
+                    path="currentPassword"
+                    placeholder="${f:h(labelCurrentPassword)}"/>
+            <form:errors path="currentPassword"/>
         </div>
     </div>
     <div class="form-group">
-        <form:label path="password" class="col-sm-2 control-label">New Password</form:label>
+        <spring:message var="labelNewPassword" code="newPassword" />
+        <spring:message var="labelConfirmPassword" code="confirmPassword" />
+        <form:label path="password" class="col-sm-2 control-label">
+            ${f:h(labelNewPassword)}
+        </form:label>
         <div class="col-sm-4">
-            <form:password cssClass="form-control" path="password" placeholder="New Password"/>
+            <form:password
+                    cssClass="form-control"
+                    path="password"
+                    placeholder="${f:h(labelNewPassword)}"/>
             <form:errors path="password"/>
         </div>
         <div class="col-sm-4">
-            <form:password cssClass="form-control" path="confirmPassword" placeholder="Confirm Password"/>
+            <form:password
+                    cssClass="form-control"
+                    path="confirmPassword"
+                    placeholder="${f:h(labelConfirmPassword)}"/>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <button class="btn btn-default" name="change">
                 <span class="glyphicon glyphicon-edit"></span>
-                Change
+                <spring:message code="change" />
             </button>
             <c:if test="${!isAuthenticated}">
                 <button class="btn btn-default" name="changeAndLogin">
                     <span class="glyphicon glyphicon-log-in"></span>
-                    Change and Login
+                    <spring:message code="changeAndLogin" />
                 </button>
             </c:if>
         </div>

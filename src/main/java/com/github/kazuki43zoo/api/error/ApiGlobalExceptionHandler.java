@@ -1,5 +1,6 @@
 package com.github.kazuki43zoo.api.error;
 
+import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +22,7 @@ import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 import javax.inject.Inject;
 
 @ControllerAdvice
-public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Inject
     ApiErrorCreator apiErrorCreator;
@@ -39,7 +40,8 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
         final Object apiError;
         if (body == null) {
             String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-            apiError = apiErrorCreator.createApiError(request, errorCode, ex.getLocalizedMessage());
+            apiError = apiErrorCreator.createApiError(
+                    request, errorCode, ex.getLocalizedMessage());
         } else {
             apiError = body;
         }
@@ -71,8 +73,8 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
             HttpStatus status,
             WebRequest request) {
         if (ex.getCause() instanceof Exception) {
-            return handleExceptionInternal((Exception) ex.getCause(), null, headers, status,
-                    request);
+            return handleExceptionInternal(
+                    (Exception) ex.getCause(), null, headers, status, request);
         } else {
             return handleExceptionInternal(ex, null, headers, status, request);
         }
@@ -82,29 +84,33 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
     public ResponseEntity<Object> handleResourceNotFoundException(
             ResourceNotFoundException ex,
             WebRequest request) {
-        return handleResultMessagesNotificationException(ex, null, HttpStatus.NOT_FOUND, request);
+        return handleResultMessagesNotificationException(
+                ex, null, HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler
     public ResponseEntity<Object> handleBusinessException(
             BusinessException ex,
             WebRequest request) {
-        return handleResultMessagesNotificationException(ex, null, HttpStatus.CONFLICT, request);
+        return handleResultMessagesNotificationException(
+                ex, null, HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({OptimisticLockingFailureException.class,
             PessimisticLockingFailureException.class})
     public ResponseEntity<Object> handleLockingFailureException(
-            Exception ex,
+            ConcurrencyFailureException ex,
             WebRequest request) {
-        return handleExceptionInternal(ex, null, null, HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(
+                ex, null, null, HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler
     public ResponseEntity<Object> handleSystemError(
             Exception ex,
             WebRequest request) {
-        return handleExceptionInternal(ex, null, null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(
+                ex, null, null, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
 
@@ -115,8 +121,8 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
             HttpStatus status,
             WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode,
-                bindingResult, ex.getMessage());
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(
+                request, errorCode, bindingResult, ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
@@ -126,8 +132,8 @@ public final class ApiGlobalExceptionHandler extends ResponseEntityExceptionHand
             HttpStatus status,
             WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode,
-                ex.getResultMessages(), ex.getMessage());
+        ApiError apiError = apiErrorCreator.createResultMessagesApiError(
+                request, errorCode, ex.getResultMessages(), ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 

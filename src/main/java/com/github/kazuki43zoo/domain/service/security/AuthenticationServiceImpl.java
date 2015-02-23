@@ -31,8 +31,8 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
             return;
         }
         authenticationHistory.setFailureReason(failureReason);
-        createAuthenticationHistory(failedAccount, authenticationHistory, AuthenticationType.LOGIN,
-                false);
+        createAuthenticationHistory(
+                failedAccount, authenticationHistory, AuthenticationType.LOGIN, false);
     }
 
     @Override

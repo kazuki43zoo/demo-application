@@ -47,15 +47,19 @@ public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenti
             throw new SystemException(Message.FW_SYSTEM_ERROR.code(), exception);
         }
         if (exception instanceof SessionAuthenticationException) {
-            String accountId = request.getParameter(securityConfigs.getUsernameParameter());
-            String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
-            CustomAuthenticationDetails authenticationDetails =
-                    authenticationDetailsSource.buildDetails(request);
-            AccountAuthenticationHistory authenticationHistory =
-                    beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
-            authenticationService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
+            createConcurrentAuthenticationFailureHistory(request);
         }
         super.onAuthenticationFailure(request, response, exception);
+    }
+
+    private void createConcurrentAuthenticationFailureHistory(HttpServletRequest request) {
+        String accountId = request.getParameter(securityConfigs.getUsernameParameter());
+        String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
+        CustomAuthenticationDetails authenticationDetails =
+                authenticationDetailsSource.buildDetails(request);
+        AccountAuthenticationHistory authenticationHistory =
+                beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
+        authenticationService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
     }
 
 

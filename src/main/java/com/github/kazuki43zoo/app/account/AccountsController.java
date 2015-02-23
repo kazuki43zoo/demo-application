@@ -45,7 +45,8 @@ public class AccountsController {
         if (bindingResult.hasErrors()) {
             return "account/list";
         }
-        AccountsSearchCriteria criteria = beanMapper.map(query, AccountsSearchCriteria.class);
+        AccountsSearchCriteria criteria = beanMapper.map(
+                query, AccountsSearchCriteria.class);
         Page<Account> page = accountService.searchAccounts(criteria, pageable);
         model.addAttribute("page", page);
         return "account/list";
@@ -135,7 +136,8 @@ public class AccountsController {
         Account inputAccount = beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(accountUuid);
         for (String authority : form.getAuthorities()) {
-            inputAccount.addAuthority(new AccountAuthority(accountUuid, authority));
+            inputAccount.addAuthority(
+                    new AccountAuthority(accountUuid, authority));
         }
         try {
             accountService.change(inputAccount);
@@ -149,7 +151,8 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_EDITED);
+        return redirectDetailView(
+                redirectAttributes, accountUuid, Message.ACCOUNT_EDITED);
     }
 
     @TransactionTokenCheck
@@ -178,7 +181,8 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_UNLOCKED);
+        return redirectDetailView(
+                redirectAttributes, accountUuid, Message.ACCOUNT_UNLOCKED);
     }
 
     private String editRedo(

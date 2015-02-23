@@ -49,7 +49,8 @@ public final class AccountServiceImpl implements AccountService {
         if (totalCount == 0) {
             accounts = Collections.emptyList();
         } else {
-            accounts = accountRepository.findAllByCriteria(criteria, new PageParams(pageable));
+            accounts = accountRepository.findAllByCriteria(
+                    criteria, new PageParams(pageable));
         }
         return new PageImpl<>(accounts, pageable, totalCount);
     }
@@ -84,8 +85,8 @@ public final class AccountServiceImpl implements AccountService {
             inputAuthority.setAccountUuid(accountUuid);
             accountRepository.createAuthority(inputAuthority);
         }
-        accountRepository.createPasswordHistory(new AccountPasswordHistory(accountUuid,
-                encodedPassword, currentDateTime));
+        accountRepository.createPasswordHistory(new AccountPasswordHistory(
+                accountUuid, encodedPassword, currentDateTime));
 
         return getAccount(accountUuid);
     }
@@ -124,8 +125,8 @@ public final class AccountServiceImpl implements AccountService {
             String encodedPassword = passwordSharedService.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
             currentAccount.setPasswordModifiedAt(currentDateTime);
-            passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword,
-                    currentDateTime);
+            passwordHistory = new AccountPasswordHistory(
+                    accountUuid, encodedPassword, currentDateTime);
         }
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
@@ -136,7 +137,8 @@ public final class AccountServiceImpl implements AccountService {
 
         for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
-                accountRepository.deleteAuthority(currentAuthority.getAccountUuid(),
+                accountRepository.deleteAuthority(
+                        currentAuthority.getAccountUuid(),
                         currentAuthority.getAuthority());
             }
         }

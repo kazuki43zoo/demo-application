@@ -27,101 +27,98 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
     @Inject
     SeasonalHolidayRepository seasonalHolidayRepository;
 
-    private Map<Integer, List<FixedHoliday>> fixedHolodaiesMapping;
+    private Map<Integer, List<FixedHoliday>> fixedHolidaysMapping;
 
-    private Map<Integer, List<HappyMondayHoliday>> happyMondayHolidaiesMapping;
+    private Map<Integer, List<HappyMondayHoliday>> happyMondayHolidaysMapping;
 
-    private Map<LocalDate, List<SeasonalHoliday>> seasonalHolidaiesMapping;
+    private Map<LocalDate, List<SeasonalHoliday>> seasonalHolidaysMapping;
 
     @PostConstruct
-    public void loadHolidaies() {
-        loadFixedHolodaies();
-        loadHappyMandayHolidaies();
-        loadSeasonalHolidaies();
+    public void loadHolidays() {
+        loadFixedHolidays();
+        loadHappyMondayHolidays();
+        loadSeasonalHolidays();
     }
 
-    private void loadFixedHolodaies() {
-        Map<Integer, List<FixedHoliday>> fixedHolodaiesMapping = new HashMap<>();
-        List<FixedHoliday> fixedHolodaies = fixedHolidayRepository.findAll();
-        for (FixedHoliday fixedHoliday : fixedHolodaies) {
-            List<FixedHoliday> fixedHolodaiesOfMonth = fixedHolodaiesMapping.get(fixedHoliday
-                    .getTargetMonth());
-            if (fixedHolodaiesOfMonth == null) {
-                fixedHolodaiesOfMonth = new ArrayList<>();
-                fixedHolodaiesMapping.put(fixedHoliday.getTargetMonth(), fixedHolodaiesOfMonth);
+    private void loadFixedHolidays() {
+        Map<Integer, List<FixedHoliday>> fixedHolidaysMapping = new HashMap<>();
+        List<FixedHoliday> fixedHolidays = fixedHolidayRepository.findAll();
+        for (FixedHoliday fixedHoliday : fixedHolidays) {
+            List<FixedHoliday> fixedHolidaysOfMonth =
+                    fixedHolidaysMapping.get(fixedHoliday.getTargetMonth());
+            if (fixedHolidaysOfMonth == null) {
+                fixedHolidaysOfMonth = new ArrayList<>();
+                fixedHolidaysMapping.put(fixedHoliday.getTargetMonth(), fixedHolidaysOfMonth);
             }
-            fixedHolodaiesOfMonth.add(fixedHoliday);
+            fixedHolidaysOfMonth.add(fixedHoliday);
         }
-        this.fixedHolodaiesMapping = Collections.unmodifiableMap(fixedHolodaiesMapping);
+        this.fixedHolidaysMapping = Collections.unmodifiableMap(fixedHolidaysMapping);
     }
 
-    private void loadHappyMandayHolidaies() {
-        Map<Integer, List<HappyMondayHoliday>> happyMondayHolidaiesMapping = new HashMap<>();
-        List<HappyMondayHoliday> happyMondayHolidaies = happyMondayHolidayRepository.findAll();
-        for (HappyMondayHoliday happyMondayHoliday : happyMondayHolidaies) {
-            List<HappyMondayHoliday> happyMondayHolidaiesOfMonth = happyMondayHolidaiesMapping
-                    .get(happyMondayHoliday.getTargetMonth());
-            if (happyMondayHolidaiesOfMonth == null) {
-                happyMondayHolidaiesOfMonth = new ArrayList<>();
-                happyMondayHolidaiesMapping.put(happyMondayHoliday.getTargetMonth(),
-                        happyMondayHolidaiesOfMonth);
+    private void loadHappyMondayHolidays() {
+        Map<Integer, List<HappyMondayHoliday>> happyMondayHolidaysMapping = new HashMap<>();
+        List<HappyMondayHoliday> happyMondayHolidays = happyMondayHolidayRepository.findAll();
+        for (HappyMondayHoliday happyMondayHoliday : happyMondayHolidays) {
+            List<HappyMondayHoliday> happyMondayHolidaysOfMonth =
+                    happyMondayHolidaysMapping.get(happyMondayHoliday.getTargetMonth());
+            if (happyMondayHolidaysOfMonth == null) {
+                happyMondayHolidaysOfMonth = new ArrayList<>();
+                happyMondayHolidaysMapping.put(happyMondayHoliday.getTargetMonth(), happyMondayHolidaysOfMonth);
             }
-            happyMondayHolidaiesOfMonth.add(happyMondayHoliday);
+            happyMondayHolidaysOfMonth.add(happyMondayHoliday);
         }
-        this.happyMondayHolidaiesMapping = Collections.unmodifiableMap(happyMondayHolidaiesMapping);
+        this.happyMondayHolidaysMapping = Collections.unmodifiableMap(happyMondayHolidaysMapping);
     }
 
-    private void loadSeasonalHolidaies() {
-        Map<LocalDate, List<SeasonalHoliday>> seasonalHolidaiesMapping = new HashMap<>();
-        List<SeasonalHoliday> seasonalHolidaies = seasonalHolidayRepository.findAll();
-        for (SeasonalHoliday seasonalHoliday : seasonalHolidaies) {
+    private void loadSeasonalHolidays() {
+        Map<LocalDate, List<SeasonalHoliday>> seasonalHolidaysMapping = new HashMap<>();
+        List<SeasonalHoliday> seasonalHolidays = seasonalHolidayRepository.findAll();
+        for (SeasonalHoliday seasonalHoliday : seasonalHolidays) {
             LocalDate month = seasonalHoliday.getTargetDate().dayOfMonth().withMinimumValue();
-            List<SeasonalHoliday> seasonalHolidaiesOfMonth = seasonalHolidaiesMapping.get(month);
-            if (seasonalHolidaiesOfMonth == null) {
-                seasonalHolidaiesOfMonth = new ArrayList<>();
-                seasonalHolidaiesMapping.put(month, seasonalHolidaiesOfMonth);
+            List<SeasonalHoliday> seasonalHolidaysOfMonth = seasonalHolidaysMapping.get(month);
+            if (seasonalHolidaysOfMonth == null) {
+                seasonalHolidaysOfMonth = new ArrayList<>();
+                seasonalHolidaysMapping.put(month, seasonalHolidaysOfMonth);
             }
-            seasonalHolidaiesOfMonth.add(seasonalHoliday);
+            seasonalHolidaysOfMonth.add(seasonalHoliday);
         }
-        this.seasonalHolidaiesMapping = Collections.unmodifiableMap(seasonalHolidaiesMapping);
+        this.seasonalHolidaysMapping = Collections.unmodifiableMap(seasonalHolidaysMapping);
     }
 
     @Override
-    public Map<LocalDate, Holiday> getHolodaies(LocalDate month) {
-        Map<LocalDate, Holiday> holidaies = new LinkedHashMap<>();
-        pickupFixedHolidaies(month, holidaies);
-        pickupHappyMondayHolidaies(month, holidaies);
-        pickupSeasonalHolidaies(month, holidaies);
-        return holidaies;
+    public Map<LocalDate, Holiday> getHolidays(LocalDate month) {
+        Map<LocalDate, Holiday> holidays = new LinkedHashMap<>();
+        pickupFixedHolidays(month, holidays);
+        pickupHappyMondayHolidays(month, holidays);
+        pickupSeasonalHolidays(month, holidays);
+        return holidays;
     }
 
-    private void pickupFixedHolidaies(LocalDate month, Map<LocalDate, Holiday> holidaies) {
-        List<FixedHoliday> fixedHolidaies = fixedHolodaiesMapping.get(month.getMonthOfYear());
-        if (fixedHolidaies == null) {
+    private void pickupFixedHolidays(LocalDate month, Map<LocalDate, Holiday> holidays) {
+        List<FixedHoliday> fixedHolidays = fixedHolidaysMapping.get(month.getMonthOfYear());
+        if (fixedHolidays == null) {
             return;
         }
-        for (FixedHoliday fixedHoliday : fixedHolidaies) {
-            if (!((fixedHoliday.getBeginYear() <= month.getYear()) && (month.getYear() <= fixedHoliday
-                    .getEndYear()))) {
+        for (FixedHoliday fixedHoliday : fixedHolidays) {
+            if (!((fixedHoliday.getBeginYear() <= month.getYear()) && (month.getYear() <= fixedHoliday.getEndYear()))) {
                 continue;
             }
             LocalDate targetDate = month.withDayOfMonth(fixedHoliday.getTargetDay());
             if (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY) {
                 targetDate = targetDate.plusDays(fixedHoliday.getTransferredLaterDays());
             }
-            holidaies.put(targetDate, fixedHoliday);
+            holidays.put(targetDate, fixedHoliday);
         }
     }
 
-    private void pickupHappyMondayHolidaies(LocalDate month, Map<LocalDate, Holiday> holidaies) {
-        List<HappyMondayHoliday> happyMondayHolidaies = happyMondayHolidaiesMapping.get(month
+    private void pickupHappyMondayHolidays(LocalDate month, Map<LocalDate, Holiday> holidaies) {
+        List<HappyMondayHoliday> happyMondayHolidays = happyMondayHolidaysMapping.get(month
                 .getMonthOfYear());
-        if (happyMondayHolidaies == null) {
+        if (happyMondayHolidays == null) {
             return;
         }
-        for (HappyMondayHoliday happyMondayHoliday : happyMondayHolidaies) {
-            if (!((happyMondayHoliday.getBeginYear() <= month.getYear()) && (month.getYear() <= happyMondayHoliday
-                    .getEndYear()))) {
+        for (HappyMondayHoliday happyMondayHoliday : happyMondayHolidays) {
+            if (!((happyMondayHoliday.getBeginYear() <= month.getYear()) && (month.getYear() <= happyMondayHoliday.getEndYear()))) {
                 continue;
             }
             LocalDate targetDate;
@@ -134,13 +131,13 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
         }
     }
 
-    private void pickupSeasonalHolidaies(LocalDate month, Map<LocalDate, Holiday> holidaies) {
-        List<SeasonalHoliday> seasonalHolidaies = seasonalHolidaiesMapping.get(month);
-        if (seasonalHolidaies == null) {
+    private void pickupSeasonalHolidays(LocalDate month, Map<LocalDate, Holiday> holidays) {
+        List<SeasonalHoliday> seasonalHolidays = seasonalHolidaysMapping.get(month);
+        if (seasonalHolidays == null) {
             return;
         }
-        for (SeasonalHoliday seasonalHoliday : seasonalHolidaies) {
-            holidaies.put(seasonalHoliday.getTargetDate(), seasonalHoliday);
+        for (SeasonalHoliday seasonalHoliday : seasonalHolidays) {
+            holidays.put(seasonalHoliday.getTargetDate(), seasonalHoliday);
         }
     }
 

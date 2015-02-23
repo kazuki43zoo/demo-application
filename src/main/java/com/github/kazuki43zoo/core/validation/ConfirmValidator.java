@@ -30,8 +30,8 @@ public class ConfirmValidator implements ConstraintValidator<Confirm, Object> {
             return true;
         } else {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(message).addPropertyNode(field)
-                    .addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(message).
+                    addPropertyNode(field).addConstraintViolation();
             return false;
         }
     }

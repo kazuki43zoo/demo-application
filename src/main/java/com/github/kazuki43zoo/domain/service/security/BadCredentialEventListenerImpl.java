@@ -33,8 +33,8 @@ public final class BadCredentialEventListenerImpl implements
 
         AccountAuthenticationHistory authenticationHistory =
                 beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-        authenticationService.createAuthenticationFailureHistory(failedAccountId,
-                authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
+        authenticationService.createAuthenticationFailureHistory(
+                failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
     }
 
 }

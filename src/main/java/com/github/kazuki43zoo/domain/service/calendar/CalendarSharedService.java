@@ -6,5 +6,5 @@ import org.joda.time.LocalDate;
 import java.util.Map;
 
 public interface CalendarSharedService {
-    public Map<LocalDate, Holiday> getHolodaies(LocalDate month);
+    public Map<LocalDate, Holiday> getHolidays(LocalDate month);
 }

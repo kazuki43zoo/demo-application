@@ -32,6 +32,10 @@ public final class InteractiveAuthenticationSuccessEventListenerImpl implements
 
         passwordSharedService.resetPasswordLock(userDetails.getAccount());
 
+        createAuthenticationSuccessHistory(event, userDetails);
+    }
+
+    private void createAuthenticationSuccessHistory(InteractiveAuthenticationSuccessEvent event, CustomUserDetails userDetails) {
         AccountAuthenticationHistory authenticationHistory =
                 beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         AuthenticationType authenticationType;
@@ -41,8 +45,8 @@ public final class InteractiveAuthenticationSuccessEventListenerImpl implements
             authenticationType = AuthenticationType.LOGIN;
         }
 
-        authenticationService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                authenticationHistory, authenticationType);
+        authenticationService.createAuthenticationSuccessHistory(
+                userDetails.getAccount(), authenticationHistory, authenticationType);
     }
 
 }

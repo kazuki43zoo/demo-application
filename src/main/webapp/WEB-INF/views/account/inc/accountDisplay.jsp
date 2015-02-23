@@ -45,9 +45,10 @@
     </div>
     <div class="col-sm-5">
         <span class="form-control">
-            Modified at : <joda:format value="${account.passwordModifiedAt}"
-                                       pattern="${dateTimeFormat}"
-                                       dateTimeZone="${timeZoneFormat}"/>
+            Modified at : <joda:format
+                value="${account.passwordModifiedAt}"
+                pattern="${applicationConfigs.dateTimeFormat}"
+                dateTimeZone="${applicationConfigs.timeZoneFormat}"/>
         </span>
     </div>
 </div>

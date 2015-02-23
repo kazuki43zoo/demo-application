@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @lombok.Data
-public final class ProfileForm implements Serializable {
+public class ProfileForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

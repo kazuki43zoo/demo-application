@@ -41,11 +41,11 @@ public final class TimeCardServiceImpl implements TimeCardService {
             }
             WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(defaultWorkPlaceUuid);
             WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
-            Map<LocalDate, Holiday> holidaies = calendarSharedService.getHolodaies(targetMonth);
+            Map<LocalDate, Holiday> holidays = calendarSharedService.getHolidays(targetMonth);
             for (DailyAttendance attendance : timeCard.getAttendances()) {
                 attendance.setWorkPlace(workPlaceSharedService.getWorkPlaceDetail(attendance
                         .getWorkPlace()));
-                attendance.calculate(defaultWorkPlace, mainOffice, holidaies);
+                attendance.calculate(defaultWorkPlace, mainOffice, holidays);
             }
         }
         return timeCard;
@@ -58,12 +58,12 @@ public final class TimeCardServiceImpl implements TimeCardService {
         TimeCard timeCard = new TimeCard();
         WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(null);
         WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
-        Map<LocalDate, Holiday> holidaies = calendarSharedService.getHolodaies(targetMonth);
+        Map<LocalDate, Holiday> holidays = calendarSharedService.getHolidays(targetMonth);
         for (int i = 0; i < targetMonth.dayOfMonth().getMaximumValue(); i++) {
             DailyAttendance attendance = new DailyAttendance();
             attendance.setTargetDate(targetMonth.plusDays(i));
+            attendance.calculate(defaultWorkPlace, mainOffice, holidays);
             timeCard.addAttendance(attendance);
-            attendance.calculate(defaultWorkPlace, mainOffice, holidaies);
         }
         return timeCard;
     }

@@ -73,8 +73,7 @@ public class WorkPlace implements Serializable {
     }
 
     int calculateWorkingMinute(final Interval workTimeInterval, final WorkPlace mainOffice) {
-        int workingMinute = (int) toMinute(workTimeInterval)
-                - calculateContainsBreakTimeMinute(workTimeInterval);
+        int workingMinute = (int) toMinute(workTimeInterval) - calculateContainsBreakTimeMinute(workTimeInterval);
         return truncateWithTimeUnit(workingMinute, mainOffice);
     }
 

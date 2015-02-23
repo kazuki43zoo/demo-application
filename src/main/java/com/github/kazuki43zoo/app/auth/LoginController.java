@@ -30,7 +30,8 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET, params = "encourage")
     public String encourageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
+        redirectAttributes.addFlashAttribute(
+                Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
         return "redirect:/auth/login";
     }
 
@@ -43,7 +44,8 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return showLoginForm();
         }
-        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(
+                form.getAccountId());
     }
 
     @RequestMapping(value = "error", method = RequestMethod.POST)
@@ -52,7 +54,8 @@ public class LoginController {
             RedirectAttributes redirectAttributes,
             HttpServletRequest request) {
         redirectAttributes.addFlashAttribute(form);
-        redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
+        redirectAttributes.addFlashAttribute(
+                WebAttributes.AUTHENTICATION_EXCEPTION,
                 request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
         return "redirect:/auth/login";
     }

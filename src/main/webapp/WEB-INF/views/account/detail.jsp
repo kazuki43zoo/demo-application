@@ -28,8 +28,7 @@
                 Delete
             </div>
             <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
-                <div class="btn btn-default pull-right"
-                     onclick="$('#unlockForm').submit();">
+                <div class="btn btn-default pull-right" onclick="$('#unlockForm').submit();">
                     <span class="glyphicon glyphicon-lock"></span>
                     <span class="glyphicon glyphicon-remove"></span>
                     Unlock

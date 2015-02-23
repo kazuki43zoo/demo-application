@@ -31,13 +31,12 @@ public class TimeCardCalculateController {
     public DailyAttendanceResource calculate(
             @RequestBody @Validated DailyAttendanceResource resource) {
         DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
-        attendance.setWorkPlace(workPlaceSharedService.getWorkPlace(attendance.getWorkPlace()
-                .getWorkPlaceUuid()));
+        attendance.setWorkPlace(workPlaceSharedService.getWorkPlace(
+                attendance.getWorkPlace().getWorkPlaceUuid()));
         attendance.calculate(
                 null,
                 workPlaceSharedService.getMainOffice(),
-                calendarSharedService.getHolodaies(attendance.getTargetDate().dayOfMonth()
-                        .withMinimumValue()));
+                calendarSharedService.getHolidays(attendance.getTargetDate().dayOfMonth().withMinimumValue()));
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 

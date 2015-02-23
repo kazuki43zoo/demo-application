@@ -13,7 +13,7 @@ import org.terasoluna.gfw.common.message.ResultMessages;
 import javax.inject.Inject;
 
 @Component
-public final class ApiErrorCreator {
+public class ApiErrorCreator {
 
     @Inject
     MessageSource messageSource;
@@ -23,8 +23,8 @@ public final class ApiErrorCreator {
             String errorCode,
             String defaultErrorMessage,
             Object... arguments) {
-        String localizedMessage = messageSource.getMessage(errorCode, arguments,
-                defaultErrorMessage, request.getLocale());
+        String localizedMessage = messageSource.getMessage(
+                errorCode, arguments, defaultErrorMessage, request.getLocale());
         return new ApiError(errorCode, localizedMessage);
     }
 
@@ -35,10 +35,12 @@ public final class ApiErrorCreator {
             String defaultErrorMessage) {
         ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            apiError.addDetail(createApiError(request, fieldError, fieldError.getField()));
+            apiError.addDetail(createApiError(
+                    request, fieldError, fieldError.getField()));
         }
         for (ObjectError objectError : bindingResult.getGlobalErrors()) {
-            apiError.addDetail(createApiError(request, objectError, objectError.getObjectName()));
+            apiError.addDetail(createApiError(
+                    request, objectError, objectError.getObjectName()));
         }
         return apiError;
     }
@@ -47,7 +49,8 @@ public final class ApiErrorCreator {
             WebRequest request,
             DefaultMessageSourceResolvable messageResolvable,
             String target) {
-        String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
+        String localizedMessage = messageSource.getMessage(
+                messageResolvable, request.getLocale());
         return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 

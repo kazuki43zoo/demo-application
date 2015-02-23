@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.joda.time.LocalDate;
 
 public interface TimeCardRepository {
+
     TimeCard findOne(
             @Param("accountUuid") String accountUuid,
             @Param("targetMonth") LocalDate targetMonth);

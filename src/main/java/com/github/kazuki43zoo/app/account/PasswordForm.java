@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Confirm(field = "password")
 @lombok.Data
 @lombok.ToString(exclude = {"oldPassword", "password", "confirmPassword"})
-public final class PasswordForm implements Serializable {
+public class PasswordForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public final class PasswordForm implements Serializable {
     private String accountId;
 
     @NotNull
-    private String oldPassword;
+    private String currentPassword;
 
     @NotNull
     @Password

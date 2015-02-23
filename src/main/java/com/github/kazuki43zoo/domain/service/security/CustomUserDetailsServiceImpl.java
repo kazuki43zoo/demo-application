@@ -41,11 +41,11 @@ public final class CustomUserDetailsServiceImpl implements UserDetailsService {
 
         DateTime currentDateTime = dateFactory.newDateTime();
 
-        boolean passwordNonExpired = account.isPasswordNonExpired(currentDateTime,
-                securityConfigs.getPasswordValidDays());
+        boolean passwordNonExpired = account.isPasswordNonExpired(
+                currentDateTime, securityConfigs.getPasswordValidDays());
 
-        boolean accountNonLock = account.isAccountNonLock(securityConfigs
-                .getAuthenticationFailureMaxCount());
+        boolean accountNonLock = account.isAccountNonLock(
+                securityConfigs.getAuthenticationFailureMaxCount());
 
         return new CustomUserDetails(account, true, passwordNonExpired, accountNonLock);
     }

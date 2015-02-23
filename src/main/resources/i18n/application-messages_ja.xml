@@ -2,9 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-    <entry key="language">言 語</entry>
-    <entry key="language.english">英語</entry>
-    <entry key="language.japanese">日本語</entry>
+    <entry key="home">ホーム</entry>
 
     <entry key="menu">メニュー</entry>
     <entry key="menu.h2AdminConsole">H2 管理コンソール</entry>
@@ -16,6 +14,8 @@
     <entry key="userMenu.authenticationHistories">認証履歴</entry>
     <entry key="userMenu.changePassword">パスワード変更</entry>
     <entry key="userMenu.logout">ログアウト</entry>
+
+    <entry key="welcome.message">ようこそ 「TERASOLUNA Server Framework for Java (5.x)を使用したデモアプリケーション」へ ！！</entry>
 
     <entry key="todayBtn">今日</entry>
     <entry key="initializeBtn">初期化</entry>
@@ -65,5 +65,13 @@
     <entry key="liquidationTime">清算時間</entry>
     <entry key="overtimeTime">残業時間</entry>
     <entry key="penaltyTime">罰則時間</entry>
+
+    <entry key="accountId">アカウントID</entry>
+    <entry key="password">パスワード</entry>
+    <entry key="currentPassword">現パスワード</entry>
+    <entry key="newPassword">新パスワード</entry>
+    <entry key="confirmPassword">確認パスワード</entry>
+    <entry key="change">変更</entry>
+    <entry key="changeAndLogin">変更 &amp; ログイン</entry>
 
 </properties>

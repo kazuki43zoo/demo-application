@@ -11,9 +11,9 @@ public final class EmptyStringSerializer extends JsonSerializer<String> {
     @Override
     public void serialize(
             String value,
-            JsonGenerator jgen,
+            JsonGenerator jsonGenerator,
             SerializerProvider provider) throws IOException {
-        jgen.writeString("");
+        jsonGenerator.writeString("");
     }
 
 }

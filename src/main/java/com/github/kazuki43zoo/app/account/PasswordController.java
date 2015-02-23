@@ -55,8 +55,8 @@ public class PasswordController {
 
     @RequestMapping(method = RequestMethod.GET, params = "encourageChange")
     public String encourageChange(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_CHANGE_PASSWORD
-                .resultMessages());
+        redirectAttributes.addFlashAttribute(
+                Message.AUTH_ENCOURAGE_CHANGE_PASSWORD.resultMessages());
         return "redirect:/password";
     }
 
@@ -82,8 +82,8 @@ public class PasswordController {
             } else {
                 accountId = form.getAccountId();
             }
-            changedAccount = passwordService.change(accountId, form.getOldPassword(),
-                    form.getPassword());
+            changedAccount = passwordService.change(
+                    accountId, form.getCurrentPassword(), form.getPassword());
         } catch (ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
@@ -93,11 +93,14 @@ public class PasswordController {
 
         if (currentUser != null) {
             beanMapper.map(changedAccount, currentUser.getAccount());
-            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
+            redirectAttributes.addFlashAttribute(
+                    Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/";
         } else {
-            redirectAttributes.addFlashAttribute(new LoginForm(form.getAccountId(), null));
-            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
+            redirectAttributes.addFlashAttribute(
+                    new LoginForm(form.getAccountId(), null));
+            redirectAttributes.addFlashAttribute(
+                    Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/auth/login";
         }
     }
@@ -120,7 +123,8 @@ public class PasswordController {
         }
 
         try {
-            passwordService.change(form.getAccountId(), form.getOldPassword(), form.getPassword());
+            passwordService.change(
+                    form.getAccountId(), form.getCurrentPassword(), form.getPassword());
         } catch (ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
@@ -128,7 +132,8 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(
+                form.getAccountId());
     }
 
 }

@@ -83,7 +83,7 @@
                 success-handler-ref="customLogoutSuccessHandler"/>
 
         <sec:remember-me
-                key="demo-application-tk"
+                key="${security.rememberMe.key}"
                 services-ref="rememberMeServices"  />
 
         <sec:custom-filter
@@ -112,8 +112,7 @@
     </sec:http>
 
     <sec:authentication-manager>
-        <sec:authentication-provider
-                user-service-ref="customUserDetailsService">
+        <sec:authentication-provider user-service-ref="customUserDetailsService">
             <sec:password-encoder ref="passwordEncoder"/>
         </sec:authentication-provider>
     </sec:authentication-manager>
@@ -127,7 +126,7 @@
     <!-- Remember Me Service -->
     <bean id="rememberMeServices"
           class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"
-          c:key="demo-application-tk"
+          c:key="${security.rememberMe.key}"
           c:userDetailsService-ref="customUserDetailsService"
           c:tokenRepository-ref="rememberMeTokenRepository"
           p:authenticationDetailsSource-ref="customAuthenticationDetailsSource"
@@ -138,7 +137,7 @@
     <!-- Remember Me Token Repository -->
     <bean id="rememberMeTokenRepository"
           class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"
-          p:dataSource-ref="dataSource" />
+          p:jdbcTemplate-ref="jdbcTemplate" />
     <tx:advice id="persistentTokenRepositoryTxAdvice">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>

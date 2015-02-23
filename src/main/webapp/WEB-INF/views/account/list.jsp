@@ -9,13 +9,15 @@
             </div>
             <div class="col-sm-4">
 
-                <c:forEach var="accountSearchTargetCodeListElement"
-                           items="${CL_ACCOUNT_SEARCH_TARGET}"
-                           varStatus="rowStatus">
+                <c:forEach
+                        var="accountSearchTargetCodeListElement"
+                        items="${CL_ACCOUNT_SEARCH_TARGET}"
+                        varStatus="rowStatus">
                     <div class="checkbox-inline">
-                        <form:checkbox path="targets"
-                                       value="${accountSearchTargetCodeListElement.key}"
-                                       label="${accountSearchTargetCodeListElement.value}"/>
+                        <form:checkbox
+                                path="targets"
+                                value="${accountSearchTargetCodeListElement.key}"
+                                label="${accountSearchTargetCodeListElement.value}"/>
                     </div>
                 </c:forEach>
 
@@ -68,7 +70,8 @@
     </c:forEach>
 </table>
 <div class="paginationContainer">
-    <t:pagination page="${page}"
-                  criteriaQuery="${f:query(accountsSearchQuery)}"
-                  outerElementClass="pagination"/>
+    <t:pagination
+            page="${page}"
+            criteriaQuery="${f:query(accountsSearchQuery)}"
+            outerElementClass="pagination"/>
 </div>
