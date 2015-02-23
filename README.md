@@ -23,7 +23,7 @@ Structure of this application is following.<br><br>
 |                      | [Spring MVC 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hibernate Validator 5.1.3.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controller | Handle a request & delegate a business procedure to the services.  |
-|                      | Form | Hold transfer data(form data) of application layer(web layer). |
+|                      | DTO | Hold transfer data(form data or resource data) of application layer(web layer). |
 |                      | JSP | Generate presentation component(HTML) by accessing to DTO and Domain Object via `Model` object or `RedirectAttributes` provided by Spring MVC.  |
 | Domain Layer         | Domain Object | Hold domain data & implements core business logic. |
 |                      | Repository | Define & provide CRUD operations(interfaces) to the Domain objects. |
