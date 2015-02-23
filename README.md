@@ -21,13 +21,13 @@ Structure of this application is following.<br><br>
 |                      | [Spring Framework 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
 |                      | [Spring MVC 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hivernate Validator 5.1.3.Final](http://hibernate.org/validator/) as implementation provider.|
-|                      | Controllers | Handle a request & delegate a business procedure to the services.  |
-|                      | DTOs(Forms) | Hold transfer data(form data) of application layer(web layer). |
-|                      | JSPs | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
-| Domain Layer         | Domain Objects | Hold domain data & implements core business logic. |
-|                      | Repositories | Define & provide CRUD operations(interfaces) to the Domain objects. |
-|                      | Services | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hibernate Validator 5.1.3.Final](http://hibernate.org/validator/) as implementation provider.|
+|                      | Controller | Handle a request & delegate a business procedure to the services.  |
+|                      | Form | Hold transfer data(form data) of application layer(web layer). |
+|                      | JSP | Generate presentation component(HTML) by accessing to DTOs and Domain Objects.  |
+| Domain Layer         | Domain Object | Hold domain data & implements core business logic. |
+|                      | Repository | Define & provide CRUD operations(interfaces) to the Domain objects. |
+|                      | Service | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
 | Libraries               | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
