@@ -4,7 +4,7 @@ import com.github.kazuki43zoo.core.config.SecurityConfigs;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
-import com.github.kazuki43zoo.domain.service.security.AuthenticationService;
+import com.github.kazuki43zoo.domain.service.security.AuthenticationSharedService;
 import com.github.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
 import org.dozer.Mapper;
 import org.springframework.context.MessageSource;
@@ -27,7 +27,7 @@ public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenti
     MessageSource messageSource;
 
     @Inject
-    AuthenticationService authenticationService;
+    AuthenticationSharedService authenticationSharedService;
 
     @Inject
     SecurityConfigs securityConfigs;
@@ -59,7 +59,7 @@ public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenti
                 authenticationDetailsSource.buildDetails(request);
         AccountAuthenticationHistory authenticationHistory =
                 beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
-        authenticationService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
+        authenticationSharedService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
     }
 
 

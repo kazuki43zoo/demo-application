@@ -22,6 +22,8 @@ public interface AccountRepository {
 
     Account findOne(String accountUuid);
 
+    void lockByAccountIdWithinTransaction(String accountUuid);
+
     boolean create(Account account);
 
     boolean update(Account account);

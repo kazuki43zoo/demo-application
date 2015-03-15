@@ -66,6 +66,7 @@
         <sec:session-management
                 invalid-session-url="/error/invalidSession">
             <sec:concurrency-control
+                    max-sessions="1"
                     error-if-maximum-exceeded="true" />
         </sec:session-management>
 
@@ -184,7 +185,7 @@
 
     <!-- LogoutSuccessHandler -->
     <bean id="customLogoutSuccessHandler"
-          class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandlerImpl"
+          class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
           p:defaultTargetUrl="/auth/logout?success" />
 
     <!-- CsrfRequestMatcher -->

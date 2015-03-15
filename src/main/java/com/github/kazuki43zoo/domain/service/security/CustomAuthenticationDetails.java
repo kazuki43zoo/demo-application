@@ -16,8 +16,4 @@ public final class CustomAuthenticationDetails implements Serializable {
     private final String trackingId;
     private String sessionId;
 
-    public static CustomAuthenticationDetails getInstance(Authentication authentication) {
-        return (CustomAuthenticationDetails) authentication.getDetails();
-    }
-
 }

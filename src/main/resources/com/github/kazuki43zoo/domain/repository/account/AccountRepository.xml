@@ -97,6 +97,16 @@
             account_uuid = #{accountUuid}
     </select>
 
+    <select id="lockByAccountIdWithinTransaction" resultType="string">
+        SELECT
+            account_id
+        FROM
+            account
+        WHERE
+            account_id = #{accountUuid}
+        FOR UPDATE
+    </select>
+
     <insert id="create">
         <selectKey keyProperty="accountUuid" order="BEFORE" resultType="String">
             SELECT RANDOM_UUID()
