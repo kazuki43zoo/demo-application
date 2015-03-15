@@ -42,35 +42,6 @@
             <id>terasoluna-gfw-snapshots</id>
             <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-snapshots/</url>
         </repository>
-        <repository>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>terasoluna-gfw-3rdparty</id>
-            <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-3rdparty/</url>
-        </repository>
-        <repository>
-            <id>repository.spring.milestone</id>
-            <name>Spring Milestone Repository</name>
-            <url>http://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
 
     <pluginRepositories>
