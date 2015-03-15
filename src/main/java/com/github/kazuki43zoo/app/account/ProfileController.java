@@ -101,7 +101,7 @@ public class ProfileController {
     }
 
     private String editRedo(
-            @CurrentUser CustomUserDetails authenticatedUser,
+            CustomUserDetails authenticatedUser,
             Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";

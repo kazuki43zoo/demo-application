@@ -85,6 +85,7 @@ public class AccountsController {
         for (String authority : form.getAuthorities()) {
             inputAccount.addAuthority(new AccountAuthority(null, authority));
         }
+
         Account createdAccount;
         try {
             createdAccount = accountService.create(inputAccount);
@@ -139,6 +140,7 @@ public class AccountsController {
             inputAccount.addAuthority(
                     new AccountAuthority(accountUuid, authority));
         }
+
         try {
             accountService.change(inputAccount);
         } catch (DuplicateKeyException e) {

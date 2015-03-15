@@ -48,16 +48,4 @@ public class LoginController {
                 form.getAccountId());
     }
 
-    @RequestMapping(value = "error", method = RequestMethod.POST)
-    public String handleLoginError(
-            LoginForm form,
-            RedirectAttributes redirectAttributes,
-            HttpServletRequest request) {
-        redirectAttributes.addFlashAttribute(form);
-        redirectAttributes.addFlashAttribute(
-                WebAttributes.AUTHENTICATION_EXCEPTION,
-                request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
-        return "redirect:/auth/login";
-    }
-
 }

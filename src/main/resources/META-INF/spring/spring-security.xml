@@ -174,7 +174,7 @@
     <bean id="customAuthenticationFailureHandler"
           class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
           p:useForward="true"
-          p:defaultFailureUrl="/auth/login/error">
+          p:defaultFailureUrl="/error/login">
         <property name="exceptionMappings">
             <util:map>
                 <entry key="org.springframework.security.authentication.CredentialsExpiredException"
