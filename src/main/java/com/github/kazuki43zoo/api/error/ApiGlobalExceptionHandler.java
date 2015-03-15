@@ -96,9 +96,8 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 ex, null, HttpStatus.CONFLICT, request);
     }
 
-    @ExceptionHandler({OptimisticLockingFailureException.class,
-            PessimisticLockingFailureException.class})
-    public ResponseEntity<Object> handleLockingFailureException(
+    @ExceptionHandler
+    public ResponseEntity<Object> handleConcurrencyFailureException(
             ConcurrencyFailureException ex,
             WebRequest request) {
         return handleExceptionInternal(

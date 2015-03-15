@@ -16,7 +16,7 @@
     <entry key="e.demo.fw.7002">Access denied.</entry>
     <entry key="e.demo.fw.7003">Illegal access detected.</entry>
     <entry key="e.demo.fw.8001">Business error occurred.</entry>
-    <entry key="e.demo.fw.8002">Conflict with other processing occurred.</entry>
+    <entry key="e.demo.fw.8002">Conflict with other processing occurred. Please try again in a few seconds.</entry>
     <entry key="e.demo.fw.9001">System error occurred.</entry>
     <entry key="e.demo.fw.9002">System error occurred.</entry>
     <entry key="i.demo.account.0001">New account was created.</entry>

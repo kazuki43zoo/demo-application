@@ -7,7 +7,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util
@@ -98,6 +98,8 @@
                        value="common/error/resourceNotFoundError"/>
                 <entry key="BusinessException"
                        value="common/error/businessError"/>
+                <entry key="ConcurrencyFailureException"
+                       value="common/error/concurrencyError"/>
                 <entry key="InvalidTransactionTokenException"
                        value="common/error/transactionTokenError"/>
                 <entry key="DataAccessException"
@@ -109,6 +111,7 @@
                 <entry key="common/error/accessError" value="403"/>
                 <entry key="common/error/resourceNotFoundError" value="404"/>
                 <entry key="common/error/businessError" value="409"/>
+                <entry key="common/error/concurrencyError" value="409" />
                 <entry key="common/error/transactionTokenError" value="409"/>
             </util:map>
         </property>

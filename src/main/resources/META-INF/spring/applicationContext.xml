@@ -68,9 +68,7 @@
                        value="e.demo.fw.7002"/>
                 <entry key="BusinessException"
                        value="e.demo.fw.8001"/>
-                <entry key="OptimisticLockingFailureException"
-                       value="e.demo.fw.8002"/>
-                <entry key="PessimisticLockingFailureException"
+                <entry key="ConcurrencyFailureException"
                        value="e.demo.fw.8002"/>
                 <entry key="DataAccessException"
                        value="e.demo.fw.9002"/>
