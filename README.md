@@ -13,14 +13,14 @@ Structure of this application is following.<br><br>
 
 | Layer | Component/Library | Main responsibilities |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [jQuery 2.1.3](http://jquery.com/) | Provide the useful javascript operations. |
-|                      | [AngularJS 1.2.27](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
-|                      | [Bootstrap 3.3.2](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
+| Client Layer         | [jQuery 2.1.4](http://jquery.com/) | Provide the useful javascript operations. |
+|                      | [AngularJS 1.2.28](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
+|                      | [Bootstrap 3.3.5](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spring Framework 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
-|                      | [Spring MVC 4.1.4.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spring Framework 4.1.7.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spring Security 3.2.7.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
+|                      | [Spring MVC 4.1.7.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hibernate Validator 5.1.3.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controller | Handle a request & delegate a business procedure to the services.  |
 |                      | DTO | Hold transfer data(form data or resource data) of application layer(web layer). |
@@ -29,14 +29,14 @@ Structure of this application is following.<br><br>
 |                      | Repository | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Service | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Server Framewrok for Java (5.x).
 
 | Library(Group Id:Artifact Id) | Version | Description |
 | ----- | :-----:| --------------------- |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.183 \* | Depends on to access H2 database. |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.187 \* | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 \* | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE \* | Depends on to support HATEOAS as REST API. |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke.log4jdbc-remix) |
