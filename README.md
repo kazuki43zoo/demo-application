@@ -49,7 +49,9 @@ The following libraries are version up from version that TERASOLUNA Server Frame
 | Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| Spring IO Platform | 1.1.3.RELEASE | 2.0.0.BUILD-SNAPSHOT |
+| MyBatis | 3.3.0 | 3.2.8 |
+| MyBatis-Spring | 1.2.3 | 1.2.2 |
+| Spring IO Platform | 2.0.0.BUILD-SNAPSHOT | 1.1.3.RELEASE |
 
 ## 2.3. Java package Structure
 
