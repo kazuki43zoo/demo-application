@@ -121,6 +121,7 @@
             ,first_name
             ,last_name
             ,enabled
+            ,enabled_auto_login
         )
         VALUES
         (
@@ -131,6 +132,7 @@
             ,#{firstName}
             ,#{lastName}
             ,#{enabled}
+            ,#{enabledAutoLogin}
         );
     </insert>
 
