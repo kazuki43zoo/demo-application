@@ -42,6 +42,22 @@
             <id>terasoluna-gfw-snapshots</id>
             <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-snapshots/</url>
         </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -59,12 +75,12 @@
 
     <properties>
 
+        <io.spring.platform.version>2.0.0.BUILD-SNAPSHOT</io.spring.platform.version>
         <org.mybatis.version>3.3.0</org.mybatis.version>
         <org.mybatis.spring.version>1.2.3</org.mybatis.spring.version>
 
         <!-- for dependency library version (Project-specific) -->
         <org.bgee.log4jdbc-log4j2.version>1.16</org.bgee.log4jdbc-log4j2.version>
-        <cglib.version>2.2.2</cglib.version>
 
         <!-- for build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
