@@ -36,7 +36,7 @@
                 <constructor-arg index="0" ref="hateoasPageableHandlerMethodArgumentResolver"/>
                 <constructor-arg index="1"><null/></constructor-arg>
             </bean>
-            <bean class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver"/>
+            <bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver"/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 

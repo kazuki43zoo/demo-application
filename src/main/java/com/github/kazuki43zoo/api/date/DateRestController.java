@@ -21,7 +21,7 @@ public class DateRestController {
     @Inject
     JodaTimeDateFactory dateFactory;
 
-    @RequestMapping(value = "/currentDateTime", method = RequestMethod.GET)
+    @RequestMapping(path = "/currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public DateResource getCurrentTimeDate() {
         DateResource responseResource = new DateResource();

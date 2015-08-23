@@ -105,7 +105,7 @@ public class TimeCardRestController {
                 targetMonth, timeCard);
     }
 
-    @RequestMapping(value = "/{targetDay}", method = {RequestMethod.HEAD, RequestMethod.GET})
+    @RequestMapping(path = "/{targetDay}", method = {RequestMethod.HEAD, RequestMethod.GET})
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource getDailyAttendance(
             @CurrentUser CustomUserDetails authenticatedUser,
@@ -127,7 +127,7 @@ public class TimeCardRestController {
         return resource;
     }
 
-    @RequestMapping(value = "/{targetDay}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{targetDay}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void putDailyAttendance(
             @CurrentUser CustomUserDetails authenticatedUser,

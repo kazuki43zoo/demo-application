@@ -11,7 +11,7 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 public class HomeController {
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(value = "/")
+    @RequestMapping("/")
     public String home() {
         return "welcome/home";
     }

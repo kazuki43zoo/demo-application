@@ -90,7 +90,7 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    @RequestMapping(value = "authenticationHistories", method = RequestMethod.GET)
+    @RequestMapping(path = "authenticationHistories", method = RequestMethod.GET)
     public String showAuthenticationHistoryList(
             @CurrentUser CustomUserDetails authenticatedUser,
             Model model) {

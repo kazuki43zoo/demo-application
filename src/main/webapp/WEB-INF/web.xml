@@ -85,8 +85,7 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter
-        </filter-name>
+        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>

@@ -32,12 +32,7 @@
 
     <sec:http pattern="/api/**"
               auto-config="false"
-              use-expressions="true"
               entry-point-ref="http403ForbiddenEntryPoint">
-
-        <sec:csrf/>
-
-        <sec:headers />
 
         <sec:custom-filter
                 ref="userIdMDCPutFilter"
@@ -45,22 +40,18 @@
 
         <sec:intercept-url
                 pattern="/api/*/timecards/**"
-                access="hasAnyRole('ROLE_EMPLOYEE')"/>
+                access="hasAnyRole('EMPLOYEE')"/>
 
     </sec:http>
 
-    <sec:http auto-config="true" use-expressions="true">
+    <sec:http>
 
         <sec:access-denied-handler ref="customAccessDeniedHandler"/>
 
         <sec:csrf request-matcher-ref="customCsrfRequestMatcher"/>
 
         <sec:headers>
-            <sec:cache-control/>
             <sec:frame-options policy="SAMEORIGIN"/>
-            <sec:hsts/>
-            <sec:content-type-options/>
-            <sec:xss-protection/>
         </sec:headers>
 
         <sec:session-management
@@ -93,16 +84,16 @@
 
         <sec:intercept-url
                 pattern="/admin/**"
-                access="hasRole('ROLE_ADMIN')"/>
+                access="hasRole('ADMIN')"/>
         <sec:intercept-url
                 pattern="/vendor/h2/**"
-                access="hasRole('ROLE_ADMIN')"/>
+                access="hasRole('ADMIN')"/>
         <sec:intercept-url
                 pattern="/profile/**"
-                access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+                access="hasAnyRole('ADMIN','USER')"/>
         <sec:intercept-url
                 pattern="/timecards/**"
-                access="hasAnyRole('ROLE_EMPLOYEE')"/>
+                access="hasAnyRole('EMPLOYEE')"/>
         <sec:intercept-url
                 pattern="/accounts/**"
                 access="hasRole('ROLE_ACCOUNTMNG')"/>

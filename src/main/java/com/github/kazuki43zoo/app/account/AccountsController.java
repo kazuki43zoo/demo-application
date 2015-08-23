@@ -53,7 +53,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(value = "{accountUuid}", method = RequestMethod.GET)
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.GET)
     public String show(
             @PathVariable("accountUuid") String accountUuid,
             Model model) {
@@ -104,7 +104,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
-    @RequestMapping(value = "{accountUuid}", method = RequestMethod.GET, params = "form=edit")
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.GET, params = "form=edit")
     public String editForm(
             @PathVariable("accountUuid") String accountUuid,
             AccountForm form,
@@ -121,7 +121,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "edit")
-    @RequestMapping(value = "{accountUuid}", method = RequestMethod.PUT)
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.PUT)
     public String edit(
             @PathVariable("accountUuid") String accountUuid,
             @Validated AccountForm form,
@@ -158,7 +158,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(value = "{accountUuid}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.DELETE)
     public String delete(
             @PathVariable("accountUuid") String accountUuid,
             RedirectAttributes redirectAttributes,
@@ -173,7 +173,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(value = "{accountUuid}/unlock", method = RequestMethod.POST)
+    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.POST)
     public String unlock(
             @PathVariable("accountUuid") String accountUuid,
             RedirectAttributes redirectAttributes,

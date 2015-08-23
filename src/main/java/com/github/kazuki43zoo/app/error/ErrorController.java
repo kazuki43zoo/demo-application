@@ -21,7 +21,7 @@ public class ErrorController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(path = "login", method = RequestMethod.POST)
     public String handleLoginError(
             LoginForm form,
             RedirectAttributes redirectAttributes,

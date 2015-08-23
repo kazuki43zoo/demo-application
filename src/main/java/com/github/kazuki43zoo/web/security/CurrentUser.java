@@ -1,6 +1,7 @@
 package com.github.kazuki43zoo.web.security;
 
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.lang.annotation.*;
 

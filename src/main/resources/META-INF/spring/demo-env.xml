@@ -38,8 +38,8 @@
     <jdbc:initialize-database
             data-source="dataSource"
             ignore-failures="ALL">
-        <jdbc:script location="classpath:database/${database}-ddl.sql"/>
-        <jdbc:script location="classpath:database/${database}-dml.sql"/>
+        <jdbc:script location="classpath:database/${database}-ddl.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:database/${database}-dml.sql" encoding="UTF-8"/>
     </jdbc:initialize-database>
 
 </beans>
