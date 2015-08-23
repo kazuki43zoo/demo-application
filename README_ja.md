@@ -1,9 +1,9 @@
 # 1. Demo Application
 
-このアプリケーションは、[TERASOLUNA Global Framework](http://terasoluna.org)用のサンプルアプリケーションです。<br>
+このアプリケーションは、[TERASOLUNA Server Framework for Java (5.x)](http://terasoluna.org)用のサンプルアプリケーションです。<br>
 **現在、このアプリケーションは開発中です。**
 
-このアプリケーションは、[TERASOLUNA Global Framework Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
+このアプリケーションは、[TERASOLUNA Server Framework for Java (5.x) Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
 
 # 2. Application Structure
 
@@ -12,15 +12,15 @@
 
 | レイヤ | コンポーネント/ライブラリ | 主な役割 |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [jQuery 2.1.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
-|                      | [AngularJS 1.2.26](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
-|                      | [Bootstrap 3.2.0](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
+| Client Layer         | [jQuery 2.1.4](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
+|                      | [AngularJS 1.2.28](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
+|                      | [Bootstrap 3.3.5](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
-| Application Layer    | [Spring Security 3.2.5.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.1.1.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.0.3.Final](http://hibernate.org/validator/) を使用しています。|
+|                      | [Spring Framework 4.1.7.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spring Security 3.2.7.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spring MVC 4.1.7.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.1.3.Final](http://hibernate.org/validator/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
 |                      | JSPs | Formデータやドメインオブジェクトなどにアクセスし、プレゼンテーション用のコンポーネント(HTMLなど)を生成します。 |
@@ -28,29 +28,25 @@
 |                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
 |                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
 | Infrastructure Layer | [MyBatis 3.2.8](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
-| Libraries            | [TERASOLUNA Global Framework Common Library 1.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
 
-以下のライブラリは、TERASOLUNA Global Framewrokと関係がないアプリケーション独自の依存ライブラリです。
+以下のライブラリは、TERASOLUNA Server Framework for Java (5.x)と関係がないアプリケーション独自の依存ライブラリです。
 
 | ライブラリ(Group Id:Artifact Id) | バージョン | 説明 |
 | ----- | :-----:| --------------------- |
-| [org.apache.commons:commons-dbcp2](http://commons.apache.org/proper/commons-dbcp/) | 2.0.1 | データソース（コネクションプーリング）を利用するために依存しています。commons-dbcpの後継ライブラリです。 |
-| [com.h2database:h2](http://www.h2database.com/) | 1.3.176 | H2データベースにアクセスするために依存しています。 |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.6 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
-| [javax.transaction:javax.transaction-api](http://jta-spec.java.net) | 1.2 | Java標準の `@java.transaction.Transactinal` アノテーションを使用するために依存しています。 |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.187 | H2データベースにアクセスするために依存しています。 |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.14.8 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.16.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 
-以下のライブラリは、TERASOLUNA Global Frameworkが依存しているバージョンからバージョンをアップしています。バージョンアップしている理由は、最新バージョンを試すためです。
+以下のライブラリは、TERASOLUNA Server Framework for Java (5.x) Frameworkが依存しているバージョンからバージョンをアップしています。バージョンアップしている理由は、最新バージョンを試すためです。
 
-| ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA<br>Global Framework |
+| ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
-| org.springframework | 4.1.1.RELEASE | 4.0.7.RELEASE |
-| commons-dbcp | exclusion | 1.4 |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
 
 ## 2.3. Java package Structure
