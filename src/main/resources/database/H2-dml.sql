@@ -124,5 +124,21 @@ INSERT INTO happy_monday_holiday VALUES(10, 2, 'Health and Sports Day', '体育�
 
 INSERT INTO seasonal_holiday VALUES( '2014-09-23', 'Autumnal Equinox Day', '秋分の日');
 INSERT INTO seasonal_holiday VALUES( '2015-03-21', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2015-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2016-03-20', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2016-09-22', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2017-03-20', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2017-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2018-03-21', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2018-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2019-03-21', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2019-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2020-03-20', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2020-09-22', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2021-03-20', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2021-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2022-03-21', 'Vernal Equinox Day', '春分の日');
+INSERT INTO seasonal_holiday VALUES( '2022-09-23', 'Autumnal Equinox Day', '秋分の日');
+INSERT INTO seasonal_holiday VALUES( '2023-03-21', 'Vernal Equinox Day', '春分の日');
 
 COMMIT;
