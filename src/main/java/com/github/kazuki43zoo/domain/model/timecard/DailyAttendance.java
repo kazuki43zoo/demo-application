@@ -64,7 +64,8 @@ public class DailyAttendance implements Serializable {
         if (targetDate != null) {
             if ((targetDate.getDayOfWeek() == DateTimeConstants.SATURDAY)
                     || (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY)
-                    || holidays.containsKey(targetDate)) {
+                    || holidays.containsKey(targetDate)
+                    || (holidays.containsKey(targetDate.minusDays(1)) && holidays.containsKey(targetDate.plusDays(1)))) {
                 this.holiday = true;
             }
         }
