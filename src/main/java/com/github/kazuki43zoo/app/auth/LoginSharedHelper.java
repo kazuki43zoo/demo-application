@@ -18,7 +18,7 @@ public class LoginSharedHelper {
         if (account != null) {
             enabledAutoLogin = account.isEnabledAutoLogin();
         }
-        return "forward:/auth/authenticate?remember_me=" + enabledAutoLogin;
+        return "forward:/app/auth/authenticate?remember-me=" + enabledAutoLogin;
 
     }
 

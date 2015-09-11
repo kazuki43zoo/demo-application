@@ -87,7 +87,7 @@ public class ProfileController {
         redirectAttributes.addFlashAttribute(
                 Message.ACCOUNT_PROFILE_EDITED.resultMessages());
 
-        return "redirect:/profile";
+        return "redirect:/app/profile";
     }
 
     @RequestMapping(path = "authenticationHistories", method = RequestMethod.GET)

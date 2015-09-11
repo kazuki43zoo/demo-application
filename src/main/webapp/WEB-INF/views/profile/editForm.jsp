@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form:form action="${contextPath}/profile" class="form-horizontal" method="post"
+<form:form action="${contextPath}/app/profile" class="form-horizontal" method="post"
            modelAttribute="profileForm">
 
     <div class="form-group">
@@ -43,7 +43,7 @@
                 <span class="glyphicon glyphicon-floppy-save"></span>
                 Save
             </button>
-            <a href="${contextPath}/profile" class="btn btn-default">
+            <a href="${contextPath}/app/profile" class="btn btn-default">
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Back
             </a>

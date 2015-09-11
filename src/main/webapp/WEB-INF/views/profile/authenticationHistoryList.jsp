@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<a href="${contextPath}/profile/authenticationHistories"
+<a href="${contextPath}/app/profile/authenticationHistories"
    class="btn btn-default pull-right"> <span
         class="glyphicon glyphicon-refresh"></span> Refresh
 </a>

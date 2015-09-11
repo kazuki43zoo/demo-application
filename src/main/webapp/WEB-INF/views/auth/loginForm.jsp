@@ -10,7 +10,8 @@
         </spring:nestedPath>
     </spring:hasBindErrors>
 </c:if>
-<form:form action="${contextPath}/auth/login" class="navbar-form" method="post" modelAttribute="loginForm">
+<c:url value="/app/auth/login" var="loginUrl"/>
+<form:form action="${loginUrl}" class="navbar-form" modelAttribute="loginForm">
     <div class="form-group">
         <spring:message var="labelAccountId" code="accountId" />
         <form:input

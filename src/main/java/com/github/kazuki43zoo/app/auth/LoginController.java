@@ -32,7 +32,7 @@ public class LoginController {
     public String encourageLogin(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(
                 Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
-        return "redirect:/auth/login";
+        return "redirect:/app/auth/login";
     }
 
     @TransactionTokenCheck

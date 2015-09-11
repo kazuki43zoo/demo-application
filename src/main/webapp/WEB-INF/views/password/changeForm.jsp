@@ -1,5 +1,5 @@
 <t:messagesPanel/>
-<form:form action="${contextPath}/password" class="form-horizontal"
+<form:form action="${contextPath}/app/password" class="form-horizontal"
            method="post"
            modelAttribute="passwordForm">
 

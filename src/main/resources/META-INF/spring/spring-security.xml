@@ -23,54 +23,35 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd
        ">
 
-    <sec:http pattern="/resources/**"
-              security="none"/>
+    <sec:http pattern="/resources/**" security="none"/>
 
-    <sec:http pattern="/auth/logout\?success"
-              request-matcher="regex"
-              security="none"/>
+    <sec:http pattern="/app/auth/logout\?success" request-matcher="regex" security="none"/>
 
-    <sec:http pattern="/api/**"
-              auto-config="false"
-              entry-point-ref="http403ForbiddenEntryPoint">
-
-        <sec:custom-filter
-                ref="userIdMDCPutFilter"
-                after="ANONYMOUS_FILTER"/>
-
-        <sec:intercept-url
-                pattern="/api/*/timecards/**"
-                access="hasAnyRole('EMPLOYEE')"/>
-
-    </sec:http>
-
-    <sec:http>
+    <sec:http pattern="/app/**">
 
         <sec:access-denied-handler ref="customAccessDeniedHandler"/>
-
-        <sec:csrf request-matcher-ref="customCsrfRequestMatcher"/>
 
         <sec:headers>
             <sec:frame-options policy="SAMEORIGIN"/>
         </sec:headers>
 
         <sec:session-management
-                invalid-session-url="/error/invalidSession">
+                invalid-session-url="/app/error/invalidSession">
             <sec:concurrency-control
                     max-sessions="1"
                     error-if-maximum-exceeded="true" />
         </sec:session-management>
 
         <sec:form-login
-                login-processing-url="/auth/authenticate"
-                login-page="/auth/login?encourage"
+                login-processing-url="/app/auth/authenticate"
+                login-page="/app/auth/login?encourage"
                 username-parameter="${security.login.parameter.username}"
                 password-parameter="${security.login.parameter.password}"
                 authentication-details-source-ref="customAuthenticationDetailsSource"
                 authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
 
         <sec:logout
-                logout-url="/auth/logout"
+                logout-url="/app/auth/logout"
                 delete-cookies="JSESSIONID"
                 success-handler-ref="customLogoutSuccessHandler"/>
 
@@ -82,24 +63,22 @@
                 ref="userIdMDCPutFilter"
                 after="ANONYMOUS_FILTER"/>
 
-        <sec:intercept-url
-                pattern="/admin/**"
-                access="hasRole('ADMIN')"/>
-        <sec:intercept-url
-                pattern="/vendor/h2/**"
-                access="hasRole('ADMIN')"/>
-        <sec:intercept-url
-                pattern="/profile/**"
-                access="hasAnyRole('ADMIN','USER')"/>
-        <sec:intercept-url
-                pattern="/timecards/**"
-                access="hasAnyRole('EMPLOYEE')"/>
-        <sec:intercept-url
-                pattern="/accounts/**"
-                access="hasRole('ROLE_ACCOUNTMNG')"/>
-        <sec:intercept-url
-                pattern="/auth/login"
-                access="!isAuthenticated()"/>
+        <sec:intercept-url pattern="/app/admin/**" access="hasRole('ADMIN')"/>
+        <sec:intercept-url pattern="/app/vendor/h2/**" access="hasRole('ADMIN')"/>
+        <sec:intercept-url pattern="/app/profile/**" access="hasAnyRole('ADMIN','USER')"/>
+        <sec:intercept-url pattern="/app/timecards/**" access="hasAnyRole('EMPLOYEE')"/>
+        <sec:intercept-url pattern="/app/accounts/**" access="hasRole('ROLE_ACCOUNTMNG')"/>
+        <sec:intercept-url pattern="/app/auth/login" access="!isAuthenticated()"/>
+
+    </sec:http>
+
+    <sec:http pattern="/api/**"
+              auto-config="false"
+              entry-point-ref="http403ForbiddenEntryPoint">
+
+        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
+
+        <sec:intercept-url pattern="/api/*/timecards/**" access="hasAnyRole('EMPLOYEE')"/>
 
     </sec:http>
 
@@ -122,8 +101,6 @@
           c:userDetailsService-ref="customUserDetailsService"
           c:tokenRepository-ref="rememberMeTokenRepository"
           p:authenticationDetailsSource-ref="customAuthenticationDetailsSource"
-          p:parameter="remember_me"
-          p:cookieName="remember_me"
           p:tokenValiditySeconds="#{30 * 24 * 60 * 60}" />
 
     <!-- Remember Me Token Repository -->
@@ -165,11 +142,11 @@
     <bean id="customAuthenticationFailureHandler"
           class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
           p:useForward="true"
-          p:defaultFailureUrl="/error/login">
+          p:defaultFailureUrl="/app/error/login">
         <property name="exceptionMappings">
             <util:map>
                 <entry key="org.springframework.security.authentication.CredentialsExpiredException"
-                       value="/password?encourageChange"/>
+                       value="/app/password?encourageChange"/>
             </util:map>
         </property>
     </bean>
@@ -177,28 +154,7 @@
     <!-- LogoutSuccessHandler -->
     <bean id="customLogoutSuccessHandler"
           class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
-          p:defaultTargetUrl="/auth/logout?success" />
-
-    <!-- CsrfRequestMatcher -->
-    <bean id="customCsrfRequestMatcher"
-          class="org.springframework.security.web.util.matcher.AndRequestMatcher">
-        <constructor-arg>
-            <util:list>
-                <bean class="org.springframework.security.web.csrf.CsrfFilter$DefaultRequiresCsrfMatcher"/>
-                <bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher"
-                      c:requestMatcher-ref="csrfExclusionPathMatcher" />
-            </util:list>
-        </constructor-arg>
-    </bean>
-    <bean id="csrfExclusionPathMatcher"
-          class="org.springframework.security.web.util.matcher.OrRequestMatcher">
-        <constructor-arg>
-            <util:list>
-                <bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher"
-                      c:pattern="/vendor/h2/**"/>
-            </util:list>
-        </constructor-arg>
-    </bean>
+          p:defaultTargetUrl="/app/auth/logout?success" />
 
     <!-- UserIdMDCPutFilter -->
     <bean id="userIdMDCPutFilter"

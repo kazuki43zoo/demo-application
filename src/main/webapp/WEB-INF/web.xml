@@ -85,19 +85,6 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>customWebInvocationPrivilegeEvaluatorProvideFilter</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>CustomWebInvocationPrivilegeEvaluatorProvideFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
         <filter-name>ResourceUrlEncodingFilter</filter-name>
         <filter-class>org.springframework.web.servlet.resource.ResourceUrlEncodingFilter</filter-class>
     </filter>
@@ -116,7 +103,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SpringSecurityFilterChain</filter-name>
-        <url-pattern>/auth/authenticate</url-pattern>
+        <url-pattern>/app/auth/authenticate</url-pattern>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
@@ -136,6 +123,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>
+        <url-pattern>/app/*</url-pattern>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
@@ -196,6 +184,9 @@
         <location>/WEB-INF/views/common/error/unhandledSystemError.html</location>
     </error-page>
 
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+    </welcome-file-list>
     <session-config>
         <session-timeout>60</session-timeout>
         <cookie-config>

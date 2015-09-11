@@ -169,7 +169,7 @@ public class AccountsController {
         transactionTokenContext.removeToken();
 
         redirectAttributes.addFlashAttribute(Message.ACCOUNT_DELETED.resultMessages());
-        return "redirect:/accounts";
+        return "redirect:/app/accounts";
     }
 
     @TransactionTokenCheck
@@ -201,7 +201,7 @@ public class AccountsController {
             Message message) {
         redirectAttributes.addFlashAttribute(message.resultMessages());
         redirectAttributes.addAttribute("accountUuid", accountUuid);
-        return "redirect:/accounts/{accountUuid}";
+        return "redirect:/app/accounts/{accountUuid}";
     }
 
 }

@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form action="${contextPath}/profile" class="form-horizontal" method="get">
+<form action="${contextPath}/app/profile" class="form-horizontal" method="get">
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">

@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form action="${contextPath}/accounts" class="form-horizontal" method="get">
+<form action="${contextPath}/app/accounts" class="form-horizontal" method="get">
     <spring:nestedPath path="accountsSearchQuery">
         <div class="form-group">
             <div class="col-sm-4">
@@ -29,7 +29,7 @@
                 <span class="glyphicon glyphicon-search"></span>
                 Filter
             </button>
-            <a href="${contextPath}/accounts?form=create" class="btn btn-default pull-right">
+            <a href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
                 <span class="glyphicon glyphicon-plus"></span>
                 Create
             </a>
@@ -53,7 +53,7 @@
         <tr>
             <td>${f:h(rowStatus.count)}</td>
             <td>
-                <a href="${contextPath}/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a>
+                <a href="${contextPath}/app/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a>
             </td>
             <td>${f:h(account.firstName)}&nbsp;${f:h(account.lastName)}</td>
             <td>

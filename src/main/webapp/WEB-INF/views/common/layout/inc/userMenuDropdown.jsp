@@ -9,15 +9,15 @@
             <b class="caret"></b>
         </a>
         <ul class="dropdown-menu pull-right">
-            <sec:authorize url="/profile">
+            <sec:authorize url="/app/profile">
                 <li>
-                    <a id="profileUserMenuLink" href="${contextPath}/profile">
+                    <a id="profileUserMenuLink" href="${contextPath}/app/profile">
                         <span class="glyphicon glyphicon-edit"></span>
                         <spring:message code="userMenu.editProfile" />
                     </a>
                 </li>
                 <li>
-                    <a id="authenticationHistoriesUserMenuLink" href="${contextPath}/profile/authenticationHistories">
+                    <a id="authenticationHistoriesUserMenuLink" href="${contextPath}/app/profile/authenticationHistories">
                         <span class="glyphicon glyphicon-list"></span>
                         <spring:message code="userMenu.authenticationHistories"/>
                     </a>
@@ -25,7 +25,7 @@
                 <li class="divider"></li>
             </sec:authorize>
             <li>
-                <a id="passwordUserMenuLink" href="${contextPath}/password">
+                <a id="passwordUserMenuLink" href="${contextPath}/app/password">
                     <span class="glyphicon glyphicon-lock"></span>
                     <spring:message code="userMenu.changePassword"/>
                 </a>
@@ -41,5 +41,5 @@
     </li>
 </ul>
 
-<form:form id="logoutForm" action="${contextPath}/auth/logout" class="sr-only"/>
+<form:form id="logoutForm" action="${contextPath}/app/auth/logout" class="sr-only"/>
 
