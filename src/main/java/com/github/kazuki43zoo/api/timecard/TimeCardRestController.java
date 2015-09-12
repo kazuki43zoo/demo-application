@@ -55,18 +55,15 @@ public class TimeCardRestController {
             @PathVariable("targetMonth") @MonthFormat LocalDate targetMonth) {
 
         // retrieve entity.
-        TimeCard timeCard = timeCardService.getTimeCard(
-                authenticatedUser.getAccount().getAccountUuid(), targetMonth);
+        TimeCard timeCard = timeCardService.getTimeCard(authenticatedUser.getAccount().getAccountUuid(), targetMonth);
         boolean stored = true;
         if (timeCard == null) {
             stored = false;
-            timeCard = timeCardService.getDefaultTimeCard(
-                    authenticatedUser.getAccount().getAccountUuid(), targetMonth);
+            timeCard = timeCardService.getDefaultTimeCard(authenticatedUser.getAccount().getAccountUuid(), targetMonth);
         }
         WorkPlace defaultWorkPlace;
         if (timeCard.getWorkPlace() != null) {
-            defaultWorkPlace = workPlaceSharedService.getWorkPlace(
-                    timeCard.getWorkPlace().getWorkPlaceUuid());
+            defaultWorkPlace = workPlaceSharedService.getWorkPlace(timeCard.getWorkPlace().getWorkPlaceUuid());
         } else {
             defaultWorkPlace = workPlaceSharedService.getMainOffice();
         }
@@ -77,12 +74,9 @@ public class TimeCardRestController {
         resource.setWorkPlace(defaultWorkPlace);
 
         // generate links.
-        resource.add(linkTo(linkController.getTimeCard(
-                authenticatedUser, targetMonth)).withSelfRel());
+        resource.add(linkTo(linkController.getTimeCard(authenticatedUser, targetMonth)).withSelfRel());
         for (DailyAttendanceResource attendance : resource.getAttendances()) {
-            Link self = linkTo(linkController.getDailyAttendance(
-                    authenticatedUser, targetMonth,
-                    attendance.getTargetDate().getDayOfMonth())).withSelfRel();
+            Link self = linkTo(linkController.getDailyAttendance(authenticatedUser, targetMonth, attendance.getTargetDate().getDayOfMonth())).withSelfRel();
             attendance.add(self);
         }
 
@@ -100,9 +94,7 @@ public class TimeCardRestController {
         TimeCard timeCard = beanMapper.map(resource, TimeCard.class);
 
         // save entity.
-        timeCardService.saveTimeCard(
-                authenticatedUser.getAccount().getAccountUuid(),
-                targetMonth, timeCard);
+        timeCardService.saveTimeCard(authenticatedUser.getAccount().getAccountUuid(), targetMonth, timeCard);
     }
 
     @RequestMapping(path = "/{targetDay}", method = {RequestMethod.HEAD, RequestMethod.GET})
@@ -113,17 +105,13 @@ public class TimeCardRestController {
             @PathVariable("targetDay") int targetDay) {
 
         // retrieve entity.
-        DailyAttendance attendance = timeCardService.getDailyAttendance(
-                authenticatedUser.getAccount().getAccountUuid(),
-                targetMonth.plusDays(targetDay - 1));
+        DailyAttendance attendance = timeCardService.getDailyAttendance(authenticatedUser.getAccount().getAccountUuid(), targetMonth.plusDays(targetDay - 1));
 
         // convert entity -> resource.
-        DailyAttendanceResource resource = beanMapper.map(
-                attendance, DailyAttendanceResource.class);
+        DailyAttendanceResource resource = beanMapper.map(attendance, DailyAttendanceResource.class);
 
         // generate link.
-        resource.add(linkTo(linkController.getDailyAttendance(
-                authenticatedUser, targetMonth, targetDay)).withSelfRel());
+        resource.add(linkTo(linkController.getDailyAttendance(authenticatedUser, targetMonth, targetDay)).withSelfRel());
         return resource;
     }
 
@@ -136,13 +124,10 @@ public class TimeCardRestController {
             @RequestBody @Validated DailyAttendanceResource resource) {
 
         // convert resource -> entity.
-        DailyAttendance attendance =
-                beanMapper.map(resource, DailyAttendance.class);
+        DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
 
         // save entity.
-        timeCardService.saveDailyAttendance(
-                authenticatedUser.getAccount().getAccountUuid(),
-                targetMonth.plusDays(targetDay - 1), attendance);
+        timeCardService.saveDailyAttendance(authenticatedUser.getAccount().getAccountUuid(), targetMonth.plusDays(targetDay - 1), attendance);
     }
 
 }

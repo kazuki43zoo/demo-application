@@ -6,10 +6,13 @@ import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.Size;
 import java.lang.annotation.*;
 
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 @Documented
 @Constraint(validatedBy = {})
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
 @ReportAsSingleViolation
 @Size(min = 8)
 public @interface Password {
@@ -20,10 +23,10 @@ public @interface Password {
 
     Class<? extends Payload>[] payload() default {};
 
-    @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
-    @Retention(RetentionPolicy.RUNTIME)
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
     @Documented
-    public @interface List {
+    @interface List {
         Password[] value();
     }
 }

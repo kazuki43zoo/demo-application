@@ -16,21 +16,8 @@ public class ErrorController {
 
     @RequestMapping("invalidSession")
     public String handleSessionError(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(
-                Message.FW_VALID_SESSION_NOT_EXISTS.resultMessages());
+        redirectAttributes.addFlashAttribute(Message.FW_VALID_SESSION_NOT_EXISTS.resultMessages());
         return "redirect:/";
-    }
-
-    @RequestMapping(path = "login", method = RequestMethod.POST)
-    public String handleLoginError(
-            LoginForm form,
-            RedirectAttributes redirectAttributes,
-            HttpServletRequest request) {
-        redirectAttributes.addFlashAttribute(form);
-        redirectAttributes.addFlashAttribute(
-                WebAttributes.AUTHENTICATION_EXCEPTION,
-                request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
-        return "redirect:/auth/login";
     }
 
 }

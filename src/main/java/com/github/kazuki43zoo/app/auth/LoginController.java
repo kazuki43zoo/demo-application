@@ -14,38 +14,44 @@ import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-@RequestMapping("auth/login")
+import static com.github.kazuki43zoo.app.auth.LoginFormControllerAdvice.LoginFormModelAttribute;
+
+@RequestMapping("auth")
 @Controller
-@LoginFormControllerAdvice.LoginFormModelAttribute
+@LoginFormModelAttribute
 public class LoginController {
 
     @Inject
     LoginSharedHelper loginSharedHelper;
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path = "login", method = RequestMethod.GET)
     public String showLoginForm() {
         return "auth/loginForm";
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "encourage")
+    @RequestMapping(path = "login", method = RequestMethod.GET, params = "encourage")
     public String encourageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(
-                Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
+        redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
         return "redirect:/app/auth/login";
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.POST)
-    public String login(
-            @Validated LoginForm form,
-            BindingResult bindingResult) {
+    @RequestMapping(path = "login", method = RequestMethod.POST)
+    public String login(@Validated LoginForm form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return showLoginForm();
         }
-        return loginSharedHelper.generateAuthenticationProcessingUrl(
-                form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
+    }
+
+
+    @RequestMapping(path = "error", method = RequestMethod.POST)
+    public String handleLoginError(LoginForm form, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        redirectAttributes.addFlashAttribute(form);
+        redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
+        return "redirect:/app/auth/login";
     }
 
 }

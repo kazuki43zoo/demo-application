@@ -61,7 +61,14 @@ public class Account implements Serializable {
         return false;
     }
 
+    public boolean isPasswordInitialized() {
+        return getPasswordModifiedAt() != null;
+    }
+
     public boolean isPasswordNonExpired(DateTime currentDateTime, int passwordValidDays) {
+        if(getPasswordModifiedAt() == null){
+            return true;
+        }
         return !currentDateTime.isAfter(getPasswordModifiedAt().plusDays(passwordValidDays));
     }
 

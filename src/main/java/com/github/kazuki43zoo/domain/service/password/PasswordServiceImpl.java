@@ -30,10 +30,7 @@ public final class PasswordServiceImpl implements PasswordService {
     PasswordSharedService passwordSharedService;
 
     @Override
-    public Account change(
-            String accountId,
-            String rawCurrentPassword,
-            String rawNewPassword) {
+    public Account change(String accountId, String rawCurrentPassword, String rawNewPassword) {
         Account currentAccount = accountRepository.findOneByAccountId(accountId);
 
         authenticate(currentAccount, rawCurrentPassword);
@@ -48,16 +45,13 @@ public final class PasswordServiceImpl implements PasswordService {
         accountRepository.update(currentAccount);
         passwordSharedService.resetPasswordLock(currentAccount);
 
-        accountRepository.createPasswordHistory(new AccountPasswordHistory(
-                currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime));
+        accountRepository.createPasswordHistory(new AccountPasswordHistory(currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime));
 
         return currentAccount;
 
     }
 
-    private void authenticate(
-            Account currentAccount,
-            String rawPassword) {
+    private void authenticate(Account currentAccount, String rawPassword) {
         if (currentAccount == null) {
             throw new ResourceNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }

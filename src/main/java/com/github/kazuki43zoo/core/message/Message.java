@@ -42,7 +42,8 @@ public enum Message {
     // ---------------
     AUTH_ENCOURAGE_LOGIN(INFO, "i.demo.auth.0001"),
     AUTH_LOGOUT(SUCCESS, "i.demo.auth.0002"),
-    AUTH_ENCOURAGE_CHANGE_PASSWORD(DANGER, "e.demo.auth.2001"),
+    AUTH_ENCOURAGE_CHANGE_PASSWORD_NOT_INITIALIZED(DANGER, "e.demo.auth.2001"),
+    AUTH_ENCOURAGE_CHANGE_PASSWORD_EXPIRED(DANGER, "e.demo.auth.2002"),
     // ---------------
     // for security
     // ---------------
@@ -55,11 +56,11 @@ public enum Message {
     private final String code;
     private final String defaultMessage;
 
-    private Message(ResultMessageType type, String code) {
+    Message(ResultMessageType type, String code) {
         this(type, code, code);
     }
 
-    private Message(ResultMessageType type, String code, String defaultMessage) {
+    Message(ResultMessageType type, String code, String defaultMessage) {
         this.type = type;
         this.code = code;
         this.defaultMessage = defaultMessage;

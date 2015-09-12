@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Confirm(field = "password")
+@EqualsPropertyValues(property = "password", comparingProperty = "confirmPassword")
 @lombok.Data
 @lombok.ToString(exclude = {"password", "confirmPassword"})
 public class AccountForm implements Serializable {

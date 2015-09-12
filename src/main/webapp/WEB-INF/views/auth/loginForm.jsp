@@ -1,6 +1,5 @@
 <c:if test="${!param.including}">
-    <t:messagesPanel messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION"
-                     messagesType="danger"/>
+    <t:messagesPanel messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" messagesType="danger"/>
     <t:messagesPanel/>
     <spring:hasBindErrors name="loginForm">
         <spring:nestedPath path="loginForm">
@@ -11,22 +10,16 @@
     </spring:hasBindErrors>
 </c:if>
 <c:url value="/app/auth/login" var="loginUrl"/>
-<form:form action="${loginUrl}" class="navbar-form" modelAttribute="loginForm">
+<form:form method="post" action="${loginUrl}" modelAttribute="loginForm" class="navbar-form">
     <div class="form-group">
         <spring:message var="labelAccountId" code="accountId" />
-        <form:input
-                path="accountId"
-                class="form-control"
-                placeholder="${f:h(labelAccountId)}"/>
+        <form:input path="username" class="form-control" placeholder="${f:h(labelAccountId)}"/>
     </div>
     <div class="form-group">
         <spring:message var="labelPassword" code="password" />
-        <form:password
-                path="password"
-                class="form-control"
-                placeholder="${f:h(labelPassword)}"/>
+        <form:password path="password" class="form-control" placeholder="${f:h(labelPassword)}"/>
     </div>
-    <button class="btn">
+    <form:button class="btn">
         <span class="glyphicon glyphicon-log-in"></span>
-    </button>
+    </form:button>
 </form:form>

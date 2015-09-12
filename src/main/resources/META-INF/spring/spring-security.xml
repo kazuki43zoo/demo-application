@@ -35,18 +35,13 @@
             <sec:frame-options policy="SAMEORIGIN"/>
         </sec:headers>
 
-        <sec:session-management
-                invalid-session-url="/app/error/invalidSession">
-            <sec:concurrency-control
-                    max-sessions="1"
-                    error-if-maximum-exceeded="true" />
+        <sec:session-management invalid-session-url="/app/error/invalidSession">
+            <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
         </sec:session-management>
 
         <sec:form-login
                 login-processing-url="/app/auth/authenticate"
                 login-page="/app/auth/login?encourage"
-                username-parameter="${security.login.parameter.username}"
-                password-parameter="${security.login.parameter.password}"
                 authentication-details-source-ref="customAuthenticationDetailsSource"
                 authentication-failure-handler-ref="customAuthenticationFailureHandler"/>
 
@@ -55,13 +50,9 @@
                 delete-cookies="JSESSIONID"
                 success-handler-ref="customLogoutSuccessHandler"/>
 
-        <sec:remember-me
-                key="${security.rememberMe.key}"
-                services-ref="rememberMeServices"  />
+        <sec:remember-me key="${security.rememberMe.key}" services-ref="rememberMeServices"  />
 
-        <sec:custom-filter
-                ref="userIdMDCPutFilter"
-                after="ANONYMOUS_FILTER"/>
+        <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
 
         <sec:intercept-url pattern="/app/admin/**" access="hasRole('ADMIN')"/>
         <sec:intercept-url pattern="/app/vendor/h2/**" access="hasRole('ADMIN')"/>
@@ -72,9 +63,7 @@
 
     </sec:http>
 
-    <sec:http pattern="/api/**"
-              auto-config="false"
-              entry-point-ref="http403ForbiddenEntryPoint">
+    <sec:http pattern="/api/**" auto-config="false" entry-point-ref="http403ForbiddenEntryPoint">
 
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
 
@@ -91,12 +80,10 @@
     <!-- Scan Components -->
     <context:component-scan base-package="com.github.kazuki43zoo.web.security"/>
 
-    <bean id="http403ForbiddenEntryPoint"
-          class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+    <bean id="http403ForbiddenEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
     <!-- Remember Me Service -->
-    <bean id="rememberMeServices"
-          class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"
           c:key="${security.rememberMe.key}"
           c:userDetailsService-ref="customUserDetailsService"
           c:tokenRepository-ref="rememberMeTokenRepository"
@@ -104,8 +91,7 @@
           p:tokenValiditySeconds="#{30 * 24 * 60 * 60}" />
 
     <!-- Remember Me Token Repository -->
-    <bean id="rememberMeTokenRepository"
-          class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"
+    <bean id="rememberMeTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"
           p:jdbcTemplate-ref="jdbcTemplate" />
     <tx:advice id="persistentTokenRepositoryTxAdvice">
         <tx:attributes>
@@ -113,51 +99,36 @@
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut
-                id="persistentTokenRepositoryMethods"
-                expression="execution(* org.springframework.security.web.authentication.rememberme.PersistentTokenRepository.*(..))"/>
-        <aop:advisor
-                pointcut-ref="persistentTokenRepositoryMethods"
-                advice-ref="persistentTokenRepositoryTxAdvice"/>
+        <aop:pointcut id="persistentTokenRepositoryMethods" expression="execution(* org.springframework.security.web.authentication.rememberme.PersistentTokenRepository.*(..))"/>
+        <aop:advisor pointcut-ref="persistentTokenRepositoryMethods" advice-ref="persistentTokenRepositoryTxAdvice"/>
     </aop:config>
 
     <!-- AccessDeniedHandler -->
-    <bean id="customAccessDeniedHandler"
-          class="org.springframework.security.web.access.DelegatingAccessDeniedHandler">
-        <constructor-arg index="0">
+    <bean id="customAccessDeniedHandler" class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
+          p:errorPage="/WEB-INF/views/common/error/accessError.jsp"/>
+
+    <bean id="customAuthenticationFailureHandler" class="org.springframework.security.web.authentication.DelegatingAuthenticationFailureHandler">
+        <constructor-arg>
             <util:map>
-                <entry key="org.springframework.security.web.csrf.InvalidCsrfTokenException">
-                    <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-                          p:errorPage="/WEB-INF/views/common/error/csrfTokenError.jsp"/>
+                <entry key="org.springframework.security.authentication.CredentialsExpiredException">
+                    <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+                          p:useForward="true"
+                          p:defaultFailureUrl="/app/password?encourageChange="/>
                 </entry>
             </util:map>
         </constructor-arg>
-        <constructor-arg index="1">
-            <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl"
-                  p:errorPage="/WEB-INF/views/common/error/accessError.jsp"/>
+        <constructor-arg>
+            <bean class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
+                  p:useForward="true"
+                  p:defaultFailureUrl="/app/auth/error"/>
         </constructor-arg>
     </bean>
 
-    <!-- AuthenticationFailureHandler -->
-    <bean id="customAuthenticationFailureHandler"
-          class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
-          p:useForward="true"
-          p:defaultFailureUrl="/app/error/login">
-        <property name="exceptionMappings">
-            <util:map>
-                <entry key="org.springframework.security.authentication.CredentialsExpiredException"
-                       value="/app/password?encourageChange"/>
-            </util:map>
-        </property>
-    </bean>
-
     <!-- LogoutSuccessHandler -->
-    <bean id="customLogoutSuccessHandler"
-          class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
+    <bean id="customLogoutSuccessHandler" class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
           p:defaultTargetUrl="/app/auth/logout?success" />
 
     <!-- UserIdMDCPutFilter -->
-    <bean id="userIdMDCPutFilter"
-          class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>
+    <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>
 
 </beans>

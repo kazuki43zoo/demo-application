@@ -9,10 +9,7 @@ import java.io.IOException;
 public final class EmptyStringSerializer extends JsonSerializer<String> {
 
     @Override
-    public void serialize(
-            String value,
-            JsonGenerator jsonGenerator,
-            SerializerProvider provider) throws IOException {
+    public void serialize(String value, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
         jsonGenerator.writeString("");
     }
 

@@ -117,14 +117,14 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:META-INF/spring/spring-mvc.xml</param-value>
+            <param-value>classpath*:META-INF/spring/spring-mvc-app.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>
         <url-pattern>/app/*</url-pattern>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -1,22 +1,19 @@
 <t:messagesPanel/>
 
-<form:form action="${contextPath}/app/accounts"
-           class="form-horizontal"
-           method="post"
-           modelAttribute="accountForm">
+<form:form method="post" action="${contextPath}/app/accounts" modelAttribute="accountForm" class="form-horizontal">
 
     <jsp:include page="inc/accountForm.jsp"/>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <button class="btn btn-default">
-                <span class="glyphicon glyphicon-floppy-save"></span>
-                Save
-            </button>
             <a href="${contextPath}/app/accounts/" class="btn btn-default">
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Back
             </a>
+            <form:button class="btn btn-default">
+                <span class="glyphicon glyphicon-floppy-save"></span>
+                Save
+            </form:button>
         </div>
     </div>
 

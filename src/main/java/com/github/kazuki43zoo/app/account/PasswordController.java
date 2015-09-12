@@ -5,6 +5,7 @@ import com.github.kazuki43zoo.app.auth.LoginSharedHelper;
 import com.github.kazuki43zoo.core.exception.InvalidAccessException;
 import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.Account;
+import com.github.kazuki43zoo.domain.service.account.AccountSharedService;
 import com.github.kazuki43zoo.domain.service.password.PasswordService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.github.kazuki43zoo.web.security.CurrentUser;
@@ -36,13 +37,16 @@ public class PasswordController {
     LoginSharedHelper loginSharedHelper;
 
     @Inject
+    AccountSharedService accountSharedService;
+
+    @Inject
     Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {
         PasswordForm form = new PasswordForm();
         if (currentUser != null) {
-            form.setAccountId(currentUser.getAccount().getAccountId());
+            form.setUsername(currentUser.getAccount().getAccountId());
         }
         return form;
     }
@@ -53,11 +57,19 @@ public class PasswordController {
         return "password/changeForm";
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "encourageChange")
-    public String encourageChange(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(
-                Message.AUTH_ENCOURAGE_CHANGE_PASSWORD.resultMessages());
-        return "redirect:/password";
+    @RequestMapping(method = RequestMethod.POST, params = "encourageChange")
+    public String encourageChange(
+            PasswordForm form,
+            RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute(form);
+        Account account = accountSharedService.getAccount(form.getUsername());
+        if (account != null) {
+            Message message = (account.getPasswordModifiedAt() == null)
+                    ? Message.AUTH_ENCOURAGE_CHANGE_PASSWORD_NOT_INITIALIZED
+                    : Message.AUTH_ENCOURAGE_CHANGE_PASSWORD_EXPIRED;
+            redirectAttributes.addFlashAttribute(message.resultMessages());
+        }
+        return "redirect:/app/password";
     }
 
     @TransactionTokenCheck
@@ -76,14 +88,8 @@ public class PasswordController {
 
         Account changedAccount;
         try {
-            String accountId;
-            if (currentUser != null) {
-                accountId = currentUser.getAccount().getAccountId();
-            } else {
-                accountId = form.getAccountId();
-            }
-            changedAccount = passwordService.change(
-                    accountId, form.getCurrentPassword(), form.getPassword());
+            String accountId = (currentUser != null) ? currentUser.getAccount().getAccountId() : form.getUsername();
+            changedAccount = passwordService.change(accountId, form.getCurrentPassword(), form.getPassword());
         } catch (ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
@@ -93,15 +99,12 @@ public class PasswordController {
 
         if (currentUser != null) {
             beanMapper.map(changedAccount, currentUser.getAccount());
-            redirectAttributes.addFlashAttribute(
-                    Message.PASSWORD_CHANGED.resultMessages());
+            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/";
         } else {
-            redirectAttributes.addFlashAttribute(
-                    new LoginForm(form.getAccountId(), null));
-            redirectAttributes.addFlashAttribute(
-                    Message.PASSWORD_CHANGED.resultMessages());
-            return "redirect:/auth/login";
+            redirectAttributes.addFlashAttribute(new LoginForm(form.getUsername(), null));
+            redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
+            return "redirect:/app/auth/login";
         }
     }
 
@@ -123,8 +126,7 @@ public class PasswordController {
         }
 
         try {
-            passwordService.change(
-                    form.getAccountId(), form.getCurrentPassword(), form.getPassword());
+            passwordService.change(form.getUsername(), form.getCurrentPassword(), form.getPassword());
         } catch (ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
@@ -132,8 +134,7 @@ public class PasswordController {
 
         transactionTokenContext.removeToken();
 
-        return loginSharedHelper.generateAuthenticationProcessingUrl(
-                form.getAccountId());
+        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
     }
 
 }

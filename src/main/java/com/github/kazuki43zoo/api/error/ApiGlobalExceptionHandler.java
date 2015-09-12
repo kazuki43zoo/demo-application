@@ -40,8 +40,7 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
         final Object apiError;
         if (body == null) {
             String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-            apiError = apiErrorCreator.createApiError(
-                    request, errorCode, ex.getLocalizedMessage());
+            apiError = apiErrorCreator.createApiError(request, errorCode, ex.getLocalizedMessage());
         } else {
             apiError = body;
         }
@@ -73,8 +72,7 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         if (ex.getCause() instanceof Exception) {
-            return handleExceptionInternal(
-                    (Exception) ex.getCause(), null, headers, status, request);
+            return handleExceptionInternal((Exception) ex.getCause(), null, headers, status, request);
         } else {
             return handleExceptionInternal(ex, null, headers, status, request);
         }
@@ -92,24 +90,21 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleBusinessException(
             BusinessException ex,
             WebRequest request) {
-        return handleResultMessagesNotificationException(
-                ex, null, HttpStatus.CONFLICT, request);
+        return handleResultMessagesNotificationException(ex, null, HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler
     public ResponseEntity<Object> handleConcurrencyFailureException(
             ConcurrencyFailureException ex,
             WebRequest request) {
-        return handleExceptionInternal(
-                ex, null, null, HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, null, null, HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler
     public ResponseEntity<Object> handleSystemError(
             Exception ex,
             WebRequest request) {
-        return handleExceptionInternal(
-                ex, null, null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(ex, null, null, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
 
@@ -120,8 +115,7 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(
-                request, errorCode, bindingResult, ex.getMessage());
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode, bindingResult, ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
@@ -131,8 +125,7 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createResultMessagesApiError(
-                request, errorCode, ex.getResultMessages(), ex.getMessage());
+        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode, ex.getResultMessages(), ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 

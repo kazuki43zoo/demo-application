@@ -32,10 +32,8 @@ public class AuthenticationEventListeners {
 
         passwordSharedService.countUpPasswordFailureCount(failedAccountId);
 
-        AccountAuthenticationHistory authenticationHistory =
-                beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-        authenticationSharedService.createAuthenticationFailureHistory(
-                failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
+        AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        authenticationSharedService.createAuthenticationFailureHistory(failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
     }
 
     @EventListener
@@ -48,8 +46,7 @@ public class AuthenticationEventListeners {
     }
 
     private void createAuthenticationSuccessHistory(InteractiveAuthenticationSuccessEvent event, CustomUserDetails userDetails) {
-        AccountAuthenticationHistory authenticationHistory =
-                beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         AuthenticationType authenticationType;
         if (event.getAuthentication() instanceof RememberMeAuthenticationToken) {
             authenticationType = AuthenticationType.AUTO_LOGIN;
@@ -57,8 +54,7 @@ public class AuthenticationEventListeners {
             authenticationType = AuthenticationType.LOGIN;
         }
 
-        authenticationSharedService.createAuthenticationSuccessHistory(
-                userDetails.getAccount(), authenticationHistory, authenticationType);
+        authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, authenticationType);
     }
 
 }

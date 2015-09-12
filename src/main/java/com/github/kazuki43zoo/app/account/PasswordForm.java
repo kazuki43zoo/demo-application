@@ -1,12 +1,12 @@
 package com.github.kazuki43zoo.app.account;
 
-import com.github.kazuki43zoo.core.validation.Confirm;
+import com.github.kazuki43zoo.core.validation.EqualsPropertyValues;
 import com.github.kazuki43zoo.core.validation.Password;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Confirm(field = "password")
+@EqualsPropertyValues(property = "password", comparingProperty = "confirmPassword")
 @lombok.Data
 @lombok.ToString(exclude = {"currentPassword", "password", "confirmPassword"})
 public class PasswordForm implements Serializable {
@@ -14,7 +14,7 @@ public class PasswordForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    private String accountId;
+    private String username;
 
     @NotNull
     private String currentPassword;

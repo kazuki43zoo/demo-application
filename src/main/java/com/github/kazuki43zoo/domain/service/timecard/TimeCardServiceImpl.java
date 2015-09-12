@@ -30,9 +30,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
 
 
     @Override
-    public TimeCard getTimeCard(
-            String accountUuid,
-            LocalDate targetMonth) {
+    public TimeCard getTimeCard(String accountUuid, LocalDate targetMonth) {
         TimeCard timeCard = timeCardRepository.findOne(accountUuid, targetMonth);
         if (timeCard != null) {
             String defaultWorkPlaceUuid = null;
@@ -43,8 +41,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
             WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
             Map<LocalDate, Holiday> holidays = calendarSharedService.getHolidays(targetMonth);
             for (DailyAttendance attendance : timeCard.getAttendances()) {
-                attendance.setWorkPlace(workPlaceSharedService.getWorkPlaceDetail(attendance
-                        .getWorkPlace()));
+                attendance.setWorkPlace(workPlaceSharedService.getWorkPlaceDetail(attendance.getWorkPlace()));
                 attendance.calculate(defaultWorkPlace, mainOffice, holidays);
             }
         }
@@ -52,9 +49,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public TimeCard getDefaultTimeCard(
-            String accountUuid,
-            LocalDate targetMonth) {
+    public TimeCard getDefaultTimeCard(String accountUuid, LocalDate targetMonth) {
         TimeCard timeCard = new TimeCard();
         WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(null);
         WorkPlace mainOffice = workPlaceSharedService.getMainOffice();
@@ -69,10 +64,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public void saveTimeCard(
-            String accountUuid,
-            LocalDate targetMonth,
-            TimeCard timeCard) {
+    public void saveTimeCard(String accountUuid, LocalDate targetMonth, TimeCard timeCard) {
         TimeCard loadedTimeCard = timeCardRepository.findOne(accountUuid, targetMonth);
         timeCard.setAccountUuid(accountUuid);
         timeCard.setTargetMonth(targetMonth);
@@ -92,12 +84,8 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public void saveDailyAttendance(
-            String accountUuid,
-            LocalDate targetDate,
-            DailyAttendance attendance) {
-        DailyAttendance loadedAttendance = timeCardRepository.findOneDailyAttendance(accountUuid,
-                targetDate);
+    public void saveDailyAttendance(String accountUuid, LocalDate targetDate, DailyAttendance attendance) {
+        DailyAttendance loadedAttendance = timeCardRepository.findOneDailyAttendance(accountUuid, targetDate);
         if (loadedAttendance == null) {
             attendance.setAccountUuid(accountUuid);
             timeCardRepository.createDailyAttendance(attendance);
@@ -108,9 +96,7 @@ public final class TimeCardServiceImpl implements TimeCardService {
     }
 
     @Override
-    public DailyAttendance getDailyAttendance(
-            String accountUuid,
-            LocalDate targetDate) {
+    public DailyAttendance getDailyAttendance(String accountUuid, LocalDate targetDate) {
         return timeCardRepository.findOneDailyAttendance(accountUuid, targetDate);
     }
 

@@ -28,9 +28,7 @@ public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService 
     public void loadWorkPlaceOfMainOffice() {
         WorkPlace workPlaceOfMainOffice = getWorkPlace(WorkPlace.MAIN_OFFICE_UUID);
         if (workPlaceOfMainOffice == null) {
-            throw new SystemException(Message.FW_DATA_INCONSISTENCIES.code(),
-                    "Workplace record of main office has not been inserted. uuid : "
-                            + WorkPlace.MAIN_OFFICE_UUID);
+            throw new SystemException(Message.FW_DATA_INCONSISTENCIES.code(), "Workplace record of main office has not been inserted. uuid : " + WorkPlace.MAIN_OFFICE_UUID);
         }
     }
 

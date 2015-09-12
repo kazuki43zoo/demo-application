@@ -5,23 +5,24 @@ import javax.validation.Payload;
 import javax.validation.constraints.Size;
 import java.lang.annotation.*;
 
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 @Documented
 @Constraint(validatedBy = {})
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
 @Size(max = 128)
 public @interface LastName {
 
     String message() default "{com.github.kazuki43zoo.core.validation.LastName.message}";
-
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 
-    @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
-    @Retention(RetentionPolicy.RUNTIME)
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
     @Documented
-    public @interface List {
+    @interface List {
         LastName[] value();
     }
 }

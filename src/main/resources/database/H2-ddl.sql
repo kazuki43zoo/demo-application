@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS account(
     account_uuid nvarchar(36),
     account_id nvarchar(128) not null,
     password char(60) not null,
-    password_modified_at timestamp not null,
+    password_modified_at timestamp,
     first_name nvarchar(128) not null,
     last_name nvarchar(128),
     enabled boolean not null,

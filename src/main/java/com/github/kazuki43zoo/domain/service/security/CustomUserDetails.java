@@ -21,9 +21,7 @@ public final class CustomUserDetails extends User implements UserDetails {
             boolean accountNonExpired,
             boolean passwordNonExpired,
             boolean accountNonLock) {
-        super(account.getAccountId(), account.getPassword(), account.isEnabled(),
-                accountNonExpired, passwordNonExpired, accountNonLock,
-                toGrantedAuthorities(account));
+        super(account.getAccountId(), account.getPassword(), account.isEnabled(), accountNonExpired, passwordNonExpired, accountNonLock, toGrantedAuthorities(account));
         this.account = account;
     }
 

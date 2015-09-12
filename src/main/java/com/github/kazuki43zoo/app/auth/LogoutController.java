@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@RequestMapping("auth/logout")
+@RequestMapping("auth")
 @Controller
 public class LogoutController {
 
-    @RequestMapping(method = RequestMethod.GET, params = "success")
+    @RequestMapping(path = "logout", method = RequestMethod.GET, params = "success")
     public String logoutSuccess(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute(
-                Message.AUTH_LOGOUT.resultMessages());
+        redirectAttributes.addFlashAttribute(Message.AUTH_LOGOUT.resultMessages());
         return "redirect:/";
     }
 

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TimeCardController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewTimeCard(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            Model model) {
+    public String viewTimeCard(@CurrentUser CustomUserDetails authenticatedUser, Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "timecard/form";
     }

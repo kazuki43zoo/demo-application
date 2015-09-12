@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width"/>
     <meta name="contextPath" content="${contextPath}">
     <sec:csrfMetaTags />
-
     <title>${param.title}</title>
-    <link rel="stylesheet" href="<c:url value="/resources/vendor/bootstrap/dist/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/vendor/bootstrap/dist/css/bootstrap-theme.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/app/styles.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/static/vendor/bootstrap/dist/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/static/vendor/bootstrap/dist/css/bootstrap-theme.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/static/app/styles.css"/>">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -38,15 +37,15 @@
         <t:messagesPanel/>
     </div>
 </div>
-<script src="<c:url value="/resources/vendor/jquery/dist/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/bootstrap/dist/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/angular/angular.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/angular-resource/angular-resource.min.js"/>"></script>
-<script src="<c:url value="/resources/app/app.js"/>"></script>
-<script src="<c:url value="/resources/app/app-resources.js"/>"></script>
-<script src="<c:url value="/resources/app/app-filters.js"/>"></script>
-<script src="<c:url value="/resources/app/common/common-controllers.js"/>"></script>
-<script src="<c:url value="/resources/app/common/common-services.js"/>"></script>
-<script src="<c:url value="/resources/app/error/error.js"/>"></script>
+<script src="<c:url value="/resources/static/vendor/jquery/dist/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/static/vendor/bootstrap/dist/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/static/vendor/angular/angular.min.js"/>"></script>
+<script src="<c:url value="/resources/static/vendor/angular-resource/angular-resource.min.js"/>"></script>
+<script src="<c:url value="/resources/static/app/app.js"/>"></script>
+<script src="<c:url value="/resources/static/app/app-resources.js"/>"></script>
+<script src="<c:url value="/resources/static/app/app-filters.js"/>"></script>
+<script src="<c:url value="/resources/static/app/common/common-controllers.js"/>"></script>
+<script src="<c:url value="/resources/static/app/common/common-services.js"/>"></script>
+<script src="<c:url value="/resources/static/app/error/error.js"/>"></script>
 </body>
 </html>

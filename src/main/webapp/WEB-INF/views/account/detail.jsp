@@ -1,7 +1,5 @@
 <t:messagesPanel/>
-<form action="${contextPath}/app/accounts/${f:h(account.accountUuid)}"
-      class="form-horizontal"
-      method="get">
+<form method="get" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="form-horizontal">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <a href="${contextPath}/app/accounts" class="btn btn-default pull-left">
@@ -38,13 +36,5 @@
     </div>
 </form>
 
-<form:form id="deleteForm"
-           action="${contextPath}/app/accounts/${f:h(account.accountUuid)}"
-           class="sr-only" method="post">
-    <input type="hidden" name="_method" value="delete">
-</form:form>
-
-<form:form id="unlockForm"
-           action="${contextPath}/app/accounts/${f:h(account.accountUuid)}/unlock"
-           class="sr-only" method="post">
-</form:form>
+<form:form id="deleteForm" method="delete" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="sr-only" />
+<form:form id="unlockForm" method="patch" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}/unlock" class="sr-only"/>

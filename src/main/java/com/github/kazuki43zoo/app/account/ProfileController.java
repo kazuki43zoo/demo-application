@@ -52,7 +52,7 @@ public class ProfileController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.PATCH)
+    @RequestMapping(method = RequestMethod.PUT)
     public String save(
             @CurrentUser CustomUserDetails authenticatedUser,
             @Validated ProfileForm form,
@@ -66,8 +66,7 @@ public class ProfileController {
         }
 
         Account inputAccount = beanMapper.map(form, Account.class);
-        inputAccount.setAccountUuid(
-                authenticatedUser.getAccount().getAccountUuid());
+        inputAccount.setAccountUuid(authenticatedUser.getAccount().getAccountUuid());
 
         Account changedAccount;
         try {
@@ -84,8 +83,7 @@ public class ProfileController {
 
         transactionTokenContext.removeToken();
 
-        redirectAttributes.addFlashAttribute(
-                Message.ACCOUNT_PROFILE_EDITED.resultMessages());
+        redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.resultMessages());
 
         return "redirect:/app/profile";
     }
@@ -94,8 +92,7 @@ public class ProfileController {
     public String showAuthenticationHistoryList(
             @CurrentUser CustomUserDetails authenticatedUser,
             Model model) {
-        Account account = accountService
-                .getAccount(authenticatedUser.getAccount().getAccountUuid());
+        Account account = accountService.getAccount(authenticatedUser.getAccount().getAccountUuid());
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
     }

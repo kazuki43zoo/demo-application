@@ -2,8 +2,7 @@
 
 <p>
     The time on the server is
-    <joda:format
-            value="${serverTime}"
+    <joda:format value="${serverTime}"
             pattern="${applicationConfigs.dateTimeFormat}"
             dateTimeZone="${applicationConfigs.timeZoneFormat}"/>.
 </p>

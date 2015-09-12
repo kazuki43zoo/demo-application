@@ -49,7 +49,7 @@ INSERT INTO account_password_histories
 
 -- GUEST USER
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','guest01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset01','',true,false);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','guest01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',DATEADD('DAY',-91,CURRENT_TIMESTAMP()),'Guset01','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','GUEST');
 INSERT INTO account_authorities
@@ -58,7 +58,7 @@ INSERT INTO account_password_histories
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b54','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','guest02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset02','',true,false);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','guest02','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',null,'Guset02','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','GUEST');
 INSERT INTO account_authorities
@@ -67,7 +67,7 @@ INSERT INTO account_password_histories
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b55','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
 INSERT INTO account
-    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','guest03','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset03','',true,false);
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','guest03','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',null,'Guset03','',true,false);
 INSERT INTO account_authorities
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','GUEST');
 INSERT INTO account_authorities

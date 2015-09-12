@@ -12,3 +12,6 @@
 <%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+<spring:eval expression="@securityConfigs" var="securityConfigs"/>
+<spring:eval expression="@applicationConfigs" var="applicationConfigs"/>

@@ -35,17 +35,14 @@ public final class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByAccountId(username);
         if (account == null) {
-            throw new UsernameNotFoundException(
-                    Message.SECURITY_ACCOUNT_NOT_FOUND.text(messageSource));
+            throw new UsernameNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.text(messageSource));
         }
 
         DateTime currentDateTime = dateFactory.newDateTime();
 
-        boolean passwordNonExpired = account.isPasswordNonExpired(
-                currentDateTime, securityConfigs.getPasswordValidDays());
+        boolean passwordNonExpired = (account.isPasswordInitialized() && account.isPasswordNonExpired(currentDateTime, securityConfigs.getPasswordValidDays()));
 
-        boolean accountNonLock = account.isAccountNonLock(
-                securityConfigs.getAuthenticationFailureMaxCount());
+        boolean accountNonLock = account.isAccountNonLock(securityConfigs.getAuthenticationFailureMaxCount());
 
         return new CustomUserDetails(account, true, passwordNonExpired, accountNonLock);
     }

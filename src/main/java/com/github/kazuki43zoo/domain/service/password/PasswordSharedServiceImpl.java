@@ -26,9 +26,7 @@ public final class PasswordSharedServiceImpl implements PasswordSharedService {
     AccountRepository accountRepository;
 
     @Override
-    public void validatePassword(
-            String rawPassword,
-            Account account) {
+    public void validatePassword(String rawPassword, Account account) {
         if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {
             throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.resultMessages());
         }

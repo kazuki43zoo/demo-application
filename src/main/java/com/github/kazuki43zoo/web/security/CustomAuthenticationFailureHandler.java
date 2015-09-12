@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.terasoluna.gfw.common.exception.SystemException;
 
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CustomAuthenticationFailureHandler extends ExceptionMappingAuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Inject
     MessageSource messageSource;

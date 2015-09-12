@@ -45,8 +45,7 @@ public class AccountsController {
         if (bindingResult.hasErrors()) {
             return "account/list";
         }
-        AccountsSearchCriteria criteria = beanMapper.map(
-                query, AccountsSearchCriteria.class);
+        AccountsSearchCriteria criteria = beanMapper.map(query, AccountsSearchCriteria.class);
         Page<Account> page = accountService.searchAccounts(criteria, pageable);
         model.addAttribute("page", page);
         return "account/list";
@@ -99,8 +98,7 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        return redirectDetailView(redirectAttributes, createdAccount.getAccountUuid(),
-                Message.ACCOUNT_CREATED);
+        return redirectDetailView(redirectAttributes, createdAccount.getAccountUuid(), Message.ACCOUNT_CREATED);
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
@@ -126,8 +124,7 @@ public class AccountsController {
             @PathVariable("accountUuid") String accountUuid,
             @Validated AccountForm form,
             BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes,
+            Model model, RedirectAttributes redirectAttributes,
             TransactionTokenContext transactionTokenContext) {
 
         if (bindingResult.hasErrors()) {
@@ -137,8 +134,7 @@ public class AccountsController {
         Account inputAccount = beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(accountUuid);
         for (String authority : form.getAuthorities()) {
-            inputAccount.addAuthority(
-                    new AccountAuthority(accountUuid, authority));
+            inputAccount.addAuthority(new AccountAuthority(accountUuid, authority));
         }
 
         try {
@@ -153,8 +149,7 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        return redirectDetailView(
-                redirectAttributes, accountUuid, Message.ACCOUNT_EDITED);
+        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_EDITED);
     }
 
     @TransactionTokenCheck
@@ -173,7 +168,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.POST)
+    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.PATCH)
     public String unlock(
             @PathVariable("accountUuid") String accountUuid,
             RedirectAttributes redirectAttributes,
@@ -183,8 +178,7 @@ public class AccountsController {
 
         transactionTokenContext.removeToken();
 
-        return redirectDetailView(
-                redirectAttributes, accountUuid, Message.ACCOUNT_UNLOCKED);
+        return redirectDetailView(redirectAttributes, accountUuid, Message.ACCOUNT_UNLOCKED);
     }
 
     private String editRedo(

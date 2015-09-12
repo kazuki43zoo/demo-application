@@ -1,8 +1,7 @@
 <t:messagesPanel/>
 
-<a href="${contextPath}/app/profile/authenticationHistories"
-   class="btn btn-default pull-right"> <span
-        class="glyphicon glyphicon-refresh"></span> Refresh
+<a href="${contextPath}/app/profile/authenticationHistories" class="btn btn-default pull-right">
+    <span class="glyphicon glyphicon-refresh"></span> Refresh
 </a>
 
 <table class="table table-hover">
@@ -17,15 +16,12 @@
         <th>Agent</th>
     </tr>
     </thead>
-    <c:forEach var="authenticationHistory"
-               items="${account.authenticationHistories}"
-               varStatus="rowStatus">
+    <c:forEach var="authenticationHistory" items="${account.authenticationHistories}" varStatus="rowStatus">
         <c:set var="strAuthenticationResult">${authenticationHistory.authenticationResult}</c:set>
         <tr>
             <td>${f:h(rowStatus.count)}</td>
             <td>
-                <joda:format
-                        value="${authenticationHistory.createdAt}"
+                <joda:format value="${authenticationHistory.createdAt}"
                         pattern="${applicationConfigs.dateTimeFormat}"
                         dateTimeZone="${applicationConfigs.timeZoneFormat}"/>
             </td>

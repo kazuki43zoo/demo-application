@@ -12,7 +12,7 @@ public final class LoginForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    private String accountId;
+    private String username;
 
     @NotNull
     private String password;

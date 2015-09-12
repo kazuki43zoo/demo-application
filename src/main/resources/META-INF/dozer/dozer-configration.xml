@@ -9,18 +9,15 @@
     <configuration>
         <relationship-type>non-cumulative</relationship-type>
         <custom-converters>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.DateTimeConverter">
                 <class-a>org.joda.time.DateTime</class-a>
                 <class-b>org.joda.time.DateTime</class-b>
             </converter>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.LocalDateConverter">
                 <class-a>org.joda.time.LocalDate</class-a>
                 <class-b>org.joda.time.LocalDate</class-b>
             </converter>
-            <converter
-                    type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
+            <converter type="com.github.kazuki43zoo.infra.dozer.converter.LocalTimeConverter">
                 <class-a>org.joda.time.LocalTime</class-a>
                 <class-b>org.joda.time.LocalTime</class-b>
             </converter>
