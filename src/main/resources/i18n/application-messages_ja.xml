@@ -66,6 +66,7 @@
     <entry key="overtimeTime">残業時間</entry>
     <entry key="penaltyTime">罰則時間</entry>
 
+    <entry key="username">アカウントID</entry>
     <entry key="accountId">アカウントID</entry>
     <entry key="password">パスワード</entry>
     <entry key="currentPassword">現パスワード</entry>

@@ -44,12 +44,9 @@ public class SessionEventListeners {
         }
         List<SecurityContext> securityContexts = event.getSecurityContexts();
         for (SecurityContext securityContext : securityContexts) {
-            CustomUserDetails userDetails =
-                    CustomUserDetails.getInstance(securityContext.getAuthentication());
-            AccountAuthenticationHistory authenticationHistory =
-                    beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-            authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                    authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
+            CustomUserDetails userDetails = CustomUserDetails.getInstance(securityContext.getAuthentication());
+            AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+            authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
         }
     }
 
@@ -64,8 +61,7 @@ public class SessionEventListeners {
 
     @EventListener
     public void onSessionFixationProtection(SessionFixationProtectionEvent event) {
-        CustomAuthenticationDetails authenticationDetails =
-                CustomAuthenticationDetails.class.cast(event.getAuthentication().getDetails());
+        CustomAuthenticationDetails authenticationDetails = CustomAuthenticationDetails.class.cast(event.getAuthentication().getDetails());
         authenticationDetails.setSessionId(event.getNewSessionId());
     }
 

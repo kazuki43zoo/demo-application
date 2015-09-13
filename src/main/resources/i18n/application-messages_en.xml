@@ -67,6 +67,7 @@
     <entry key="overtimeTime">Overtime Time</entry>
     <entry key="penaltyTime">Penalty Time</entry>
 
+    <entry key="username">Account ID</entry>
     <entry key="accountId">Account ID</entry>
     <entry key="password">Password</entry>
     <entry key="currentPassword">Current Password</entry>

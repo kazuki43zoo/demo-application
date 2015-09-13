@@ -1,4 +1,4 @@
-package com.github.kazuki43zoo.web.security;
+package com.github.kazuki43zoo.core.security;
 
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

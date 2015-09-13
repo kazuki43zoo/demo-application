@@ -1,5 +1,6 @@
 package com.github.kazuki43zoo.domain.service.security;
 
+import com.github.kazuki43zoo.core.message.Message;
 import com.github.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.github.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.github.kazuki43zoo.domain.service.password.PasswordSharedService;
@@ -7,9 +8,11 @@ import org.dozer.Mapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
+import org.springframework.security.authentication.event.AuthenticationFailureServiceExceptionEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.terasoluna.gfw.common.exception.SystemException;
 
 import javax.inject.Inject;
 
@@ -43,6 +46,11 @@ public class AuthenticationEventListeners {
         passwordSharedService.resetPasswordLock(userDetails.getAccount());
 
         createAuthenticationSuccessHistory(event, userDetails);
+    }
+
+    @EventListener
+    public void onAuthenticationFailureServiceException(AuthenticationFailureServiceExceptionEvent event){
+        throw new SystemException(Message.FW_SYSTEM_ERROR.code(), event.getException());
     }
 
     private void createAuthenticationSuccessHistory(InteractiveAuthenticationSuccessEvent event, CustomUserDetails userDetails) {

@@ -7,29 +7,14 @@
 
     <resultMap id="accountResultMap" type="Account">
         <id property="accountUuid" column="account_uuid"/>
-        <association property="passwordLock"
-                     column="account_uuid"
-                     javaType="AccountPasswordLock"
-                     select="findOnePasswordLock"
-                     fetchType="lazy"/>
-        <collection property="authorities"
-                    column="account_uuid"
-                    javaType="ArrayList"
-                    ofType="AccountAuthority"
-                    select="findAllAuthorityByAccountUuid"
-                    fetchType="lazy"/>
-        <collection property="passwordHistories"
-                    column="account_uuid"
-                    javaType="ArrayList"
-                    ofType="AccountPasswordHistory"
-                    select="findAllPasswordHistoryByAccountUuid"
-                    fetchType="lazy"/>
-        <collection property="authenticationHistories"
-                    column="account_uuid"
-                    javaType="ArrayList"
-                    ofType="AccountAuthenticationHistory"
-                    select="findAllAuthenticationHistoryByAccountUuid"
-                    fetchType="lazy"/>
+        <association property="passwordLock" column="account_uuid" javaType="AccountPasswordLock"
+                     select="findOnePasswordLock" fetchType="lazy"/>
+        <collection property="authorities" column="account_uuid" javaType="ArrayList" ofType="AccountAuthority"
+                    select="findAllAuthorityByAccountUuid" fetchType="lazy"/>
+        <collection property="passwordHistories" column="account_uuid" javaType="ArrayList" ofType="AccountPasswordHistory"
+                    select="findAllPasswordHistoryByAccountUuid" fetchType="lazy"/>
+        <collection property="authenticationHistories" column="account_uuid" javaType="ArrayList" ofType="AccountAuthenticationHistory"
+                    select="findAllAuthenticationHistoryByAccountUuid" fetchType="lazy"/>
     </resultMap>
 
     <sql id="selectAllColumnsOfAccountSql">
@@ -49,11 +34,8 @@
     <sql id="whereCriteriaSql">
         <where>
             <if test="criteria.word != null">
-                <bind name="wildcardedWord"
-                      value="@org.terasoluna.gfw.common.query.QueryEscapeUtils@toContainingCondition(criteria.word)"/>
-                <foreach collection="criteria.targets"
-                         item="target"
-                         separator="OR">
+                <bind name="wildcardedWord" value="@org.terasoluna.gfw.common.query.QueryEscapeUtils@toContainingCondition(criteria.word)"/>
+                <foreach collection="criteria.targets" item="target" separator="OR">
                     <choose>
                         <when test="target == 'accountId'">
                             account_id LIKE #{wildcardedWord} ESCAPE '~'
@@ -77,8 +59,7 @@
         <include refid="whereCriteriaSql"/>
     </select>
 
-    <select id="findAllByCriteria"
-            resultMap="accountResultMap" resultSetType="SCROLL_INSENSITIVE">
+    <select id="findAllByCriteria" resultMap="accountResultMap" resultSetType="SCROLL_INSENSITIVE">
         <include refid="selectAllColumnsOfAccountSql"/>
         <include refid="whereCriteriaSql"/>
         ORDER BY
@@ -87,7 +68,7 @@
 
     <select id="findOneByAccountId" resultMap="accountResultMap">
         <include refid="selectAllColumnsOfAccountSql"/>
-        WHERE
+        WHEREa
             account_id = #{accountId}
     </select>
 
@@ -200,8 +181,7 @@
             account_uuid = #{accountUuid}
     </delete>
 
-    <select id="findAllPasswordHistoryByAccountUuid"
-            resultType="AccountPasswordHistory">
+    <select id="findAllPasswordHistoryByAccountUuid" resultType="AccountPasswordHistory">
         SELECT
             account_uuid
             ,password
@@ -300,8 +280,7 @@
             account_authentication_histories
     </sql>
 
-    <select id="findAllAuthenticationHistoryByAccountUuid"
-            resultType="AccountAuthenticationHistory">
+    <select id="findAllAuthenticationHistoryByAccountUuid" resultType="AccountAuthenticationHistory">
         <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
         WHERE
             account_uuid = #{accountUuid}
@@ -311,8 +290,7 @@
             100
     </select>
 
-    <select id="findOneLastSuccessAuthenticationHistoryByAccountUuid"
-            resultType="AccountAuthenticationHistory">
+    <select id="findOneLastSuccessAuthenticationHistoryByAccountUuid" resultType="AccountAuthenticationHistory">
         <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
         WHERE
             account_uuid = #{accountUuid}

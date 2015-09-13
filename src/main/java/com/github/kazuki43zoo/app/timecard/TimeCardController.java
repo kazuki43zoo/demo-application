@@ -1,7 +1,7 @@
 package com.github.kazuki43zoo.app.timecard;
 
+import com.github.kazuki43zoo.core.security.CurrentUser;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
-import com.github.kazuki43zoo.web.security.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

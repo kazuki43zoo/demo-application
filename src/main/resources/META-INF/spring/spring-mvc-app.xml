@@ -95,7 +95,6 @@
                 <entry key="BusinessException" value="common/error/businessError"/>
                 <entry key="ConcurrencyFailureException" value="common/error/concurrencyError"/>
                 <entry key="InvalidTransactionTokenException" value="common/error/transactionTokenError"/>
-                <entry key="DataAccessException" value="common/error/dataAccessError"/>
             </util:map>
         </property>
         <property name="statusCodes">

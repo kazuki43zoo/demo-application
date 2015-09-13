@@ -36,11 +36,9 @@ public final class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHand
     private void createLogoutSuccessHistory(Authentication authentication) {
         CustomUserDetails userDetails = CustomUserDetails.getInstance(authentication);
 
-        AccountAuthenticationHistory authenticationHistory =
-                beanMapper.map(authentication.getDetails(), AccountAuthenticationHistory.class);
+        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authentication.getDetails(), AccountAuthenticationHistory.class);
 
-        authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(),
-                authenticationHistory, AuthenticationType.LOGOUT);
+        authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.LOGOUT);
     }
 
 }

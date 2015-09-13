@@ -9,16 +9,11 @@
         <id property="accountUuid" column="account_uuid"/>
         <id property="targetMonth" column="target_month"/>
         <result property="note" column="note"/>
-        <association property="workPlace"
-                     javaType="WorkPlace">
+        <association property="workPlace" javaType="WorkPlace">
             <id property="workPlaceUuid" column="work_place_uuid"/>
         </association>
-        <collection property="attendances"
-                    column="{accountUuid=account_uuid,targetMonth=target_month}"
-                    javaType="ArrayList"
-                    ofType="DailyAttendance"
-                    select="findAttendancesOfTargetMonth"
-                    fetchType="lazy"/>
+        <collection property="attendances" column="{accountUuid=account_uuid,targetMonth=target_month}" javaType="ArrayList" ofType="DailyAttendance"
+                    select="findAttendancesOfTargetMonth" fetchType="lazy"/>
     </resultMap>
 
     <select id="findOne" resultMap="timeCardResultMap">
@@ -109,8 +104,7 @@
             target_date = #{targetDate}
     </select>
 
-    <select id="findAttendancesOfTargetMonth"
-            resultMap="dailyAttendanceResultMap">
+    <select id="findAttendancesOfTargetMonth" resultMap="dailyAttendanceResultMap">
         <include refid="selectAllColumnsOfDailyAttendanceSql"/>
         <![CDATA[
         WHERE

@@ -1,10 +1,10 @@
 package com.github.kazuki43zoo.app.account;
 
 import com.github.kazuki43zoo.core.message.Message;
+import com.github.kazuki43zoo.core.security.CurrentUser;
 import com.github.kazuki43zoo.domain.model.account.Account;
 import com.github.kazuki43zoo.domain.service.account.AccountService;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
-import com.github.kazuki43zoo.web.security.CurrentUser;
 import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
-import org.terasoluna.gfw.web.token.transaction.TransactionTokenContext;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
 import javax.inject.Inject;
@@ -33,19 +32,14 @@ public class ProfileController {
     Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String show(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            Model model) {
+    public String show(@CurrentUser CustomUserDetails authenticatedUser, Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/detail";
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @RequestMapping(method = RequestMethod.GET, params = "edit")
-    public String edit(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            ProfileForm form,
-            Model model) {
+    public String edit(@CurrentUser CustomUserDetails authenticatedUser, ProfileForm form, Model model) {
         beanMapper.map(authenticatedUser.getAccount(), form);
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";
@@ -53,13 +47,9 @@ public class ProfileController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.PUT)
-    public String save(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            @Validated ProfileForm form,
-            BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes,
-            TransactionTokenContext transactionTokenContext) {
+    public String save(@CurrentUser CustomUserDetails authenticatedUser,
+            @Validated ProfileForm form, BindingResult bindingResult,
+            Model model, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return edit(authenticatedUser, form, model);
@@ -81,25 +71,19 @@ public class ProfileController {
 
         beanMapper.map(changedAccount, authenticatedUser.getAccount());
 
-        transactionTokenContext.removeToken();
-
         redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.resultMessages());
 
         return "redirect:/app/profile";
     }
 
     @RequestMapping(path = "authenticationHistories", method = RequestMethod.GET)
-    public String showAuthenticationHistoryList(
-            @CurrentUser CustomUserDetails authenticatedUser,
-            Model model) {
+    public String showAuthenticationHistoryList(@CurrentUser CustomUserDetails authenticatedUser, Model model) {
         Account account = accountService.getAccount(authenticatedUser.getAccount().getAccountUuid());
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
     }
 
-    private String editRedo(
-            CustomUserDetails authenticatedUser,
-            Model model) {
+    private String editRedo(CustomUserDetails authenticatedUser, Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";
     }

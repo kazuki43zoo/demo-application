@@ -18,22 +18,27 @@
     <entry key="e.demo.fw.8002">Conflict with other processing occurred. Please try again in a few seconds.</entry>
     <entry key="e.demo.fw.9001">System error occurred.</entry>
     <entry key="e.demo.fw.9002">System error occurred.</entry>
+
     <entry key="i.demo.account.0001">New account was created.</entry>
     <entry key="i.demo.account.0002">Account was edited.</entry>
     <entry key="i.demo.account.0003">Account was deleted.</entry>
     <entry key="i.demo.account.0004">Account was unlocked.</entry>
     <entry key="i.demo.account.0005">Profile was edited.</entry>
     <entry key="e.demo.account.2001">Specified account id is already used by another user.</entry>
+
     <entry key="i.demo.auth.0001">Please login from this page to view the specified page.</entry>
     <entry key="i.demo.auth.0002">Logout was completed.</entry>
     <entry key="e.demo.auth.2001">Password has not initialized. Please initialize the password.</entry>
     <entry key="e.demo.auth.2002">Password has expired. Please change the password.</entry>
+
     <entry key="i.demo.password.0001">Password was changed.</entry>
     <entry key="e.demo.password.2001">Specified password is already used past. You cannot use same password during certain period of time.</entry>
     <entry key="e.demo.password.2002">Specified password is contains in account id. You cannot use password that contains account id.</entry>
+
     <entry key="e.demo.security.5001">Account not found.</entry>
     <entry key="e.demo.security.8001">Already has login by another session.</entry>
-    <entry key="NotNull.loginForm.accountId">"Account ID" may not be null.</entry>
+
+    <entry key="NotNull.loginForm.username">"Account ID" may not be null.</entry>
     <entry key="NotNull.loginForm.password">"Password" may not be null.</entry>
 
     <entry key="language">Language</entry>
