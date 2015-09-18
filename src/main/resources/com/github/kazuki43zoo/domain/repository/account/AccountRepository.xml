@@ -68,7 +68,7 @@
 
     <select id="findOneByAccountId" resultMap="accountResultMap">
         <include refid="selectAllColumnsOfAccountSql"/>
-        WHEREa
+        WHERE
             account_id = #{accountId}
     </select>
 
