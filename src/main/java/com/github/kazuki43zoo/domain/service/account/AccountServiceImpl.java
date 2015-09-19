@@ -40,10 +40,10 @@ public final class AccountServiceImpl implements AccountService {
     PersistentTokenRepository persistentTokenRepository;
 
     @Override
-    public Page<Account> searchAccounts(AccountsSearchCriteria criteria, Pageable pageable) {
+    public Page<Account> searchAccounts(final AccountsSearchCriteria criteria, final Pageable pageable) {
         criteria.determineCriteria();
-        long totalCount = accountRepository.countByCriteria(criteria);
-        List<Account> accounts;
+        final long totalCount = accountRepository.countByCriteria(criteria);
+        final List<Account> accounts;
         if (totalCount == 0) {
             accounts = Collections.emptyList();
         } else {
@@ -53,8 +53,8 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getAccount(String accountUuid) {
-        Account account = accountRepository.findOne(accountUuid);
+    public Account getAccount(final String accountUuid) {
+        final Account account = accountRepository.findOne(accountUuid);
         if (account == null) {
             throw new ResourceNotFoundException(Message.FW_NOT_FOUND.resultMessages());
         }
@@ -62,8 +62,8 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account create(Account inputAccount) {
-        DateTime currentDateTime = dateFactory.newDateTime();
+    public Account create(final Account inputAccount) {
+        final DateTime currentDateTime = dateFactory.newDateTime();
 
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
@@ -72,12 +72,12 @@ public final class AccountServiceImpl implements AccountService {
             rawPassword = passwordSharedService.generateNewPassword();
         }
 
-        String encodedPassword = passwordSharedService.encode(rawPassword);
+        final String encodedPassword = passwordSharedService.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
         accountRepository.create(inputAccount);
 
-        String accountUuid = inputAccount.getAccountUuid();
-        for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
+        final String accountUuid = inputAccount.getAccountUuid();
+        for (final AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
             inputAuthority.setAccountUuid(accountUuid);
             accountRepository.createAuthority(inputAuthority);
         }
@@ -87,10 +87,10 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account changeProfile(Account inputAccount) {
-        String accountUuid = inputAccount.getAccountUuid();
+    public Account changeProfile(final Account inputAccount) {
+        final String accountUuid = inputAccount.getAccountUuid();
 
-        Account currentAccount = getAccount(accountUuid);
+        final Account currentAccount = getAccount(accountUuid);
 
         currentAccount.setAccountId(inputAccount.getAccountId());
         currentAccount.setFirstName(inputAccount.getFirstName());
@@ -106,15 +106,15 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void change(Account inputAccount) {
-        String accountUuid = inputAccount.getAccountUuid();
+    public void change(final Account inputAccount) {
+        final String accountUuid = inputAccount.getAccountUuid();
 
-        Account currentAccount = getAccount(accountUuid);
+        final Account currentAccount = getAccount(accountUuid);
 
-        DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = dateFactory.newDateTime();
 
         AccountPasswordHistory passwordHistory = null;
-        String rawPassword = inputAccount.getPassword();
+        final String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
             passwordSharedService.validatePassword(rawPassword, currentAccount);
             String encodedPassword = passwordSharedService.encode(rawPassword);
@@ -129,12 +129,12 @@ public final class AccountServiceImpl implements AccountService {
         currentAccount.setEnabledAutoLogin(inputAccount.isEnabledAutoLogin());
         accountRepository.update(currentAccount);
 
-        for (AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
+        for (final AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
                 accountRepository.deleteAuthority(currentAuthority.getAccountUuid(), currentAuthority.getAuthority());
             }
         }
-        for (AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
+        for (final AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
             accountRepository.createAuthority(inputAuthority);
         }
 
@@ -149,8 +149,8 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void delete(String accountUuid) {
-        Account account = accountRepository.findOne(accountUuid);
+    public void delete(final String accountUuid) {
+        final Account account = accountRepository.findOne(accountUuid);
         accountRepository.deleteAuthenticationHistories(accountUuid);
         accountRepository.deletePasswordHistories(accountUuid);
         accountRepository.deletePasswordLock(accountUuid);
@@ -162,8 +162,8 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void unlock(String accountUuid) {
-        Account account = getAccount(accountUuid);
+    public void unlock(final String accountUuid) {
+        final Account account = getAccount(accountUuid);
         passwordSharedService.resetPasswordLock(account);
     }
 

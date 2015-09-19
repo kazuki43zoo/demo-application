@@ -15,7 +15,7 @@ public final class AccountSharedServiceImpl implements AccountSharedService {
     AccountRepository accountRepository;
 
     @Override
-    public Account getAccount(String accountId) {
+    public Account getAccount(final String accountId) {
         return accountRepository.findOneByAccountId(accountId);
     }
 

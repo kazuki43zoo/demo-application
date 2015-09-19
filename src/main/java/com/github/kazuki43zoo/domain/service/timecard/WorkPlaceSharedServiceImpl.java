@@ -26,7 +26,7 @@ public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService 
 
     @PostConstruct
     public void loadWorkPlaceOfMainOffice() {
-        WorkPlace workPlaceOfMainOffice = getWorkPlace(WorkPlace.MAIN_OFFICE_UUID);
+        final WorkPlace workPlaceOfMainOffice = getWorkPlace(WorkPlace.MAIN_OFFICE_UUID);
         if (workPlaceOfMainOffice == null) {
             throw new SystemException(Message.FW_DATA_INCONSISTENCIES.code(), "Workplace record of main office has not been inserted. uuid : " + WorkPlace.MAIN_OFFICE_UUID);
         }
@@ -38,19 +38,20 @@ public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService 
     }
 
     @Override
-    public WorkPlace getWorkPlace(String workPlaceUuid) {
-        if (!StringUtils.hasLength(workPlaceUuid)) {
-            workPlaceUuid = WorkPlace.MAIN_OFFICE_UUID;
+    public WorkPlace getWorkPlace(final String workPlaceUuid) {
+        String targetWorkPlaceUuid = workPlaceUuid;
+        if (!StringUtils.hasLength(targetWorkPlaceUuid)) {
+            targetWorkPlaceUuid = WorkPlace.MAIN_OFFICE_UUID;
         }
-        WorkPlace workPlace = cachedWorkPlaces.get(workPlaceUuid);
+        WorkPlace workPlace = cachedWorkPlaces.get(targetWorkPlaceUuid);
         if (workPlace == null) {
-            synchronized (workPlaceUuid.intern()) {
-                workPlace = cachedWorkPlaces.get(workPlaceUuid);
+            synchronized (targetWorkPlaceUuid.intern()) {
+                workPlace = cachedWorkPlaces.get(targetWorkPlaceUuid);
                 if (workPlace == null) {
-                    workPlace = workPlaceRepository.findOne(workPlaceUuid);
+                    workPlace = workPlaceRepository.findOne(targetWorkPlaceUuid);
                     if (workPlace != null) {
                         workPlace.initialize();
-                        cachedWorkPlaces.put(workPlaceUuid, workPlace);
+                        cachedWorkPlaces.put(targetWorkPlaceUuid, workPlace);
                     }
                 }
             }
@@ -59,11 +60,11 @@ public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService 
     }
 
     @Override
-    public WorkPlace getWorkPlaceDetail(WorkPlace workPlace) {
+    public WorkPlace getWorkPlaceDetail(final WorkPlace workPlace) {
         if (workPlace == null) {
             return null;
         }
-        String workPlaceUuid = workPlace.getWorkPlaceUuid();
+        final String workPlaceUuid = workPlace.getWorkPlaceUuid();
         if (StringUtils.hasLength(workPlaceUuid)) {
             return getWorkPlace(workPlaceUuid);
         } else {

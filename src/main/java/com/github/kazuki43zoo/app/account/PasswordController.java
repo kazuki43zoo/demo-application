@@ -42,8 +42,8 @@ public class PasswordController {
     Mapper beanMapper;
 
     @ModelAttribute
-    public PasswordForm setUpPasswordForm(@CurrentUser CustomUserDetails currentUser) {
-        PasswordForm form = new PasswordForm();
+    public PasswordForm setUpPasswordForm(final @CurrentUser CustomUserDetails currentUser) {
+        final PasswordForm form = new PasswordForm();
         if (currentUser != null) {
             form.setUsername(currentUser.getAccount().getAccountId());
         }
@@ -57,11 +57,11 @@ public class PasswordController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "encourageChange")
-    public String encourageChange(PasswordForm form, RedirectAttributes redirectAttributes) {
+    public String encourageChange(final PasswordForm form, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(form);
-        Account account = accountSharedService.getAccount(form.getUsername());
+        final Account account = accountSharedService.getAccount(form.getUsername());
         if (account != null) {
-            Message message = (account.getPasswordModifiedAt() == null)
+            final Message message = (account.getPasswordModifiedAt() == null)
                     ? Message.AUTH_ENCOURAGE_CHANGE_PASSWORD_NOT_INITIALIZED
                     : Message.AUTH_ENCOURAGE_CHANGE_PASSWORD_EXPIRED;
             redirectAttributes.addFlashAttribute(message.resultMessages());
@@ -71,19 +71,17 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "change")
-    public String change(@CurrentUser CustomUserDetails currentUser,
-            @Validated PasswordForm form, BindingResult bindingResult,
-            Model model, RedirectAttributes redirectAttributes) {
+    public String change(final @CurrentUser CustomUserDetails currentUser, final @Validated PasswordForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return showChangeForm();
         }
 
-        Account changedAccount;
+        final Account changedAccount;
         try {
             String accountId = (currentUser != null) ? currentUser.getAccount().getAccountId() : form.getUsername();
             changedAccount = passwordService.change(accountId, form.getCurrentPassword(), form.getPassword());
-        } catch (ResultMessagesNotificationException e) {
+        } catch (final ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
         }
@@ -101,8 +99,7 @@ public class PasswordController {
 
     @TransactionTokenCheck
     @RequestMapping(method = RequestMethod.POST, params = "changeAndLogin")
-    public String changeAndLogin(@CurrentUser CustomUserDetails currentUser,
-            @Validated PasswordForm form, BindingResult bindingResult, Model model) {
+    public String changeAndLogin(final @CurrentUser CustomUserDetails currentUser, final @Validated PasswordForm form, final BindingResult bindingResult, final Model model) {
 
         if (currentUser != null) {
             throw new InvalidAccessException();
@@ -114,7 +111,7 @@ public class PasswordController {
 
         try {
             passwordService.change(form.getUsername(), form.getCurrentPassword(), form.getPassword());
-        } catch (ResultMessagesNotificationException e) {
+        } catch (final ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
         }

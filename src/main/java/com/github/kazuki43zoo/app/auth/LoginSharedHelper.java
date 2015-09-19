@@ -12,8 +12,8 @@ public class LoginSharedHelper {
     @Inject
     AccountSharedService accountSharedService;
 
-    public String generateAuthenticationProcessingUrl(String username) {
-        Account account = accountSharedService.getAccount(username);
+    public String generateAuthenticationProcessingUrl(final String username) {
+        final Account account = accountSharedService.getAccount(username);
         boolean enabledAutoLogin = false;
         if (account != null) {
             enabledAutoLogin = account.isEnabledAutoLogin();

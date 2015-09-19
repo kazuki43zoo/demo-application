@@ -16,18 +16,14 @@ public final class CustomUserDetails extends User implements UserDetails {
     private static final long serialVersionUID = 1L;
     private final Account account;
 
-    public CustomUserDetails(
-            Account account,
-            boolean accountNonExpired,
-            boolean passwordNonExpired,
-            boolean accountNonLock) {
+    public CustomUserDetails(final Account account, final boolean accountNonExpired, final boolean passwordNonExpired, final boolean accountNonLock) {
         super(account.getAccountId(), account.getPassword(), account.isEnabled(), accountNonExpired, passwordNonExpired, accountNonLock, toGrantedAuthorities(account));
         this.account = account;
     }
 
-    private static Collection<GrantedAuthority> toGrantedAuthorities(Account account) {
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (AccountAuthority authority : account.getAuthorities()) {
+    private static Collection<GrantedAuthority> toGrantedAuthorities(final Account account) {
+        final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (final AccountAuthority authority : account.getAuthorities()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + authority.getAuthority()));
         }
         return grantedAuthorities;
@@ -37,7 +33,7 @@ public final class CustomUserDetails extends User implements UserDetails {
         return account;
     }
 
-    public static CustomUserDetails getInstance(Authentication authentication) {
+    public static CustomUserDetails getInstance(final Authentication authentication) {
         return (CustomUserDetails) authentication.getPrincipal();
     }
 

@@ -24,8 +24,8 @@ public class SessionAuthenticationStrategySynchronizer {
     private final TransactionTemplate transactionTemplate;
 
     @Inject
-    public SessionAuthenticationStrategySynchronizer(PlatformTransactionManager transactionManager, AccountRepository accountRepository) {
-        DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+    public SessionAuthenticationStrategySynchronizer(final PlatformTransactionManager transactionManager) {
+        final DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
         transactionDefinition.setName(getClass().getName());
         this.transactionTemplate = new TransactionTemplate(transactionManager, transactionDefinition);
     }
@@ -34,15 +34,15 @@ public class SessionAuthenticationStrategySynchronizer {
     public void synchronize(final ProceedingJoinPoint joinPoint) {
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             protected void doInTransactionWithoutResult(TransactionStatus status) {
-                Authentication authentication = Authentication.class.cast(joinPoint.getArgs()[0]);
+                final Authentication authentication = Authentication.class.cast(joinPoint.getArgs()[0]);
                 accountRepository.lockByAccountIdWithinTransaction(authentication.getName());
                 try {
                     joinPoint.proceed();
-                } catch (RuntimeException e) {
+                } catch (final RuntimeException e) {
                     throw e;
-                } catch (Error e) {
+                } catch (final Error e) {
                     throw e;
-                } catch (Throwable e) {
+                } catch (final Throwable e) {
                     throw new IllegalStateException(e);
                 }
             }

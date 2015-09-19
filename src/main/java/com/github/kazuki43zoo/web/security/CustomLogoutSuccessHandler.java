@@ -23,21 +23,14 @@ public final class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHand
     Mapper beanMapper;
 
     @Override
-    public void onLogoutSuccess(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Authentication authentication) throws IOException, ServletException {
-
+    public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException, ServletException {
         createLogoutSuccessHistory(authentication);
-
         super.onLogoutSuccess(request, response, authentication);
     }
 
-    private void createLogoutSuccessHistory(Authentication authentication) {
-        CustomUserDetails userDetails = CustomUserDetails.getInstance(authentication);
-
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authentication.getDetails(), AccountAuthenticationHistory.class);
-
+    private void createLogoutSuccessHistory(final Authentication authentication) {
+        final CustomUserDetails userDetails = CustomUserDetails.getInstance(authentication);
+        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(authentication.getDetails(), AccountAuthenticationHistory.class);
         authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.LOGOUT);
     }
 

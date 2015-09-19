@@ -26,7 +26,7 @@ public final class PasswordSharedServiceImpl implements PasswordSharedService {
     AccountRepository accountRepository;
 
     @Override
-    public void validatePassword(String rawPassword, Account account) {
+    public void validatePassword(final String rawPassword, final Account account) {
         if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {
             throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.resultMessages());
         }
@@ -36,26 +36,26 @@ public final class PasswordSharedServiceImpl implements PasswordSharedService {
     }
 
     @Override
-    public void countUpPasswordFailureCount(String failedAccountId) {
+    public void countUpPasswordFailureCount(final String failedAccountId) {
 
-        Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
+        final Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
 
-        DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = dateFactory.newDateTime();
         failedAccount.countUpPasswordFailureCount(currentDateTime);
         accountRepository.savePasswordFailureCount(failedAccount);
     }
 
     @Override
-    public void resetPasswordLock(Account account) {
+    public void resetPasswordLock(final Account account) {
         account.resetPasswordFailureCount();
         accountRepository.savePasswordFailureCount(account);
     }
 
     @Override
-    public String encode(String rawPassword) {
+    public String encode(final String rawPassword) {
         return passwordEncoder.encode(rawPassword);
     }
 

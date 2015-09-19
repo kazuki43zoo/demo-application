@@ -28,16 +28,15 @@ public class BreakTime implements Serializable {
 
     private String noteJa;
 
-    public BreakTime(final String workPlaceUuid, final LocalTime beginTime,
-                     final LocalTime finishTime) {
+    public BreakTime(final String workPlaceUuid, final LocalTime beginTime, final LocalTime finishTime) {
         this.workPlaceUuid = workPlaceUuid;
         this.beginTime = beginTime;
         this.finishTime = finishTime;
     }
 
     List<Interval> toBreakTimeIntervals() {
-        List<Interval> breakTimeIntervals = new ArrayList<>();
-        Interval breakTimeInterval = new Interval(BASE_DATE.toDateTime(beginTime),
+        final List<Interval> breakTimeIntervals = new ArrayList<>();
+        final Interval breakTimeInterval = new Interval(BASE_DATE.toDateTime(beginTime),
                 BASE_DATE.toDateTime(finishTime));
         breakTimeIntervals.add(breakTimeInterval);
         breakTimeIntervals.add(new Interval(breakTimeInterval.getStart().plusDays(1),

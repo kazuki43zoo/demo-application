@@ -23,12 +23,12 @@ public final class GlobalControllerAdvice {
     }
 
     @ModelAttribute
-    public Locale setUpLocale(Locale locale) {
+    public Locale setUpLocale(final Locale locale) {
         return locale;
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    public void initBinder(final WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 

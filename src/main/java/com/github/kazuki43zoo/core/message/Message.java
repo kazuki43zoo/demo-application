@@ -56,25 +56,25 @@ public enum Message {
     private final String code;
     private final String defaultMessage;
 
-    Message(ResultMessageType type, String code) {
+    Message(final ResultMessageType type, final String code) {
         this(type, code, code);
     }
 
-    Message(ResultMessageType type, String code, String defaultMessage) {
+    Message(final ResultMessageType type, final String code, final String defaultMessage) {
         this.type = type;
         this.code = code;
         this.defaultMessage = defaultMessage;
     }
 
-    public ResultMessages resultMessages(Object... args) {
+    public ResultMessages resultMessages(final Object... args) {
         return new ResultMessages(type).add(code, args);
     }
 
-    public String text(MessageSource messageSource, Object... args) {
+    public String text(final MessageSource messageSource, final Object... args) {
         return text(messageSource, LocaleContextHolder.getLocale(), args);
     }
 
-    public String text(MessageSource messageSource, Locale locale, Object... args) {
+    public String text(final MessageSource messageSource, final Locale locale, final Object... args) {
         return messageSource.getMessage(code, args, defaultMessage, locale);
     }
 

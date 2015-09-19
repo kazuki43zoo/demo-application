@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LogoutController {
 
     @RequestMapping(path = "logout", method = RequestMethod.GET, params = "success")
-    public String logoutSuccess(RedirectAttributes redirectAttributes) {
+    public String logoutSuccess(final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_LOGOUT.resultMessages());
         return "redirect:/";
     }

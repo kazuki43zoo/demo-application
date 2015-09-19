@@ -22,9 +22,8 @@ public final class AuthenticationSharedServiceImpl implements AuthenticationShar
     AccountRepository accountRepository;
 
     @Override
-    public void createAuthenticationFailureHistory(String failedAccountId, AccountAuthenticationHistory authenticationHistory,
-                                                   AuthenticationType type, String failureReason) {
-        Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
+    public void createAuthenticationFailureHistory(final String failedAccountId, final AccountAuthenticationHistory authenticationHistory, final AuthenticationType type, final String failureReason) {
+        final Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
@@ -33,11 +32,11 @@ public final class AuthenticationSharedServiceImpl implements AuthenticationShar
     }
 
     @Override
-    public void createAuthenticationSuccessHistory(Account account, AccountAuthenticationHistory authenticationHistory, AuthenticationType type) {
+    public void createAuthenticationSuccessHistory(final Account account, final AccountAuthenticationHistory authenticationHistory, final AuthenticationType type) {
         createAuthenticationHistory(account, authenticationHistory, type, true);
     }
 
-    private void createAuthenticationHistory(Account account, AccountAuthenticationHistory authenticationHistory, AuthenticationType type, boolean result) {
+    private void createAuthenticationHistory(final Account account, final AccountAuthenticationHistory authenticationHistory, final AuthenticationType type, final boolean result) {
         DateTime currentDateTime = dateFactory.newDateTime();
 
         authenticationHistory.setAccountUuid(account.getAccountUuid());

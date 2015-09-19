@@ -11,23 +11,21 @@ public class EqualsPropertyValuesValidator implements ConstraintValidator<Equals
 
     private EqualsPropertyValues constraint;
 
-    public void initialize(EqualsPropertyValues constraint) {
+    public void initialize(final EqualsPropertyValues constraint) {
         this.constraint = constraint;
     }
 
-    public boolean isValid(Object bean, ConstraintValidatorContext context) {
-        BeanWrapper beanWrapper = new BeanWrapperImpl(bean);
-        Object propertyValue = beanWrapper.getPropertyValue(constraint.property());
-        Object comparingPropertyValue = beanWrapper.getPropertyValue(constraint.comparingProperty());
-        boolean matched = ObjectUtils.nullSafeEquals(propertyValue, comparingPropertyValue);
-        if (matched) {
-            return true;
-        } else {
+    public boolean isValid(final Object bean, final ConstraintValidatorContext context) {
+        final BeanWrapper beanWrapper = new BeanWrapperImpl(bean);
+        final Object propertyValue = beanWrapper.getPropertyValue(constraint.property());
+        final Object comparingPropertyValue = beanWrapper.getPropertyValue(constraint.comparingProperty());
+        final boolean matched = ObjectUtils.nullSafeEquals(propertyValue, comparingPropertyValue);
+        if (!matched) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(constraint.message()).
                     addPropertyNode(constraint.property()).addConstraintViolation();
-            return false;
         }
+        return matched;
     }
 
 }

@@ -40,18 +40,18 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
     Mapper beanMapper;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response, final AuthenticationException exception) throws IOException, ServletException {
         if (exception instanceof SessionAuthenticationException) {
             createConcurrentAuthenticationFailureHistory(request);
         }
         super.onAuthenticationFailure(request, response, exception);
     }
 
-    private void createConcurrentAuthenticationFailureHistory(HttpServletRequest request) {
-        String accountId = request.getParameter(securityConfigs.getUsernameParameter());
-        String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
-        CustomAuthenticationDetails authenticationDetails = authenticationDetailsSource.buildDetails(request);
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
+    private void createConcurrentAuthenticationFailureHistory(final HttpServletRequest request) {
+        final String accountId = request.getParameter(securityConfigs.getUsernameParameter());
+        final String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
+        final CustomAuthenticationDetails authenticationDetails = authenticationDetailsSource.buildDetails(request);
+        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
         authenticationSharedService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
     }
 

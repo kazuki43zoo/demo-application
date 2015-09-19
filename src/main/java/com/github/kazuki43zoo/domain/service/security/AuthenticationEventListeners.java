@@ -30,18 +30,18 @@ public class AuthenticationEventListeners {
     Mapper beanMapper;
 
     @EventListener
-    public void onAuthenticationFailureBadCredentials(AuthenticationFailureBadCredentialsEvent event) {
-        String failedAccountId = event.getAuthentication().getName();
+    public void onAuthenticationFailureBadCredentials(final AuthenticationFailureBadCredentialsEvent event) {
+        final String failedAccountId = event.getAuthentication().getName();
 
         passwordSharedService.countUpPasswordFailureCount(failedAccountId);
 
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         authenticationSharedService.createAuthenticationFailureHistory(failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
     }
 
     @EventListener
-    public void onInteractiveAuthenticationSuccess(InteractiveAuthenticationSuccessEvent event) {
-        CustomUserDetails userDetails = CustomUserDetails.getInstance(event.getAuthentication());
+    public void onInteractiveAuthenticationSuccess(final InteractiveAuthenticationSuccessEvent event) {
+        final CustomUserDetails userDetails = CustomUserDetails.getInstance(event.getAuthentication());
 
         passwordSharedService.resetPasswordLock(userDetails.getAccount());
 
@@ -49,13 +49,13 @@ public class AuthenticationEventListeners {
     }
 
     @EventListener
-    public void onAuthenticationFailureServiceException(AuthenticationFailureServiceExceptionEvent event){
+    public void onAuthenticationFailureServiceException(final AuthenticationFailureServiceExceptionEvent event){
         throw new SystemException(Message.FW_SYSTEM_ERROR.code(), event.getException());
     }
 
-    private void createAuthenticationSuccessHistory(InteractiveAuthenticationSuccessEvent event, CustomUserDetails userDetails) {
-        AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-        AuthenticationType authenticationType;
+    private void createAuthenticationSuccessHistory(final InteractiveAuthenticationSuccessEvent event, final CustomUserDetails userDetails) {
+        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        final AuthenticationType authenticationType;
         if (event.getAuthentication() instanceof RememberMeAuthenticationToken) {
             authenticationType = AuthenticationType.AUTO_LOGIN;
         } else {

@@ -11,26 +11,26 @@ import java.sql.*;
 public final class LocalDateTypeHandler extends BaseTypeHandler<LocalDate> {
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, LocalDate parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(final PreparedStatement ps, final int i, final LocalDate parameter, final JdbcType jdbcType) throws SQLException {
         ps.setDate(i, new Date(parameter.toDate().getTime()));
     }
 
     @Override
-    public LocalDate getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public LocalDate getNullableResult(final ResultSet rs, final String columnName) throws SQLException {
         return toLocalDate(rs.getDate(columnName));
     }
 
     @Override
-    public LocalDate getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public LocalDate getNullableResult(final ResultSet rs, final int columnIndex) throws SQLException {
         return toLocalDate(rs.getDate(columnIndex));
     }
 
     @Override
-    public LocalDate getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public LocalDate getNullableResult(final CallableStatement cs, final int columnIndex) throws SQLException {
         return toLocalDate(cs.getDate(columnIndex));
     }
 
-    protected LocalDate toLocalDate(Date date) {
+    protected LocalDate toLocalDate(final Date date) {
         if (date == null) {
             return null;
         } else {
@@ -38,7 +38,7 @@ public final class LocalDateTypeHandler extends BaseTypeHandler<LocalDate> {
         }
     }
 
-    protected LocalDate newLocalDate(Date date) {
+    protected LocalDate newLocalDate(final Date date) {
         return new LocalDate(date.getTime());
     }
 

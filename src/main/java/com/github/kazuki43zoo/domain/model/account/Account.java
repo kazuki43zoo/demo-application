@@ -27,7 +27,7 @@ public class Account implements Serializable {
     private List<AccountPasswordHistory> passwordHistories;
     private List<AccountAuthenticationHistory> authenticationHistories;
 
-    public Account addAuthority(AccountAuthority authority) {
+    public Account addAuthority(final AccountAuthority authority) {
         if (authorities == null) {
             authorities = new ArrayList<>();
         }
@@ -35,8 +35,8 @@ public class Account implements Serializable {
         return this;
     }
 
-    public void countUpPasswordFailureCount(DateTime modifiedAt) {
-        AccountPasswordLock currentPasswordLock = getPasswordLock();
+    public void countUpPasswordFailureCount(final DateTime modifiedAt) {
+        final AccountPasswordLock currentPasswordLock = getPasswordLock();
         if (currentPasswordLock == null) {
             setPasswordLock(new AccountPasswordLock(getAccountUuid(), 1, modifiedAt));
         } else {
@@ -49,11 +49,11 @@ public class Account implements Serializable {
         setPasswordLock(null);
     }
 
-    public boolean isPastUsedPassword(String rawPassword, PasswordEncoder passwordEncoder) {
+    public boolean isPastUsedPassword(final String rawPassword, final PasswordEncoder passwordEncoder) {
         if (getPasswordHistories() == null) {
             return false;
         }
-        for (AccountPasswordHistory passwordHistory : getPasswordHistories()) {
+        for (final AccountPasswordHistory passwordHistory : getPasswordHistories()) {
             if (passwordEncoder.matches(rawPassword, passwordHistory.getPassword())) {
                 return true;
             }
@@ -65,14 +65,14 @@ public class Account implements Serializable {
         return getPasswordModifiedAt() != null;
     }
 
-    public boolean isPasswordNonExpired(DateTime currentDateTime, int passwordValidDays) {
+    public boolean isPasswordNonExpired(final DateTime currentDateTime, final int passwordValidDays) {
         if(getPasswordModifiedAt() == null){
             return true;
         }
         return !currentDateTime.isAfter(getPasswordModifiedAt().plusDays(passwordValidDays));
     }
 
-    public boolean isAccountNonLock(int authenticationFailureMaxCount) {
+    public boolean isAccountNonLock(final int authenticationFailureMaxCount) {
         return (getPasswordLock() == null)
                 || (getPasswordLock().getFailureCount() <= authenticationFailureMaxCount);
     }

@@ -37,31 +37,31 @@ public class SessionEventListeners {
 
     @EventListener
     @Transactional
-    public void onHttpSessionDestroyed(HttpSessionDestroyedEvent event) {
-        Boolean isHandleLogout = (Boolean) event.getSession().getAttribute(HANDLE_LOGOUT_KEY);
+    public void onHttpSessionDestroyed(final HttpSessionDestroyedEvent event) {
+        final Boolean isHandleLogout = (Boolean) event.getSession().getAttribute(HANDLE_LOGOUT_KEY);
         if (isHandleLogout != null && isHandleLogout) {
             return;
         }
-        List<SecurityContext> securityContexts = event.getSecurityContexts();
-        for (SecurityContext securityContext : securityContexts) {
-            CustomUserDetails userDetails = CustomUserDetails.getInstance(securityContext.getAuthentication());
-            AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        final List<SecurityContext> securityContexts = event.getSecurityContexts();
+        for (final SecurityContext securityContext : securityContexts) {
+            final CustomUserDetails userDetails = CustomUserDetails.getInstance(securityContext.getAuthentication());
+            final AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
             authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
         }
     }
 
     @Before(value = "execution(* org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler.logout(..))")
-    public void handleLogout(JoinPoint joinPoint) {
-        HttpServletRequest request = HttpServletRequest.class.cast(joinPoint.getArgs()[0]);
-        HttpSession session = request.getSession(false);
+    public void handleLogout(final JoinPoint joinPoint) {
+        final HttpServletRequest request = HttpServletRequest.class.cast(joinPoint.getArgs()[0]);
+        final HttpSession session = request.getSession(false);
         if (session != null) {
             session.setAttribute(HANDLE_LOGOUT_KEY, true);
         }
     }
 
     @EventListener
-    public void onSessionFixationProtection(SessionFixationProtectionEvent event) {
-        CustomAuthenticationDetails authenticationDetails = CustomAuthenticationDetails.class.cast(event.getAuthentication().getDetails());
+    public void onSessionFixationProtection(final SessionFixationProtectionEvent event) {
+        final CustomAuthenticationDetails authenticationDetails = CustomAuthenticationDetails.class.cast(event.getAuthentication().getDetails());
         authenticationDetails.setSessionId(event.getNewSessionId());
     }
 

@@ -31,14 +31,14 @@ public class LoginController {
     }
 
     @RequestMapping(path = "login", method = RequestMethod.GET, params = "encourage")
-    public String encourageLogin(RedirectAttributes redirectAttributes) {
+    public String encourageLogin(final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
         return "redirect:/app/auth/login";
     }
 
     @TransactionTokenCheck
     @RequestMapping(path = "login", method = RequestMethod.POST)
-    public String login(@Validated LoginForm form, BindingResult bindingResult) {
+    public String login(final @Validated LoginForm form, final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return showLoginForm();
@@ -48,7 +48,7 @@ public class LoginController {
 
 
     @RequestMapping(path = "error", method = RequestMethod.POST)
-    public String handleLoginError(LoginForm form, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public String handleLoginError(final LoginForm form, final RedirectAttributes redirectAttributes, final HttpServletRequest request) {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
         return "redirect:/app/auth/login";

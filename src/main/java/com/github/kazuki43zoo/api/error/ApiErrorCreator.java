@@ -18,56 +18,41 @@ public class ApiErrorCreator {
     @Inject
     MessageSource messageSource;
 
-    public ApiError createApiError(
-            WebRequest request,
-            String errorCode,
-            String defaultErrorMessage,
-            Object... arguments) {
-        String localizedMessage = messageSource.getMessage(
+    public ApiError createApiError(final WebRequest request, final String errorCode, final String defaultErrorMessage, final Object... arguments) {
+        final String localizedMessage = messageSource.getMessage(
                 errorCode, arguments, defaultErrorMessage, request.getLocale());
         return new ApiError(errorCode, localizedMessage);
     }
 
-    public ApiError createBindingResultApiError(
-            WebRequest request,
-            String errorCode,
-            BindingResult bindingResult,
-            String defaultErrorMessage) {
-        ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+    public ApiError createBindingResultApiError(final WebRequest request, final String errorCode, final BindingResult bindingResult, final String defaultErrorMessage) {
+        final ApiError apiError = createApiError(request, errorCode, defaultErrorMessage);
+        for (final FieldError fieldError : bindingResult.getFieldErrors()) {
             apiError.addDetail(createApiError(request, fieldError, fieldError.getField()));
         }
-        for (ObjectError objectError : bindingResult.getGlobalErrors()) {
+        for (final ObjectError objectError : bindingResult.getGlobalErrors()) {
             apiError.addDetail(createApiError(request, objectError, objectError.getObjectName()));
         }
         return apiError;
     }
 
-    private ApiError createApiError(
-            WebRequest request,
-            DefaultMessageSourceResolvable messageResolvable,
-            String target) {
-        String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
+    private ApiError createApiError(final WebRequest request, final DefaultMessageSourceResolvable messageResolvable, final String target) {
+        final String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
         return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 
-    public ApiError createResultMessagesApiError(
-            WebRequest request,
-            String rootErrorCode,
-            ResultMessages resultMessages,
-            String defaultErrorMessage) {
-        ApiError apiError;
+    public ApiError createResultMessagesApiError(final WebRequest request, final String rootErrorCode, final ResultMessages resultMessages, final String defaultErrorMessage) {
+        final ApiError apiError;
         if (resultMessages.getList().size() == 1) {
-            ResultMessage resultMessage = resultMessages.iterator().next();
+            final ResultMessage resultMessage = resultMessages.iterator().next();
             String errorCode = resultMessage.getCode();
-            String errorText = resultMessage.getText();
+            final String errorText = resultMessage.getText();
             if (errorCode == null && errorText == null) {
                 errorCode = rootErrorCode;
             }
             apiError = createApiError(request, errorCode, errorText, resultMessage.getArgs());
         } else {
             apiError = createApiError(request, rootErrorCode, defaultErrorMessage);
-            for (ResultMessage resultMessage : resultMessages.getList()) {
+            for (final ResultMessage resultMessage : resultMessages.getList()) {
                 apiError.addDetail(createApiError(request, resultMessage.getCode(), resultMessage.getText(), resultMessage.getArgs()));
             }
         }

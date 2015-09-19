@@ -14,18 +14,18 @@ public final class CustomAuthenticationDetailsSource implements
         AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> {
 
     @Override
-    public CustomAuthenticationDetails buildDetails(HttpServletRequest request) {
-        String forwardedFor = request.getHeader(HttpHeaders.X_FORWARDED_FOR);
-        String remoteAddress;
+    public CustomAuthenticationDetails buildDetails(final HttpServletRequest request) {
+        final String forwardedFor = request.getHeader(HttpHeaders.X_FORWARDED_FOR);
+        final String remoteAddress;
         if (forwardedFor != null) {
             remoteAddress = forwardedFor;
         } else {
             remoteAddress = request.getRemoteAddr();
         }
-        HttpSession session = request.getSession(false);
-        String requestedSessionId = (session != null) ? session.getId() : null;
-        String agent = request.getHeader(HttpHeaders.USER_AGENT);
-        String trackingId = String.class.cast(request.getAttribute(CustomHttpHeaders.X_TRACK));
+        final HttpSession session = request.getSession(false);
+        final String requestedSessionId = (session != null) ? session.getId() : null;
+        final String agent = request.getHeader(HttpHeaders.USER_AGENT);
+        final String trackingId = String.class.cast(request.getAttribute(CustomHttpHeaders.X_TRACK));
         return new CustomAuthenticationDetails(remoteAddress, requestedSessionId, agent, trackingId);
     }
 

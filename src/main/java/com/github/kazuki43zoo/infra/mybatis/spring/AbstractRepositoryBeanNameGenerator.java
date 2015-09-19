@@ -12,9 +12,7 @@ public abstract class AbstractRepositoryBeanNameGenerator implements BeanNameGen
     private final String suffix = getClass().getSimpleName().replaceAll("BeanNameGenerator", "");
 
     @Override
-    public String generateBeanName(
-            BeanDefinition definition,
-            BeanDefinitionRegistry registry) {
+    public String generateBeanName(final BeanDefinition definition, final BeanDefinitionRegistry registry) {
         String defaultBeanName = Introspector.decapitalize(ClassUtils.getShortName(definition.getBeanClassName()));
         return defaultBeanName.replaceAll("Repository", suffix);
     }

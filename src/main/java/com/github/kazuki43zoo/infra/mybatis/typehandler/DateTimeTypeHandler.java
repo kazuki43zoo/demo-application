@@ -11,26 +11,26 @@ import java.sql.*;
 public final class DateTimeTypeHandler extends BaseTypeHandler<DateTime> {
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, DateTime parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(final PreparedStatement ps, final int i, final DateTime parameter, final JdbcType jdbcType) throws SQLException {
         ps.setTimestamp(i, new Timestamp(parameter.getMillis()));
     }
 
     @Override
-    public DateTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public DateTime getNullableResult(final ResultSet rs, final String columnName) throws SQLException {
         return toDateTime(rs.getTimestamp(columnName));
     }
 
     @Override
-    public DateTime getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public DateTime getNullableResult(final ResultSet rs, final int columnIndex) throws SQLException {
         return toDateTime(rs.getTimestamp(columnIndex));
     }
 
     @Override
-    public DateTime getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public DateTime getNullableResult(final CallableStatement cs, final int columnIndex) throws SQLException {
         return toDateTime(cs.getTimestamp(columnIndex));
     }
 
-    protected DateTime toDateTime(Timestamp timestamp) {
+    protected DateTime toDateTime(final Timestamp timestamp) {
         if (timestamp == null) {
             return null;
         } else {
@@ -38,7 +38,7 @@ public final class DateTimeTypeHandler extends BaseTypeHandler<DateTime> {
         }
     }
 
-    protected DateTime newDateTime(Timestamp timestamp) {
+    protected DateTime newDateTime(final Timestamp timestamp) {
         return new DateTime(timestamp.getTime());
     }
 

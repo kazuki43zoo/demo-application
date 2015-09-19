@@ -28,8 +28,8 @@ public class TimeCardCalculateController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public DailyAttendanceResource calculate(@RequestBody @Validated DailyAttendanceResource resource) {
-        DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
+    public DailyAttendanceResource calculate(final @RequestBody @Validated DailyAttendanceResource resource) {
+        final DailyAttendance attendance = beanMapper.map(resource, DailyAttendance.class);
         attendance.setWorkPlace(workPlaceSharedService.getWorkPlace(attendance.getWorkPlace().getWorkPlaceUuid()));
         attendance.calculate(null, workPlaceSharedService.getMainOffice(), calendarSharedService.getHolidays(attendance.getTargetDate().dayOfMonth().withMinimumValue()));
         return beanMapper.map(attendance, DailyAttendanceResource.class);
@@ -38,10 +38,10 @@ public class TimeCardCalculateController {
     @RequestMapping(method = RequestMethod.GET, params = "target=default")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public DailyAttendanceResource getDefaultAttendanceResource(@RequestParam(value = "workPlaceUuid", required = false) String workPlaceUuid) {
-        WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(workPlaceUuid);
+    public DailyAttendanceResource getDefaultAttendanceResource(final @RequestParam(value = "workPlaceUuid", required = false) String workPlaceUuid) {
+        final WorkPlace defaultWorkPlace = workPlaceSharedService.getWorkPlace(workPlaceUuid);
 
-        DailyAttendance attendance = new DailyAttendance();
+        final DailyAttendance attendance = new DailyAttendance();
         attendance.setDefault(defaultWorkPlace);
         attendance.calculate(defaultWorkPlace, workPlaceSharedService.getMainOffice());
         return beanMapper.map(attendance, DailyAttendanceResource.class);

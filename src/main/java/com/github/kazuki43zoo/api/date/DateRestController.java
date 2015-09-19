@@ -24,7 +24,7 @@ public class DateRestController {
     @RequestMapping(path = "/currentDateTime", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public DateResource getCurrentTimeDate() {
-        DateResource responseResource = new DateResource();
+        final DateResource responseResource = new DateResource();
         responseResource.setDateTime(dateFactory.newDateTime());
         responseResource.add(linkTo(linkController.getCurrentTimeDate()).withSelfRel());
         return responseResource;

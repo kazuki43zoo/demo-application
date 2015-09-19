@@ -56,8 +56,7 @@ public class DailyAttendance implements Serializable {
         calculate(defaultWorkPlace, mainOffice, holidays);
     }
 
-    public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice,
-                          final Map<LocalDate, Holiday> holidays) {
+    public void calculate(final WorkPlace defaultWorkPlace, final WorkPlace mainOffice, final Map<LocalDate, Holiday> holidays) {
 
         clearCalculate();
 

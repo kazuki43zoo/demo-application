@@ -12,7 +12,7 @@ public final class InvalidAccessException extends ResultMessagesNotificationExce
         super(Message.FW_VALID_ACCESS_DENIED.resultMessages());
     }
 
-    public InvalidAccessException(ResultMessages messages) {
+    public InvalidAccessException(final ResultMessages messages) {
         super(messages);
     }
 

@@ -53,7 +53,7 @@ public class WorkPlace implements Serializable {
     private transient List<Interval> breakTimeIntervals;
 
     public void initialize() {
-        List<Interval> breakTimeIntervals = new ArrayList<>();
+        final List<Interval> breakTimeIntervals = new ArrayList<>();
         if (getBreakTimes() != null) {
             for (BreakTime breakTime : getBreakTimes()) {
                 breakTimeIntervals.addAll(breakTime.toBreakTimeIntervals());
