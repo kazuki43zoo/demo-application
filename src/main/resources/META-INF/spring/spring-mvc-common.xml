@@ -19,6 +19,12 @@
           p:defaultLocale="en"
           p:cookieName="locale"/>
 
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver"
+          p:cookieName="theme" p:defaultThemeName="default" />
+
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource"
+          p:basenamePrefix="themes/"/>
+
     <bean id="handlerExceptionResolverLoggingInterceptor" class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor"
           p:exceptionLogger-ref="exceptionLogger"/>
     <aop:config>

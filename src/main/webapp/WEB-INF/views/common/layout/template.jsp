@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="<c:url value="/resources/static/vendor/bootstrap/dist/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/static/vendor/bootstrap/dist/css/bootstrap-theme.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/static/app/styles.css"/>">
+    <spring:theme var="themeStylesCssFile" code="stylesCss" text="default.css"/>
+    <link rel="stylesheet" href="<c:url value="/resources/static/app/${themeStylesCssFile}"/>">
     <link rel="stylesheet" href="<c:url value="/resources/static/app/${usecaseName}/${usecaseName}.css"/>">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

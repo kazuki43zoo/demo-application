@@ -76,4 +76,7 @@
     <entry key="change">Change</entry>
     <entry key="changeAndLogin">Change and Login</entry>
 
+    <entry key="theme">Theme</entry>
+    <entry key="theme.default">White</entry>
+    <entry key="theme.blue">Blue</entry>
 </properties>
