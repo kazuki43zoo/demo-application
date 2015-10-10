@@ -5,6 +5,8 @@
 
 このアプリケーションは、[TERASOLUNA Server Framework for Java (5.x) Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
 
+[![Build Status for master](https://travis-ci.org/kazuki43zoo/demo-application.svg?branch=master)](https://travis-ci.org/kazuki43zoo/demo-application)
+
 # 2. Application Structure
 
 アプリケーション構造は以下の通りです。<br><br>
