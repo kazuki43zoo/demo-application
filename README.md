@@ -6,6 +6,9 @@ This is sample application for develop using [TERASOLUNA Server Framework for Ja
 This application is developed based [TERASOLUNA Server Framework for Java (5.x) Development Guideline](http://terasolunaorg.github.io/guideline/).<br>
 But it being customized by my opinion in the partially (this means is not 100% compliance by guideline).
 
+[![Build Status for master](https://travis-ci.org/kazuki43zoo/demo-application.svg?branch=master)](https://travis-ci.org/kazuki43zoo/demo-application)
+
+
 # 2. Application Structure
 
 Structure of this application is following.<br><br>
