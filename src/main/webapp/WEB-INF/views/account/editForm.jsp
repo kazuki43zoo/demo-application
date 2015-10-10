@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form:form method="put" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" modelAttribute="accountForm" class="form-horizontal" >
+<form:form method="put" servletRelativeAction="/app/accounts/${f:h(account.accountUuid)}" modelAttribute="accountForm" class="form-horizontal" >
 
     <jsp:include page="inc/accountForm.jsp"/>
 

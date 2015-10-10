@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form method="get" action="${contextPath}/app/profile" class="form-horizontal">
+<form:form method="get" servletRelativeAction="/app/profile" class="form-horizontal">
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
@@ -20,4 +20,4 @@
         </div>
 
     </div>
-</form>
+</form:form>

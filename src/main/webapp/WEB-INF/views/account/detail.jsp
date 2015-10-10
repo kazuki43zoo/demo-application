@@ -1,5 +1,5 @@
 <t:messagesPanel/>
-<form method="get" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="form-horizontal">
+<form:form method="get" servletRelativeAction="/app/accounts/${f:h(account.accountUuid)}" class="form-horizontal">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
             <a href="${contextPath}/app/accounts" class="btn btn-default pull-left">
@@ -34,7 +34,7 @@
             </c:if>
         </div>
     </div>
-</form>
+</form:form>
 
-<form:form id="deleteForm" method="delete" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="sr-only" />
-<form:form id="unlockForm" method="patch" action="${contextPath}/app/accounts/${f:h(account.accountUuid)}/unlock" class="sr-only"/>
+<form:form id="deleteForm" method="delete" servletRelativeAction="/app/accounts/${f:h(account.accountUuid)}" class="sr-only" />
+<form:form id="unlockForm" method="patch" servletRelativeAction="/app/accounts/${f:h(account.accountUuid)}/unlock" class="sr-only"/>

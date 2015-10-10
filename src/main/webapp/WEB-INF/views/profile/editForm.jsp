@@ -1,6 +1,6 @@
 <t:messagesPanel/>
 
-<form:form method="put" action="${contextPath}/app/profile" modelAttribute="profileForm" class="form-horizontal">
+<form:form method="put" servletRelativeAction="/app/profile" modelAttribute="profileForm" class="form-horizontal">
 
     <div class="form-group">
         <form:label path="accountId" class="col-sm-2 control-label">Account ID</form:label>

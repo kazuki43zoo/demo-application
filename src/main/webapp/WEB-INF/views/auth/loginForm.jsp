@@ -9,8 +9,7 @@
         </spring:nestedPath>
     </spring:hasBindErrors>
 </c:if>
-<c:url value="/app/auth/login" var="loginUrl"/>
-<form:form method="post" action="${loginUrl}" modelAttribute="loginForm" class="navbar-form">
+<form:form method="post" servletRelativeAction="/app/auth/login" modelAttribute="loginForm" class="navbar-form">
     <div class="form-group">
         <spring:message var="labelAccountId" code="accountId" />
         <form:input path="username" class="form-control" placeholder="${f:h(labelAccountId)}"/>

@@ -41,5 +41,5 @@
     </li>
 </ul>
 
-<form:form id="logoutForm" action="${contextPath}/app/auth/logout" class="sr-only"/>
+<form:form id="logoutForm" servletRelativeAction="/app/auth/logout" class="sr-only"/>
 

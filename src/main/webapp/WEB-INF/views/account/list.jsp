@@ -1,40 +1,37 @@
 <t:messagesPanel/>
 
-<form method="get" action="${contextPath}/app/accounts" class="form-horizontal">
-    <spring:nestedPath path="accountsSearchQuery">
-        <div class="form-group">
-            <div class="col-sm-4">
-                <form:input path="word" cssClass="form-control" placeholder="Account ID or Account Name"/>
-                <form:errors path="word"/>
-            </div>
-            <div class="col-sm-4">
-
-                <c:forEach
-                        var="accountSearchTargetCodeListElement"
-                        items="${CL_ACCOUNT_SEARCH_TARGET}"
-                        varStatus="rowStatus">
-                    <div class="checkbox-inline">
-                        <form:checkbox path="targets"
-                                value="${accountSearchTargetCodeListElement.key}"
-                                label="${accountSearchTargetCodeListElement.value}"/>
-                    </div>
-                </c:forEach>
-                <div>
-                    <form:errors path="targets"/>
-                </div>
-            </div>
-            <button class="btn btn-default" name="filter">
-                <span class="glyphicon glyphicon-search"></span>
-                Filter
-            </button>
-            <a href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
-                <span class="glyphicon glyphicon-plus"></span>
-                Create
-            </a>
+<form:form method="get" servletRelativeAction="/app/accounts" class="form-horizontal" modelAttribute="accountsSearchQuery">
+    <div class="form-group">
+        <div class="col-sm-4">
+            <form:input path="word" cssClass="form-control" placeholder="Account ID or Account Name"/>
+            <form:errors path="word"/>
         </div>
+        <div class="col-sm-4">
 
-    </spring:nestedPath>
-</form>
+            <c:forEach
+                    var="accountSearchTargetCodeListElement"
+                    items="${CL_ACCOUNT_SEARCH_TARGET}"
+                    varStatus="rowStatus">
+                <div class="checkbox-inline">
+                    <form:checkbox path="targets"
+                            value="${accountSearchTargetCodeListElement.key}"
+                            label="${accountSearchTargetCodeListElement.value}"/>
+                </div>
+            </c:forEach>
+            <div>
+                <form:errors path="targets"/>
+            </div>
+        </div>
+        <button class="btn btn-default" name="filter">
+            <span class="glyphicon glyphicon-search"></span>
+            Filter
+        </button>
+        <a href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create
+        </a>
+    </div>
+</form:form>
 
 <table class="table table-hover">
     <thead>
