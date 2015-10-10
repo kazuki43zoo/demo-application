@@ -13,7 +13,7 @@ public class LogoutController {
     @RequestMapping(path = "logout", method = RequestMethod.GET, params = "success")
     public String logoutSuccess(final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_LOGOUT.resultMessages());
-        return "redirect:/";
+        return "redirect:/app/";
     }
 
 }

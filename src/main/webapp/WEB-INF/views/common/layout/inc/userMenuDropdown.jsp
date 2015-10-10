@@ -32,7 +32,7 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a id="logoutUserMenu">
+                <a id="logoutUserMenu" href="">
                     <span class="glyphicon glyphicon-log-out"></span>
                     <spring:message code="userMenu.logout"/>
                 </a>
