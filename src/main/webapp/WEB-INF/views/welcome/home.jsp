@@ -1,4 +1,4 @@
-<h1><spring:message code="welcome.message" /></h1>
+<h1 id="welcomeMessage"><spring:message code="welcome.message" /></h1>
 
 <p>
     The time on the server is

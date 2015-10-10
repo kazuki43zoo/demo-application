@@ -10,7 +10,7 @@
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Back
             </a>
-            <form:button class="btn btn-default">
+            <form:button id="saveBtn" class="btn btn-default">
                 <span class="glyphicon glyphicon-floppy-save"></span>
                 Save
             </form:button>

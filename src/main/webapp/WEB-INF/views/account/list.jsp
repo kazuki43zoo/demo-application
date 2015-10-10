@@ -26,7 +26,7 @@
             <span class="glyphicon glyphicon-search"></span>
             Filter
         </button>
-        <a href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
+        <a id="createBtn" href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
             <span class="glyphicon glyphicon-plus"></span>
             Create
         </a>

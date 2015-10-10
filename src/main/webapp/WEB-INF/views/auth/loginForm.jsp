@@ -18,7 +18,7 @@
         <spring:message var="labelPassword" code="password" />
         <form:password path="password" class="form-control" placeholder="${f:h(labelPassword)}"/>
     </div>
-    <form:button class="btn">
+    <form:button id="loginBtn" class="btn">
         <span class="glyphicon glyphicon-log-in"></span>
     </form:button>
 </form:form>
