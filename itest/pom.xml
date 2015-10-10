@@ -3,6 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>demo-application-itest</artifactId>
     <packaging>jar</packaging>
+    <version>1.0</version>
 
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
