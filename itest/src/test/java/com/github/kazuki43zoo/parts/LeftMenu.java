@@ -10,6 +10,8 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
+
 @Getter
 public class LeftMenu<P extends Page<P>> {
 
@@ -29,11 +31,7 @@ public class LeftMenu<P extends Page<P>> {
 
 	public AccountListPage accountManagement() {
 		this.accountsMenuLink.click();
-		if (page instanceof AccountListPage) {
-			return AccountListPage.class.cast(page.reload());
-		} else {
-			return new AccountListPage(driver);
-		}
+		return decideNextPageInstance(page, AccountListPage.class, driver);
 	}
 
 }

@@ -14,8 +14,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static com.github.kazuki43zoo.utils.WebElementOperations.check;
-import static com.github.kazuki43zoo.utils.WebElementOperations.inputValue;
+import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
+import static com.github.kazuki43zoo.utils.WebElementOperations.*;
 
 @Getter
 public class AccountCreateFormPage implements Page<AccountCreateFormPage> {
@@ -68,6 +68,7 @@ public class AccountCreateFormPage implements Page<AccountCreateFormPage> {
 		reload();
 	}
 
+	@Override
 	public AccountCreateFormPage reload() {
 		PageFactory.initElements(driver, this);
 		this.userMenuPullDown = new UserMenuPullDown<>(driver, this);
@@ -77,48 +78,45 @@ public class AccountCreateFormPage implements Page<AccountCreateFormPage> {
 	}
 
 	public AccountCreateFormPage accountId(String value) {
-		return input(this.accountId, value);
+		return input(this, this.accountId, value);
 	}
 
 	public AccountCreateFormPage firstName(String value) {
-		return input(this.firstName, value);
+		return input(this, this.firstName, value);
 	}
 
 	public AccountCreateFormPage lastName(String value) {
-		return input(this.lastName, value);
+		return input(this, this.lastName, value);
 	}
 
 	public AccountCreateFormPage password(String value) {
-		return input(this.password, value);
+		return input(this, this.password, value);
 	}
 
 	public AccountCreateFormPage confirmPassword(String value) {
-		return input(this.confirmPassword, value);
+		return input(this, this.confirmPassword, value);
 	}
 
 	public AccountCreateFormPage enabled(boolean value) {
-		enabled.get(value ? 0 : 1).click();
-		return this;
+		return select(this, enabled, value);
 	}
 
 	public AccountCreateFormPage enabledAutoLogin(boolean value) {
-		enabledAutoLogin.get(value ? 0 : 1).click();
-		return this;
+		return select(this, enabledAutoLogin, value);
 	}
 
 	public AccountCreateFormPage authorities(String... values) {
-		check(authorities, values);
-		return this;
+		return check(this, authorities, values);
 	}
 
 	public AccountDetailPage save() {
-		this.saveBtn.click();
-		return new AccountDetailPage(driver);
+		return save(AccountDetailPage.class);
 	}
 
-	private AccountCreateFormPage input(WebElement element, String value) {
-		inputValue(element, value);
-		return this;
+	public <P extends Page<P>> P save(Class<P> nextPage) {
+		this.saveBtn.click();
+		return decideNextPageInstance(this, nextPage, driver);
 	}
+
 
 }

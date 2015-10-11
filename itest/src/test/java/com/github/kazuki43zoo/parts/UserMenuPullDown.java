@@ -10,6 +10,8 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
+
 @Getter
 public class UserMenuPullDown<P extends Page<P>> {
 
@@ -34,11 +36,7 @@ public class UserMenuPullDown<P extends Page<P>> {
 	public WelcomePage logout() {
 		toggle();
 		this.logoutUserMenu.click();
-		if (page instanceof WelcomePage) {
-			return (WelcomePage) page.reload();
-		} else {
-			return new WelcomePage(driver);
-		}
+		return decideNextPageInstance(page, WelcomePage.class, driver);
 	}
 
 	private UserMenuPullDown toggle() {

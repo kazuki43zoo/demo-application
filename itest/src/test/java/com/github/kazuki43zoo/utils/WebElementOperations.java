@@ -1,5 +1,6 @@
 package com.github.kazuki43zoo.utils;
 
+import com.github.kazuki43zoo.pages.Page;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -12,13 +13,19 @@ public class WebElementOperations {
 		// NOP
 	}
 
-
-	public static void inputValue(WebElement element, String value) {
+	public static <P extends Page<P>> P input(P page, WebElement element, String value) {
 		element.clear();
 		element.sendKeys(value);
+		return page;
 	}
 
-	public static void check(List<WebElement> checkboxes, String... selectValues) {
+	public static <P extends Page<P>> P select(P page, List<WebElement> radios, boolean value) {
+		radios.get(value ? 0 : 1).click();
+		return page;
+	}
+
+
+	public static <P extends Page<P>> P check(P page, List<WebElement> checkboxes, String... selectValues) {
 		Set<String> valueSet = new HashSet<>(Arrays.asList(selectValues));
 		for (WebElement checkbox : checkboxes) {
 			if (valueSet.contains(checkbox.getAttribute("value")) && !checkbox.isSelected()) {
@@ -27,7 +34,7 @@ public class WebElementOperations {
 				checkbox.click();
 			}
 		}
-
+		return page;
 	}
 
 }

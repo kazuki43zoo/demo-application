@@ -12,8 +12,6 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.github.kazuki43zoo.utils.WebElementOperations.inputValue;
-
 @Getter
 public class AccountListPage implements Page<AccountListPage> {
 
@@ -32,6 +30,7 @@ public class AccountListPage implements Page<AccountListPage> {
 		reload();
 	}
 
+	@Override
 	public AccountListPage reload() {
 		PageFactory.initElements(driver, this);
 		this.userMenuPullDown = new UserMenuPullDown<>(driver, this);
@@ -43,12 +42,6 @@ public class AccountListPage implements Page<AccountListPage> {
 	public AccountCreateFormPage create() {
 		this.createBtn.click();
 		return new AccountCreateFormPage(driver);
-	}
-
-
-	private AccountListPage input(WebElement element, String value) {
-		inputValue(element, value);
-		return this;
 	}
 
 }

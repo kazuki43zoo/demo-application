@@ -31,7 +31,8 @@ public class AuthenticationTest {
 		driver.get(applicationContextUrl);
 
 		// login
-		WelcomePage welcomePage = new WelcomePage(driver).username("user01").password("password").login();
+		WelcomePage welcomePage = new WelcomePage(driver)
+				.username("user01").password("password").login();
 
 		// logout
 		welcomePage.getUserMenuPullDown().logout();

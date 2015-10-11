@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
-import static com.github.kazuki43zoo.utils.WebElementOperations.inputValue;
+import static com.github.kazuki43zoo.utils.WebElementOperations.input;
 
 @Getter
 public class LoginPage implements Page<LoginPage> {
@@ -44,11 +44,11 @@ public class LoginPage implements Page<LoginPage> {
 	}
 
 	public LoginPage username(String value) {
-		return input(this.username, value);
+		return input(this, this.username, value);
 	}
 
 	public LoginPage password(String value) {
-		return input(this.password, value);
+		return input(this, this.password, value);
 	}
 
 	public LoginPage login() {
@@ -58,11 +58,6 @@ public class LoginPage implements Page<LoginPage> {
 	public <T extends Page<T>> T login(Class<T> nextPage) {
 		this.loginBtn.click();
 		return decideNextPageInstance(this, nextPage, driver);
-	}
-
-	private LoginPage input(WebElement element, String value) {
-		inputValue(element, value);
-		return this;
 	}
 
 }

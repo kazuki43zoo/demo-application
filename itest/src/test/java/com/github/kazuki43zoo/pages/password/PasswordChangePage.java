@@ -9,7 +9,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.github.kazuki43zoo.utils.WebElementOperations.inputValue;
+import static com.github.kazuki43zoo.utils.WebElementOperations.input;
 
 @Getter
 public class PasswordChangePage implements Page<PasswordChangePage> {
@@ -43,11 +43,11 @@ public class PasswordChangePage implements Page<PasswordChangePage> {
 	}
 
 	public PasswordChangePage username(String value) {
-		return input(this.username, value);
+		return input(this, this.username, value);
 	}
 
 	public PasswordChangePage password(String value) {
-		return input(this.password, value);
+		return input(this, this.password, value);
 	}
 
 	public void login() {
@@ -57,12 +57,6 @@ public class PasswordChangePage implements Page<PasswordChangePage> {
 	public PasswordChangePage failureOnLogin() {
 		this.loginBtn.click();
 		return reload();
-	}
-
-
-	private PasswordChangePage input(WebElement element, String value) {
-		inputValue(element, value);
-		return this;
 	}
 
 }
