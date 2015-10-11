@@ -5,7 +5,6 @@ jdk:
 cache:
   directories:
   - $HOME/.m2
-  - $HOME/.cargo
 install: true
 
 before_script:
@@ -18,3 +17,4 @@ before_script:
 script:
   - mvn package cargo:daemon-start
   - mvn test -f itest/pom.xml
+  - ls -lrta $HOME
