@@ -43,7 +43,7 @@ public class AccountRegisterTest {
 					.enabledAutoLogin(false)
 					.password(password)
 					.confirmPassword(password)
-				.authorities("ADMIN", "USER", "ACCOUNTMNG").save()
+					.authorities("ADMIN", "USER", "ACCOUNTMNG").save()
 				.getUserMenuPullDown().logout()
 				.username(accountId).password(password).login(PasswordChangePage.class);
 
