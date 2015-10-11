@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
+import static com.github.kazuki43zoo.utils.PageOperations.loadNextPage;
 import static com.github.kazuki43zoo.utils.WebElementOperations.*;
 
 @Getter
@@ -115,7 +115,7 @@ public class AccountCreateFormPage implements Page<AccountCreateFormPage> {
 
 	public <P extends Page<P>> P save(Class<P> nextPage) {
 		this.saveBtn.click();
-		return decideNextPageInstance(this, nextPage, driver);
+		return loadNextPage(this, nextPage, driver);
 	}
 
 

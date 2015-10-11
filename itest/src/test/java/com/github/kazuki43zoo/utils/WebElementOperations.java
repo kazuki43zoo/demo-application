@@ -28,13 +28,17 @@ public class WebElementOperations {
 	public static <P extends Page<P>> P check(P page, List<WebElement> checkboxes, String... selectValues) {
 		Set<String> valueSet = new HashSet<>(Arrays.asList(selectValues));
 		for (WebElement checkbox : checkboxes) {
-			if (valueSet.contains(checkbox.getAttribute("value")) && !checkbox.isSelected()) {
+			if (valueSet.contains(getValue(checkbox)) && !checkbox.isSelected()) {
 				checkbox.click();
 			} else if (checkbox.isSelected()) {
 				checkbox.click();
 			}
 		}
 		return page;
+	}
+
+	public static String getValue(WebElement item) {
+		return item.getAttribute("value");
 	}
 
 }

@@ -10,7 +10,7 @@ public class PageOperations {
 		// NOP
 	}
 
-	public static <P extends Page<P>> P decideNextPageInstance(Page<?> currentPage, Class<P> nextPage, WebDriver driver) {
+	public static <P extends Page<P>> P loadNextPage(Page<?> currentPage, Class<P> nextPage, WebDriver driver) {
 		if (nextPage == currentPage.getClass()) {
 			return nextPage.cast(currentPage).reload();
 		}

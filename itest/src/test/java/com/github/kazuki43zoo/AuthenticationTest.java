@@ -2,7 +2,6 @@ package com.github.kazuki43zoo;
 
 import com.github.kazuki43zoo.pages.WelcomePage;
 import com.github.kazuki43zoo.pages.auth.LoginPage;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,8 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.inject.Inject;
-
+import static com.github.kazuki43zoo.utils.WebElementOperations.getValue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -28,7 +26,7 @@ public class AuthenticationTest {
 	String applicationContextUrl;
 
 	@BeforeClass
-	public static void setUp(){
+	public static void setUp() {
 		driver = new FirefoxDriver();
 	}
 
@@ -60,8 +58,8 @@ public class AuthenticationTest {
 
 		// assert
 		assertThat(loginPage.getAlert().getText(), is("Bad credentials"));
-		assertThat(loginPage.getUsername().getAttribute("value"), is("unknownUser"));
-		assertThat(loginPage.getPassword().getAttribute("value"), is(""));
+		assertThat(getValue(loginPage.getUsername()), is("unknownUser"));
+		assertThat(getValue(loginPage.getPassword()), is(""));
 
 	}
 
@@ -77,8 +75,8 @@ public class AuthenticationTest {
 
 		// assert
 		assertThat(loginPage.getAlert().getText(), is("Bad credentials"));
-		assertThat(loginPage.getUsername().getAttribute("value"), is("user01"));
-		assertThat(loginPage.getPassword().getAttribute("value"), is(""));
+		assertThat(getValue(loginPage.getUsername()), is("user01"));
+		assertThat(getValue(loginPage.getPassword()), is(""));
 
 	}
 
@@ -93,15 +91,15 @@ public class AuthenticationTest {
 
 		// assert
 		assertThat(loginPage.getAlert().getText(), is("\"Password\" may not be null."));
-		assertThat(loginPage.getUsername().getAttribute("value"), is("user01"));
-		assertThat(loginPage.getPassword().getAttribute("value"), is(""));
+		assertThat(getValue(loginPage.getUsername()), is("user01"));
+		assertThat(getValue(loginPage.getPassword()), is(""));
 
 		// login
 		loginPage.username("").password("password").login();
 
 		assertThat(loginPage.getAlert().getText(), is("\"Account ID\" may not be null."));
-		assertThat(loginPage.getUsername().getAttribute("value"), is(""));
-		assertThat(loginPage.getPassword().getAttribute("value"), is(""));
+		assertThat(getValue(loginPage.getUsername()), is(""));
+		assertThat(getValue(loginPage.getPassword()), is(""));
 
 	}
 

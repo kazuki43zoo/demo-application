@@ -11,7 +11,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.github.kazuki43zoo.utils.PageOperations.decideNextPageInstance;
+import static com.github.kazuki43zoo.utils.PageOperations.loadNextPage;
 import static com.github.kazuki43zoo.utils.WebElementOperations.input;
 
 @Getter
@@ -71,7 +71,7 @@ public class WelcomePage implements Page<WelcomePage> {
 
 	public <T extends Page<T>> T login(Class<T> nextPage) {
 		this.loginBtn.click();
-		return decideNextPageInstance(this, nextPage, driver);
+		return loadNextPage(this, nextPage, driver);
 	}
 
 }
