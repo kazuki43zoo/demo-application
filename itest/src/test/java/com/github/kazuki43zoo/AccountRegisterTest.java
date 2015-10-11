@@ -35,7 +35,8 @@ public class AccountRegisterTest {
 
 		PasswordChangePage passwordChangePage = new WelcomePage(driver)
 				.username("user01").password("password").login()
-				.getLeftMenu().accountManagement().create()
+				.getLeftMenu().accountManagement()
+				.create()
 					.accountId(accountId)
 					.firstName("Kazuki")
 					.lastName("Shimizu")
@@ -43,7 +44,8 @@ public class AccountRegisterTest {
 					.enabledAutoLogin(false)
 					.password(password)
 					.confirmPassword(password)
-					.authorities("ADMIN", "USER", "ACCOUNTMNG").save()
+					.authorities("ADMIN", "USER", "ACCOUNTMNG")
+					.save()
 				.getUserMenuPullDown().logout()
 				.username(accountId).password(password).login(PasswordChangePage.class);
 
