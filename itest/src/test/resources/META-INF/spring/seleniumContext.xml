@@ -9,6 +9,4 @@
 
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
 
-    <bean class="org.openqa.selenium.firefox.FirefoxDriver" scope="prototype"/>
-
 </beans>

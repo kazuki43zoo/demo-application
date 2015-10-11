@@ -3,9 +3,12 @@ package com.github.kazuki43zoo;
 import com.github.kazuki43zoo.pages.WelcomePage;
 import com.github.kazuki43zoo.pages.auth.LoginPage;
 import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,11 +22,15 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(locations = {"classpath:META-INF/spring/seleniumContext.xml"})
 public class AuthenticationTest {
 
-	@Inject
-	WebDriver driver;
+	private static WebDriver driver;
 
 	@Value("${selenium.applicationContextUrl}")
 	String applicationContextUrl;
+
+	@BeforeClass
+	public static void setUp(){
+		driver = new FirefoxDriver();
+	}
 
 	@Test
 	public void loginAndLogoutSuccess() {
@@ -98,8 +105,8 @@ public class AuthenticationTest {
 
 	}
 
-	@After
-	public void tearDown() {
+	@AfterClass
+	public static void tearDown() {
 		driver.quit();
 	}
 
