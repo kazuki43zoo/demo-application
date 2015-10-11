@@ -10,7 +10,7 @@ install: true
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - sh pwd
+  - pwd
   - sh startup-cargo-daemon.sh
 
 script:
