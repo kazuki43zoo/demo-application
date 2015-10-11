@@ -15,6 +15,7 @@ before_script:
   - java -jar ./target/cargo-daemon-webapp-${CARGO_DAEMON_WEBAPP_VERSION}.war &
 
 script:
-  - mvn package cargo:daemon-start
+  - mvn package
+  - mvn cargo:daemon-start -X
   - mvn test -f itest/pom.xml
   - ls -lrta $HOME
