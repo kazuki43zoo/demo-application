@@ -5,6 +5,7 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/cargo-daemon
 install: true
 
 before_script:
