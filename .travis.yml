@@ -5,7 +5,6 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
-    - $HOME/downloads/cargo
 install: true
 
 before_script:
@@ -14,7 +13,6 @@ before_script:
   - export CARGO_DAEMON_WEBAPP_VERSION=1.4.16
   - mvn dependency:copy -Dartifact=org.codehaus.cargo:cargo-daemon-webapp:${CARGO_DAEMON_WEBAPP_VERSION}:war -DoutputDirectory=./target/.
   - java -jar ./target/cargo-daemon-webapp-${CARGO_DAEMON_WEBAPP_VERSION}.war &
-  - mkdir -p $HOME/downloads/cargo
 
 script:
   - mvn package cargo:daemon-start

@@ -116,8 +116,6 @@
                             <containerId>${cargo.container.id}</containerId>
                             <zipUrlInstaller>
                                 <url>${cargo.container.url}</url>
-                                <downloadDir>${user.home}/downloads/cargo</downloadDir>
-                                <extractDir>${user.home}/downloads/cargo/extract</extractDir>
                             </zipUrlInstaller>
                         </container>
                         <daemon>
