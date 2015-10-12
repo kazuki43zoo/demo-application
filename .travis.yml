@@ -14,5 +14,5 @@ before_script:
   - sh ./startup-cargo-daemon.sh
 
 script:
-  - mvn package cargo:daemon-start
-  - mvn test -f itest/pom.xml
+  - mvn -U package cargo:daemon-start
+  - mvn -U test -f itest/pom.xml
