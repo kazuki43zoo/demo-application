@@ -26,7 +26,7 @@
             <span class="glyphicon glyphicon-search"></span>
             Filter
         </button>
-        <a id="createBtn" href="${contextPath}/app/accounts?form=create" class="btn btn-default pull-right">
+        <a id="createBtn" href="<c:url value='/app/accounts?form=create'/>" class="btn btn-default pull-right">
             <span class="glyphicon glyphicon-plus"></span>
             Create
         </a>
@@ -48,7 +48,7 @@
         <tr>
             <td>${f:h(rowStatus.count)}</td>
             <td>
-                <a href="${contextPath}/app/accounts/${f:h(account.accountUuid)}">${f:h(account.accountId)}</a>
+                <a href="<c:url value='/app/accounts/${f:h(account.accountUuid)}'/>">${f:h(account.accountId)}</a>
             </td>
             <td>${f:h(account.firstName)}&nbsp;${f:h(account.lastName)}</td>
             <td>

@@ -6,7 +6,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <a href="${contextPath}/app/accounts/${f:h(account.accountUuid)}" class="btn btn-default">
+            <a href="<c:url value='/app/accounts/${f:h(account.accountUuid)}'/>" class="btn btn-default">
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Back
             </a>

@@ -41,7 +41,7 @@
                 <span class="glyphicon glyphicon-floppy-save"></span>
                 Save
             </button>
-            <a href="${contextPath}/app/profile" class="btn btn-default">
+            <a href="<c:out value='/app/profile'/>" class="btn btn-default">
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Back
             </a>

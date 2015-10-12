@@ -2,7 +2,7 @@
 <form:form method="get" servletRelativeAction="/app/accounts/${f:h(account.accountUuid)}" class="form-horizontal">
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">
-            <a href="${contextPath}/app/accounts" class="btn btn-default pull-left">
+            <a href="<c:url value='/app/accounts'/>" class="btn btn-default pull-left">
                 <span class="glyphicon glyphicon-step-backward"></span>
                 Account List
             </a>

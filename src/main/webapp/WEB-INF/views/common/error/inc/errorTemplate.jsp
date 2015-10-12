@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width"/>
-    <meta name="contextPath" content="${contextPath}">
+    <meta name="contextPath" content="${pageContext.request.contextPath}">
     <sec:csrfMetaTags />
     <title>${param.title}</title>
     <link rel="stylesheet" href="<c:url value="/resources/static/vendor/bootstrap/dist/css/bootstrap.min.css"/>">

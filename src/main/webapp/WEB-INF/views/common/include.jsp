@@ -12,7 +12,7 @@
 <%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda" %>
 <%@ taglib tagdir="/WEB-INF/tags/form" prefix="formEx"%>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%--<c:set var="contextPath" value="${pageContext.request.contextPath}"/>--%>
 
 <spring:eval expression="@securityConfigs" var="securityConfigs"/>
 <spring:eval expression="@applicationConfigs" var="applicationConfigs"/>
