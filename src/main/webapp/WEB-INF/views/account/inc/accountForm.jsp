@@ -46,6 +46,7 @@
     </div>
     <div class="col-sm-4">
         <form:password path="confirmPassword" cssClass="form-control" placeholder="Confirm Password" />
+        <form:errors path="confirmPassword"/>
     </div>
 </div>
 

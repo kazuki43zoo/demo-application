@@ -35,6 +35,7 @@
         </div>
         <div class="col-sm-4">
             <form:password path="confirmPassword" cssClass="form-control" placeholder="${f:h(labelConfirmPassword)}"/>
+            <form:errors path="confirmPassword"/>
         </div>
     </div>
     <div class="form-group">
