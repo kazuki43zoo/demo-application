@@ -46,7 +46,7 @@ public class ProfileController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.POST, params = "_method=put")
     public String save(final @CurrentUser CustomUserDetails authenticatedUser, final @Validated ProfileForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {

@@ -1,5 +1,9 @@
 <t:messagesPanel/>
 
+<spring:hasBindErrors name="accountForm">
+    <c:set var="bindingResult" scope="request" value="${errors}"/>
+</spring:hasBindErrors>
+
 <form:form method="post" servletRelativeAction="/app/accounts" modelAttribute="accountForm" class="form-horizontal">
 
     <jsp:include page="inc/accountForm.jsp"/>

@@ -9,14 +9,22 @@
         </spring:nestedPath>
     </spring:hasBindErrors>
 </c:if>
+
+<spring:hasBindErrors name="loginForm"><c:set var="bindingResult" scope="request" value="${errors}"/></spring:hasBindErrors>
+
 <form:form method="post" servletRelativeAction="/app/auth/login" modelAttribute="loginForm" class="navbar-form">
     <div class="form-group">
-        <spring:message var="labelAccountId" code="accountId" />
-        <form:input path="username" class="form-control" placeholder="${f:h(labelAccountId)}"/>
+        <div class="${bindingResult.hasFieldErrors('username') ? 'has-error' : ''}">
+            <spring:message var="labelAccountId" code="accountId"/>
+            <form:input path="username" class="form-control" cssErrorClass="form-control"
+                        placeholder="${f:h(labelAccountId)}"/>
+        </div>
     </div>
     <div class="form-group">
-        <spring:message var="labelPassword" code="password" />
-        <form:password path="password" class="form-control" placeholder="${f:h(labelPassword)}"/>
+        <div class="${bindingResult.hasFieldErrors('password') ? 'has-error' : ''}">
+            <spring:message var="labelPassword" code="password"/>
+            <form:password path="password" class="form-control" placeholder="${f:h(labelPassword)}"/>
+        </div>
     </div>
     <form:button id="loginBtn" class="btn">
         <span class="glyphicon glyphicon-log-in"></span>

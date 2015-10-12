@@ -81,7 +81,7 @@
     </filter>
     <filter-mapping>
         <filter-name>HiddenHttpMethodFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>ApiServlet</servlet-name>
     </filter-mapping>
 
     <filter>

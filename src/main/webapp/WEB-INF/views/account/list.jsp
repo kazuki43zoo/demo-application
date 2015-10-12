@@ -1,25 +1,31 @@
 <t:messagesPanel/>
 
-<form:form method="get" servletRelativeAction="/app/accounts" class="form-horizontal" modelAttribute="accountsSearchQuery">
+<spring:hasBindErrors name="accountsSearchQuery">
+    <c:set var="bindingResult" scope="request" value="${errors}"/>
+</spring:hasBindErrors>
+
+<form:form method="get" servletRelativeAction="/app/accounts" class="form-horizontal"
+           modelAttribute="accountsSearchQuery">
     <div class="form-group">
-        <div class="col-sm-4">
-            <form:input path="word" cssClass="form-control" placeholder="Account ID or Account Name"/>
-            <form:errors path="word"/>
+        <div class="${bindingResult.hasFieldErrors('word') ? 'has-error' : ''}">
+            <div class="col-sm-4">
+                <form:input path="word" cssClass="form-control" placeholder="Account ID or Account Name"/>
+                <formEx:errors path="word"/>
+            </div>
         </div>
         <div class="col-sm-4">
-
             <c:forEach
                     var="accountSearchTargetCodeListElement"
                     items="${CL_ACCOUNT_SEARCH_TARGET}"
                     varStatus="rowStatus">
                 <div class="checkbox-inline">
                     <form:checkbox path="targets"
-                            value="${accountSearchTargetCodeListElement.key}"
-                            label="${accountSearchTargetCodeListElement.value}"/>
+                                   value="${accountSearchTargetCodeListElement.key}"
+                                   label="${accountSearchTargetCodeListElement.value}"/>
                 </div>
             </c:forEach>
             <div>
-                <form:errors path="targets"/>
+                <formEx:errors path="targets"/>
             </div>
         </div>
         <button class="btn btn-default" name="filter">
@@ -45,23 +51,23 @@
     <thead>
     <c:forEach var="account" items="${page.content}" varStatus="rowStatus">
         <c:set var="enabled">${account.enabled}</c:set>
-        <tr>
-            <td>${f:h(rowStatus.count)}</td>
-            <td>
-                <a href="<c:url value='/app/accounts/${f:h(account.accountUuid)}'/>">${f:h(account.accountId)}</a>
-            </td>
-            <td>${f:h(account.firstName)}&nbsp;${f:h(account.lastName)}</td>
-            <td>
-                <c:if test="${!account.enabled}">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </c:if>
-            </td>
-            <td>
-                <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </c:if>
-            </td>
-        </tr>
+    <tr>
+        <td>${f:h(rowStatus.count)}</td>
+        <td>
+            <a href="<c:url value='/app/accounts/${f:h(account.accountUuid)}'/>">${f:h(account.accountId)}</a>
+        </td>
+        <td>${f:h(account.firstName)}&nbsp;${f:h(account.lastName)}</td>
+        <td>
+            <c:if test="${!account.enabled}">
+                <span class="glyphicon glyphicon-ok"></span>
+            </c:if>
+        </td>
+        <td>
+            <c:if test="${account.passwordLock != null and securityConfigs.authenticationFailureMaxCount < account.passwordLock.failureCount}">
+                <span class="glyphicon glyphicon-ok"></span>
+            </c:if>
+        </td>
+    </tr>
     </c:forEach>
 </table>
 <div class="paginationContainer">

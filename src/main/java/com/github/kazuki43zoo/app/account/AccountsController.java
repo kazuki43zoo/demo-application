@@ -102,7 +102,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "edit")
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.PUT)
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.POST, params = "_method=put")
     public String edit(final @PathVariable("accountUuid") String accountUuid, final @Validated AccountForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
@@ -129,7 +129,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "{accountUuid}", method = RequestMethod.POST, params = "_method=delete")
     public String delete(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
         accountService.delete(accountUuid);
@@ -139,7 +139,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.PATCH)
+    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.POST, params = "_method=patch")
     public String unlock(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
         accountService.unlock(accountUuid);

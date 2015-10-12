@@ -260,7 +260,7 @@ footer {
 }
 
 [class$="error"], [id$="errors"] {
-	color: red;
+	color: #a94442;
 }
 
 .checkbox-inline>label, .radio-inline>label {
