@@ -12,7 +12,7 @@
                 <form:label path="username" cssClass="col-sm-2 control-label">${f:h(labelAccountId)}</form:label>
                 <div class="col-sm-8">
                     <form:input path="username" cssClass="form-control" placeholder="${f:h(labelAccountId)}"/>
-                    <form:errors path="username"/>
+                    <formEx:errors path="username"/>
                 </div>
             </div>
         </c:otherwise>
@@ -22,7 +22,7 @@
         <form:label path="currentPassword" class="col-sm-2 control-label">${f:h(labelCurrentPassword)}</form:label>
         <div class="col-sm-4">
             <form:password path="currentPassword" cssClass="form-control" placeholder="${f:h(labelCurrentPassword)}"/>
-            <form:errors path="currentPassword"/>
+            <formEx:errors path="currentPassword"/>
         </div>
     </div>
     <div class="form-group">
@@ -31,11 +31,11 @@
         <form:label path="password" class="col-sm-2 control-label">${f:h(labelNewPassword)}</form:label>
         <div class="col-sm-4">
             <form:password path="password" cssClass="form-control" placeholder="${f:h(labelNewPassword)}"/>
-            <form:errors path="password"/>
+            <formEx:errors path="password" />
         </div>
         <div class="col-sm-4">
             <form:password path="confirmPassword" cssClass="form-control" placeholder="${f:h(labelConfirmPassword)}"/>
-            <form:errors path="confirmPassword"/>
+            <formEx:errors path="confirmPassword"/>
         </div>
     </div>
     <div class="form-group">

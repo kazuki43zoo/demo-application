@@ -3,6 +3,7 @@ package com.github.kazuki43zoo.core.validation;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -19,6 +20,9 @@ public class NotEqualsPropertyValuesValidator implements ConstraintValidator<Not
         final BeanWrapper beanWrapper = new BeanWrapperImpl(bean);
         final Object propertyValue = beanWrapper.getPropertyValue(constraint.property());
         final Object comparingPropertyValue = beanWrapper.getPropertyValue(constraint.comparingProperty());
+        if (StringUtils.isEmpty(propertyValue) && StringUtils.isEmpty(comparingPropertyValue)) {
+            return true;
+        }
         final boolean matched = ObjectUtils.nullSafeEquals(propertyValue, comparingPropertyValue);
         if (matched) {
             context.disableDefaultConstraintViolation();

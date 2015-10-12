@@ -2,18 +2,18 @@
     <form:label path="accountId" cssClass="col-sm-2 control-label">Account ID</form:label>
     <div class="col-sm-8">
         <form:input path="accountId" cssClass="form-control" />
-        <form:errors path="accountId"/>
+        <formEx:errors path="accountId"/>
     </div>
 </div>
 <div class="form-group">
     <form:label path="firstName" cssClass="col-sm-2 control-label">Name</form:label>
     <div class="col-sm-4">
         <form:input path="firstName" cssClass="form-control" placeholder="First Name"/>
-        <form:errors path="firstName"/>
+        <formEx:errors path="firstName"/>
     </div>
     <div class="col-sm-4">
         <form:input path="lastName" cssClass="form-control" placeholder="Last name"/>
-        <form:errors path="lastName"/>
+        <formEx:errors path="lastName"/>
     </div>
 </div>
 <div class="form-group">
@@ -24,7 +24,7 @@
                 <form:radiobutton path="enabled" value="${enabledCodeListElement.key}" label="${enabledCodeListElement.value}"/>
             </div>
         </c:forEach>
-        <div><form:errors path="enabled"/></div>
+        <div><formEx:errors path="enabled"/></div>
     </div>
 </div>
 <div class="form-group">
@@ -35,18 +35,18 @@
                 <form:radiobutton path="enabledAutoLogin" value="${enabledAutoLoginCodeListElement.key}" label="${enabledAutoLoginCodeListElement.value}"/>
             </div>
         </c:forEach>
-        <div><form:errors path="enabledAutoLogin"/></div>
+        <div><formEx:errors path="enabledAutoLogin"/></div>
     </div>
 </div>
 <div class="form-group">
     <form:label path="password" class="col-sm-2 control-label">Password</form:label>
     <div class="col-sm-4">
         <form:password path="password" cssClass="form-control" placeholder="Password" />
-        <form:errors path="password"/>
+        <formEx:errors path="password"/>
     </div>
     <div class="col-sm-4">
         <form:password path="confirmPassword" cssClass="form-control" placeholder="Confirm Password" />
-        <form:errors path="confirmPassword"/>
+        <formEx:errors path="confirmPassword"/>
     </div>
 </div>
 
@@ -58,7 +58,7 @@
                 <form:checkbox path="authorities" value="${authorityCodeListElement.key}" label="${authorityCodeListElement.value}"/>
             </div>
         </c:forEach>
-        <div><form:errors path="authorities"/></div>
+        <div><formEx:errors path="authorities"/></div>
     </div>
 </div>
 

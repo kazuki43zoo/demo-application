@@ -6,18 +6,18 @@
         <form:label path="accountId" class="col-sm-2 control-label">Account ID</form:label>
         <div class="col-sm-8">
             <form:input path="accountId" cssClass="form-control" />
-            <form:errors path="accountId"/>
+            <formEx:errors path="accountId"/>
         </div>
     </div>
     <div class="form-group">
         <form:label path="firstName" class="col-sm-2 control-label">Name</form:label>
         <div class="col-sm-4">
             <form:input path="firstName" cssClass="form-control" placeholder="First Name"/>
-            <form:errors path="firstName"/>
+            <formEx:errors path="firstName"/>
         </div>
         <div class="col-sm-4">
             <form:input path="lastName" cssClass="form-control" placeholder="Last name"/>
-            <form:errors path="lastName"/>
+            <formEx:errors path="lastName"/>
         </div>
     </div>
     <div class="form-group">
@@ -31,7 +31,7 @@
                 </div>
             </c:forEach>
             <div>
-                <form:errors path="enabledAutoLogin"/>
+                <formEx:errors path="enabledAutoLogin"/>
             </div>
         </div>
     </div>
