@@ -97,7 +97,7 @@
         <tomcat8.version>8.0.28</tomcat8.version>
 
         <org.eluder.coveralls.coveralls-maven-plugin>4.0.0</org.eluder.coveralls.coveralls-maven-plugin>
-        <org.jacoco.jacoco-maven-plugin>0.7.5.201505241946</org.jacoco.jacoco-maven-plugin>
+        <org.jacoco.jacoco-maven-plugin>0.7.4.201502262128</org.jacoco.jacoco-maven-plugin>
 
     </properties>
 
