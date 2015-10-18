@@ -15,9 +15,9 @@ before_script:
   - sh ./startup-cargo-daemon.sh
 
 script:
-  - mvn -U package cargo:daemon-start
+  - mvn -U package jacoco:report cargo:daemon-start
   - mvn -U test -f itest/pom.xml
-  - mvn -U clean test jacoco:report coveralls:report
+  - mvn -U coveralls:report
 
 addons:
   coverity_scan:
@@ -26,7 +26,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: kazuki43zoo@gmail.com
     build_command_prepend: "mvn clean"
-    build_command:   "mvn -U -DskipTests=true compile"
+    build_command:   "mvn -U compile -DskipTests=true"
     branch_pattern: master
 
 env:
