@@ -19,16 +19,16 @@ script:
   - mvn -U test -f itest/pom.xml
   - mvn -U coveralls:report
 
-addons:
-  coverity_scan:
-    project:
-      name: "kazuki43zoo/demo-application"
-      description: "Build submitted via Travis CI"
-    notification_email: kazuki43zoo@gmail.com
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn -U compile -DskipTests=true"
-    branch_pattern: master
+#addons:
+#  coverity_scan:
+#    project:
+#      name: "kazuki43zoo/demo-application"
+#      description: "Build submitted via Travis CI"
+#    notification_email: kazuki43zoo@gmail.com
+#    build_command_prepend: "mvn clean"
+#    build_command:   "mvn -U compile -DskipTests=true"
+#    branch_pattern: master
 
-env:
-  global:
-    - secure: "IdKHj9w0sq7KrYz2okdG+h3l2hXC/JB4pQcGXkYPMq1rIaB6CbKn8zvHOoA5g/JXmCw8d+HXdP8KyXhiym7rKuGFPv6vjMiBqJKb2xp3czIu0tA3KHK2nbUJKF6NdkJ4WpK1icEE4LDfulMtShVT/J3w+xtrlHV3Yl8WP056Vbc="
+#env:
+#  global:
+#    - secure: "IdKHj9w0sq7KrYz2okdG+h3l2hXC/JB4pQcGXkYPMq1rIaB6CbKn8zvHOoA5g/JXmCw8d+HXdP8KyXhiym7rKuGFPv6vjMiBqJKb2xp3czIu0tA3KHK2nbUJKF6NdkJ4WpK1icEE4LDfulMtShVT/J3w+xtrlHV3Yl8WP056Vbc="
