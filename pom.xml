@@ -96,6 +96,9 @@
         <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-8/v${tomcat8.version}/bin/apache-tomcat-${tomcat8.version}.zip</cargo.container.url>
         <tomcat8.version>8.0.28</tomcat8.version>
 
+        <org.eluder.coveralls.coveralls-maven-plugin>4.0.0</org.eluder.coveralls.coveralls-maven-plugin>
+        <org.jacoco.jacoco-maven-plugin>0.7.5.201505241946</org.jacoco.jacoco-maven-plugin>
+
     </properties>
 
     <build>
@@ -131,6 +134,16 @@
                             </deployable>
                         </deployables>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>${org.eluder.coveralls.coveralls-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${org.jacoco.jacoco-maven-plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

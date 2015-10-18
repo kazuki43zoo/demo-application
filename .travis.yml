@@ -17,3 +17,6 @@ before_script:
 script:
   - mvn -U package cargo:daemon-start
   - mvn -U test -f itest/pom.xml
+
+after_success:
+  - mvn -U clean test jacoco:report coveralls:report
