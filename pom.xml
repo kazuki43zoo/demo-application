@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.0.1.RELEASE</version>
+        <version>5.1.0-SNAPSHOT</version>
     </parent>
 
     <repositories>
@@ -76,8 +76,6 @@
     <properties>
 
         <io.spring.platform.version>2.0.0.BUILD-SNAPSHOT</io.spring.platform.version>
-        <org.mybatis.version>3.3.0</org.mybatis.version>
-        <org.mybatis.spring.version>1.2.3</org.mybatis.spring.version>
 
         <!-- for dependency library version (Project-specific) -->
         <org.bgee.log4jdbc-log4j2.version>1.16</org.bgee.log4jdbc-log4j2.version>
@@ -176,16 +174,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${org.mybatis.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- TERASOLUNA -->
