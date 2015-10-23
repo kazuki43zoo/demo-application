@@ -30,7 +30,7 @@
 |                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
 |                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
 | Infrastructure Layer | [MyBatis 3.3.0](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
 
@@ -50,8 +50,6 @@
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| MyBatis | 3.3.0 | 3.2.8 |
-| MyBatis-Spring | 1.2.3 | 1.2.2 |
 | Spring IO Platform | 2.0.0.BUILD-SNAPSHOT | 1.1.3.RELEASE |
 
 ## 2.3. Java package Structure
