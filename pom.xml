@@ -139,7 +139,7 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
-                        <argLine>${jacocoArgs} -Xmx256m -XX:MaxPermSize=256m</argLine>
+                        <argLine>${jacocoArgs}</argLine>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -176,15 +176,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </reporting>
 
     <dependencyManagement>
         <dependencies>
