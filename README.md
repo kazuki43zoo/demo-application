@@ -32,7 +32,7 @@ Structure of this application is following.<br><br>
 |                      | Repository | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Service | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.3.0](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.0.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.1.0-SNAPSHOT](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Server Framewrok for Java (5.x).
@@ -52,8 +52,6 @@ The following libraries are version up from version that TERASOLUNA Server Frame
 | Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| MyBatis | 3.3.0 | 3.2.8 |
-| MyBatis-Spring | 1.2.3 | 1.2.2 |
 | Spring IO Platform | 2.0.0.BUILD-SNAPSHOT | 1.1.3.RELEASE |
 
 ## 2.3. Java package Structure
