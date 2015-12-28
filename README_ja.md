@@ -19,9 +19,9 @@
 |                      | [Bootstrap 3.3.5](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.2.2.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
-| Application Layer    | [Spring Security 4.0.2.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.2.2.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Spring Framework 4.2.3.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spring Security 4.0.3.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spring MVC 4.2.3.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.2.2.Final](http://hibernate.org/validator/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
@@ -50,7 +50,6 @@
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| Spring IO Platform | 2.0.0.BUILD-SNAPSHOT | 1.1.3.RELEASE |
 
 ## 2.3. Java package Structure
 
