@@ -104,7 +104,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
                 continue;
             }
             LocalDate targetDate = month.withDayOfMonth(fixedHoliday.getTargetDay());
-            if (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY) {
+            if (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY && fixedHoliday.getTransferredLaterDays() != null) {
                 targetDate = targetDate.plusDays(fixedHoliday.getTransferredLaterDays());
             }
             holidays.put(targetDate, fixedHoliday);
