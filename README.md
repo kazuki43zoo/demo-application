@@ -21,9 +21,9 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.3.5](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
-|                      | [Spring Framework 4.2.2.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spring Security 4.0.2.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
-|                      | [Spring MVC 4.2.2.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spring Framework 4.2.3.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spring Security 4.0.3.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
+|                      | [Spring MVC 4.2.3.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hibernate Validator 5.2.2.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controller | Handle a request & delegate a business procedure to the services.  |
 |                      | DTO | Hold transfer data(form data or resource data) of application layer(web layer). |
@@ -52,7 +52,6 @@ The following libraries are version up from version that TERASOLUNA Server Frame
 | Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| Spring IO Platform | 2.0.0.BUILD-SNAPSHOT | 1.1.3.RELEASE |
 
 ## 2.3. Java package Structure
 
