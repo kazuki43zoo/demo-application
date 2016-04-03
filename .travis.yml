@@ -16,7 +16,7 @@ before_script:
 
 script:
   - mvn -U package jacoco:report cargo:daemon-start
-  - mvn -U test -f itest/pom.xml
+  - mvn -U test -f itest/pom.xml -Dselenium.version=2.46.0
   - mvn -U coveralls:report
 
 #addons:
