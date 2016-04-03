@@ -135,7 +135,11 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
             return;
         }
         for (final SeasonalHoliday seasonalHoliday : seasonalHolidays) {
-            holidays.put(seasonalHoliday.getTargetDate(), seasonalHoliday);
+            LocalDate targetDate = seasonalHoliday.getTargetDate();
+            if (targetDate.getDayOfWeek() == DateTimeConstants.SUNDAY) {
+                targetDate = targetDate.plusDays(1);
+            }
+            holidays.put(targetDate, seasonalHoliday);
         }
     }
 
