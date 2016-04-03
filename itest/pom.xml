@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.0.1.RELEASE</version>
+        <version>5.1.0.RELEASE</version>
     </parent>
 
     <repositories>
@@ -49,12 +49,12 @@
     </repositories>
 
     <properties>
-        <io.spring.platform.version>2.0.0.BUILD-SNAPSHOT</io.spring.platform.version>
         <!-- for build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <java-version>1.7</java-version>
+        <selenium.version>2.52.0</selenium.version>
     </properties>
 
     <dependencies>

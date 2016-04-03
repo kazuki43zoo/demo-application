@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.1.0-SNAPSHOT</version>
+        <version>5.1.0.RELEASE</version>
     </parent>
 
     <repositories>
@@ -75,8 +75,6 @@
 
     <properties>
 
-        <io.spring.platform.version>2.0.0.BUILD-SNAPSHOT</io.spring.platform.version>
-
         <!-- for dependency library version (Project-specific) -->
         <org.bgee.log4jdbc-log4j2.version>1.16</org.bgee.log4jdbc-log4j2.version>
 
@@ -87,15 +85,15 @@
         <java-version>1.7</java-version>
 
         <!-- for cargo -->
-        <org.codehaus.cargo.cargo-maven2-plugin.version>1.4.16</org.codehaus.cargo.cargo-maven2-plugin.version>
+        <org.codehaus.cargo.cargo-maven2-plugin.version>1.4.19</org.codehaus.cargo.cargo-maven2-plugin.version>
         <cargo.jvmargs>-Xms512m -Xmx1024m</cargo.jvmargs>
         <cargo.daemon.url>http://localhost:18000</cargo.daemon.url>
         <cargo.container.id>tomcat8x</cargo.container.id>
         <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-8/v${tomcat8.version}/bin/apache-tomcat-${tomcat8.version}.zip</cargo.container.url>
-        <tomcat8.version>8.0.28</tomcat8.version>
+        <tomcat8.version>8.0.26</tomcat8.version>
 
-        <org.eluder.coveralls.coveralls-maven-plugin>4.0.0</org.eluder.coveralls.coveralls-maven-plugin>
-        <org.jacoco.jacoco-maven-plugin>0.7.5.201505241946</org.jacoco.jacoco-maven-plugin>
+        <org.eluder.coveralls.coveralls-maven-plugin.version>4.1.0</org.eluder.coveralls.coveralls-maven-plugin.version>
+        <org.jacoco.jacoco-maven-plugin.version>0.7.6.201602180812</org.jacoco.jacoco-maven-plugin.version>
 
     </properties>
 
@@ -143,7 +141,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${org.jacoco.jacoco-maven-plugin}</version>
+                    <version>${org.jacoco.jacoco-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>prepare-agent</id>
@@ -163,7 +161,7 @@
                 <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>${org.eluder.coveralls.coveralls-maven-plugin}</version>
+                    <version>${org.eluder.coveralls.coveralls-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -179,7 +177,7 @@
         <!-- TERASOLUNA -->
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
-            <artifactId>terasoluna-gfw-web</artifactId>
+            <artifactId>terasoluna-gfw-web-jsp</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.lazyluke</groupId>
