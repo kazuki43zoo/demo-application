@@ -14,25 +14,25 @@
         var _this = this;
         var reflectLoadedCurrentDateTime = function(loadedCurrentDateTime) {
             var time = new Date(loadedCurrentDateTime.dateTime).getTime();
-            if (_this.currentDateTime == null) {
+            if (_this.currentDateTime === null) {
                 _this.currentDateTime = new Date(time);
             } else {
                 _this.currentDateTime.setTime(time);
             }
             $timeout(loadCurrentDateTime, timeOfReloadInterval);
-            if (refreshPromise != null) {
+            if (refreshPromise !== null) {
                 $timeout.cancel(refreshPromise);
             }
             refreshPromise = $timeout(refreshDateTime, timeOfOneSeconds);
-        }
+        };
         var loadCurrentDateTime = function() {
             dateTimeService.getCurrentDateTime().then(reflectLoadedCurrentDateTime);
-        }
+        };
         var refreshDateTime = function() {
             var nextTime = _this.currentDateTime.getTime() + timeOfOneSeconds;
             _this.currentDateTime.setTime(nextTime);
             refreshPromise = $timeout(refreshDateTime, timeOfOneSeconds);
-        }
+        };
 
         this.currentDateTime = null;
         loadCurrentDateTime();

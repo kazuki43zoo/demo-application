@@ -21,7 +21,7 @@
     };
 
     DateTimeService.prototype.isHoliday = function(targetDate) {
-        if (targetDate == undefined) {
+        if (targetDate === undefined) {
             return false;
         }
         var targetDayOfWeek = this.getDayOfWeek(targetDate);
@@ -61,7 +61,7 @@
             hourOfTime = Math.floor(minute / 60);
         } else {
             hourOfTime = Math.ceil(minute / 60);
-            if (hourOfTime == 0) {
+            if (hourOfTime === 0) {
                 hourOfTime = "-" + hourOfTime;
             }
         }

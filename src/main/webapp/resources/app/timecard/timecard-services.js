@@ -51,7 +51,7 @@
         if (!attendance.holiday === true) {
             total.baseWorkDays++;
         }
-    }
+    };
 
     TimeCardService.prototype.calculateTotalMinute = function(total) {
         total.baseWorkingMinute = total.baseWorkDays * BASE_WORKING_MINUTE_PER_DAY;
@@ -61,7 +61,7 @@
                 * (BASE_WORKING_MINUTE_PER_DAY * -1);
         total.liquidationMinute = this.dateTimeService.truncateWithTimeUnit(total.overtimeTime
                 + total.penaltyTime, TIME_UNIT_MINUTE_OF_LIQUIDATION_TIME);
-    }
+    };
 
     TimeCardService.prototype.getTimeCard = function(targetMonth, total) {
         var timeCard = TimeCardResource.get({
@@ -72,7 +72,7 @@
         var _this = this;
         var reflectTimeCard = function(timeCard) {
             _this.calculateTimeCard(timeCard, total);
-        }
+        };
         timeCard.$promise.then(reflectTimeCard);
 
         return timeCard;
@@ -90,10 +90,10 @@
         var _this = this;
         var initTimeCard = function(defaultAttendance) {
             _this.initTotal(total);
-            delete defaultAttendance.targetDate
+            delete defaultAttendance.targetDate;
             _this.initTimeCardByDefaultAttendance(timeCard, total, defaultAttendance);
             _this.calculateTotalMinute(total);
-        }
+        };
         return this.$http.get(this.apiBasePath + '/timecards/calculate', {
             params : {
                 target : 'default',
@@ -105,7 +105,7 @@
     TimeCardService.prototype.initTimeCardByDefaultAttendance = function(timeCard, total,
             defaultAttendance) {
         angular.forEach(timeCard.attendances, function(attendance) {
-            delete defaultAttendance.holiday
+            delete defaultAttendance.holiday;
             angular.extend(attendance, defaultAttendance);
             if (attendance.holiday === true) {
                 attendance.beginTime = null;
@@ -119,7 +119,7 @@
 
     TimeCardService.prototype.calculateTime = function(defaultWorkPlaceUuid, attendance,
             originalAttendance, total, fieldName) {
-        if (fieldName != undefined) {
+        if (fieldName !== undefined) {
             if (attendance[fieldName] === originalAttendance[fieldName]) {
                 return;
             }
@@ -130,7 +130,7 @@
             _this.reflectCalculateResult(calculatedAttendance, originalAttendance, total);
             angular.extend(attendance, calculatedAttendance);
             angular.copy(attendance, originalAttendance);
-        }
+        };
         var postingAttendance = angular.copy(attendance);
         if (postingAttendance.workPlaceUuid === '') {
             postingAttendance.workPlaceUuid = defaultWorkPlaceUuid;

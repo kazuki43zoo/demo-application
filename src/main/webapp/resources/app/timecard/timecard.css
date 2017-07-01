@@ -27,11 +27,10 @@ thead>tr>td {
 }
 
 #attendanceInputArea {
-	padding: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
 	border-style: solid;
 	border-width: 2px;
 	margin-bottom: 20px;
-	border-width: 2px;
 }
 
 #attendanceInputArea td, .attendanceInputArea th {
@@ -39,7 +38,7 @@ thead>tr>td {
 }
 
 #attendanceInputArea .table {
-	margin-bottom: 0px !important;
+	margin-bottom: 0 !important;
 }
 
 #attendanceInputArea thead th.targetDay {
@@ -64,11 +63,11 @@ thead>tr>td {
 }
 
 #attendanceInputTable {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 #attendanceInputCalculationResultTable {
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 #attendanceInputCalculationResultTable thead th {
@@ -181,7 +180,6 @@ th .breakdown {
 .summary {
 	font-weight: bolder;
 	font-size: large;
-	font-weight: bolder;
 }
 
 td .breakdown {

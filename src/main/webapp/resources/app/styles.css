@@ -252,7 +252,7 @@ footer {
 #h2Console {
 	width: 90%;
 	height: 100%;
-	border-width: 0px;
+	border-width: 0;
 }
 
 .paginationContainer {

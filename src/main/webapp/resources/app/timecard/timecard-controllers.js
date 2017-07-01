@@ -51,7 +51,7 @@
                     _this.setEditableAttendance();
                 }
             }
-        }
+        };
         this.dateTimeService.getCurrentDateTime().then(loadToday);
     };
 
@@ -89,7 +89,7 @@
             _this.stored = true;
             angular.copy(_this.timeCard, _this.loadedTimeCard);
             _this.setEditableAttendance();
-        }
+        };
         this.timeCardService.saveTimeCard(this.targetMonth, this.timeCard).then(reflectSaveResult);
     };
 
@@ -97,7 +97,7 @@
         var _this = this;
         var reflectSaveResult = function() {
             angular.copy(_this.editableAttendance, _this.loadedAttendance);
-        }
+        };
         this.timeCardService.saveDailyAttendance(this.targetMonth, this.targetDay,
                 this.editableAttendance).then(reflectSaveResult);
     };
@@ -117,7 +117,7 @@
                 _this.calculateTime('beginTime');
                 _this.saveDailyAttendance();
             }
-        }
+        };
         this.dateTimeService.getCurrentDateTime().then(enter);
     };
 
@@ -131,7 +131,7 @@
                 _this.calculateTime('finishTime');
                 _this.saveDailyAttendance();
             }
-        }
+        };
         this.dateTimeService.getCurrentDateTime().then(exit);
     };
 
