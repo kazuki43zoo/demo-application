@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.1.0.RELEASE</version>
+        <version>5.3.0.RELEASE</version>
     </parent>
 
     <repositories>
@@ -23,24 +23,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>terasoluna-gfw-releases</id>
-            <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-releases/</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-            </snapshots>
-            <id>terasoluna-gfw-snapshots</id>
-            <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-snapshots/</url>
         </repository>
         <repository>
             <id>spring-snapshots</id>
@@ -177,8 +159,9 @@
         <!-- TERASOLUNA -->
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
-            <artifactId>terasoluna-gfw-web-jsp</artifactId>
-            <exclusions>
+            <artifactId>terasoluna-gfw-web-jsp-dependencies</artifactId>
+          <type>pom</type>
+          <exclusions>
                 <exclusion>
                     <groupId>org.lazyluke</groupId>
                     <artifactId>log4jdbc-remix</artifactId>
@@ -186,16 +169,28 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.terasoluna.gfw</groupId>
-            <artifactId>terasoluna-gfw-jodatime</artifactId>
+          <groupId>org.apache.taglibs</groupId>
+          <artifactId>taglibs-standard-jstlel</artifactId>
         </dependency>
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
-            <artifactId>terasoluna-gfw-security-web</artifactId>
+            <artifactId>terasoluna-gfw-jodatime-dependencies</artifactId>
+          <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>
-            <artifactId>terasoluna-gfw-mybatis3</artifactId>
+            <artifactId>terasoluna-gfw-security-core-dependencies</artifactId>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-security-web-dependencies</artifactId>
+          <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-mybatis3-dependencies</artifactId>
+          <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.terasoluna.gfw</groupId>

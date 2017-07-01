@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <setting name="aggressiveLazyLoading" value="false"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="defaultFetchSize" value="1000"/>
     </settings>

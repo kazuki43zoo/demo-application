@@ -8,28 +8,10 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.1.0.RELEASE</version>
+        <version>5.3.0.RELEASE</version>
     </parent>
 
     <repositories>
-        <repository>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>terasoluna-gfw-releases</id>
-            <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-releases/</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-            </snapshots>
-            <id>terasoluna-gfw-snapshots</id>
-            <url>http://repo.terasoluna.org/nexus/content/repositories/terasoluna-gfw-snapshots/</url>
-        </repository>
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>

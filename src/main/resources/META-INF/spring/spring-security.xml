@@ -58,7 +58,7 @@
         <sec:intercept-url pattern="/app/vendor/h2/**" access="hasRole('ADMIN')"/>
         <sec:intercept-url pattern="/app/profile/**" access="hasAnyRole('ADMIN','USER')"/>
         <sec:intercept-url pattern="/app/timecards/**" access="hasAnyRole('EMPLOYEE')"/>
-        <sec:intercept-url pattern="/app/accounts/**" access="hasRole('ROLE_ACCOUNTMNG')"/>
+        <sec:intercept-url pattern="/app/accounts/**" access="hasRole('ACCOUNTMNG')"/>
         <sec:intercept-url pattern="/app/auth/login" access="!isAuthenticated()"/>
 
     </sec:http>
