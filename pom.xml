@@ -171,6 +171,10 @@
             <artifactId>terasoluna-gfw-recommended-web-dependencies</artifactId>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>org.terasoluna.gfw</groupId>
+            <artifactId>terasoluna-gfw-validator</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
