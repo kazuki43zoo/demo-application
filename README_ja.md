@@ -14,9 +14,9 @@
 
 | レイヤ | コンポーネント/ライブラリ | 主な役割 |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [jQuery 2.1.4](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
-|                      | [AngularJS 1.2.29](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
-|                      | [Bootstrap 3.3.5](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
+| Client Layer         | [jQuery 3.2.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
+|                      | [AngularJS 1.2.32](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
+|                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
 |                      | [Spring Framework 4.3.5.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
