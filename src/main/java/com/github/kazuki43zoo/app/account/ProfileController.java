@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -31,14 +33,14 @@ public class ProfileController {
     @Inject
     Mapper beanMapper;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String show(final @CurrentUser CustomUserDetails authenticatedUser, final Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/detail";
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(method = RequestMethod.GET, params = "edit")
+    @GetMapping(params = "edit")
     public String edit(final @CurrentUser CustomUserDetails authenticatedUser, final ProfileForm form, final Model model) {
         beanMapper.map(authenticatedUser.getAccount(), form);
         model.addAttribute(authenticatedUser.getAccount());
@@ -46,7 +48,7 @@ public class ProfileController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.POST, params = "_method=put")
+    @PostMapping(params = "_method=put")
     public String save(final @CurrentUser CustomUserDetails authenticatedUser, final @Validated ProfileForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
@@ -74,7 +76,7 @@ public class ProfileController {
         return "redirect:/app/profile";
     }
 
-    @RequestMapping(path = "authenticationHistories", method = RequestMethod.GET)
+    @GetMapping(path = "authenticationHistories")
     public String showAuthenticationHistoryList(final @CurrentUser CustomUserDetails authenticatedUser, final Model model) {
         final Account account = accountService.getAccount(authenticatedUser.getAccount().getAccountUuid());
         model.addAttribute(account);

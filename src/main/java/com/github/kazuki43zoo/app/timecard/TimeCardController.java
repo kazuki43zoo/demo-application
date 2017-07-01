@@ -4,6 +4,7 @@ import com.github.kazuki43zoo.core.security.CurrentUser;
 import com.github.kazuki43zoo.domain.service.security.CustomUserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TimeCardController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String viewTimeCard(final @CurrentUser CustomUserDetails authenticatedUser, final Model model) {
         model.addAttribute(authenticatedUser.getAccount());
         return "timecard/form";

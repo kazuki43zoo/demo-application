@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
@@ -35,7 +33,7 @@ public class AccountsController {
     @Inject
     AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String list(final @Validated AccountsSearchQuery query, final BindingResult bindingResult, final @PageableDefault(size = 15) Pageable pageable, final Model model) {
         if (bindingResult.hasErrors()) {
             return "account/list";
@@ -47,7 +45,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.GET)
+    @GetMapping(path = "{accountUuid}")
     public String show(final @PathVariable("accountUuid") String accountUuid, final Model model) {
         final Account account = accountService.getAccount(accountUuid);
         model.addAttribute(account);
@@ -55,13 +53,13 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "create", type = TransactionTokenType.BEGIN)
-    @RequestMapping(method = RequestMethod.GET, params = "form=create")
+    @GetMapping(params = "form=create")
     public String createForm(final AccountForm form) {
         return "account/createForm";
     }
 
     @TransactionTokenCheck(value = "create")
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public String create(final @Validated AccountForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
@@ -88,7 +86,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "edit", type = TransactionTokenType.BEGIN)
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.GET, params = "form=edit")
+    @GetMapping(path = "{accountUuid}", params = "form=edit")
     public String editForm(final @PathVariable("accountUuid") String accountUuid, final AccountForm form, final Model model) {
 
         final Account account = accountService.getAccount(accountUuid);
@@ -102,7 +100,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck(value = "edit")
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.POST, params = "_method=put")
+    @PostMapping(path = "{accountUuid}", params = "_method=put")
     public String edit(final @PathVariable("accountUuid") String accountUuid, final @Validated AccountForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
@@ -129,7 +127,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "{accountUuid}", method = RequestMethod.POST, params = "_method=delete")
+    @PostMapping(path = "{accountUuid}", params = "_method=delete")
     public String delete(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
         accountService.delete(accountUuid);
@@ -139,7 +137,7 @@ public class AccountsController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "{accountUuid}/unlock", method = RequestMethod.POST, params = "_method=patch")
+    @PostMapping(path = "{accountUuid}/unlock", params = "_method=patch")
     public String unlock(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
         accountService.unlock(accountUuid);

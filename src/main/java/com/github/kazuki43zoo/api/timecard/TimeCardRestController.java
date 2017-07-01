@@ -48,7 +48,7 @@ public class TimeCardRestController {
     @Inject
     Mapper beanMapper;
 
-    @RequestMapping(method = {RequestMethod.HEAD, RequestMethod.GET})
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public TimeCardResource getTimeCard(final @CurrentUser CustomUserDetails authenticatedUser, final @PathVariable("targetMonth") @MonthFormat LocalDate targetMonth) {
 
@@ -81,7 +81,7 @@ public class TimeCardRestController {
         return resource;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void putTimeCard(final @CurrentUser CustomUserDetails authenticatedUser, final @PathVariable("targetMonth") @MonthFormat LocalDate targetMonth, final @RequestBody @Validated TimeCardResource resource) {
 
@@ -92,7 +92,7 @@ public class TimeCardRestController {
         timeCardService.saveTimeCard(authenticatedUser.getAccount().getAccountUuid(), targetMonth, timeCard);
     }
 
-    @RequestMapping(path = "/{targetDay}", method = {RequestMethod.HEAD, RequestMethod.GET})
+    @GetMapping(path = "/{targetDay}")
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource getDailyAttendance(final @CurrentUser CustomUserDetails authenticatedUser, final @PathVariable("targetMonth") @MonthFormat LocalDate targetMonth, final @PathVariable("targetDay") int targetDay) {
 
@@ -107,7 +107,7 @@ public class TimeCardRestController {
         return resource;
     }
 
-    @RequestMapping(path = "/{targetDay}", method = RequestMethod.PUT)
+    @PutMapping(path = "/{targetDay}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void putDailyAttendance(final @CurrentUser CustomUserDetails authenticatedUser, final @PathVariable("targetMonth") @MonthFormat LocalDate targetMonth, final @PathVariable("targetDay") int targetDay, final @RequestBody @Validated DailyAttendanceResource resource) {
 

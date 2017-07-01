@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
@@ -51,12 +49,12 @@ public class PasswordController {
     }
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String showChangeForm() {
         return "password/changeForm";
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "encourageChange")
+    @PostMapping(params = "encourageChange")
     public String encourageChange(final PasswordForm form, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(form);
         final Account account = accountSharedService.getAccount(form.getUsername());
@@ -70,7 +68,7 @@ public class PasswordController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.POST, params = "change")
+    @PostMapping(params = "change")
     public String change(final @CurrentUser CustomUserDetails currentUser, final @Validated PasswordForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
@@ -98,7 +96,7 @@ public class PasswordController {
     }
 
     @TransactionTokenCheck
-    @RequestMapping(method = RequestMethod.POST, params = "changeAndLogin")
+    @PostMapping(params = "changeAndLogin")
     public String changeAndLogin(final @CurrentUser CustomUserDetails currentUser, final @Validated PasswordForm form, final BindingResult bindingResult, final Model model) {
 
         if (currentUser != null) {

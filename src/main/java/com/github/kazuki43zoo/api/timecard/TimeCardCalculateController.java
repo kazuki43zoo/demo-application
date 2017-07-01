@@ -25,7 +25,7 @@ public class TimeCardCalculateController {
     @Inject
     Mapper beanMapper;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource calculate(final @RequestBody @Validated DailyAttendanceResource resource) {
@@ -35,7 +35,7 @@ public class TimeCardCalculateController {
         return beanMapper.map(attendance, DailyAttendanceResource.class);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "target=default")
+    @GetMapping(params = "target=default")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public DailyAttendanceResource getDefaultAttendanceResource(final @RequestParam(value = "workPlaceUuid", required = false) String workPlaceUuid) {

@@ -5,6 +5,8 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,19 +27,19 @@ public class LoginController {
     LoginSharedHelper loginSharedHelper;
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
-    @RequestMapping(path = "login", method = RequestMethod.GET)
+    @GetMapping(path = "login")
     public String showLoginForm() {
         return "auth/loginForm";
     }
 
-    @RequestMapping(path = "login", method = RequestMethod.GET, params = "encourage")
+    @GetMapping(path = "login", params = "encourage")
     public String encourageLogin(final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(Message.AUTH_ENCOURAGE_LOGIN.resultMessages());
         return "redirect:/app/auth/login";
     }
 
     @TransactionTokenCheck
-    @RequestMapping(path = "login", method = RequestMethod.POST)
+    @PostMapping(path = "login")
     public String login(final @Validated LoginForm form, final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -47,7 +49,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(path = "error", method = RequestMethod.POST)
+    @PostMapping(path = "error")
     public String handleLoginError(final LoginForm form, final RedirectAttributes redirectAttributes, final HttpServletRequest request) {
         redirectAttributes.addFlashAttribute(form);
         redirectAttributes.addFlashAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));

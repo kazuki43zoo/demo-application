@@ -1,10 +1,7 @@
 package com.github.kazuki43zoo.api.date;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
 import javax.inject.Inject;
@@ -21,7 +18,7 @@ public class DateRestController {
     @Inject
     JodaTimeDateFactory dateFactory;
 
-    @RequestMapping(path = "/currentDateTime", method = RequestMethod.GET)
+    @GetMapping(path = "/currentDateTime")
     @ResponseStatus(HttpStatus.OK)
     public DateResource getCurrentTimeDate() {
         final DateResource responseResource = new DateResource();
