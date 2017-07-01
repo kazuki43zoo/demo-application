@@ -67,7 +67,6 @@
         <java-version>1.7</java-version>
 
         <!-- for cargo -->
-        <org.codehaus.cargo.cargo-maven2-plugin.version>1.4.19</org.codehaus.cargo.cargo-maven2-plugin.version>
         <cargo.jvmargs>-Xms512m -Xmx1024m</cargo.jvmargs>
         <cargo.daemon.url>http://localhost:18000</cargo.daemon.url>
         <cargo.container.id>tomcat8x</cargo.container.id>
@@ -83,37 +82,6 @@
         <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
-                    <configuration>
-                        <configuration>
-                            <properties>
-                                <cargo.servlet.uriencoding>UTF-8</cargo.servlet.uriencoding>
-                                <cargo.jvmargs>${cargo.jvmargs}</cargo.jvmargs>
-                            </properties>
-                        </configuration>
-                        <container>
-                            <containerId>${cargo.container.id}</containerId>
-                            <zipUrlInstaller>
-                                <url>${cargo.container.url}</url>
-                            </zipUrlInstaller>
-                        </container>
-                        <daemon>
-                            <properties>
-                                <cargo.daemon.url>${cargo.daemon.url}</cargo.daemon.url>
-                                <cargo.daemon.handleid>${project.artifactId}</cargo.daemon.handleid>
-                            </properties>
-                        </daemon>
-                        <deployables>
-                            <deployable>
-                                <location>${project.basedir}/target/${project.artifactId}.war</location>
-                                <type>war</type>
-                            </deployable>
-                        </deployables>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
