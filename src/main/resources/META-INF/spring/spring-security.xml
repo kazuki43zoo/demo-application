@@ -78,7 +78,7 @@
     </sec:authentication-manager>
 
     <!-- Scan Components -->
-    <context:component-scan base-package="com.github.kazuki43zoo.web.security"/>
+    <context:component-scan base-package="com.kazuki43zoo.web.security"/>
 
     <bean id="http403ForbiddenEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
@@ -118,14 +118,14 @@
             </util:map>
         </constructor-arg>
         <constructor-arg>
-            <bean class="com.github.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
+            <bean class="com.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
                   p:useForward="true"
                   p:defaultFailureUrl="/app/auth/error"/>
         </constructor-arg>
     </bean>
 
     <!-- LogoutSuccessHandler -->
-    <bean id="customLogoutSuccessHandler" class="com.github.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
+    <bean id="customLogoutSuccessHandler" class="com.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
           p:defaultTargetUrl="/app/auth/logout?success" />
 
     <!-- UserIdMDCPutFilter -->

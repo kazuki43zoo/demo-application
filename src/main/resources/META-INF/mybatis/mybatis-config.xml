@@ -12,9 +12,9 @@
         <typeAlias type="org.joda.time.LocalDate" alias="LocalDate"/>
         <typeAlias type="org.joda.time.LocalTime" alias="LocalTime"/>
         <typeAlias type="org.joda.time.LocalDateTime" alias="LocalDateTime"/>
-        <package name="com.github.kazuki43zoo.domain.model"/>
+        <package name="com.kazuki43zoo.domain.model"/>
     </typeAliases>
     <typeHandlers>
-        <package name="com.github.kazuki43zoo.infra.mybatis.typehandler"/>
+        <package name="com.kazuki43zoo.infra.mybatis.typehandler"/>
     </typeHandlers>
 </configuration>

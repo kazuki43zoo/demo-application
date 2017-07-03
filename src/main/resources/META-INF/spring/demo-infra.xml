@@ -25,14 +25,14 @@
           p:configLocation="classpath:/META-INF/mybatis/mybatis-config.xml"/>
 
     <mybatis:scan
-            base-package="com.github.kazuki43zoo.domain.repository"
+            base-package="com.kazuki43zoo.domain.repository"
             template-ref="sqlSessionTemplateForBatch"
-            name-generator="com.github.kazuki43zoo.infra.mybatis.spring.BatchModeRepositoryBeanNameGenerator"/>
+            name-generator="com.kazuki43zoo.infra.mybatis.spring.BatchModeRepositoryBeanNameGenerator"/>
 
     <bean id="sqlSessionTemplateForBatch" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="getExecutorType"
           c:sqlSessionFactory-ref="sqlSessionFactory"
           c:executorType="BATCH"/>
 
-    <mybatis:scan base-package="com.github.kazuki43zoo.domain.repository"/>
+    <mybatis:scan base-package="com.kazuki43zoo.domain.repository"/>
 
 </beans>

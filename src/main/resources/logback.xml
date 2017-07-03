@@ -34,7 +34,7 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="com.github.kazuki43zoo">
+    <logger name="com.kazuki43zoo">
         <level value="info"/>
     </logger>
 

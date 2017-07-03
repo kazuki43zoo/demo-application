@@ -64,7 +64,7 @@
     <bean id="exceptionLoggingFilter" class="org.terasoluna.gfw.web.exception.ExceptionLoggingFilter"
           p:exceptionLogger-ref="exceptionLogger"/>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.core"/>
+    <context:component-scan base-package="com.kazuki43zoo.core"/>
 
     <aop:aspectj-autoproxy />
 

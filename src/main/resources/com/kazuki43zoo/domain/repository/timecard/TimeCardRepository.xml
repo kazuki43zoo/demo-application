@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kazuki43zoo.domain.repository.timecard.TimeCardRepository">
+
+    <resultMap id="timeCardResultMap" type="TimeCard">
+        <id property="accountUuid" column="account_uuid"/>
+        <id property="targetMonth" column="target_month"/>
+        <result property="note" column="note"/>
+        <association property="workPlace" javaType="WorkPlace">
+            <id property="workPlaceUuid" column="work_place_uuid"/>
+        </association>
+        <collection property="attendances" column="{accountUuid=account_uuid,targetMonth=target_month}" javaType="ArrayList" ofType="DailyAttendance"
+                    select="findAttendancesOfTargetMonth" fetchType="lazy"/>
+    </resultMap>
+
+    <select id="findOne" resultMap="timeCardResultMap">
+        SELECT
+            account_uuid
+            ,target_month
+            ,work_place_uuid
+            ,note
+        FROM
+            time_card
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            target_month = #{targetMonth}
+    </select>
+
+    <insert id="create">
+        INSERT INTO
+            time_card
+        (
+            account_uuid
+            ,target_month
+            ,work_place_uuid
+            ,note
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{targetMonth}
+            ,#{workPlace.workPlaceUuid}
+            ,#{note}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE
+            time_card
+        SET
+            work_place_uuid = #{workPlace.workPlaceUuid}
+            ,note = #{note}
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            target_month = #{targetMonth}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM
+            time_card
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            target_month = #{targetMonth}
+    </delete>
+
+    <resultMap id="dailyAttendanceResultMap" type="DailyAttendance">
+        <id property="accountUuid" column="account_uuid"/>
+        <id property="targetDate" column="target_date"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="finishTime" column="finish_time"/>
+        <result property="paidLeave" column="paid_leave"/>
+        <result property="specialWorkCode" column="special_work_code"/>
+        <result property="note" column="note"/>
+        <association property="workPlace" javaType="WorkPlace">
+            <id property="workPlaceUuid" column="work_place_uuid"/>
+        </association>
+    </resultMap>
+
+    <sql id="selectAllColumnsOfDailyAttendanceSql">
+        SELECT
+            account_uuid
+            ,target_date
+            ,begin_time
+            ,finish_time
+            ,paid_leave
+            ,special_work_code
+            ,note
+            ,work_place_uuid
+        FROM
+            daily_attendance
+    </sql>
+
+    <select id="findOneDailyAttendance" resultMap="dailyAttendanceResultMap">
+        <include refid="selectAllColumnsOfDailyAttendanceSql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            target_date = #{targetDate}
+    </select>
+
+    <select id="findAttendancesOfTargetMonth" resultMap="dailyAttendanceResultMap">
+        <include refid="selectAllColumnsOfDailyAttendanceSql"/>
+        <![CDATA[
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            #{targetMonth} <= target_date
+        AND
+            target_date < DATEADD('MONTH', 1, #{targetMonth})
+        ]]>
+    </select>
+
+    <insert id="createDailyAttendance">
+        INSERT INTO
+            daily_attendance
+        (
+            account_uuid
+            ,target_date
+            ,begin_time
+            ,finish_time
+            ,paid_leave
+            ,special_work_code
+            ,note
+            ,work_place_uuid
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{targetDate}
+            ,#{beginTime}
+            ,#{finishTime}
+            ,#{paidLeave}
+            ,#{specialWorkCode}
+            ,#{note}
+            ,#{workPlace.workPlaceUuid}
+        )
+    </insert>
+
+    <insert id="updateDailyAttendance">
+        UPDATE
+            daily_attendance
+        SET
+            begin_time = #{beginTime}
+            ,finish_time = #{finishTime}
+            ,paid_leave = #{paidLeave}
+            ,special_work_code = #{specialWorkCode}
+            ,note = #{note}
+            ,work_place_uuid = #{workPlace.workPlaceUuid}
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            target_date = #{targetDate}
+    </insert>
+
+</mapper>

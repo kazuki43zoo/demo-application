@@ -114,7 +114,7 @@
         </property>
     </bean>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.web.mvc"/>
-    <context:component-scan base-package="com.github.kazuki43zoo.app"/>
+    <context:component-scan base-package="com.kazuki43zoo.web.mvc"/>
+    <context:component-scan base-package="com.kazuki43zoo.app"/>
 
 </beans>

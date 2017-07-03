@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kazuki43zoo.domain.repository.account.AccountRepository">
+
+    <resultMap id="accountResultMap" type="Account">
+        <id property="accountUuid" column="account_uuid"/>
+        <association property="passwordLock" column="account_uuid" javaType="AccountPasswordLock"
+                     select="findOnePasswordLock" fetchType="lazy"/>
+        <collection property="authorities" column="account_uuid" javaType="ArrayList" ofType="AccountAuthority"
+                    select="findAllAuthorityByAccountUuid" fetchType="lazy"/>
+        <collection property="passwordHistories" column="account_uuid" javaType="ArrayList" ofType="AccountPasswordHistory"
+                    select="findAllPasswordHistoryByAccountUuid" fetchType="lazy"/>
+        <collection property="authenticationHistories" column="account_uuid" javaType="ArrayList" ofType="AccountAuthenticationHistory"
+                    select="findAllAuthenticationHistoryByAccountUuid" fetchType="lazy"/>
+    </resultMap>
+
+    <sql id="selectAllColumnsOfAccountSql">
+        SELECT
+            account_uuid
+            ,account_id
+            ,password
+            ,password_modified_at
+            ,first_name
+            ,last_name
+            ,enabled
+            ,enabled_auto_login
+        FROM
+            account
+    </sql>
+
+    <sql id="whereCriteriaSql">
+        <where>
+            <if test="criteria.word != null">
+                <bind name="wildcardedWord" value="@org.terasoluna.gfw.common.query.QueryEscapeUtils@toContainingCondition(criteria.word)"/>
+                <foreach collection="criteria.targets" item="target" separator="OR">
+                    <choose>
+                        <when test="target == 'accountId'">
+                            account_id LIKE #{wildcardedWord} ESCAPE '~'
+                        </when>
+                        <when test="target == 'accountName'">
+                            first_name LIKE #{wildcardedWord} ESCAPE '~'
+                            OR
+                            last_name LIKE #{wildcardedWord} ESCAPE '~'
+                        </when>
+                    </choose>
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="countByCriteria" resultType="long">
+        SELECT
+            COUNT(*)
+        FROM
+            account
+        <include refid="whereCriteriaSql"/>
+    </select>
+
+    <select id="findAllByCriteria" resultMap="accountResultMap" resultSetType="SCROLL_INSENSITIVE">
+        <include refid="selectAllColumnsOfAccountSql"/>
+        <include refid="whereCriteriaSql"/>
+        ORDER BY
+            account_id
+    </select>
+
+    <select id="findOneByAccountId" resultMap="accountResultMap">
+        <include refid="selectAllColumnsOfAccountSql"/>
+        WHERE
+            account_id = #{accountId}
+    </select>
+
+    <select id="findOne" resultMap="accountResultMap">
+        <include refid="selectAllColumnsOfAccountSql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+    </select>
+
+    <select id="lockByAccountIdWithinTransaction" resultType="string">
+        SELECT
+            account_id
+        FROM
+            account
+        WHERE
+            account_id = #{accountUuid}
+        FOR UPDATE
+    </select>
+
+    <insert id="create">
+        <selectKey keyProperty="accountUuid" order="BEFORE" resultType="String">
+            SELECT RANDOM_UUID()
+        </selectKey>
+        INSERT INTO
+        account
+        (
+            account_uuid
+            ,account_id
+            ,password
+            ,password_modified_at
+            ,first_name
+            ,last_name
+            ,enabled
+            ,enabled_auto_login
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{accountId}
+            ,#{password}
+            ,#{passwordModifiedAt}
+            ,#{firstName}
+            ,#{lastName}
+            ,#{enabled}
+            ,#{enabledAutoLogin}
+        );
+    </insert>
+
+    <update id="update">
+        UPDATE
+            account
+        SET
+            account_id = #{accountId}
+            ,password = #{password}
+            ,password_modified_at = #{passwordModifiedAt}
+            ,first_name = #{firstName}
+            ,last_name = #{lastName}
+            ,enabled = #{enabled}
+            ,enabled_auto_login = #{enabledAutoLogin}
+        WHERE
+            account_uuid = #{accountUuid}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM
+            account
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <select id="findAllAuthorityByAccountUuid" resultType="AccountAuthority">
+        SELECT
+            account_uuid
+            ,authority
+        FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+        ORDER BY
+            authority
+    </select>
+
+    <insert id="createAuthority">
+        INSERT INTO
+            account_authorities
+        (
+            account_uuid
+            ,authority
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{authority}
+        )
+    </insert>
+
+    <delete id="deleteAuthority">
+        DELETE FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            authority = #{authority}
+    </delete>
+
+    <delete id="deleteAuthorities">
+        DELETE FROM
+            account_authorities
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <select id="findAllPasswordHistoryByAccountUuid" resultType="AccountPasswordHistory">
+        SELECT
+            account_uuid
+            ,password
+        FROM
+            account_password_histories
+        WHERE
+            account_uuid = #{account_uuid}
+    </select>
+
+    <insert id="createPasswordHistory">
+        INSERT INTO
+            account_password_histories
+        (
+            account_uuid
+            ,password
+            ,created_at
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{password}
+            ,#{createdAt}
+        )
+    </insert>
+
+    <delete id="deletePasswordHistories">
+        DELETE FROM
+            account_password_histories
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <select id="findOnePasswordLock" resultType="AccountPasswordLock">
+        SELECT
+            account_uuid
+            ,failure_count
+        FROM
+            account_password_lock
+        WHERE
+            account_uuid = #{accountUuid}
+    </select>
+
+    <update id="savePasswordFailureCount">
+        <choose>
+            <when test="passwordLock == null">
+                DELETE FROM
+                    account_password_lock
+                WHERE
+                    account_uuid = #{accountUuid}
+            </when>
+            <when test="passwordLock.failureCount == 1">
+                INSERT INTO
+                    account_password_lock
+                (
+                    account_uuid
+                    ,failure_count
+                    ,modified_at
+                )
+                VALUES(
+                    #{accountUuid}
+                    ,#{passwordLock.failureCount}
+                    ,#{passwordLock.modifiedAt}
+                )
+            </when>
+            <otherwise>
+                UPDATE
+                    account_password_lock
+                SET
+                    failure_count = #{passwordLock.failureCount}
+                    ,modified_at = #{passwordLock.modifiedAt}
+                WHERE
+                    account_uuid = #{accountUuid}
+            </otherwise>
+        </choose>
+    </update>
+
+    <delete id="deletePasswordLock">
+        DELETE FROM
+            account_password_lock
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+    <sql id="selectAllColumnsOfAccountAuthenticationHistorySql">
+        SELECT
+            account_uuid
+            ,created_at
+            ,authentication_type
+            ,authentication_result
+            ,failure_reason
+            ,remote_address
+            ,session_id
+            ,agent
+            ,tracking_id
+        FROM
+            account_authentication_histories
+    </sql>
+
+    <select id="findAllAuthenticationHistoryByAccountUuid" resultType="AccountAuthenticationHistory">
+        <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+        ORDER BY
+            created_at DESC
+        LIMIT
+            100
+    </select>
+
+    <select id="findOneLastSuccessAuthenticationHistoryByAccountUuid" resultType="AccountAuthenticationHistory">
+        <include refid="selectAllColumnsOfAccountAuthenticationHistorySql"/>
+        WHERE
+            account_uuid = #{accountUuid}
+        AND
+            authentication_result = true
+        ORDER BY
+            created_at DESC
+        LIMIT
+            1
+    </select>
+
+    <insert id="createAuthenticationHistory">
+        INSERT INTO
+            account_authentication_histories
+        (
+            account_uuid
+            ,created_at
+            ,authentication_type
+            ,authentication_result
+            ,failure_reason
+            ,remote_address
+            ,session_id
+            ,agent
+            ,tracking_id
+        )
+        VALUES
+        (
+            #{accountUuid}
+            ,#{createdAt}
+            ,#{authenticationType}
+            ,#{authenticationResult}
+            ,#{failureReason}
+            ,#{remoteAddress}
+            ,#{sessionId}
+            ,#{agent}
+            ,#{trackingId}
+        )
+    </insert>
+
+    <delete id="deleteAuthenticationHistories">
+        DELETE FROM
+            account_authentication_histories
+        WHERE
+            account_uuid = #{accountUuid}
+    </delete>
+
+</mapper>

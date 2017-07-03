@@ -22,7 +22,7 @@
 
     <tx:annotation-driven/>
 
-    <context:component-scan base-package="com.github.kazuki43zoo.domain"/>
+    <context:component-scan base-package="com.kazuki43zoo.domain"/>
 
     <!-- AOP. -->
     <bean id="resultMessagesLoggingInterceptor" class="org.terasoluna.gfw.common.exception.ResultMessagesLoggingInterceptor"
