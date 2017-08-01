@@ -75,6 +75,15 @@ INSERT INTO account_authorities
 INSERT INTO account_password_histories
     VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b56','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
 
+INSERT INTO account
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b57','guest100','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'Guset100','',true,false);
+INSERT INTO account_authorities
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b57','GUEST');
+INSERT INTO account_authorities
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b57','EMPLOYEE');
+INSERT INTO account_password_histories
+    VALUES('f88a8086-f3ec-11e3-9125-b2227cce2b57','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP());
+
 -- ACCOUNTS MANAGER USER
 INSERT INTO account
     VALUES('b655e0e6-f457-11e3-9c20-b2227cce2b54','user01','$2a$10$MPLzsWbMR4SEHpCwrq1oFOAJzFFJos1e2H5ffcY5vNKyKs6IMWBkG',CURRENT_TIMESTAMP(),'User01','',true,false);
