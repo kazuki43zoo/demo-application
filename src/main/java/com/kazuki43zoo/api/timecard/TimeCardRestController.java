@@ -37,12 +37,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @lombok.RequiredArgsConstructor
 public class TimeCardRestController {
 
-    @Target(ElementType.PARAMETER)
-    @Retention(RetentionPolicy.RUNTIME)
-    @DateTimeFormat(pattern = "yyyy-MM")
-    private @interface MonthFormat {
-    }
-
     private static final TimeCardRestController LINK_CONTROLLER = methodOn(TimeCardRestController.class);
 
     private final TimeCardService timeCardService;
@@ -119,6 +113,12 @@ public class TimeCardRestController {
 
         // save entity.
         this.timeCardService.saveDailyAttendance(authenticatedUser.getAccount().getAccountUuid(), targetMonth.plusDays(targetDay - 1), attendance);
+    }
+
+    @Target(ElementType.PARAMETER)
+    @Retention(RetentionPolicy.RUNTIME)
+    @DateTimeFormat(pattern = "yyyy-MM")
+    private @interface MonthFormat {
     }
 
 }

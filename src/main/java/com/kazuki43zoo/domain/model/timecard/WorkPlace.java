@@ -72,16 +72,16 @@ public class WorkPlace implements Serializable {
                 - calculateContainsBreakTimeMinute(baseWorkTimeInterval);
     }
 
-    int calculateWorkingMinute(final Interval workTimeInterval, final WorkPlace mainOffice) {
+    public int calculateWorkingMinute(final Interval workTimeInterval, final WorkPlace mainOffice) {
         int workingMinute = (int) toMinute(workTimeInterval) - calculateContainsBreakTimeMinute(workTimeInterval);
         return truncateWithTimeUnit(workingMinute, mainOffice);
     }
 
-    int truncateWithTimeUnit(final int minute) {
+    public int truncateWithTimeUnit(final int minute) {
         return truncateWithTimeUnit(minute, this);
     }
 
-    int truncateWithTimeUnit(final int minute, final WorkPlace mainOffice) {
+    public int truncateWithTimeUnit(final int minute, final WorkPlace mainOffice) {
         int determinedMinute = 0;
         int undeterminedMinute = minute;
         int baseWorkTimeMinute = this.baseWorkTimeMinute;
@@ -98,7 +98,7 @@ public class WorkPlace implements Serializable {
         return determinedMinute + undeterminedMinute - (undeterminedMinute % unitTimeMinute);
     }
 
-    boolean isTardyOrEarlyLeaving(final DateTime beginTime, final DateTime finishTime) {
+    public boolean isTardyOrEarlyLeaving(final DateTime beginTime, final DateTime finishTime) {
         if (beginTime != null && beginTime.isAfter(baseWorkTimeInterval.getStart())) {
             return true;
         }
@@ -108,7 +108,7 @@ public class WorkPlace implements Serializable {
         return false;
     }
 
-    int calculateContainsBreakTimeMinute(final Interval workTimeInterval) {
+    public int calculateContainsBreakTimeMinute(final Interval workTimeInterval) {
         if (getBreakTimes() == null) {
             return 0;
         }

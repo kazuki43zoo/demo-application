@@ -34,7 +34,7 @@ public class BreakTime implements Serializable {
         this.finishTime = finishTime;
     }
 
-    List<Interval> toBreakTimeIntervals() {
+    public List<Interval> toBreakTimeIntervals() {
         final List<Interval> breakTimeIntervals = new ArrayList<>();
         final Interval breakTimeInterval = new Interval(BASE_DATE.toDateTime(beginTime),
                 BASE_DATE.toDateTime(finishTime));

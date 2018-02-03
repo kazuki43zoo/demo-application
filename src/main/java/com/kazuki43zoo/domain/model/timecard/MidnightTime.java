@@ -16,9 +16,9 @@ public class MidnightTime {
 
     private static final LocalTime MIDNIGHT_FINISH_TIME = LocalTime.parse("05:00");
 
-    private final List<Interval> midnightIntervals = new ArrayList<>();
-
     static final MidnightTime INSTANCE = new MidnightTime();
+
+    private final List<Interval> midnightIntervals = new ArrayList<>();
 
     private MidnightTime() {
         // 00:00-05:00
@@ -35,7 +35,7 @@ public class MidnightTime {
                 BASE_DATE.toDateTime(MIDNIGHT_BEGIN_TIME).plusDays(1).plusHours(2)));
     }
 
-    int calculateContainsMinute(final Interval workTimeInterval, final WorkPlace workPlace) {
+    public int calculateContainsMinute(final Interval workTimeInterval, final WorkPlace workPlace) {
         long minute = 0;
         for (final Interval midnightInterval : midnightIntervals) {
             if (workTimeInterval.overlaps(midnightInterval)) {

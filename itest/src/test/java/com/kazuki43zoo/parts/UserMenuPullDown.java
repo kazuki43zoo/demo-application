@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class UserMenuPullDown<P extends Page<P>> {
 
-	final WebDriver driver;
+	private final WebDriver driver;
 
 	@CacheLookup
 	@FindBy(id = "userMenuLink")

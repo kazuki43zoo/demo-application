@@ -24,7 +24,7 @@ public class AuthenticationTest {
 	private static WebDriver driver;
 
 	@Value("${selenium.applicationContextUrl}")
-	String applicationContextUrl;
+	private String applicationContextUrl;
 
 	@BeforeClass
 	public static void setUp() {
