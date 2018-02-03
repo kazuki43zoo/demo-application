@@ -10,13 +10,13 @@ import java.util.concurrent.TimeUnit;
 
 public class MidnightTime {
 
-    public static final MidnightTime INSTANCE = new MidnightTime();
-
     private static final LocalDate BASE_DATE = new LocalDate(0);
 
     private static final LocalTime MIDNIGHT_BEGIN_TIME = LocalTime.parse("22:00");
 
     private static final LocalTime MIDNIGHT_FINISH_TIME = LocalTime.parse("05:00");
+
+    public static final MidnightTime INSTANCE = new MidnightTime();
 
     private final List<Interval> midnightIntervals = new ArrayList<>();
 
