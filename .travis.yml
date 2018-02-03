@@ -6,6 +6,8 @@ cache:
   directories:
     - $HOME/.m2
     - $HOME/cargo-daemon
+addons:
+  firefox: "38.8.0esr"
 
 install: true
 
