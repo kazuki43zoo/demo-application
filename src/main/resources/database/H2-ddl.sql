@@ -5,11 +5,11 @@
 --DROP TABLE work_place;
 
 -- DROP Tables for account
-DROP TABLE account_authentication_histories;
-DROP TABLE account_password_lock;
-DROP TABLE account_password_histories;
-DROP TABLE account_authorities;
-DROP TABLE account;
+DROP TABLE IF EXISTS account_authentication_histories;
+DROP TABLE IF EXISTS account_password_lock;
+DROP TABLE IF EXISTS account_password_histories;
+DROP TABLE IF EXISTS account_authorities;
+DROP TABLE IF EXISTS account;
 
 -- CREATE Tables for account
 CREATE TABLE IF NOT EXISTS account(
