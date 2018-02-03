@@ -19,6 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Compare(left = "", right = "", operator = Compare.Operator.EQUAL, message = "{com.github.kazuki43zoo.core.validation.EqualsPropertyValues.message}")
 public @interface EqualsPropertyValues {
+    @OverridesAttribute(constraint = Compare.class, name = "message")
     String message() default "";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

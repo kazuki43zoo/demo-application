@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @NotEqualsPropertyValues.List({
-        @NotEqualsPropertyValues(property = "password", comparingProperty = "username")
-        , @NotEqualsPropertyValues(property = "password", comparingProperty = "currentPassword")
+        @NotEqualsPropertyValues(property = "password", comparingProperty = "username", message = "{NotEqualsWithAccountId.message}")
+        , @NotEqualsPropertyValues(property = "password", comparingProperty = "currentPassword", message = "{NotEqualsWithCurrentPassword.message}")
 })
-@EqualsPropertyValues(property = "confirmPassword", comparingProperty = "password")
+@EqualsPropertyValues(property = "confirmPassword", comparingProperty = "password", message = "{EqualsWithPassword.message}")
 @lombok.Data
 @lombok.ToString(exclude = {"currentPassword", "password", "confirmPassword"})
 public class PasswordForm implements Serializable {

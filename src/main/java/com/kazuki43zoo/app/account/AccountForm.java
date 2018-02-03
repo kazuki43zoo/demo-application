@@ -1,14 +1,19 @@
 package com.kazuki43zoo.app.account;
 
-import com.kazuki43zoo.core.validation.*;
+import com.kazuki43zoo.core.validation.AccountId;
+import com.kazuki43zoo.core.validation.EqualsPropertyValues;
+import com.kazuki43zoo.core.validation.FirstName;
+import com.kazuki43zoo.core.validation.LastName;
+import com.kazuki43zoo.core.validation.NotEqualsPropertyValues;
+import com.kazuki43zoo.core.validation.Password;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@NotEqualsPropertyValues(property = "password", comparingProperty = "accountId")
-@EqualsPropertyValues(property = "confirmPassword", comparingProperty = "password")
+@NotEqualsPropertyValues(property = "password", comparingProperty = "accountId", message = "{NotEqualsWithAccountId.message}")
+@EqualsPropertyValues(property = "confirmPassword", comparingProperty = "password", message = "{EqualsWithPassword.message}")
 @lombok.Data
 @lombok.ToString(exclude = {"password", "confirmPassword"})
 public class AccountForm implements Serializable {
