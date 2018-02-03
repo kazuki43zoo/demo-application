@@ -5,18 +5,16 @@ import com.kazuki43zoo.domain.repository.account.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-
 @Transactional
 @Service
-public final class AccountSharedServiceImpl implements AccountSharedService {
+@lombok.RequiredArgsConstructor
+public class AccountSharedServiceImpl implements AccountSharedService {
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     @Override
     public Account getAccount(final String accountId) {
-        return accountRepository.findOneByAccountId(accountId);
+        return this.accountRepository.findOneByAccountId(accountId);
     }
 
 }

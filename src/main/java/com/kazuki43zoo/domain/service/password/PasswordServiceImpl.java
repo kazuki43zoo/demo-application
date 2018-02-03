@@ -11,41 +11,36 @@ import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
-import javax.inject.Inject;
-
 @Transactional
 @Service
-public final class PasswordServiceImpl implements PasswordService {
+@lombok.RequiredArgsConstructor
+public class PasswordServiceImpl implements PasswordService {
 
-    @Inject
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Inject
-    JodaTimeDateFactory dateFactory;
+    private final JodaTimeDateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final PasswordSharedService passwordSharedService;
 
     @Override
     public Account change(final String accountId, final String rawCurrentPassword, final String rawNewPassword) {
-        final Account currentAccount = accountRepository.findOneByAccountId(accountId);
+        final Account currentAccount = this.accountRepository.findOneByAccountId(accountId);
 
         authenticate(currentAccount, rawCurrentPassword);
 
-        passwordSharedService.validatePassword(rawNewPassword, currentAccount);
+        this.passwordSharedService.validatePassword(rawNewPassword, currentAccount);
 
-        final DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = this.dateFactory.newDateTime();
 
-        final String encodedNewPassword = passwordEncoder.encode(rawNewPassword);
+        final String encodedNewPassword = this.passwordEncoder.encode(rawNewPassword);
         currentAccount.setPassword(encodedNewPassword);
         currentAccount.setPasswordModifiedAt(currentDateTime);
-        accountRepository.update(currentAccount);
-        passwordSharedService.resetPasswordLock(currentAccount);
+        this.accountRepository.update(currentAccount);
+        this.passwordSharedService.resetPasswordLock(currentAccount);
 
-        accountRepository.createPasswordHistory(new AccountPasswordHistory(currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime));
+        this.accountRepository.createPasswordHistory(new AccountPasswordHistory(currentAccount.getAccountUuid(), encodedNewPassword, currentDateTime));
 
         return currentAccount;
 
@@ -55,7 +50,7 @@ public final class PasswordServiceImpl implements PasswordService {
         if (currentAccount == null) {
             throw new ResourceNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
-        if (!passwordEncoder.matches(rawPassword, currentAccount.getPassword())) {
+        if (!this.passwordEncoder.matches(rawPassword, currentAccount.getPassword())) {
             throw new ResourceNotFoundException(Message.SECURITY_ACCOUNT_NOT_FOUND.resultMessages());
         }
     }

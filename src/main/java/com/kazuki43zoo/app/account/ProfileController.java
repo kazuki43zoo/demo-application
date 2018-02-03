@@ -19,18 +19,15 @@ import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import javax.inject.Inject;
-
 @TransactionTokenCheck("profile")
 @RequestMapping("profile")
 @Controller
+@lombok.RequiredArgsConstructor
 public class ProfileController {
 
-    @Inject
-    AccountService accountService;
+    private final AccountService accountService;
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
     @GetMapping
     public String show(final @CurrentUser CustomUserDetails authenticatedUser, final Model model) {
@@ -41,7 +38,7 @@ public class ProfileController {
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @GetMapping(params = "edit")
     public String edit(final @CurrentUser CustomUserDetails authenticatedUser, final ProfileForm form, final Model model) {
-        beanMapper.map(authenticatedUser.getAccount(), form);
+        this.beanMapper.map(authenticatedUser.getAccount(), form);
         model.addAttribute(authenticatedUser.getAccount());
         return "profile/editForm";
     }
@@ -54,12 +51,12 @@ public class ProfileController {
             return edit(authenticatedUser, form, model);
         }
 
-        final Account inputAccount = beanMapper.map(form, Account.class);
+        final Account inputAccount = this.beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(authenticatedUser.getAccount().getAccountUuid());
 
         final Account changedAccount;
         try {
-            changedAccount = accountService.changeProfile(inputAccount);
+            changedAccount = this.accountService.changeProfile(inputAccount);
         } catch (final DuplicateKeyException e) {
             model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return editRedo(authenticatedUser, model);
@@ -68,7 +65,7 @@ public class ProfileController {
             return editRedo(authenticatedUser, model);
         }
 
-        beanMapper.map(changedAccount, authenticatedUser.getAccount());
+        this.beanMapper.map(changedAccount, authenticatedUser.getAccount());
 
         redirectAttributes.addFlashAttribute(Message.ACCOUNT_PROFILE_EDITED.resultMessages());
 
@@ -77,7 +74,7 @@ public class ProfileController {
 
     @GetMapping(path = "authenticationHistories")
     public String showAuthenticationHistoryList(final @CurrentUser CustomUserDetails authenticatedUser, final Model model) {
-        final Account account = accountService.getAccount(authenticatedUser.getAccount().getAccountUuid());
+        final Account account = this.accountService.getAccount(authenticatedUser.getAccount().getAccountUuid());
         model.addAttribute(account);
         return "profile/authenticationHistoryList";
     }

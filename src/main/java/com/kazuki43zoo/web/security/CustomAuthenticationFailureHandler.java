@@ -13,28 +13,23 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@lombok.RequiredArgsConstructor
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    @Inject
-    MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Inject
-    AuthenticationSharedService authenticationSharedService;
+    private final AuthenticationSharedService authenticationSharedService;
 
-    @Inject
-    SecurityConfigs securityConfigs;
+    private final SecurityConfigs securityConfigs;
 
-    @Inject
-    AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> authenticationDetailsSource;
+    private final AuthenticationDetailsSource<HttpServletRequest, CustomAuthenticationDetails> authenticationDetailsSource;
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
     @Override
     public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response, final AuthenticationException exception) throws IOException, ServletException {
@@ -45,11 +40,11 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
     }
 
     private void createConcurrentAuthenticationFailureHistory(final HttpServletRequest request) {
-        final String accountId = request.getParameter(securityConfigs.getUsernameParameter());
-        final String message = Message.SECURITY_CONCURRENT_LOGIN.text(messageSource);
-        final CustomAuthenticationDetails authenticationDetails = authenticationDetailsSource.buildDetails(request);
-        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
-        authenticationSharedService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
+        final String accountId = request.getParameter(this.securityConfigs.getUsernameParameter());
+        final String message = Message.SECURITY_CONCURRENT_LOGIN.text(this.messageSource);
+        final CustomAuthenticationDetails authenticationDetails = this.authenticationDetailsSource.buildDetails(request);
+        final AccountAuthenticationHistory authenticationHistory = this.beanMapper.map(authenticationDetails, AccountAuthenticationHistory.class);
+        this.authenticationSharedService.createAuthenticationFailureHistory(accountId, authenticationHistory, AuthenticationType.LOGIN, message);
     }
 
 }

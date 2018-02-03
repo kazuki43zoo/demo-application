@@ -14,30 +14,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import javax.inject.Inject;
-
 @TransactionTokenCheck("password")
 @RequestMapping("password")
 @Controller
+@lombok.RequiredArgsConstructor
 public class PasswordController {
 
-    @Inject
-    PasswordService passwordService;
+    private final PasswordService passwordService;
 
-    @Inject
-    LoginSharedHelper loginSharedHelper;
+    private final LoginSharedHelper loginSharedHelper;
 
-    @Inject
-    AccountSharedService accountSharedService;
+    private final AccountSharedService accountSharedService;
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
     @ModelAttribute
     public PasswordForm setUpPasswordForm(final @CurrentUser CustomUserDetails currentUser) {
@@ -57,7 +55,7 @@ public class PasswordController {
     @PostMapping(params = "encourageChange")
     public String encourageChange(final PasswordForm form, final RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute(form);
-        final Account account = accountSharedService.getAccount(form.getUsername());
+        final Account account = this.accountSharedService.getAccount(form.getUsername());
         if (account != null) {
             final Message message = (account.getPasswordModifiedAt() == null)
                     ? Message.AUTH_ENCOURAGE_CHANGE_PASSWORD_NOT_INITIALIZED
@@ -78,14 +76,14 @@ public class PasswordController {
         final Account changedAccount;
         try {
             String accountId = (currentUser != null) ? currentUser.getAccount().getAccountId() : form.getUsername();
-            changedAccount = passwordService.change(accountId, form.getCurrentPassword(), form.getPassword());
+            changedAccount = this.passwordService.change(accountId, form.getCurrentPassword(), form.getPassword());
         } catch (final ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
         }
 
         if (currentUser != null) {
-            beanMapper.map(changedAccount, currentUser.getAccount());
+            this.beanMapper.map(changedAccount, currentUser.getAccount());
             redirectAttributes.addFlashAttribute(Message.PASSWORD_CHANGED.resultMessages());
             return "redirect:/";
         } else {
@@ -108,13 +106,13 @@ public class PasswordController {
         }
 
         try {
-            passwordService.change(form.getUsername(), form.getCurrentPassword(), form.getPassword());
+            this.passwordService.change(form.getUsername(), form.getCurrentPassword(), form.getPassword());
         } catch (final ResultMessagesNotificationException e) {
             model.addAttribute(e.getResultMessages());
             return showChangeForm();
         }
 
-        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
+        return this.loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
     }
 
 }

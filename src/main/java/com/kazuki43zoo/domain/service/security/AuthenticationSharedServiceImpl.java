@@ -9,21 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
-import javax.inject.Inject;
-
 @Transactional
 @Service
-public final class AuthenticationSharedServiceImpl implements AuthenticationSharedService {
+@lombok.RequiredArgsConstructor
+public class AuthenticationSharedServiceImpl implements AuthenticationSharedService {
 
-    @Inject
-    JodaTimeDateFactory dateFactory;
+    private final JodaTimeDateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     @Override
     public void createAuthenticationFailureHistory(final String failedAccountId, final AccountAuthenticationHistory authenticationHistory, final AuthenticationType type, final String failureReason) {
-        final Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
+        final Account failedAccount = this.accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
@@ -37,13 +34,13 @@ public final class AuthenticationSharedServiceImpl implements AuthenticationShar
     }
 
     private void createAuthenticationHistory(final Account account, final AccountAuthenticationHistory authenticationHistory, final AuthenticationType type, final boolean result) {
-        DateTime currentDateTime = dateFactory.newDateTime();
+        DateTime currentDateTime = this.dateFactory.newDateTime();
 
         authenticationHistory.setAccountUuid(account.getAccountUuid());
         authenticationHistory.setAuthenticationType(type);
         authenticationHistory.setAuthenticationResult(result);
         authenticationHistory.setCreatedAt(currentDateTime);
 
-        accountRepository.createAuthenticationHistory(authenticationHistory);
+        this.accountRepository.createAuthenticationHistory(authenticationHistory);
     }
 }

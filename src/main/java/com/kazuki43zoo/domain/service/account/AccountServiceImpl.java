@@ -19,42 +19,38 @@ import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
 @Transactional
 @Service
-public final class AccountServiceImpl implements AccountService {
+@lombok.RequiredArgsConstructor
+public class AccountServiceImpl implements AccountService {
 
-    @Inject
-    JodaTimeDateFactory dateFactory;
+    private final JodaTimeDateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final PasswordSharedService passwordSharedService;
 
-    @Inject
-    PersistentTokenRepository persistentTokenRepository;
+    private final PersistentTokenRepository persistentTokenRepository;
 
     @Override
     public Page<Account> searchAccounts(final AccountsSearchCriteria criteria, final Pageable pageable) {
         criteria.determineCriteria();
-        final long totalCount = accountRepository.countByCriteria(criteria);
+        final long totalCount = this.accountRepository.countByCriteria(criteria);
         final List<Account> accounts;
         if (totalCount == 0) {
             accounts = Collections.emptyList();
         } else {
-            accounts = accountRepository.findAllByCriteria(criteria, new PageParams(pageable));
+            accounts = this.accountRepository.findAllByCriteria(criteria, new PageParams(pageable));
         }
         return new PageImpl<>(accounts, pageable, totalCount);
     }
 
     @Override
     public Account getAccount(final String accountUuid) {
-        final Account account = accountRepository.findOne(accountUuid);
+        final Account account = this.accountRepository.findOne(accountUuid);
         if (account == null) {
             throw new ResourceNotFoundException(Message.FW_NOT_FOUND.resultMessages());
         }
@@ -63,25 +59,25 @@ public final class AccountServiceImpl implements AccountService {
 
     @Override
     public Account create(final Account inputAccount) {
-        final DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = this.dateFactory.newDateTime();
 
         String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
-            passwordSharedService.validatePassword(rawPassword, inputAccount);
+            this.passwordSharedService.validatePassword(rawPassword, inputAccount);
         } else {
-            rawPassword = passwordSharedService.generateNewPassword();
+            rawPassword = this.passwordSharedService.generateNewPassword();
         }
 
-        final String encodedPassword = passwordSharedService.encode(rawPassword);
+        final String encodedPassword = this.passwordSharedService.encode(rawPassword);
         inputAccount.setPassword(encodedPassword);
-        accountRepository.create(inputAccount);
+        this.accountRepository.create(inputAccount);
 
         final String accountUuid = inputAccount.getAccountUuid();
         for (final AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
             inputAuthority.setAccountUuid(accountUuid);
-            accountRepository.createAuthority(inputAuthority);
+            this.accountRepository.createAuthority(inputAuthority);
         }
-        accountRepository.createPasswordHistory(new AccountPasswordHistory(accountUuid, encodedPassword, currentDateTime));
+        this.accountRepository.createPasswordHistory(new AccountPasswordHistory(accountUuid, encodedPassword, currentDateTime));
 
         return getAccount(accountUuid);
     }
@@ -96,10 +92,10 @@ public final class AccountServiceImpl implements AccountService {
         currentAccount.setFirstName(inputAccount.getFirstName());
         currentAccount.setLastName(inputAccount.getLastName());
         currentAccount.setEnabledAutoLogin(inputAccount.isEnabledAutoLogin());
-        accountRepository.update(currentAccount);
+        this.accountRepository.update(currentAccount);
 
         if (!currentAccount.isEnabledAutoLogin()) {
-            persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
+            this.persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
         }
 
         return getAccount(accountUuid);
@@ -111,13 +107,13 @@ public final class AccountServiceImpl implements AccountService {
 
         final Account currentAccount = getAccount(accountUuid);
 
-        final DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = this.dateFactory.newDateTime();
 
         AccountPasswordHistory passwordHistory = null;
         final String rawPassword = inputAccount.getPassword();
         if (StringUtils.hasLength(rawPassword)) {
-            passwordSharedService.validatePassword(rawPassword, currentAccount);
-            String encodedPassword = passwordSharedService.encode(rawPassword);
+            this.passwordSharedService.validatePassword(rawPassword, currentAccount);
+            String encodedPassword = this.passwordSharedService.encode(rawPassword);
             currentAccount.setPassword(encodedPassword);
             currentAccount.setPasswordModifiedAt(currentDateTime);
             passwordHistory = new AccountPasswordHistory(accountUuid, encodedPassword, currentDateTime);
@@ -127,44 +123,44 @@ public final class AccountServiceImpl implements AccountService {
         currentAccount.setLastName(inputAccount.getLastName());
         currentAccount.setEnabled(inputAccount.isEnabled());
         currentAccount.setEnabledAutoLogin(inputAccount.isEnabledAutoLogin());
-        accountRepository.update(currentAccount);
+        this.accountRepository.update(currentAccount);
 
         for (final AccountAuthority currentAuthority : currentAccount.getAuthorities()) {
             if (!inputAccount.getAuthorities().remove(currentAuthority)) {
-                accountRepository.deleteAuthority(currentAuthority.getAccountUuid(), currentAuthority.getAuthority());
+                this.accountRepository.deleteAuthority(currentAuthority.getAccountUuid(), currentAuthority.getAuthority());
             }
         }
         for (final AccountAuthority inputAuthority : inputAccount.getAuthorities()) {
-            accountRepository.createAuthority(inputAuthority);
+            this.accountRepository.createAuthority(inputAuthority);
         }
 
         if (passwordHistory != null) {
-            accountRepository.createPasswordHistory(passwordHistory);
+            this.accountRepository.createPasswordHistory(passwordHistory);
         }
 
         if (!currentAccount.isEnabledAutoLogin()) {
-            persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
+            this.persistentTokenRepository.removeUserTokens(currentAccount.getAccountId());
         }
 
     }
 
     @Override
     public void delete(final String accountUuid) {
-        final Account account = accountRepository.findOne(accountUuid);
-        accountRepository.deleteAuthenticationHistories(accountUuid);
-        accountRepository.deletePasswordHistories(accountUuid);
-        accountRepository.deletePasswordLock(accountUuid);
-        accountRepository.deleteAuthorities(accountUuid);
-        accountRepository.delete(accountUuid);
+        final Account account = this.accountRepository.findOne(accountUuid);
+        this.accountRepository.deleteAuthenticationHistories(accountUuid);
+        this.accountRepository.deletePasswordHistories(accountUuid);
+        this.accountRepository.deletePasswordLock(accountUuid);
+        this.accountRepository.deleteAuthorities(accountUuid);
+        this.accountRepository.delete(accountUuid);
         if (account != null) {
-            persistentTokenRepository.removeUserTokens(account.getAccountId());
+            this.persistentTokenRepository.removeUserTokens(account.getAccountId());
         }
     }
 
     @Override
     public void unlock(final String accountUuid) {
         final Account account = getAccount(accountUuid);
-        passwordSharedService.resetPasswordLock(account);
+        this.passwordSharedService.resetPasswordLock(account);
     }
 
 }

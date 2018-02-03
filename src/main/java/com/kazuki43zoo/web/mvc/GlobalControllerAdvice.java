@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
-import javax.inject.Inject;
 import java.util.Locale;
 
 @ControllerAdvice
+@lombok.RequiredArgsConstructor
 public final class GlobalControllerAdvice {
 
-    @Inject
-    JodaTimeDateFactory dateFactory;
+    private final JodaTimeDateFactory dateFactory;
 
     @ModelAttribute("serverTime")
     public DateTime setUpServerTime() {
-        return dateFactory.newDateTime();
+        return this.dateFactory.newDateTime();
     }
 
     @ModelAttribute

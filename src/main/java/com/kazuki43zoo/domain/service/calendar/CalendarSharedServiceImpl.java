@@ -12,20 +12,22 @@ import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
-public final class CalendarSharedServiceImpl implements CalendarSharedService {
+@lombok.RequiredArgsConstructor
+public class CalendarSharedServiceImpl implements CalendarSharedService {
 
-    @Inject
-    FixedHolidayRepository fixedHolidayRepository;
+    private final FixedHolidayRepository fixedHolidayRepository;
 
-    @Inject
-    HappyMondayHolidayRepository happyMondayHolidayRepository;
+    private final HappyMondayHolidayRepository happyMondayHolidayRepository;
 
-    @Inject
-    SeasonalHolidayRepository seasonalHolidayRepository;
+    private final SeasonalHolidayRepository seasonalHolidayRepository;
 
     private Map<Integer, List<FixedHoliday>> fixedHolidaysMapping;
 
@@ -42,7 +44,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
     private void loadFixedHolidays() {
         final Map<Integer, List<FixedHoliday>> fixedHolidaysMapping = new HashMap<>();
-        final List<FixedHoliday> fixedHolidays = fixedHolidayRepository.findAll();
+        final List<FixedHoliday> fixedHolidays = this.fixedHolidayRepository.findAll();
         for (final FixedHoliday fixedHoliday : fixedHolidays) {
             List<FixedHoliday> fixedHolidaysOfMonth =
                     fixedHolidaysMapping.get(fixedHoliday.getTargetMonth());
@@ -57,7 +59,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
     private void loadHappyMondayHolidays() {
         final Map<Integer, List<HappyMondayHoliday>> happyMondayHolidaysMapping = new HashMap<>();
-        final List<HappyMondayHoliday> happyMondayHolidays = happyMondayHolidayRepository.findAll();
+        final List<HappyMondayHoliday> happyMondayHolidays = this.happyMondayHolidayRepository.findAll();
         for (final HappyMondayHoliday happyMondayHoliday : happyMondayHolidays) {
             List<HappyMondayHoliday> happyMondayHolidaysOfMonth =
                     happyMondayHolidaysMapping.get(happyMondayHoliday.getTargetMonth());
@@ -72,7 +74,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
 
     private void loadSeasonalHolidays() {
         final Map<LocalDate, List<SeasonalHoliday>> seasonalHolidaysMapping = new HashMap<>();
-        final List<SeasonalHoliday> seasonalHolidays = seasonalHolidayRepository.findAll();
+        final List<SeasonalHoliday> seasonalHolidays = this.seasonalHolidayRepository.findAll();
         for (final SeasonalHoliday seasonalHoliday : seasonalHolidays) {
             final LocalDate month = seasonalHoliday.getTargetDate().dayOfMonth().withMinimumValue();
             List<SeasonalHoliday> seasonalHolidaysOfMonth = seasonalHolidaysMapping.get(month);
@@ -95,7 +97,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
     }
 
     private void pickupFixedHolidays(final LocalDate month, final Map<LocalDate, Holiday> holidays) {
-        final List<FixedHoliday> fixedHolidays = fixedHolidaysMapping.get(month.getMonthOfYear());
+        final List<FixedHoliday> fixedHolidays = this.fixedHolidaysMapping.get(month.getMonthOfYear());
         if (fixedHolidays == null) {
             return;
         }
@@ -112,7 +114,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
     }
 
     private void pickupHappyMondayHolidays(final LocalDate month, final Map<LocalDate, Holiday> holidays) {
-        final List<HappyMondayHoliday> happyMondayHolidays = happyMondayHolidaysMapping.get(month.getMonthOfYear());
+        final List<HappyMondayHoliday> happyMondayHolidays = this.happyMondayHolidaysMapping.get(month.getMonthOfYear());
         if (happyMondayHolidays == null) {
             return;
         }
@@ -130,7 +132,7 @@ public final class CalendarSharedServiceImpl implements CalendarSharedService {
     }
 
     private void pickupSeasonalHolidays(final LocalDate month, final Map<LocalDate, Holiday> holidays) {
-        final List<SeasonalHoliday> seasonalHolidays = seasonalHolidaysMapping.get(month);
+        final List<SeasonalHoliday> seasonalHolidays = this.seasonalHolidaysMapping.get(month);
         if (seasonalHolidays == null) {
             return;
         }

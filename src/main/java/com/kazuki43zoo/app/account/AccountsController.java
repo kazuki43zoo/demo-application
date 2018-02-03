@@ -14,32 +14,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import javax.inject.Inject;
-
 @TransactionTokenCheck("accounts")
 @RequestMapping("accounts")
 @Controller
+@lombok.RequiredArgsConstructor
 public class AccountsController {
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
-    @Inject
-    AccountService accountService;
+    private final AccountService accountService;
 
     @GetMapping
     public String list(final @Validated AccountsSearchQuery query, final BindingResult bindingResult, final @PageableDefault(size = 15) Pageable pageable, final Model model) {
         if (bindingResult.hasErrors()) {
             return "account/list";
         }
-        final AccountsSearchCriteria criteria = beanMapper.map(query, AccountsSearchCriteria.class);
-        final Page<Account> page = accountService.searchAccounts(criteria, pageable);
+        final AccountsSearchCriteria criteria = this.beanMapper.map(query, AccountsSearchCriteria.class);
+        final Page<Account> page = this.accountService.searchAccounts(criteria, pageable);
         model.addAttribute("page", page);
         return "account/list";
     }
@@ -47,7 +47,7 @@ public class AccountsController {
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @GetMapping(path = "{accountUuid}")
     public String show(final @PathVariable("accountUuid") String accountUuid, final Model model) {
-        final Account account = accountService.getAccount(accountUuid);
+        final Account account = this.accountService.getAccount(accountUuid);
         model.addAttribute(account);
         return "account/detail";
     }
@@ -66,14 +66,14 @@ public class AccountsController {
             return createForm(form);
         }
 
-        final Account inputAccount = beanMapper.map(form, Account.class);
+        final Account inputAccount = this.beanMapper.map(form, Account.class);
         for (final String authority : form.getAuthorities()) {
             inputAccount.addAuthority(new AccountAuthority(null, authority));
         }
 
         final Account createdAccount;
         try {
-            createdAccount = accountService.create(inputAccount);
+            createdAccount = this.accountService.create(inputAccount);
         } catch (final DuplicateKeyException e) {
             model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return createForm(form);
@@ -89,9 +89,9 @@ public class AccountsController {
     @GetMapping(path = "{accountUuid}", params = "form=edit")
     public String editForm(final @PathVariable("accountUuid") String accountUuid, final AccountForm form, final Model model) {
 
-        final Account account = accountService.getAccount(accountUuid);
+        final Account account = this.accountService.getAccount(accountUuid);
         model.addAttribute(account);
-        beanMapper.map(account, form);
+        this.beanMapper.map(account, form);
         for (final AccountAuthority accountAuthority : account.getAuthorities()) {
             form.addAuthority(accountAuthority.getAuthority());
         }
@@ -107,14 +107,14 @@ public class AccountsController {
             return editRedo(accountUuid, model);
         }
 
-        final Account inputAccount = beanMapper.map(form, Account.class);
+        final Account inputAccount = this.beanMapper.map(form, Account.class);
         inputAccount.setAccountUuid(accountUuid);
         for (final String authority : form.getAuthorities()) {
             inputAccount.addAuthority(new AccountAuthority(accountUuid, authority));
         }
 
         try {
-            accountService.change(inputAccount);
+            this.accountService.change(inputAccount);
         } catch (final DuplicateKeyException e) {
             model.addAttribute(Message.ACCOUNT_ID_USED.resultMessages());
             return editRedo(accountUuid, model);
@@ -130,7 +130,7 @@ public class AccountsController {
     @PostMapping(path = "{accountUuid}", params = "_method=delete")
     public String delete(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
-        accountService.delete(accountUuid);
+        this.accountService.delete(accountUuid);
 
         redirectAttributes.addFlashAttribute(Message.ACCOUNT_DELETED.resultMessages());
         return "redirect:/app/accounts";
@@ -140,13 +140,13 @@ public class AccountsController {
     @PostMapping(path = "{accountUuid}/unlock", params = "_method=patch")
     public String unlock(final @PathVariable("accountUuid") String accountUuid, final RedirectAttributes redirectAttributes) {
 
-        accountService.unlock(accountUuid);
+        this.accountService.unlock(accountUuid);
 
         return redirectDetailView(accountUuid, Message.ACCOUNT_UNLOCKED, redirectAttributes);
     }
 
     private String editRedo(final String accountUuid, final Model model) {
-        final Account account = accountService.getAccount(accountUuid);
+        final Account account = this.accountService.getAccount(accountUuid);
         model.addAttribute(account);
         return "account/editForm";
     }

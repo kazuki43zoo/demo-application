@@ -9,20 +9,17 @@ import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.exception.SystemException;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Transactional
 @Service
-public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
+@lombok.RequiredArgsConstructor
+public class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService {
 
-    private Map<String, WorkPlace> cachedWorkPlaces = new ConcurrentHashMap<>();
+    private static final Map<String, WorkPlace> CACHED_WORK_PLACES = new ConcurrentHashMap<>();
 
-    @Inject
-    @Named("workPlaceBatchModeRepository")
-    WorkPlaceRepository workPlaceRepository;
+    private final WorkPlaceRepository workPlaceRepository;
 
     @PostConstruct
     public void loadWorkPlaceOfMainOffice() {
@@ -43,15 +40,15 @@ public final class WorkPlaceSharedServiceImpl implements WorkPlaceSharedService 
         if (!StringUtils.hasLength(targetWorkPlaceUuid)) {
             targetWorkPlaceUuid = WorkPlace.MAIN_OFFICE_UUID;
         }
-        WorkPlace workPlace = cachedWorkPlaces.get(targetWorkPlaceUuid);
+        WorkPlace workPlace = CACHED_WORK_PLACES.get(targetWorkPlaceUuid);
         if (workPlace == null) {
             synchronized (targetWorkPlaceUuid.intern()) {
-                workPlace = cachedWorkPlaces.get(targetWorkPlaceUuid);
+                workPlace = CACHED_WORK_PLACES.get(targetWorkPlaceUuid);
                 if (workPlace == null) {
-                    workPlace = workPlaceRepository.findOne(targetWorkPlaceUuid);
+                    workPlace = this.workPlaceRepository.findOne(targetWorkPlaceUuid);
                     if (workPlace != null) {
                         workPlace.initialize();
-                        cachedWorkPlaces.put(targetWorkPlaceUuid, workPlace);
+                        CACHED_WORK_PLACES.put(targetWorkPlaceUuid, workPlace);
                     }
                 }
             }

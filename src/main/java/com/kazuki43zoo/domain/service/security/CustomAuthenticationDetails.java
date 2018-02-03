@@ -1,7 +1,5 @@
 package com.kazuki43zoo.domain.service.security;
 
-import org.springframework.security.core.Authentication;
-
 import java.io.Serializable;
 
 @lombok.Data

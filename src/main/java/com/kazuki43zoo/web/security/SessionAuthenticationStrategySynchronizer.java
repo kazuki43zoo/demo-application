@@ -12,19 +12,16 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.inject.Inject;
-
 @Aspect
 @Component
 public class SessionAuthenticationStrategySynchronizer {
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     private final TransactionTemplate transactionTemplate;
 
-    @Inject
-    public SessionAuthenticationStrategySynchronizer(final PlatformTransactionManager transactionManager) {
+    public SessionAuthenticationStrategySynchronizer(final AccountRepository accountRepository, final PlatformTransactionManager transactionManager) {
+        this.accountRepository = accountRepository;
         final DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
         transactionDefinition.setName(getClass().getName());
         this.transactionTemplate = new TransactionTemplate(transactionManager, transactionDefinition);
@@ -32,10 +29,10 @@ public class SessionAuthenticationStrategySynchronizer {
 
     @Around("execution( * org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy.onAuthentication(..))")
     public void synchronize(final ProceedingJoinPoint joinPoint) {
-        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+        this.transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 final Authentication authentication = Authentication.class.cast(joinPoint.getArgs()[0]);
-                accountRepository.lockByAccountIdWithinTransaction(authentication.getName());
+                SessionAuthenticationStrategySynchronizer.this.accountRepository.lockByAccountIdWithinTransaction(authentication.getName());
                 try {
                     joinPoint.proceed();
                 } catch (final RuntimeException e) {

@@ -10,16 +10,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
-import javax.inject.Inject;
-
 @Component
+@lombok.RequiredArgsConstructor
 public class ApiErrorCreator {
 
-    @Inject
-    MessageSource messageSource;
+    private final MessageSource messageSource;
 
     public ApiError createApiError(final WebRequest request, final String errorCode, final String defaultErrorMessage, final Object... arguments) {
-        final String localizedMessage = messageSource.getMessage(
+        final String localizedMessage = this.messageSource.getMessage(
                 errorCode, arguments, defaultErrorMessage, request.getLocale());
         return new ApiError(errorCode, localizedMessage);
     }
@@ -36,7 +34,7 @@ public class ApiErrorCreator {
     }
 
     private ApiError createApiError(final WebRequest request, final DefaultMessageSourceResolvable messageResolvable, final String target) {
-        final String localizedMessage = messageSource.getMessage(messageResolvable, request.getLocale());
+        final String localizedMessage = this.messageSource.getMessage(messageResolvable, request.getLocale());
         return new ApiError(messageResolvable.getCode(), localizedMessage, target);
     }
 

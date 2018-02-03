@@ -4,16 +4,14 @@ import com.kazuki43zoo.domain.model.account.Account;
 import com.kazuki43zoo.domain.service.account.AccountSharedService;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
 @Component
+@lombok.RequiredArgsConstructor
 public class LoginSharedHelper {
 
-    @Inject
-    AccountSharedService accountSharedService;
+    private final AccountSharedService accountSharedService;
 
     public String generateAuthenticationProcessingUrl(final String username) {
-        final Account account = accountSharedService.getAccount(username);
+        final Account account = this.accountSharedService.getAccount(username);
         boolean enabledAutoLogin = false;
         if (account != null) {
             enabledAutoLogin = account.isEnabledAutoLogin();

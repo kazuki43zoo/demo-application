@@ -14,36 +14,32 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.exception.SystemException;
 
-import javax.inject.Inject;
-
 @Transactional
 @Component
+@lombok.RequiredArgsConstructor
 public class AuthenticationEventListeners {
 
-    @Inject
-    AuthenticationSharedService authenticationSharedService;
+    private final AuthenticationSharedService authenticationSharedService;
 
-    @Inject
-    PasswordSharedService passwordSharedService;
+    private final PasswordSharedService passwordSharedService;
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
     @EventListener
     public void onAuthenticationFailureBadCredentials(final AuthenticationFailureBadCredentialsEvent event) {
         final String failedAccountId = event.getAuthentication().getName();
 
-        passwordSharedService.countUpPasswordFailureCount(failedAccountId);
+        this.passwordSharedService.countUpPasswordFailureCount(failedAccountId);
 
-        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-        authenticationSharedService.createAuthenticationFailureHistory(failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
+        final AccountAuthenticationHistory authenticationHistory = this.beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        this.authenticationSharedService.createAuthenticationFailureHistory(failedAccountId, authenticationHistory, AuthenticationType.LOGIN, event.getException().getMessage());
     }
 
     @EventListener
     public void onInteractiveAuthenticationSuccess(final InteractiveAuthenticationSuccessEvent event) {
         final CustomUserDetails userDetails = CustomUserDetails.getInstance(event.getAuthentication());
 
-        passwordSharedService.resetPasswordLock(userDetails.getAccount());
+        this.passwordSharedService.resetPasswordLock(userDetails.getAccount());
 
         createAuthenticationSuccessHistory(event, userDetails);
     }
@@ -54,7 +50,7 @@ public class AuthenticationEventListeners {
     }
 
     private void createAuthenticationSuccessHistory(final InteractiveAuthenticationSuccessEvent event, final CustomUserDetails userDetails) {
-        final AccountAuthenticationHistory authenticationHistory = beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+        final AccountAuthenticationHistory authenticationHistory = this.beanMapper.map(event.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
         final AuthenticationType authenticationType;
         if (event.getAuthentication() instanceof RememberMeAuthenticationToken) {
             authenticationType = AuthenticationType.AUTO_LOGIN;
@@ -62,7 +58,7 @@ public class AuthenticationEventListeners {
             authenticationType = AuthenticationType.LOGIN;
         }
 
-        authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, authenticationType);
+        this.authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, authenticationType);
     }
 
 }

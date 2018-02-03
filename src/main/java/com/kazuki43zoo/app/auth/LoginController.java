@@ -12,16 +12,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("auth")
 @Controller
 @LoginFormControllerAdvice.LoginFormModelAttribute
+@lombok.RequiredArgsConstructor
 public class LoginController {
 
-    @Inject
-    LoginSharedHelper loginSharedHelper;
+    private final LoginSharedHelper loginSharedHelper;
 
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     @GetMapping(path = "login")
@@ -42,7 +41,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return showLoginForm();
         }
-        return loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
+        return this.loginSharedHelper.generateAuthenticationProcessingUrl(form.getUsername());
     }
 
 

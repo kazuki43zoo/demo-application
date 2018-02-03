@@ -11,11 +11,11 @@ public interface TimeCardRepository {
             @Param("accountUuid") String accountUuid,
             @Param("targetMonth") LocalDate targetMonth);
 
-    boolean create(TimeCard timeCard);
+    void create(TimeCard timeCard);
 
-    boolean update(TimeCard timeCard);
+    void update(TimeCard timeCard);
 
-    boolean delete(
+    void delete(
             @Param("accountUuid") String accountUuid,
             @Param("targetMonth") LocalDate targetMonth);
 
@@ -23,8 +23,8 @@ public interface TimeCardRepository {
             @Param("accountUuid") String accountUuid,
             @Param("targetDate") LocalDate targetDate);
 
-    boolean createDailyAttendance(DailyAttendance dailyAttendance);
+    void createDailyAttendance(DailyAttendance dailyAttendance);
 
-    boolean updateDailyAttendance(DailyAttendance dailyAttendance);
+    void updateDailyAttendance(DailyAttendance dailyAttendance);
 
 }

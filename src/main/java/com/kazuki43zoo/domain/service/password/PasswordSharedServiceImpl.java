@@ -10,27 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
-import javax.inject.Inject;
-
 @Transactional
 @Service
-public final class PasswordSharedServiceImpl implements PasswordSharedService {
+@lombok.RequiredArgsConstructor
+public class PasswordSharedServiceImpl implements PasswordSharedService {
 
-    @Inject
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Inject
-    JodaTimeDateFactory dateFactory;
+    private final JodaTimeDateFactory dateFactory;
 
-    @Inject
-    AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     @Override
     public void validatePassword(final String rawPassword, final Account account) {
         if (rawPassword.toLowerCase().contains(account.getAccountId().toLowerCase())) {
             throw new BusinessException(Message.PASSWORD_CONTAINS_ACCOUNT_ID.resultMessages());
         }
-        if (account.isPastUsedPassword(rawPassword, passwordEncoder)) {
+        if (account.isPastUsedPassword(rawPassword, this.passwordEncoder)) {
             throw new BusinessException(Message.PASSWORD_USED_PAST.resultMessages());
         }
     }
@@ -38,30 +34,30 @@ public final class PasswordSharedServiceImpl implements PasswordSharedService {
     @Override
     public void countUpPasswordFailureCount(final String failedAccountId) {
 
-        final Account failedAccount = accountRepository.findOneByAccountId(failedAccountId);
+        final Account failedAccount = this.accountRepository.findOneByAccountId(failedAccountId);
         if (failedAccount == null) {
             return;
         }
 
-        final DateTime currentDateTime = dateFactory.newDateTime();
+        final DateTime currentDateTime = this.dateFactory.newDateTime();
         failedAccount.countUpPasswordFailureCount(currentDateTime);
-        accountRepository.savePasswordFailureCount(failedAccount);
+        this.accountRepository.savePasswordFailureCount(failedAccount);
     }
 
     @Override
     public void resetPasswordLock(final Account account) {
         account.resetPasswordFailureCount();
-        accountRepository.savePasswordFailureCount(account);
+        this.accountRepository.savePasswordFailureCount(account);
     }
 
     @Override
     public String encode(final String rawPassword) {
-        return passwordEncoder.encode(rawPassword);
+        return this.passwordEncoder.encode(rawPassword);
     }
 
     @Override
     public String generateNewPassword() {
-        return dateFactory.newDateTime().toString("yyyyMMdd");
+        return this.dateFactory.newDateTime().toString("yyyyMMdd");
     }
 
 }

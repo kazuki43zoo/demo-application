@@ -23,31 +23,31 @@ public interface AccountRepository {
 
     void lockByAccountIdWithinTransaction(String accountUuid);
 
-    boolean create(Account account);
+    void create(Account account);
 
-    boolean update(Account account);
+    void update(Account account);
 
-    boolean delete(String accountUuid);
+    void delete(String accountUuid);
 
-    boolean createAuthority(AccountAuthority authority);
+    void createAuthority(AccountAuthority authority);
 
-    boolean deleteAuthority(
+    void deleteAuthority(
             @Param("accountUuid") String accountUuid,
             @Param("authority") String authority);
 
-    int deleteAuthorities(String accountUuid);
+    void deleteAuthorities(String accountUuid);
 
-    boolean createPasswordHistory(AccountPasswordHistory passwordHistory);
+    void createPasswordHistory(AccountPasswordHistory passwordHistory);
 
-    int deletePasswordHistories(String accountUuid);
+    void deletePasswordHistories(String accountUuid);
 
-    boolean savePasswordFailureCount(Account account);
+    void savePasswordFailureCount(Account account);
 
-    boolean deletePasswordLock(String accountUuid);
+    void deletePasswordLock(String accountUuid);
 
-    boolean createAuthenticationHistory(AccountAuthenticationHistory authenticationHistory);
+    void createAuthenticationHistory(AccountAuthenticationHistory authenticationHistory);
 
-    int deleteAuthenticationHistories(String accountUuid);
+    void deleteAuthenticationHistories(String accountUuid);
 
     AccountAuthenticationHistory findOneLastSuccessAuthenticationHistoryByAccountUuid(String accountUuid);
 

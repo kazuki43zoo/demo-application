@@ -24,16 +24,15 @@ import java.util.List;
 
 @Component
 @Aspect
+@lombok.RequiredArgsConstructor
 public class SessionEventListeners {
 
     private static final String HANDLE_LOGOUT_KEY = SecurityContextLogoutHandler.class.getName()
             .concat(".logout");
 
-    @Inject
-    AuthenticationSharedService authenticationSharedService;
+    private final AuthenticationSharedService authenticationSharedService;
 
-    @Inject
-    Mapper beanMapper;
+    private final Mapper beanMapper;
 
     @EventListener
     @Transactional
@@ -45,8 +44,8 @@ public class SessionEventListeners {
         final List<SecurityContext> securityContexts = event.getSecurityContexts();
         for (final SecurityContext securityContext : securityContexts) {
             final CustomUserDetails userDetails = CustomUserDetails.getInstance(securityContext.getAuthentication());
-            final AccountAuthenticationHistory authenticationHistory = beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
-            authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
+            final AccountAuthenticationHistory authenticationHistory = this.beanMapper.map(securityContext.getAuthentication().getDetails(), AccountAuthenticationHistory.class);
+            this.authenticationSharedService.createAuthenticationSuccessHistory(userDetails.getAccount(), authenticationHistory, AuthenticationType.SESSION_TIMEOUT);
         }
     }
 

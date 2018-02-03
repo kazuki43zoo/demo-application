@@ -17,24 +17,21 @@ import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
 
-import javax.inject.Inject;
-
 @ControllerAdvice
+@lombok.RequiredArgsConstructor
 public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Inject
-    ApiErrorCreator apiErrorCreator;
+    private final ApiErrorCreator apiErrorCreator;
 
-    @Inject
-    ExceptionCodeResolver exceptionCodeResolver;
+    private final ExceptionCodeResolver exceptionCodeResolver;
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(final Exception ex, final Object body,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final Object apiError;
         if (body == null) {
-            String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-            apiError = apiErrorCreator.createApiError(request, errorCode, ex.getLocalizedMessage());
+            String errorCode = this.exceptionCodeResolver.resolveExceptionCode(ex);
+            apiError = this.apiErrorCreator.createApiError(request, errorCode, ex.getLocalizedMessage());
         } else {
             apiError = body;
         }
@@ -87,15 +84,15 @@ public class ApiGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleBindingResult(final Exception ex, final BindingResult bindingResult,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
-        final String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        final ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode, bindingResult, ex.getMessage());
+        final String errorCode = this.exceptionCodeResolver.resolveExceptionCode(ex);
+        final ApiError apiError = this.apiErrorCreator.createBindingResultApiError(request, errorCode, bindingResult, ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
     private ResponseEntity<Object> handleResultMessagesNotificationException(final ResultMessagesNotificationException ex,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
-        final String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        final ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode, ex.getResultMessages(), ex.getMessage());
+        final String errorCode = this.exceptionCodeResolver.resolveExceptionCode(ex);
+        final ApiError apiError = this.apiErrorCreator.createResultMessagesApiError(request, errorCode, ex.getResultMessages(), ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, status, request);
     }
 
