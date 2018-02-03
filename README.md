@@ -19,8 +19,8 @@ Structure of this application is following.<br><br>
 | Client Layer         | [jQuery 3.2.1](http://jquery.com/) | Provide the useful javascript operations. |
 |                      | [AngularJS 1.2.32](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
-| Server Side Platform | Java SE 7 Java Virtual Machine | Provide the execution environment for Java application. | 
-|                      | Java EE 6 Servlet Container | Provide the servlet engine that supports servlet 3.0 specification. | 
+| Server Side Platform | Java SE 8 Java Virtual Machine | Provide the execution environment for Java application. | 
+|                      | Java EE 7 Servlet Container | Provide the servlet engine that supports servlet 3.1 specification. | 
 |                      | [Spring Framework 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
 | Application Layer    | [Spring Security 4.2.3.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
 |                      | [Spring MVC 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |

@@ -17,8 +17,8 @@
 | Client Layer         | [jQuery 3.2.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
 |                      | [AngularJS 1.2.32](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
-| Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
-|                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
+| Server Side Platform | Java SE 8 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
+|                      | Java EE 7 Servlet Container | サーブレット3.1仕様のサーブレットエンジンを提供します。 | 
 |                      | [Spring Framework 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
 | Application Layer    | [Spring Security 4.2.3.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
 |                      | [Spring MVC 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
