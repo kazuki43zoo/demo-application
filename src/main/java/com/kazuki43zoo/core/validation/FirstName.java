@@ -15,6 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @NotNull
 @Size(max = 128)
+@Repeatable(FirstName.List.class)
 public @interface FirstName {
 
     String message() default "{com.github.kazuki43zoo.core.validation.FirstName.message}";

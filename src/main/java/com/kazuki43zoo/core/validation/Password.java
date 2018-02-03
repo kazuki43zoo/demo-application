@@ -15,6 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @ReportAsSingleViolation
 @Size(min = 8)
+@Repeatable(Password.List.class)
 public @interface Password {
 
     String message() default "{com.github.kazuki43zoo.core.validation.Password.message}";

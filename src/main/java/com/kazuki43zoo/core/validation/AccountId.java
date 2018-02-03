@@ -5,6 +5,7 @@ import javax.validation.Payload;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.lang.annotation.Documented;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -18,6 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @NotNull
 @Size(max = 128)
+@Repeatable(AccountId.List.class)
 public @interface AccountId {
 
     String message() default "{com.github.kazuki43zoo.core.validation.AccountId.message}";

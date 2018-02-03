@@ -13,6 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @Size(max = 128)
+@Repeatable(LastName.List.class)
 public @interface LastName {
 
     String message() default "{com.github.kazuki43zoo.core.validation.LastName.message}";
