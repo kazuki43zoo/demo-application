@@ -2,6 +2,7 @@ package com.kazuki43zoo;
 
 import com.kazuki43zoo.pages.WelcomePage;
 import com.kazuki43zoo.pages.password.PasswordChangePage;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class AccountRegisterTest {
 
 	@BeforeClass
 	public static void setUp(){
+		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
 	}
 

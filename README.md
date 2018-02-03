@@ -42,7 +42,8 @@ The following libraries is dependency for application-specific without relate on
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.196 \* | Depends on to access H2 database. |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.18 \* | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.23.0.RELEASE \* | Depends on to support HATEOAS as REST API. |
-| [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke.log4jdbc-remix) |
+| [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke:log4jdbc-remix) |
+| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 2.1.0 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
 
 \* The version is managed by Spring IO Platform via TERASOLUNA Server Framewrok for Java (5.x) parent project.
 
@@ -51,7 +52,8 @@ The following libraries are version up from version that TERASOLUNA Server Frame
 
 | Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
-| org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
+| org.lazyluke:log4jdbc-remix | exclusion | 0.2.7 |
+| org.seleniumhq.selenium:selenium-java | 3.8.1 | 2.53.1 |
 
 ## 2.3. Java package Structure
 

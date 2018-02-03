@@ -3,6 +3,7 @@ package com.kazuki43zoo;
 import com.kazuki43zoo.pages.WelcomePage;
 import com.kazuki43zoo.pages.auth.LoginPage;
 import com.kazuki43zoo.utils.WebElementOperations;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,6 +28,7 @@ public class AuthenticationTest {
 
 	@BeforeClass
 	public static void setUp() {
+		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
 	}
 

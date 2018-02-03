@@ -42,6 +42,7 @@
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.18 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.23.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
+| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 2.1.0 | Seleniumの `WebDrivier` 実行ファイルをダウンロードするために依存しています。(testスコープ) |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 
@@ -50,6 +51,7 @@
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
+| org.seleniumhq.selenium:selenium-java | 3.8.1 | 2.53.1 |
 
 ## 2.3. Java package Structure
 
