@@ -66,10 +66,10 @@ public class WorkPlace implements Serializable {
             });
         }
         this.breakTimeIntervals = breakTimeIntervals;
-        this.baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(baseBeginTime),
-                BASE_DATE.toDateTime(baseFinishTime));
-        this.baseWorkTimeMinute = (int) toMinute(baseWorkTimeInterval)
-                - calculateContainsBreakTimeMinute(baseWorkTimeInterval);
+        this.baseWorkTimeInterval = new Interval(BASE_DATE.toDateTime(this.baseBeginTime),
+                BASE_DATE.toDateTime(this.baseFinishTime));
+        this.baseWorkTimeMinute = (int) toMinute(this.baseWorkTimeInterval)
+                - calculateContainsBreakTimeMinute(this.baseWorkTimeInterval);
     }
 
     public int calculateWorkingMinute(final Interval workTimeInterval, final WorkPlace mainOffice) {
@@ -99,10 +99,10 @@ public class WorkPlace implements Serializable {
     }
 
     public boolean isTardyOrEarlyLeaving(final DateTime beginTime, final DateTime finishTime) {
-        if (beginTime != null && beginTime.isAfter(baseWorkTimeInterval.getStart())) {
+        if (beginTime != null && beginTime.isAfter(this.baseWorkTimeInterval.getStart())) {
             return true;
         }
-        if (finishTime != null && finishTime.isBefore(baseWorkTimeInterval.getEnd())) {
+        if (finishTime != null && finishTime.isBefore(this.baseWorkTimeInterval.getEnd())) {
             return true;
         }
         return false;
@@ -113,7 +113,7 @@ public class WorkPlace implements Serializable {
             return 0;
         }
         long minute = 0;
-        for (final Interval breakTimeInterval : breakTimeIntervals) {
+        for (final Interval breakTimeInterval : this.breakTimeIntervals) {
             if (workTimeInterval.overlaps(breakTimeInterval)) {
                 minute += toMinute(workTimeInterval.overlap(breakTimeInterval));
             }
