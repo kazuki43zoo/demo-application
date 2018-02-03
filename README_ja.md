@@ -19,18 +19,18 @@
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 7 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 6 Servlet Container | サーブレット3.0仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.3.5.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
-| Application Layer    | [Spring Security 4.1.4.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.3.5.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
-|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.2.4.Final](http://hibernate.org/validator/) を使用しています。|
+|                      | [Spring Framework 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spring Security 4.2.3.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spring MVC 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.3.5.Final](http://hibernate.org/validator/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
 |                      | JSPs | Formデータやドメインオブジェクトなどにアクセスし、プレゼンテーション用のコンポーネント(HTMLなど)を生成します。 |
 | Domain Layer         | Domain Objects | ドメインデータの保持と、コアなビジネスロジックを実装・提供します。 |
 |                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
 |                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
-| Infrastructure Layer | [MyBatis 3.4.2](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.3.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
+| Infrastructure Layer | [MyBatis 3.4.5](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.4.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
 
@@ -38,9 +38,9 @@
 
 | ライブラリ(Group Id:Artifact Id) | バージョン | 説明 |
 | ----- | :-----:| --------------------- |
-| [com.h2database:h2](http://www.h2database.com/) | 1.4.193 | H2データベースにアクセスするために依存しています。 |
-| [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.12 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
-| [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.20.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
+| [com.h2database:h2](http://www.h2database.com/) | 1.4.196 | H2データベースにアクセスするために依存しています。 |
+| [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.18 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
+| [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.23.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
 
 ## 2.2. Version up of dependency libraries for application-specific  
