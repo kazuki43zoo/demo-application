@@ -3,7 +3,6 @@ package com.kazuki43zoo;
 import com.kazuki43zoo.pages.WelcomePage;
 import com.kazuki43zoo.pages.auth.LoginPage;
 import com.kazuki43zoo.utils.WebElementOperations;
-import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
