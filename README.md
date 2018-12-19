@@ -16,7 +16,7 @@ Structure of this application is following.<br><br>
 
 | Layer | Component/Library | Main responsibilities |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [jQuery 3.2.1](http://jquery.com/) | Provide the useful javascript operations. |
+| Client Layer         | [jQuery 3.3.1](http://jquery.com/) | Provide the useful javascript operations. |
 |                      | [AngularJS 1.2.32](https://angularjs.org/) | Provide the JavaScript MVW Framework. |
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 8 Java Virtual Machine | Provide the execution environment for Java application. | 

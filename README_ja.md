@@ -14,7 +14,7 @@
 
 | レイヤ | コンポーネント/ライブラリ | 主な役割 |
 | :-----: | --------- | --------------------- |
-| Client Layer         | [jQuery 3.2.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
+| Client Layer         | [jQuery 3.3.1](http://jquery.com/) | 便利なJavaScript操作を提供します。 |
 |                      | [AngularJS 1.2.32](https://angularjs.org/) | JavaScriptのMVW Frameworkのメカニズムを提供します。 |
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 8 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
