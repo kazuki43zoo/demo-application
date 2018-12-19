@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.4.0.RELEASE</version>
+        <version>5.4.1.RELEASE</version>
         <relativePath />
     </parent>
 
@@ -37,7 +37,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java-version>1.8</java-version>
-        <selenium.version>3.8.1</selenium.version>
+        <selenium.version>3.141.59</selenium.version>
+        <webdrivermanager.version>3.1.1</webdrivermanager.version>
     </properties>
 
     <dependencyManagement>
@@ -136,7 +137,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>2.1.0</version>
+            <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

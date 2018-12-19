@@ -1,6 +1,7 @@
 package com.kazuki43zoo;
 
 import com.kazuki43zoo.pages.WelcomePage;
+import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -26,7 +27,7 @@ public class WelcomePageTest {
 
 	@BeforeClass
 	public static void setUp(){
-		FirefoxDriverManager.getInstance().setup();
+		FirefoxDriverManager.firefoxdriver().setup();
 		driver = new FirefoxDriver();
 	}
 
