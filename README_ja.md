@@ -19,9 +19,9 @@
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | 便利でスタイリッシュなCSS定義とクライアントコンポーネント（Alert, メッセージダイアログなど）を提供します。 |
 | Server Side Platform | Java SE 8 Java Virtual Machine | Javaアプリケーションの実行環境を提供します。 | 
 |                      | Java EE 7 Servlet Container | サーブレット3.1仕様のサーブレットエンジンを提供します。 | 
-|                      | [Spring Framework 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
-| Application Layer    | [Spring Security 4.2.3.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
-|                      | [Spring MVC 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
+|                      | [Spring Framework 4.3.14.RELEASE](http://projects.spring.io/spring-framework/) | CDI(Context and Dependency Inject)のメカニズムを提供します。本アプリケーションでは、トランザクション管理やAOPなどのメカニズムも利用しています。|
+| Application Layer    | [Spring Security 4.2.4.RELEASE](http://projects.spring.io/spring-security/) | Webアプリケーションのセキュリティ対策のメカニズムを提供します。 |
+|                      | [Spring MVC 4.3.14.RELEASE](http://projects.spring.io/spring-framework/) | WebアプリケーションのMVC Frameworkのメカニズムを提供します。 |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | リクエストデータ(FormなどのJavaBean)に対する入力チェックのメカニズムを提供します。本アプリケーションでは、実装プロバイダとして [Hivernate Validator 5.3.5.Final](http://hibernate.org/validator/) を使用しています。|
 |                      | Controllers | リクエストをハンドリングし、サービスクラスへビジネスロジックの手続き処理を委譲します。 |
 |                      | DTOs(Forms) | アプリケーション層（Web層）で扱うデータ（Formデータ）を保持します。 |
@@ -30,7 +30,7 @@
 |                      | Repositories | ドメインオブジェクトに対するCRUD操作(インタフェース)を定義・提供します。 |
 |                      | Services | ビジネスロジックの手続の実装・提供及びトランザクション境界を提供します。|
 | Infrastructure Layer | [MyBatis 3.4.5](http://mybatis.github.io/mybatis-3/) | データベースへアクセスするためのメカニズムを提供します。本アプリケーションでは、RespoistoryインタフェースとしてMyBatisのMapperインタフェースを使用します。また、SQLはMapper XMLファイルに実装します。 |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.4.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.4.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | エンタープライズアプリケーションを開発する際に役立つ便利な機能（トランザクショントークンチェック、コードリスト、ページネーション、メッセージ表示、例外ハンドリングなど）を提供します。また、開発に役立つ便利なOSSライブラリ（[Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/)など）への依存性を提供します。 |
 
 ## 2.1. Dependency libraries for application-specific
 
@@ -42,7 +42,7 @@
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.18 | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.23.0.RELEASE | REST APIとしてHATEOASをサポートするために依存しています。 |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
-| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 2.1.0 | Seleniumの `WebDrivier` 実行ファイルをダウンロードするために依存しています。(testスコープ) |
+| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 3.1.1 | Seleniumの `WebDrivier` 実行ファイルをダウンロードするために依存しています。(testスコープ) |
 
 ## 2.2. Version up of dependency libraries for application-specific  
 
@@ -51,7 +51,7 @@
 | ライブラリ | 本アプリケーションでの使用バージョン | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke.log4jdbc-remix | exclusion | 0.2.7 |
-| org.seleniumhq.selenium:selenium-java | 3.8.1 | 2.53.1 |
+| org.seleniumhq.selenium:selenium-java | 3.141.59 | 2.53.1 |
 
 ## 2.3. Java package Structure
 

@@ -21,9 +21,9 @@ Structure of this application is following.<br><br>
 |                      | [Bootstrap 3.3.7](http://getbootstrap.com/) | Provide the useful & stylish css configurations, and provide the useful client components(alert, message dialog, etc..). |
 | Server Side Platform | Java SE 8 Java Virtual Machine | Provide the execution environment for Java application. | 
 |                      | Java EE 7 Servlet Container | Provide the servlet engine that supports servlet 3.1 specification. | 
-|                      | [Spring Framework 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
-| Application Layer    | [Spring Security 4.2.3.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
-|                      | [Spring MVC 4.3.11.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
+|                      | [Spring Framework 4.3.14.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of CDI(Context and Dependency Inject). In this application, use the transaction management and AOP mechanism.|
+| Application Layer    | [Spring Security 4.2.4.RELEASE](http://projects.spring.io/spring-security/) | Provide mechanism of security on web application. |
+|                      | [Spring MVC 4.3.14.RELEASE](http://projects.spring.io/spring-framework/) | Provide mechanism of Java MVC Framework for web application. |
 |                      | [Bean Validation 1.1(JSR-349)](http://beanvalidation.org/1.1/) | Provide mechanism of validation for request data. In this application, use [Hibernate Validator 5.3.5.Final](http://hibernate.org/validator/) as implementation provider.|
 |                      | Controller | Handle a request & delegate a business procedure to the services.  |
 |                      | DTO | Hold transfer data(form data or resource data) of application layer(web layer). |
@@ -32,7 +32,7 @@ Structure of this application is following.<br><br>
 |                      | Repository | Define & provide CRUD operations(interfaces) to the Domain objects. |
 |                      | Service | Implements & provide business procedure(Part of the business logic) and provide transaction boundary. |
 | Infrastructure Layer | [MyBatis 3.4.5](http://mybatis.github.io/mybatis-3/) | Provide mechanism of database access. In this application, use the Mapper interface as Repository interface. SQL is implements in Mapper MXL. |
-| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.4.0.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
+| Libraries            | [TERASOLUNA Server Framework for Java (5.x) Common Library 5.4.1.RELEASE](https://github.com/terasolunaorg/terasoluna-gfw) | Provide useful functionalities(Transaction Token Check, Codelist, Pagination, MessageManagement, ExceptionHandling, etc..) on develop enterprise application. And provide dependency on useful OSS libraries([Dozer](http://dozer.sourceforge.net/), [Joda-Time](http://www.joda.org/joda-time/), [Apache-Commons families](http://commons.apache.org/), etc..). |
 
 ## 2.1. Dependency libraries for application-specific
 The following libraries is dependency for application-specific without relate on TERASOLUNA Server Framewrok for Java (5.x).
@@ -43,7 +43,7 @@ The following libraries is dependency for application-specific without relate on
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.16.18 \* | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 0.23.0.RELEASE \* | Depends on to support HATEOAS as REST API. |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke:log4jdbc-remix) |
-| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 2.1.0 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
+| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 3.1.1 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
 
 \* The version is managed by Spring IO Platform via TERASOLUNA Server Framewrok for Java (5.x) parent project.
 
@@ -53,7 +53,7 @@ The following libraries are version up from version that TERASOLUNA Server Frame
 | Library | In this application | TERASOLUNA Server Framework<br>for Java (5.x) |
 | ----- | :-----: | :-----: |
 | org.lazyluke:log4jdbc-remix | exclusion | 0.2.7 |
-| org.seleniumhq.selenium:selenium-java | 3.8.1 | 2.53.1 |
+| org.seleniumhq.selenium:selenium-java | 3.141.59 | 2.53.1 |
 
 ## 2.3. Java package Structure
 
