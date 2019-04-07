@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.terasoluna.gfw</groupId>
         <artifactId>terasoluna-gfw-parent</artifactId>
-        <version>5.4.1.RELEASE</version>
+        <version>5.5.1.RELEASE</version>
         <relativePath />
     </parent>
 
@@ -37,59 +37,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java-version>1.8</java-version>
-        <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.1.1</webdrivermanager.version>
     </properties>
-
-    <dependencyManagement>
-      <dependencies>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-java</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-chrome-driver</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-remote-driver</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-api</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-firefox-driver</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-ie-driver</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-safari-driver</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-support</artifactId>
-          <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-          <version>23.6-jre</version>
-        </dependency>
-      </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>

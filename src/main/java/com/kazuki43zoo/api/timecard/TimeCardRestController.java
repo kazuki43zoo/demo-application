@@ -1,5 +1,6 @@
 package com.kazuki43zoo.api.timecard;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.core.security.CurrentUser;
 import com.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.kazuki43zoo.domain.model.timecard.TimeCard;
@@ -7,7 +8,6 @@ import com.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.kazuki43zoo.domain.service.security.CustomUserDetails;
 import com.kazuki43zoo.domain.service.timecard.TimeCardService;
 import com.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
-import org.dozer.Mapper;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.Link;

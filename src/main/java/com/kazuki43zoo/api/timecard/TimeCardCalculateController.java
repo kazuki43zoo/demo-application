@@ -1,10 +1,10 @@
 package com.kazuki43zoo.api.timecard;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.domain.model.timecard.DailyAttendance;
 import com.kazuki43zoo.domain.model.timecard.WorkPlace;
 import com.kazuki43zoo.domain.service.calendar.CalendarSharedService;
 import com.kazuki43zoo.domain.service.timecard.WorkPlaceSharedService;
-import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;

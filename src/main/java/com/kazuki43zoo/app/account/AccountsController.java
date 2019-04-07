@@ -1,11 +1,11 @@
 package com.kazuki43zoo.app.account;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.core.message.Message;
 import com.kazuki43zoo.domain.model.account.Account;
 import com.kazuki43zoo.domain.model.account.AccountAuthority;
 import com.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
 import com.kazuki43zoo.domain.service.account.AccountService;
-import org.dozer.Mapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
