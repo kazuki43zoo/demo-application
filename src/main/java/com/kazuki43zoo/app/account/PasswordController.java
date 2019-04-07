@@ -1,5 +1,6 @@
 package com.kazuki43zoo.app.account;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.app.auth.LoginForm;
 import com.kazuki43zoo.app.auth.LoginSharedHelper;
 import com.kazuki43zoo.core.exception.InvalidAccessException;
@@ -9,7 +10,6 @@ import com.kazuki43zoo.domain.model.account.Account;
 import com.kazuki43zoo.domain.service.account.AccountSharedService;
 import com.kazuki43zoo.domain.service.password.PasswordService;
 import com.kazuki43zoo.domain.service.security.CustomUserDetails;
-import org.dozer.Mapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

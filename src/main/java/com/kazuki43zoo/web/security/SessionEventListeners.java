@@ -1,5 +1,6 @@
 package com.kazuki43zoo.web.security;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.kazuki43zoo.domain.service.security.AuthenticationSharedService;
@@ -8,7 +9,6 @@ import com.kazuki43zoo.domain.service.security.CustomUserDetails;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.dozer.Mapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;

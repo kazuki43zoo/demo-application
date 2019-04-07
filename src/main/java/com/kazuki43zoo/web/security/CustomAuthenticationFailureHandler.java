@@ -1,12 +1,12 @@
 package com.kazuki43zoo.web.security;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.core.config.SecurityConfigs;
 import com.kazuki43zoo.core.message.Message;
 import com.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.kazuki43zoo.domain.service.security.AuthenticationSharedService;
 import com.kazuki43zoo.domain.service.security.CustomAuthenticationDetails;
-import org.dozer.Mapper;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.core.AuthenticationException;

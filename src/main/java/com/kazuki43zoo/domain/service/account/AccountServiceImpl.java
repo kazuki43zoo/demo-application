@@ -1,13 +1,16 @@
 package com.kazuki43zoo.domain.service.account;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.kazuki43zoo.core.message.Message;
 import com.kazuki43zoo.domain.model.account.Account;
 import com.kazuki43zoo.domain.model.account.AccountAuthority;
 import com.kazuki43zoo.domain.model.account.AccountPasswordHistory;
-import com.kazuki43zoo.domain.repository.PageParams;
 import com.kazuki43zoo.domain.repository.account.AccountRepository;
 import com.kazuki43zoo.domain.repository.account.AccountsSearchCriteria;
 import com.kazuki43zoo.domain.service.password.PasswordSharedService;
+import org.apache.ibatis.session.RowBounds;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,9 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
-
-import java.util.Collections;
-import java.util.List;
 
 @Transactional
 @Service
@@ -43,7 +43,8 @@ public class AccountServiceImpl implements AccountService {
         if (totalCount == 0) {
             accounts = Collections.emptyList();
         } else {
-            accounts = this.accountRepository.findAllByCriteria(criteria, new PageParams(pageable));
+            accounts = this.accountRepository.findAllByCriteria(
+                criteria, new RowBounds((int) pageable.getOffset(), pageable.getPageSize()));
         }
         return new PageImpl<>(accounts, pageable, totalCount);
     }

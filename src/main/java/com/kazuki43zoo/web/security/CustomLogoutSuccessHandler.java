@@ -1,10 +1,10 @@
 package com.kazuki43zoo.web.security;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.kazuki43zoo.domain.service.security.AuthenticationSharedService;
 import com.kazuki43zoo.domain.service.security.CustomUserDetails;
-import org.dozer.Mapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 

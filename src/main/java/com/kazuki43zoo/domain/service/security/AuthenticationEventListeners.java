@@ -1,10 +1,10 @@
 package com.kazuki43zoo.domain.service.security;
 
+import com.github.dozermapper.core.Mapper;
 import com.kazuki43zoo.core.message.Message;
 import com.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.kazuki43zoo.domain.model.account.AuthenticationType;
 import com.kazuki43zoo.domain.service.password.PasswordSharedService;
-import org.dozer.Mapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;

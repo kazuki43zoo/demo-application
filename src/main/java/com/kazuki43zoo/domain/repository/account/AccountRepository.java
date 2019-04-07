@@ -5,6 +5,7 @@ import com.kazuki43zoo.domain.model.account.AccountAuthenticationHistory;
 import com.kazuki43zoo.domain.model.account.AccountAuthority;
 import com.kazuki43zoo.domain.model.account.AccountPasswordHistory;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface AccountRepository {
 
     List<Account> findAllByCriteria(
             @Param("criteria") AccountsSearchCriteria criteria,
-            @Param("pageable") Pageable pageable);
+            RowBounds rowBounds);
 
     Account findOneByAccountId(String accountId);
 

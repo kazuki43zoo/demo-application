@@ -1,6 +1,6 @@
 package com.kazuki43zoo.infra.dozer.converter;
 
-import org.dozer.DozerConverter;
+import com.github.dozermapper.core.DozerConverter;
 
 public class ImmutableObjectCopyConverter<A, B> extends DozerConverter<A, B> {
 
