@@ -45,7 +45,7 @@ The following libraries is dependency for application-specific without relate on
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke:log4jdbc-remix) |
 | [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 4.0.0 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
 
-\* The version is managed by Spring IO Platform via TERASOLUNA Server Framewrok for Java (5.x) parent project.
+\* The version is managed by Spring Boot Dependency via TERASOLUNA Server Framewrok for Java (5.x) parent project.
 
 ## 2.2. Version up of dependency libraries for application-specific  
 The following libraries are version up from version that TERASOLUNA Server Framework for Java (5.x) depend on. Reason of version up is to try the latest version.
