@@ -5,7 +5,7 @@
         "angular": "1.2.32",
         "angular-resource": "1.2.32",
         "angular-i18n": "1.2.32",
-        "jquery": "3.3.1",
-        "bootstrap": "3.3.7"
+        "jquery": "3.5.1",
+        "bootstrap": "3.4.1"
     }
 }
