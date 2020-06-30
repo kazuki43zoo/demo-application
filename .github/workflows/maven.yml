@@ -18,7 +18,6 @@ jobs:
           - 11  # Latest LTS version
           - 14  # Latest non LST version
           - 15-ea  # Next non LST version (under develop)
-          - 16-ea  # Latest develop version
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK ${{ matrix.java }}
