@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring/seleniumContext.xml"})
-public class AuthenticationTest {
+public class AuthenticationIT {
 
 	private static WebDriver driver;
 

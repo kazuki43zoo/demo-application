@@ -1,7 +1,6 @@
 package com.kazuki43zoo;
 
 import com.kazuki43zoo.pages.WelcomePage;
-import com.kazuki43zoo.pages.password.PasswordChangePage;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring/seleniumContext.xml"})
-public class AccountRegisterTest {
+public class WelcomePageIT {
 
 	private static WebDriver driver;
 
@@ -32,32 +31,35 @@ public class AccountRegisterTest {
 	}
 
 	@Test
-	public void registerNewAccount() {
+	public void viewWelcomePage() {
 
 		driver.get(applicationContextUrl);
 
-		String accountId = "kazuki43zoo";
-		String password = "password";
+		assertThat(driver.getTitle(),
+				is("Demo Application using TERASOLUNA Server Framework for Java (5.x)"));
+	}
 
-		PasswordChangePage passwordChangePage = new WelcomePage(driver)
-				.username("user01").password("password").login()
-				.getLeftMenu().accountManagement()
-				.create()
-					.accountId(accountId)
-					.firstName("Kazuki")
-					.lastName("Shimizu")
-					.enabled(true)
-					.enabledAutoLogin(false)
-					.password(password)
-					.confirmPassword(password)
-					.authorities("ADMIN", "USER", "ACCOUNTMNG")
-					.save()
-				.getUserMenuPullDown().logout()
-				.username(accountId).password(password).login(PasswordChangePage.class);
+	@Test
+	public void switchLanguage() {
 
-		assertThat(passwordChangePage.getAlert().getText(),
-				is("Password has not initialized. Please initialize the password."));
+		driver.get(applicationContextUrl);
 
+		WelcomePage welcomePage = new WelcomePage(driver);
+
+		// Switch to Japanese
+		{
+			welcomePage.getLanguagePullDown().japanese();
+
+			assertThat(welcomePage.getWelcomeMessage().getText(),
+					is("ようこそ 「TERASOLUNA Server Framework for Java (5.x)を使用したデモアプリケーション」へ ！！"));
+		}
+		// Switch to English
+		{
+			welcomePage.getLanguagePullDown().english();
+
+			assertThat(welcomePage.getWelcomeMessage().getText(),
+					is("Welcome Demo Application using TERASOLUNA Server Framework for Java (5.x) !!"));
+		}
 	}
 
 	@AfterClass
