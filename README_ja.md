@@ -5,7 +5,8 @@
 
 このアプリケーションは、[TERASOLUNA Server Framework for Java (5.x) Development Guideline](http://terasolunaorg.github.io/guideline/)をベースに作成していますが、私個人の考えでカスタマイズしている部分があります。（１００％ガイドラインに準拠しているわけではありません）
 
-[![Build Status for master](https://travis-ci.org/kazuki43zoo/demo-application.svg?branch=master)](https://travis-ci.org/kazuki43zoo/demo-application)
+[![Java CI with Maven](https://github.com/kazuki43zoo/demo-application/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/kazuki43zoo/demo-application/actions?query=workflow%3A%22Java+CI+with+Maven%22)
+
 
 # 2. Application Structure
 
