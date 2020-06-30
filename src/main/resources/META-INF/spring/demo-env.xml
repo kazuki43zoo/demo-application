@@ -13,10 +13,7 @@
 
     <bean id="dateFactory" class="org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory"/>
 
-    <bean id="dataSource" class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy"
-          c:realDataSource-ref="realDataSource"/>
-
-    <bean id="realDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           p:driverClassName="${database.driverClassName}"
           p:url="${database.url}"
           p:username="${database.username}"

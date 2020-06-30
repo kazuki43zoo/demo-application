@@ -37,6 +37,9 @@
     <logger name="com.kazuki43zoo">
         <level value="info"/>
     </logger>
+    <logger name="com.kazuki43zoo.domain.repository">
+        <level value="trace"/>
+    </logger>
 
     <!-- TERASOLUNA -->
     <logger name="org.terasoluna.gfw">
@@ -76,17 +79,12 @@
     <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <level value="debug"/>
     </logger>
+    <logger name="org.springframework.jdbc.core.JdbcTemplate">
+        <level value="trace" />
+    </logger>
 
     <logger name="Spring Security Debugger">
         <level value="warn"/>
-    </logger>
-
-    <logger name="jdbc.sqltiming">
-        <level value="debug"/>
-    </logger>
-
-    <logger name="jdbc.resultsettable">
-        <level value="debug"/>
     </logger>
 
     <root level="warn">
