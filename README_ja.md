@@ -42,7 +42,6 @@
 | [com.h2database:h2](http://www.h2database.com/) | 1.4.200 \* | H2データベースにアクセスするために依存しています。 |
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.18.10 \* | JavaBeanのメソッド（getter/setterメソッドなど）を自動生成するために依存しています。このライブラリを使うことで、スムーズかつ効率的に開発することができます。<br>**Eclispe, STS(Spring Tool Suite), IDEA, NetBeansなどのIDEを使う場合は、IDEに lombok.jarをインストールしてください。インストール方法の詳細は、[ここ](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation)を参照してください。** (IDEAの場合は、プラグインをインストールしてください) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 1.0.3.RELEASE \* | REST APIとしてHATEOASをサポートするために依存しています。 |
-| [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | デバッグ用にJDBC操作のログ出力をサポートするために依存しています。 |
 | [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 4.0.0 | Seleniumの `WebDrivier` 実行ファイルをダウンロードするために依存しています。(testスコープ) |
 
 \* バージョンはTERASOLUNA Server Framewrok for Java (5.x) の親プロジェクト経由してSpring Boot Dependencyによって管理されています。
