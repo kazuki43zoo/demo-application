@@ -18,7 +18,6 @@ before_script:
 script:
   - mvn -U package jacoco:report cargo:daemon-start
   - mvn -U test -f itest/pom.xml -Dwdm.gitHubTokenName=${WDM_GITHUB_USER} -Dwdm.gitHubTokenSecret=${WDM_GITHUB_TOKEN}
-  - mvn -U coveralls:report
 
 #addons:
 #  coverity_scan:
