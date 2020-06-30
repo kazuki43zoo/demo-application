@@ -8,7 +8,7 @@ But it being customized by my opinion in the partially (this means is not 100% c
 
 [![Build Status for master](https://travis-ci.org/kazuki43zoo/demo-application.svg?branch=master)](https://travis-ci.org/kazuki43zoo/demo-application)
 
-![Java CI with Maven](https://github.com/kazuki43zoo/demo-application/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![Java CI with Maven](https://github.com/kazuki43zoo/demo-application/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/kazuki43zoo/demo-application/actions?query=workflow%3A%22Java+CI+with+Maven%22)
 
 
 # 2. Application Structure
