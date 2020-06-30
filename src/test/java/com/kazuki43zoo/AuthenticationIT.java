@@ -3,13 +3,14 @@ package com.kazuki43zoo;
 import com.kazuki43zoo.pages.WelcomePage;
 import com.kazuki43zoo.pages.auth.LoginPage;
 import com.kazuki43zoo.utils.WebElementOperations;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,8 +29,8 @@ public class AuthenticationIT {
 
 	@BeforeClass
 	public static void setUp() {
-		FirefoxDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver();
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver(new ChromeOptions().addArguments("--headless"));
 	}
 
 	@Test

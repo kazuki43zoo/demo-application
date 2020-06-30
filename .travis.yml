@@ -6,10 +6,6 @@ cache:
   directories:
     - $HOME/.m2
     - $HOME/cargo-daemon
-services:
-  - xvfb
-addons:
-  firefox: latest
 
 install: true
 
