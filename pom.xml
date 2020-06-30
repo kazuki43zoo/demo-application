@@ -44,7 +44,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <java-version>1.8</java-version>
 
-        <org.eluder.coveralls.coveralls-maven-plugin.version>4.3.0</org.eluder.coveralls.coveralls-maven-plugin.version>
         <org.jacoco.jacoco-maven-plugin.version>0.8.2</org.jacoco.jacoco-maven-plugin.version>
         <cargo-maven2-plugin.version>1.7.1</cargo-maven2-plugin.version>
 
@@ -80,11 +79,6 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.eluder.coveralls</groupId>
-                    <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>${org.eluder.coveralls.coveralls-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
