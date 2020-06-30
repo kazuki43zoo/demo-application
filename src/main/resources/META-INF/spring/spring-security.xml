@@ -109,7 +109,7 @@
 
     <bean id="customAuthenticationFailureHandler" class="org.springframework.security.web.authentication.DelegatingAuthenticationFailureHandler">
         <constructor-arg>
-            <util:map>
+            <util:map map-class="java.util.LinkedHashMap">
                 <entry key="org.springframework.security.authentication.CredentialsExpiredException">
                     <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
                           p:useForward="true"
@@ -119,6 +119,11 @@
         </constructor-arg>
         <constructor-arg>
             <bean class="com.kazuki43zoo.web.security.CustomAuthenticationFailureHandler"
+                  c:messageSource-ref="messageSource"
+                  c:authenticationSharedService-ref="authenticationSharedServiceImpl"
+                  c:securityConfigs-ref="securityConfigs"
+                  c:authenticationDetailsSource-ref="customAuthenticationDetailsSource"
+                  c:beanMapper-ref="beanMapper"
                   p:useForward="true"
                   p:defaultFailureUrl="/app/auth/error"/>
         </constructor-arg>
@@ -126,7 +131,9 @@
 
     <!-- LogoutSuccessHandler -->
     <bean id="customLogoutSuccessHandler" class="com.kazuki43zoo.web.security.CustomLogoutSuccessHandler"
-          p:defaultTargetUrl="/app/auth/logout?success" />
+          c:authenticationSharedService-ref="authenticationSharedServiceImpl"
+          c:beanMapper-ref="beanMapper"
+          p:defaultTargetUrl="/app/auth/logout?success"/>
 
     <!-- UserIdMDCPutFilter -->
     <bean id="userIdMDCPutFilter" class="org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter"/>

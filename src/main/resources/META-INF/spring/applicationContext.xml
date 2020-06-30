@@ -37,7 +37,7 @@
     <bean id="exceptionCodeResolver" class="org.terasoluna.gfw.common.exception.SimpleMappingExceptionCodeResolver"
           p:defaultExceptionCode="e.demo.fw.9001">
         <property name="exceptionMappings">
-            <util:map>
+            <util:map map-class="java.util.LinkedHashMap">
                 <entry key="ResourceNotFoundException" value="e.demo.fw.5001"/>
                 <entry key="HttpRequestMethodNotSupportedException" value="e.demo.fw.6001"/>
                 <entry key="MediaTypeNotAcceptableException" value="e.demo.fw.6002"/>

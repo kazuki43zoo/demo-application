@@ -95,7 +95,7 @@
           p:defaultErrorView="common/error/systemError"
           p:defaultStatusCode="500">
         <property name="exceptionMappings">
-            <util:map>
+            <util:map map-class="java.util.Properties">
                 <entry key="InvalidAccessException" value="common/error/accessError"/>
                 <entry key="ResourceNotFoundException" value="common/error/resourceNotFoundError"/>
                 <entry key="BusinessException" value="common/error/businessError"/>
@@ -104,7 +104,7 @@
             </util:map>
         </property>
         <property name="statusCodes">
-            <util:map>
+            <util:map map-class="java.util.Properties">
                 <entry key="common/error/accessError" value="403"/>
                 <entry key="common/error/resourceNotFoundError" value="404"/>
                 <entry key="common/error/businessError" value="409"/>
