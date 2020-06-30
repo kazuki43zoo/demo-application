@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.kazuki43zoo.infra.jackson.map.EmptyStringSerializer;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 
 @lombok.Data
 @lombok.ToString(callSuper = true)
 @lombok.EqualsAndHashCode(callSuper = true)
-public class DailyAttendanceResource extends ResourceSupport implements Serializable {
+public class DailyAttendanceResource extends RepresentationModel<DailyAttendanceResource> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
