@@ -43,7 +43,7 @@ The following libraries is dependency for application-specific without relate on
 | [org.projectlombok:lombok](http://projectlombok.org/) | 1.18.10 \* | Depends on for automatically generate a methods(getter/setter/etc ...) of JavaBean. By the this library use, we can develop smoothly and effectively.<br>**If you are use IDE as Eclispe or STS(Spring Tool Suite) or IDEA or NetBeans, please  install lombok.jar to the IED. In detail of how to install, please see [here](http://jnb.ociweb.com/jnb/jnbJan2010.html#installation).** (If IDEA , please install lombok plugin) |
 | [org.springframework.hateoas:spring-hateoas](https://github.com/spring-projects/spring-hateoas) | 1.0.3.RELEASE \* | Depends on to support HATEOAS as REST API. |
 | [org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1](https://code.google.com/p/log4jdbc-log4j2) | 1.16 | Depends on to support logging JDBC for debug. (instead of org.lazyluke:log4jdbc-remix) |
-| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 3.4.0 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
+| [io.github.bonigarcia:webdrivermanager](http://www.h2database.com/) | 4.0.0 | Depends on download an execution file of selenium `WebDrivier`. (test scope) |
 
 \* The version is managed by Spring IO Platform via TERASOLUNA Server Framewrok for Java (5.x) parent project.
 
