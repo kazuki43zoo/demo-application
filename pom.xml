@@ -37,7 +37,7 @@
 
         <!-- for dependency library version (Project-specific) -->
         <org.bgee.log4jdbc-log4j2.version>1.16</org.bgee.log4jdbc-log4j2.version>
-        <webdrivermanager.version>3.4.0</webdrivermanager.version>
+        <webdrivermanager.version>4.0.0</webdrivermanager.version>
 
         <!-- for build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
