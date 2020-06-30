@@ -14,8 +14,10 @@ jobs:
     strategy:
       matrix:
         java:
-          - 1.8
-          - 11
+          - 1.8 # Legacy LTS version
+          - 11  # Latest LTS version
+          - 14  # Latest non LST version
+          - 15-ea  # Next non LST version (under develop)
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK ${{ matrix.java }}
