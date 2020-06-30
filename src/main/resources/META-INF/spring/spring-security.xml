@@ -10,17 +10,17 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
         http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security.xsd
+        https://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
+        https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util.xsd
+        https://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
+        https://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
+        https://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd
+        https://www.springframework.org/schema/aop/spring-aop.xsd
        ">
 
     <sec:http pattern="/resources/**" security="none"/>
