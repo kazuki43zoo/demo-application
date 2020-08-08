@@ -16,7 +16,7 @@ public class JdbcDriverDeregisterServletContextListener implements ServletContex
         sce.getServletContext().log("Deregister the JDBC driver '" + x.getClass().getName() + "'");
         DriverManager.deregisterDriver(x);
       } catch (Exception e) {
-        sce.getServletContext().log("Ignored an exception during deregister jdbc driver '" + x.getClass().getName() + "'", e);
+        sce.getServletContext().log("Ignored an exception during deregister JDBC driver '" + x.getClass().getName() + "'", e);
       }
     });
   }
